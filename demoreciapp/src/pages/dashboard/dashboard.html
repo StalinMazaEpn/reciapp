@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar>
+
+    <ion-title text-center>Hola, Marlon!</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  
+  <ion-fab top right edge>
+    <button ion-fab mini><ion-icon name="menu"></ion-icon></button>
+    <ion-fab-list>
+      <button ion-fab><ion-icon ios="ios-person" md="md-person"></ion-icon></button>
+      <button ion-fab><ion-icon ios="ios-share" md="md-share"></ion-icon></button>
+      <button ion-fab><ion-icon ios="ios-contacts" md="md-contacts"></ion-icon></button>
+      <button ion-fab><ion-icon ios="ios-log-out" md="md-log-out"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <ion-list>
+    <ion-list-header color="light"> # Recicladores </ion-list-header>
+    <ion-item small>  5  </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header color="light"> Última Entrega </ion-list-header>
+    <ion-item >  01/01/1990  </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header color="light"> Tus Recicladores </ion-list-header>
+    <ion-item>
+      Juan Pablo Peréz 
+      <button ion-button clear small item-end (click)="verReciclador()">
+        <ion-icon ios="ios-eye" md="md-eye"></ion-icon>
+      </button>
+    </ion-item>
+    <ion-item>
+      Maria Blanca Azucena 
+      <button ion-button clear small item-end (click)="verReciclador()">
+        <ion-icon ios="ios-eye" md="md-eye" ></ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-row text-center>
+      <ion-col>
+        <button ion-button icon-left clear small >
+          <ion-icon  ios="ios-home" md="md-home"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-left clear small (click)="Separa()">
+          <ion-icon ios="ios-hand" md="md-hand"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col >
+        <button ion-button icon-left clear small (click)="Entrega()">
+          <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
+        </button>
+      </ion-col>
+      <!--ion-col >
+        <button ion-button icon-left clear small (click)="Dashboard()">
+          <ion-icon name="text"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col >
+        <button ion-button icon-left clear small (click)="Dashboard()">
+          <ion-icon name="text"></ion-icon>
+        </button>
+      </ion-col-->
+    </ion-row>  
+  </ion-toolbar>
+</ion-footer>

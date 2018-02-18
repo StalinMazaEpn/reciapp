@@ -11,6 +11,11 @@ import { Tour2PageModule } from '../pages/tour2/tour2.module';
 import { Tour3PageModule } from '../pages/tour3/tour3.module';
 import { Tour4PageModule } from '../pages/tour4/tour4.module';
 import { InicioPageModule } from '../pages/inicio/inicio.module';
+import { DashboardPageModule } from '../pages/dashboard/dashboard.module';
+import { EntregaPageModule } from '../pages/entrega/entrega.module';
+import { RecicladorPageModule } from '../pages/reciclador/reciclador.module';
+import { CategoriaPageModule } from '../pages/categoria/categoria.module';
+import { DetallePageModule } from '../pages/detalle/detalle.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +29,12 @@ import { InicioPageModule } from '../pages/inicio/inicio.module';
     Tour2PageModule,
     Tour3PageModule,
     Tour4PageModule,
-    InicioPageModule
+    InicioPageModule,
+    DashboardPageModule,
+    EntregaPageModule,
+    RecicladorPageModule,
+    CategoriaPageModule,
+    DetallePageModule
 
   ],
   bootstrap: [IonicApp],

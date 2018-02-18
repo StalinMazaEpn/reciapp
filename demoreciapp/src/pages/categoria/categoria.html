@@ -1,0 +1,51 @@
+
+<ion-content padding>
+
+	<ion-row>
+	    <ion-col col-6 text-center>
+	    	<img src="http://www.reciveci.ec/images/reciclar/categorias/plastico.png" alt="Plástico" style="width: 72px; height: 72px;" (click)="ver()"><br><span (click)="ver()">Plástico</span>
+	    </ion-col>
+	    <ion-col col-6 text-center>
+	    	<img src="http://www.reciveci.ec/images/reciclar/categorias/papel.png" alt="Papel" style="width: 72px; height: 72px;" (click)="ver()"><br><span (click)="ver()">Papel</span>
+	    </ion-col>
+	    <ion-col col-6 text-center>
+	    	<img src="http://www.reciveci.ec/images/reciclar/categorias/vidrio.png" alt="Vidrio" style="width: 72px; height: 72px;" (click)="ver()"><br><span (click)="ver()">Vidrio</span>
+	    </ion-col>
+	    <ion-col col-6 text-center>
+	    	<img src="http://www.reciveci.ec/images/reciclar/categorias/compuesto.png" alt="Tetrapack" style="width: 72px; height: 72px;" (click)="ver()"><br><span (click)="ver()">Compuesto</span>   	
+	    </ion-col>
+	</ion-row>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-row text-center>
+      <ion-col>
+        <button ion-button icon-left clear small (click)="Dashboard()">
+          <ion-icon  ios="ios-home" md="md-home"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-left clear small>
+          <ion-icon ios="ios-hand" md="md-hand"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col >
+        <button ion-button icon-left clear small (click)="Entrega()">
+          <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
+        </button>
+      </ion-col>
+      <!--ion-col >
+        <button ion-button icon-left clear small (click)="Dashboard()">
+          <ion-icon name="text"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col >
+        <button ion-button icon-left clear small (click)="Dashboard()">
+          <ion-icon name="text"></ion-icon>
+        </button>
+      </ion-col-->
+    </ion-row>  
+  </ion-toolbar>
+</ion-footer>

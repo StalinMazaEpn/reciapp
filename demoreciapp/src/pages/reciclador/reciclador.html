@@ -1,0 +1,58 @@
+<!--
+  Generated template for the RecicladorPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>Reciclador</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+	<ion-card>
+	  <img src="https://image.freepik.com/iconos-gratis/la-imagen-del-usuario-con-el-fondo-negro_318-34564.jpg">
+	  <ion-fab right top>
+	    <div *ngIf="siguiendo; else elseBlockFavorite">
+			<button (click)="seguir()" ion-fab color="danger">
+				<ion-icon ios="ios-heart" md="md-heart"></ion-icon>
+			</button>    	
+	    </div>
+	    <ng-template #elseBlockFavorite>
+	    	<button (click)="seguir()" ion-fab color="danger">
+				<ion-icon ios="ios-heart-outline" md="md-heart-outline"></ion-icon>
+			</button>
+		</ng-template>
+	  </ion-fab>
+
+	  <ion-item>
+	    <ion-icon ios="ios-call" md="md-call" item-start large></ion-icon>
+	    <h2>Teléfono</h2>
+	    <p>0987654321</p>
+	  </ion-item>
+
+	  <ion-item>
+	    <ion-icon ios="ios-calendar" md="md-calendar" item-left large ></ion-icon>
+	    <h2>Horario</h2>
+	    <p>Lunes, Jueves y viernes<br>17:00 - 18:00</p>
+	  </ion-item>
+
+	  <ion-item>
+	    <span item-left>Notificaciones</span>
+	    
+	    <div *ngIf="notificacion; else elseBlockNotification">
+			<button (click)="notification()" ion-button icon-left clear item-end>
+				<ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
+			</button>
+	    </div>
+	    <ng-template #elseBlockNotification>
+	    	<button (click)="notification()" ion-button icon-left clear item-end>
+				<ion-icon ios="ios-notifications-off" md="md-notifications-off"></ion-icon>
+			</button>
+		</ng-template>
+	    
+	  </ion-item>
+	</ion-card>
+</ion-content>

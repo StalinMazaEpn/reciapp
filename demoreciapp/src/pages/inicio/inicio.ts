@@ -1,13 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the InicioPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
+import { RecicladorPage } from '../../pages/reciclador/reciclador';
 @IonicPage()
 @Component({
   selector: 'page-inicio',
@@ -22,4 +16,15 @@ export class InicioPage {
     console.log('ionViewDidLoad InicioPage');
   }
 
+  login_gmail():any{
+  	console.log('gmail');
+  }
+
+  login_fb():any{
+  	console.log('fb');
+  }
+
+  verReciclador(){
+    this.navCtrl.push(RecicladorPage);
+  }
 }
