@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the DetallePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { ReciappService } from '../../services/reciapp.service';
+
+import { EntregaPage } from '../entrega/entrega';
+import { DashboardPage } from '../dashboard/dashboard';
+import { CategoriaPage } from '../categoria/categoria';
 
 @IonicPage()
 @Component({
@@ -15,11 +14,33 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class DetallePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  id=null;
+  categoria:any;
+  reciclables:any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public CategoriaSrv:ReciappService, public ReciclableSrv:ReciappService) {
+  	this.id=navParams.get('id');
+  	this.categoria=CategoriaSrv.getCategoria(this.id);
+
+    this.reciclables=ReciclableSrv.getReciclables(this.categoria.id);
+
+    console.log(this.reciclables);
+    
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DetallePage');
   }
 
+  Dashboard():void{
+  	this.navCtrl.push(DashboardPage);
+  }
+
+  Separa():void{
+  	this.navCtrl.push(CategoriaPage);
+  }
+
+  Entrega():void{
+  	this.navCtrl.push(EntregaPage);
+  }
 }

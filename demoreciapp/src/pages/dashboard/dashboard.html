@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
 
-    <ion-title text-center>Hola, Marlon!</ion-title>
+    <ion-title text-center>Hola, {{Usuario.Nombres}}!</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -20,7 +20,7 @@
 
   <ion-list>
     <ion-list-header color="light"> # Recicladores </ion-list-header>
-    <ion-item small>  5  </ion-item>
+    <ion-item small>  {{reciclador_tot}}  </ion-item>
   </ion-list>
 
   <ion-list>
@@ -30,16 +30,10 @@
 
   <ion-list>
     <ion-list-header color="light"> Tus Recicladores </ion-list-header>
-    <ion-item>
-      Juan Pablo Peréz 
-      <button ion-button clear small item-end (click)="verReciclador()">
+    <ion-item *ngFor="let reciclador of Recicladores">
+      {{reciclador.Nombre}}
+      <button ion-button clear small item-end (click)="verReciclador(reciclador.id)">
         <ion-icon ios="ios-eye" md="md-eye"></ion-icon>
-      </button>
-    </ion-item>
-    <ion-item>
-      Maria Blanca Azucena 
-      <button ion-button clear small item-end (click)="verReciclador()">
-        <ion-icon ios="ios-eye" md="md-eye" ></ion-icon>
       </button>
     </ion-item>
   </ion-list>

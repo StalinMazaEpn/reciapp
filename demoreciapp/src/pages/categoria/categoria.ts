@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ReciappService } from '../../services/reciapp.service';
 
 import { EntregaPage } from '../entrega/entrega';
 import { DashboardPage } from '../dashboard/dashboard';
@@ -11,8 +12,12 @@ import { DetallePage } from '../detalle/detalle';
   templateUrl: 'categoria.html',
 })
 export class CategoriaPage {
+  
+  Categorias=[];
+  constructor(public navCtrl: NavController, public navParams: NavParams, public categoriaSrv: ReciappService) {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.Categorias=categoriaSrv.getCategorias();
+    //console.log(this.Categorias);
   }
 
   ionViewDidLoad() {
@@ -31,8 +36,9 @@ export class CategoriaPage {
   	this.navCtrl.push(EntregaPage);
   }
 
-  ver():void{
-  	this.navCtrl.push(DetallePage);
+  ver(id):void{
+    //console.log(id);
+  	this.navCtrl.push(DetallePage,{id:id});
   }
 
 }

@@ -16,28 +16,16 @@ export class HomePage {
   login:any=true;
 
   constructor(public navCtrl: NavController) { 
-  	let i =0;
-  	while (i<5){
-  		setTimeout(()=>this.ruta,1000);
-  		i++;
-  	}
-
-    this.rutas();
-
-  } 
-
-  rutas(){
-  	if (this.tour) {
-	  	this.tour=false;
-	  	return this.ruta=this.navCtrl.push(Tour1Page);
-  	}else{
-  		if (this.login) {
-  			return this.ruta=this.navCtrl.push(DashboardPage);
-  		}else{
-  			return this.ruta=this.navCtrl.push(InicioPage);
-  		}
-  	}
+    if (this.tour) {
+        this.tour=false;
+        this.ruta=Tour1Page;
+      }else{
+        if (this.login) {
+          this.ruta=DashboardPage;
+        }else{
+          this.ruta=InicioPage;
+        }
+      }
+    setTimeout(()=>{this.navCtrl.push(this.ruta)},1000);
   }
-
-  
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ReciappService } from '../../services/reciapp.service';
 
 import { RecicladorPage } from '../reciclador/reciclador';
 import { EntregaPage } from '../entrega/entrega';
@@ -11,8 +12,16 @@ import { CategoriaPage } from '../categoria/categoria';
   templateUrl: 'dashboard.html',
 })
 export class DashboardPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  
+  Usuario:any;
+  Recicladores=[];
+  reciclador_tot=0;
+  
+  constructor(public navCtrl: NavController, public navParams: NavParams, public recicladorSrv:ReciappService,public UsuarioSrv:ReciappService) {
+    this.Recicladores=recicladorSrv.getRecicladores();
+    this.reciclador_tot=recicladorSrv.getReciclador_count();
+    this.Usuario=UsuarioSrv.getUsuario();
+    console.log(this.Usuario);
   }
 
   ionViewDidLoad() {
@@ -31,7 +40,7 @@ export class DashboardPage {
   	this.navCtrl.push(EntregaPage);
   }
 
-  verReciclador(){
-  	this.navCtrl.push(RecicladorPage);
+  verReciclador(id){
+  	this.navCtrl.push(RecicladorPage, {id:id});
   }
 }

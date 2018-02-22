@@ -4,6 +4,8 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
+import { ReciappService } from '../services/reciapp.service';
+
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { Tour1PageModule } from '../pages/tour1/tour1.module';
@@ -45,6 +47,7 @@ import { DetallePageModule } from '../pages/detalle/detalle.module';
   providers: [
     StatusBar,
     SplashScreen,
+    ReciappService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

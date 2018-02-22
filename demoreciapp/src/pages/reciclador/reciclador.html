@@ -6,14 +6,19 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>Reciclador</ion-title>
+    <ion-title>{{reciclador.Nombre}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+	
+	<ion-row align-items-center>
+      <ion-col center text-center>
+        <img src="{{reciclador.img}}" center style="border-radius: 100px; height: 200px; width: 200px;">
+      </ion-col>
+    </ion-row>
 
 	<ion-card>
-	  <img src="https://image.freepik.com/iconos-gratis/la-imagen-del-usuario-con-el-fondo-negro_318-34564.jpg">
 	  <ion-fab right top>
 	    <div *ngIf="siguiendo; else elseBlockFavorite">
 			<button (click)="seguir()" ion-fab color="danger">
@@ -30,13 +35,13 @@
 	  <ion-item>
 	    <ion-icon ios="ios-call" md="md-call" item-start large></ion-icon>
 	    <h2>Teléfono</h2>
-	    <p>0987654321</p>
+	    <p>{{reciclador.telefono}}</p>
 	  </ion-item>
 
 	  <ion-item>
 	    <ion-icon ios="ios-calendar" md="md-calendar" item-left large ></ion-icon>
 	    <h2>Horario</h2>
-	    <p>Lunes, Jueves y viernes<br>17:00 - 18:00</p>
+	    <p>{{reciclador.dias}}<br>{{reciclador.horario}}</p>
 	  </ion-item>
 
 	  <ion-item>
