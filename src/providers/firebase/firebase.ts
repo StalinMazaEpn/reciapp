@@ -7,7 +7,7 @@ export class FirebaseProvider {
   constructor(public afdatabase: AngularFireDatabase) {
   }
 
-  getRecicladores(): AngularFireDatabase<any[]> {
+  getRecicladores() {
     return this.afdatabase.list('/recicladores');
   }
 
