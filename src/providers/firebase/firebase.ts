@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
+import {AngularFireDatabase} from 'angularfire2/database';
 
 @Injectable()
 export class FirebaseProvider {
@@ -7,7 +7,7 @@ export class FirebaseProvider {
   constructor(public afdatabase: AngularFireDatabase) {
   }
 
-  getRecicladores(): FirebaseListObservable<any[]> {
+  getRecicladores(): AngularFireDatabase<any[]> {
     return this.afdatabase.list('/recicladores');
   }
 

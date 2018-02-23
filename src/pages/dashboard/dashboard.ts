@@ -3,7 +3,7 @@ import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {ReciappService} from '../../services/reciapp.service';
 
 import {FirebaseProvider} from '../../providers/firebase/firebase';
-import {FirebaseListObservable} from 'angularfire2/database';
+import {AngularFireDatabase} from 'angularfire2/database';
 
 
 import {RecicladorPage} from '../reciclador/reciclador';
@@ -18,7 +18,7 @@ import {CategoriaPage} from '../categoria/categoria';
 export class DashboardPage {
 
   Usuario: any;
-  recicladores: FirebaseListObservable<any[]>;
+  recicladores: AngularFireDatabase<any[]>;
   newReciclador = {};
 
   // reciclador_tot=0;
