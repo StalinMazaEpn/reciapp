@@ -19,6 +19,21 @@ import { RecicladorPageModule } from '../pages/reciclador/reciclador.module';
 import { CategoriaPageModule } from '../pages/categoria/categoria.module';
 import { DetallePageModule } from '../pages/detalle/detalle.module';
 
+import { HttpModule } from '@angular/http';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireModule } from 'angularfire2';
+import { FirebaseProvider } from '../providers/firebase/firebase';
+
+// Initialize Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyD2qXD-AALuipF57RmPcbq25S-eIjb3TKs",
+  authDomain: "reciveci-app.firebaseapp.com",
+  databaseURL: "https://reciveci-app.firebaseio.com",
+  projectId: "reciveci-app",
+  storageBucket: "reciveci-app.appspot.com",
+  messagingSenderId: "138367459115"
+};
+
 @NgModule({
   declarations: [
     MyApp,
@@ -26,6 +41,9 @@ import { DetallePageModule } from '../pages/detalle/detalle.module';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
+    AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(firebaseConfig),
     IonicModule.forRoot(MyApp),
     Tour1PageModule,
     Tour2PageModule,
@@ -48,6 +66,7 @@ import { DetallePageModule } from '../pages/detalle/detalle.module';
     StatusBar,
     SplashScreen,
     ReciappService,
+    FirebaseProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

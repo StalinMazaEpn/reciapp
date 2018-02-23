@@ -7,7 +7,7 @@
 
 
 <ion-content padding>
-  
+
   <ion-fab top right edge>
     <button ion-fab mini><ion-icon name="menu"></ion-icon></button>
     <ion-fab-list>
@@ -30,9 +30,9 @@
 
   <ion-list>
     <ion-list-header color="light"> Tus Recicladores </ion-list-header>
-    <ion-item *ngFor="let reciclador of Recicladores">
-      {{reciclador.Nombre}}
-      <button ion-button clear small item-end (click)="verReciclador(reciclador.id)">
+    <ion-item *ngFor='let reciclador of recicladores | async'>
+      {{reciclador.name}}
+      <button ion-button clear small item-end (click)="verReciclador(reciclador.key)">
         <ion-icon ios="ios-eye" md="md-eye"></ion-icon>
       </button>
     </ion-item>
@@ -69,6 +69,6 @@
           <ion-icon name="text"></ion-icon>
         </button>
       </ion-col-->
-    </ion-row>  
+    </ion-row>
   </ion-toolbar>
 </ion-footer>
