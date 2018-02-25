@@ -2,8 +2,6 @@ import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {ReciappService} from '../../services/reciapp.service';
 
-import {FirebaseProvider} from '../../providers/firebase/firebase';
-
 import {RecicladorPage} from '../reciclador/reciclador';
 import {EntregaPage} from '../entrega/entrega';
 import {CategoriaPage} from '../categoria/categoria';
@@ -21,8 +19,9 @@ export class DashboardPage {
 
   // reciclador_tot=0;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public firebaseProvider: FirebaseProvider, public UsuarioSrv: ReciappService) {
-    this.recicladores = this.firebaseProvider.getRecicladores().valueChanges()
+  constructor(public navCtrl: NavController, public navParams: NavParams, public UsuarioSrv: ReciappService) {
+    this.recicladores = this.UsuarioSrv.getRecicladores();
+    
       // .subscribe(actions => {
       //   actions.forEach(action => {
       //     console.log(action.type);
@@ -33,16 +32,15 @@ export class DashboardPage {
     // this.recicladores = this.firebaseProvider.getRecicladores().snapshotChanges(['child_added']);
     // this.reciclador_tot=recicladorSrv.getReciclador_count();
     this.Usuario = UsuarioSrv.getUsuario();
-    console.log(this.Usuario);
   }
 
-  addReciclador() {
+  /*addReciclador() {
     this.firebaseProvider.addReciclador(this.newReciclador);
   }
 
   removeReciclador(id) {
     this.firebaseProvider.removeReciclador(id);
-  }
+  }*/
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DashboardPage');

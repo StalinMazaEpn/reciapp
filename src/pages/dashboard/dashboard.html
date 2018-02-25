@@ -32,7 +32,7 @@
     <ion-list-header color="light"> Tus Recicladores </ion-list-header>
     <ion-item *ngFor='let reciclador of recicladores | async'>
       {{reciclador.name}}
-      <button ion-button clear small item-end (click)="verReciclador(reciclador.key)">
+      <button ion-button clear small item-end (click)="verReciclador(reciclador.id)">
         <ion-icon ios="ios-eye" md="md-eye"></ion-icon>
       </button>
     </ion-item>

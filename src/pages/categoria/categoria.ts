@@ -13,7 +13,8 @@ import { DetallePage } from '../detalle/detalle';
 })
 export class CategoriaPage {
   
-  Categorias=[];
+  Categorias:any;;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public categoriaSrv: ReciappService) {
 
     this.Categorias=categoriaSrv.getCategorias();

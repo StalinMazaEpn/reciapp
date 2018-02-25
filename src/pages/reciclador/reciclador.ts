@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 
 import { ReciappService } from '../../services/reciapp.service';
+import { Observable } from 'rxjs/Observable';
 
 @IonicPage()
 @Component({
@@ -14,12 +15,14 @@ import { ReciappService } from '../../services/reciapp.service';
 export class RecicladorPage {
 	siguiendo: boolean = false;
 	notificacion:boolean=false;
-  reciclador:any;
   id=null;
+
+  reciclador:any;
+  
   constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl: ToastController, public RecicladorSrv:ReciappService) {
     this.id=navParams.get('id');
-    this.reciclador=RecicladorSrv.getReciclador(this.id);
-    console.log(this.reciclador);
+    this.reciclador=RecicladorSrv.getRecicle(this.id);
+
   }
 
   ionViewDidLoad() {
@@ -38,7 +41,8 @@ export class RecicladorPage {
   	}
   }
 
-  notification():void{
+  notification(name):void{
+    console.log(name);
   	if (this.notificacion) {
   		this.notificacion=false;
   		this.notificacionDesactivada();
@@ -50,7 +54,7 @@ export class RecicladorPage {
 
   seguirReciclador() {
     let toast = this.toastCtrl.create({
-      message: 'Ahora estas siguiendo a '+this.reciclador.Nombre+'.',
+      message: 'Ahora estas siguiendo a '+this.reciclador.name+'.',
       duration: 3000,
       position:'top'
     });
@@ -59,7 +63,7 @@ export class RecicladorPage {
 
   dejarReciclador() {
     let toast = this.toastCtrl.create({
-      message: 'Dejaste de seguir a '+this.reciclador.Nombre+'.',
+      message: 'Dejaste de seguir a '+this.reciclador.name+'.',
       duration: 3000,
       position:'top'
     });
@@ -68,7 +72,7 @@ export class RecicladorPage {
 
   notificacionActivada() {
     let toast = this.toastCtrl.create({
-      message: 'Te llegara información sobre '+this.reciclador.Nombre+'.',
+      message: 'Te llegara información sobre '+this.reciclador.name+'.',
       duration: 3000,
       position:'top'
     });

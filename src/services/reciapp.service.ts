@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
 
+import {AngularFireDatabase} from 'angularfire2/database';
+
 @Injectable()
 export class ReciappService{
+
+	constructor(public afdatabase: AngularFireDatabase) {}
+
+
 	Categorias=[
 	{
 		id:1,
@@ -27,7 +33,8 @@ export class ReciappService{
 	];
 
 	public getCategorias(){
-		return this.Categorias;
+		return this.afdatabase.list('/categories').valueChanges();
+		//return this.Categorias;
 	}
 
 	public getCategoria(id){
@@ -38,12 +45,21 @@ export class ReciappService{
 	}
 
 	Recicladores=[
-	{id:1, Nombre:'Elon Musk', img:'https://fin.guru/uploads/contents/5a68c193ed930.jpg', telefono:'0987654321', dias:'Lunes, Jueves y Viernes',horario:'17:00 - 18:00'},
+	{id:1, Nombre:'Elon Musk',
+	 img:'https://fin.guru/uploads/contents/5a68c193ed930.jpg',
+	  telefono:'0987654321', 
+	  dias:'Lunes, Jueves y Viernes',
+	  horario:'17:00 - 18:00'},
 	{id:2, Nombre:'María Blanca Azucena', img:'https://www.connectas.org/wp-content/uploads/2017/08/foto-de-perfil.jpg', telefono:'0987654321', dias:'Martes y Jueves',horario:'15:00 - 17:00'}
 	];
 
+	
 	public getRecicladores(){
-		return this.Recicladores;
+		return this.afdatabase.list('/recicladores').valueChanges();
+	}
+
+	public getRecicle(id){
+		return this.afdatabase.object('/recicladores/'+id).valueChanges();
 	}
 
 	public getReciclador(id){

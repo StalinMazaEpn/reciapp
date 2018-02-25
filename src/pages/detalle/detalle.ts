@@ -23,8 +23,6 @@ export class DetallePage {
   	this.categoria=CategoriaSrv.getCategoria(this.id);
 
     this.reciclables=ReciclableSrv.getReciclables(this.categoria.id);
-
-    console.log(this.reciclables);
     
   }
 
