@@ -13,7 +13,7 @@ import { DetallePage } from '../detalle/detalle';
 })
 export class CategoriaPage {
   
-  Categorias:any;;
+  Categorias:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public categoriaSrv: ReciappService) {
 

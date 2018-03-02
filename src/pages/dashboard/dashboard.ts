@@ -13,25 +13,17 @@ import {CategoriaPage} from '../categoria/categoria';
 })
 export class DashboardPage {
 
-  Usuario: any;
+  user: any;
   recicladores;
   newReciclador = {};
 
   // reciclador_tot=0;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public UsuarioSrv: ReciappService) {
-    this.recicladores = this.UsuarioSrv.getRecicladores();
+  constructor(public navCtrl: NavController, public navParams: NavParams, public userSrv: ReciappService) {
+    this.recicladores = this.userSrv.getRecicladores();
     
-      // .subscribe(actions => {
-      //   actions.forEach(action => {
-      //     console.log(action.type);
-      //     console.log(action.key);
-      //     console.log(action.payload.val());
-      //   });
-      // });
-    // this.recicladores = this.firebaseProvider.getRecicladores().snapshotChanges(['child_added']);
-    // this.reciclador_tot=recicladorSrv.getReciclador_count();
-    this.Usuario = UsuarioSrv.getUsuario();
+    this.user = userSrv.getUsuario();
+    //console.log('Usuario:', this.user);
   }
 
   /*addReciclador() {

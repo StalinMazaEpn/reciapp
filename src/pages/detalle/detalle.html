@@ -7,7 +7,7 @@
 <ion-header text-center>
 
   <ion-navbar>
-    <ion-title>{{categoria.Nombre}}</ion-title>
+    <ion-title>{{(categoria | async)?.category}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -17,20 +17,20 @@
 
   <ion-row>
     <ion-col col-8 center text-center>
-      <h2>{{categoria.Nombre}}</h2>
-      <p>{{categoria.tip}}</p>
+      <h2>{{(categoria | async)?.category}}</h2>
+      <p>{{(categoria | async)?.tip}}</p>
     </ion-col>
     <ion-col col-4 center text-center>
-      <img src="{{categoria.img}}">
+      <img src="{{(categoria | async)?.image}}">
     </ion-col>
   </ion-row>
   
-  <ion-row *ngFor="let item of reciclables">
+  <ion-row *ngFor='let item of reciclables | async'>
     <ion-col col-12>
-      <img src="{{item.descripcion.img}}" width="100%" height="100" />
+      <img src="{{item.description.image}}" width="100%" height="100" />
     </ion-col>
     <ion-col col-12 center text-center>
-      <p>{{item.descripcion.detalle}}</p>
+      <p>{{item.description.detail}}</p>
     </ion-col>
   </ion-row>
 

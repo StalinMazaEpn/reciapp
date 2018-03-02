@@ -3,7 +3,7 @@
 
 	<ion-row>
 	    <ion-col col-6 text-center *ngFor="let Ctg of Categorias | async">
-	    	<img src="{{Ctg.image}}" alt="{{Ctg.category}}" style="width: 72px; height: 72px;" (click)="ver(Ctg.id)"><br><span (click)="ver(Ctg.id)">{{Ctg.category}}</span>
+	    	<img src="{{Ctg.image}}" alt="{{Ctg.category}}" style="width: 72px; height: 72px;" (click)="ver(Ctg.id)"><br><b><span (click)="ver(Ctg.id)">{{Ctg.category}}</span></b>
 	    </ion-col>
 	</ion-row>
 

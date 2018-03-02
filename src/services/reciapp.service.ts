@@ -7,8 +7,43 @@ export class ReciappService{
 
 	constructor(public afdatabase: AngularFireDatabase) {}
 
+	public getCategorias(){
+		return this.afdatabase.list('/categories').valueChanges();
+	}
 
-	Categorias=[
+	public getCategoria(id){
+		return this.afdatabase.object('/categories/'+id).valueChanges();
+	}
+	
+	public getRecicladores(){
+		return this.afdatabase.list('/recicladores').valueChanges();
+	}
+
+	public getRecicle(id){
+		return this.afdatabase.object('/recicladores/'+id).valueChanges();
+	}
+
+	public getReciclables(id){
+		console.log("CATEGORY ID",id);
+		return this.afdatabase.list('/recyclable', ref => ref.orderByChild('categorie').equalTo(id))
+	}
+
+	public getUsuario(){
+		return this.afdatabase.object('/Users/1').valueChanges();
+	}
+}
+/*Usuario=[
+		{id:1,
+		 Nombres:'Marlon Ricardo',
+		 Apellidos:'Cáceres Almeida',
+		 img:'http://www.reciveci.ec/images/reciclar/categorias/plastico.png',
+		 telefono:'0987654321',
+		 correo:'a@a.com',
+		 contrasena:'123'
+		}
+	];*/
+
+/*Categorias=[
 	{
 		id:1,
 		Nombre:'Plástico',
@@ -30,66 +65,41 @@ export class ReciappService{
 		img:'http://www.reciveci.ec/images/reciclar/categorias/compuesto.png',
 		tip:'Tip para reciclar compuesto.'
 	}
-	];
-
-	public getCategorias(){
-		return this.afdatabase.list('/categories').valueChanges();
-		//return this.Categorias;
-	}
-
-	public getCategoria(id){
+	];*/
+	
+	/*public getCategoria(id){
 		return this.Categorias.filter(
 			function(e,i){
 				return e.id==id
 			})[0] || {id:null, Nombre:null, img:null};
-	}
+	}*/
 
-	Recicladores=[
+	/*Recicladores=[
 	{id:1, Nombre:'Elon Musk',
 	 img:'https://fin.guru/uploads/contents/5a68c193ed930.jpg',
 	  telefono:'0987654321', 
 	  dias:'Lunes, Jueves y Viernes',
 	  horario:'17:00 - 18:00'},
 	{id:2, Nombre:'María Blanca Azucena', img:'https://www.connectas.org/wp-content/uploads/2017/08/foto-de-perfil.jpg', telefono:'0987654321', dias:'Martes y Jueves',horario:'15:00 - 17:00'}
-	];
-
-	
-	public getRecicladores(){
-		return this.afdatabase.list('/recicladores').valueChanges();
-	}
-
-	public getRecicle(id){
-		return this.afdatabase.object('/recicladores/'+id).valueChanges();
-	}
-
-	public getReciclador(id){
+	];*/
+	/*public getReciclador(id){
 		return this.Recicladores.filter(
 			function(e,i){
 				return e.id==id
 			})[0] || {id:null, Nombre:null, img:null, telefono:null, dias:null,horario:null};
-	}
+	}*/
 
-	public getReciclador_count(){
+	/*public getReciclador_count(){
 		return this.Recicladores.length;
-	}
-
-	Usuario=[
-		{id:1,
-		 Nombres:'Marlon Ricardo',
-		 Apellidos:'Cáceres Almeida',
-		 img:'http://www.reciveci.ec/images/reciclar/categorias/plastico.png',
-		 telefono:'0987654321',
-		 correo:'a@a.com',
-		 contrasena:'123'
-		}
-	];
-
-	public getUsuario(){
-		return this.Usuario[0];
-	}
+	}*/
 
 
-	Reciclables=[
+	/*public getReciclables(id){
+		return this.Reciclables.filter(function(e,i){
+				return e.categoria==id
+			}) || {id:null, descripcion:{ img:null, detalle:null},categoria:null};
+	}*/
+	/*Reciclables=[
 		{
 			id:1,
 			descripcion:{
@@ -120,11 +130,4 @@ export class ReciappService{
 			categoria:2
 		}
 
-	];
-
-	public getReciclables(id){
-		return this.Reciclables.filter(function(e,i){
-				return e.categoria==id
-			}) || {id:null, descripcion:{ img:null, detalle:null},categoria:null};
-	}
-}
+	];*/
