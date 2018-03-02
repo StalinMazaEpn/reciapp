@@ -1,7 +1,6 @@
 <ion-header>
   <ion-toolbar>
-
-    <ion-title text-center>Hola, {{Usuario.Nombres}}!</ion-title>
+    <ion-title text-center>Hola, {{(user | async)?.name}}!</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -19,20 +18,20 @@
   </ion-fab>
 
   <ion-list>
-    <ion-list-header color="light"> # Recicladores </ion-list-header>
+    <ion-list-header color="light"> Recicladores Cercanos </ion-list-header>
     <ion-item small>  {{reciclador_tot}}  </ion-item>
   </ion-list>
 
-  <ion-list>
+  <!--ion-list>
     <ion-list-header color="light"> Última Entrega </ion-list-header>
     <ion-item >  01/01/1990  </ion-item>
-  </ion-list>
+  </ion-list-->
 
   <ion-list>
     <ion-list-header color="light"> Tus Recicladores </ion-list-header>
     <ion-item *ngFor='let reciclador of recicladores | async'>
       {{reciclador.name}}
-      <button ion-button clear small item-end (click)="verReciclador(reciclador.key)">
+      <button ion-button clear small item-end (click)="verReciclador(reciclador.id)">
         <ion-icon ios="ios-eye" md="md-eye"></ion-icon>
       </button>
     </ion-item>

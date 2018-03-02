@@ -1,20 +1,15 @@
-<!--
-  Generated template for the RecicladorPage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
   <ion-navbar>
-    <ion-title>{{reciclador.Nombre}}</ion-title>
+    <ion-title > {{(reciclador | async)?.name}} </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-	
 	<ion-row align-items-center>
       <ion-col center text-center>
-        <img src="{{reciclador.img}}" center style="border-radius: 100px; height: 200px; width: 200px;">
+        <img src="{{(reciclador | async)?.image}}" center 
+        style="border-radius: 100px; height: 200px; width: 200px;">
       </ion-col>
     </ion-row>
 
@@ -26,7 +21,7 @@
 			</button>    	
 	    </div>
 	    <ng-template #elseBlockFavorite>
-	    	<button (click)="seguir()" ion-fab color="danger">
+	    	<button (click)="seguir()" ion-fab color="light">
 				<ion-icon ios="ios-heart-outline" md="md-heart-outline"></ion-icon>
 			</button>
 		</ng-template>
@@ -35,24 +30,24 @@
 	  <ion-item>
 	    <ion-icon ios="ios-call" md="md-call" item-start large></ion-icon>
 	    <h2>Teléfono</h2>
-	    <p>{{reciclador.telefono}}</p>
+	    <p>{{(reciclador | async)?.phone}}</p>
 	  </ion-item>
 
 	  <ion-item>
 	    <ion-icon ios="ios-calendar" md="md-calendar" item-left large ></ion-icon>
 	    <h2>Horario</h2>
-	    <p>{{reciclador.dias}}<br>{{reciclador.horario}}</p>
+	    <p>{{(reciclador | async)?.day}}<br>{{(reciclador | async)?.time}}</p>
 	  </ion-item>
 
 	  <ion-item>
 	    <span item-left>Notificaciones</span>
 	    
-	    <div *ngIf="notificacion; else elseBlockNotification">
+	    <div *ngIf="notificacion; else elseBlockNotification" >
 			<button (click)="notification()" ion-button icon-left clear item-end>
 				<ion-icon ios="ios-notifications" md="md-notifications"></ion-icon>
 			</button>
 	    </div>
-	    <ng-template #elseBlockNotification>
+	    <ng-template #elseBlockNotification >
 	    	<button (click)="notification()" ion-button icon-left clear item-end>
 				<ion-icon ios="ios-notifications-off" md="md-notifications-off"></ion-icon>
 			</button>

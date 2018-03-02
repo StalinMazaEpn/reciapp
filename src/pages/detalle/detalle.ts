@@ -20,11 +20,11 @@ export class DetallePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public CategoriaSrv:ReciappService, public ReciclableSrv:ReciappService) {
   	this.id=navParams.get('id');
+    //console.log("PARAAM ID",this.id);
   	this.categoria=CategoriaSrv.getCategoria(this.id);
-
-    this.reciclables=ReciclableSrv.getReciclables(this.categoria.id);
-
-    console.log(this.reciclables);
+    //console.log("DET CATEGORY", this.categoria);
+    this.reciclables=ReciclableSrv.getReciclables(this.id).valueChanges();
+    //console.log(this.reciclables);
     
   }
 
