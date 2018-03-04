@@ -21,7 +21,7 @@ export class RecicladorPage {
   
   constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl: ToastController, public RecicladorSrv:ReciappService) {
     this.id=navParams.get('id');
-    this.reciclador=RecicladorSrv.getRecicle(this.id);
+    this.reciclador=RecicladorSrv.getRecyclerById(this.id);
 
   }
 

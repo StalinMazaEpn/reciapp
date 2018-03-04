@@ -36,7 +36,7 @@
 	  <ion-item>
 	    <ion-icon ios="ios-calendar" md="md-calendar" item-left large ></ion-icon>
 	    <h2>Horario</h2>
-	    <p>{{(reciclador | async)?.day}}<br>{{(reciclador | async)?.time}}</p>
+	    <p>{{(reciclador | async)?.date.day}}<br>{{(reciclador | async)?.date.startTime}} - {{(reciclador | async)?.date.endTime}}</p>
 	  </ion-item>
 
 	  <ion-item>

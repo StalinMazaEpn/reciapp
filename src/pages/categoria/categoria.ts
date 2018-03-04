@@ -13,12 +13,12 @@ import { DetallePage } from '../detalle/detalle';
 })
 export class CategoriaPage {
   
-  Categorias:any;
+  categories:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public categoriaSrv: ReciappService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public categoriesSrv: ReciappService) {
 
-    this.Categorias=categoriaSrv.getCategorias();
-    //console.log(this.Categorias);
+    this.categories=categoriesSrv.getCategory();
+    //console.log(this.categories);
   }
 
   ionViewDidLoad() {
@@ -37,7 +37,7 @@ export class CategoriaPage {
   	this.navCtrl.push(EntregaPage);
   }
 
-  ver(id):void{
+  goSubcategory(id):void{
     //console.log(id);
   	this.navCtrl.push(DetallePage,{id:id});
   }

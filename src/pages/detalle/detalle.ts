@@ -15,16 +15,16 @@ import { CategoriaPage } from '../categoria/categoria';
 export class DetallePage {
 
   id=null;
-  categoria:any;
-  reciclables:any;
+  category:any;
+  subcategories:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public CategoriaSrv:ReciappService, public ReciclableSrv:ReciappService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public categorySrv:ReciappService, public subcategoriesSrv:ReciappService) {
   	this.id=navParams.get('id');
     //console.log("PARAAM ID",this.id);
-  	this.categoria=CategoriaSrv.getCategoria(this.id);
-    //console.log("DET CATEGORY", this.categoria);
-    this.reciclables=ReciclableSrv.getReciclables(this.id).valueChanges();
-    //console.log(this.reciclables);
+  	this.category=categorySrv.getCategoryById(this.id);
+    console.log("DET CATEGORY", this.category);
+    this.subcategories=subcategoriesSrv.getSubcategory(this.id).valueChanges();
+    console.log(this.subcategories);
     
   }
 
