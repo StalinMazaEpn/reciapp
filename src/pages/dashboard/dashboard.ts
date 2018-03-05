@@ -13,17 +13,13 @@ import {CategoriaPage} from '../categoria/categoria';
 })
 export class DashboardPage {
 
-  user: any;
-  recicladores;
-  newReciclador = {};
+  user:any;
+  recyclers:any;
 
-  // reciclador_tot=0;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public userSrv: ReciappService,public recyclerSrv: ReciappService) {
+    this.recyclers = this.recyclerSrv.getRecycler();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public userSrv: ReciappService) {
-    this.recicladores = this.userSrv.getRecicladores();
-    
-    this.user = userSrv.getUsuario();
-    //console.log('Usuario:', this.user);
+    this.user = this.userSrv.getUser();
   }
 
   /*addReciclador() {
@@ -50,7 +46,7 @@ export class DashboardPage {
     this.navCtrl.push(EntregaPage);
   }
 
-  verReciclador(id) {
+  goRecycler(id) {
     this.navCtrl.push(RecicladorPage, {id: id});
   }
 }

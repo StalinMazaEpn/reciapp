@@ -7,29 +7,28 @@ export class ReciappService{
 
 	constructor(public afdatabase: AngularFireDatabase) {}
 
-	public getCategorias(){
-		return this.afdatabase.list('/categories').valueChanges();
+	public getCategory(){
+		return this.afdatabase.list('/category').valueChanges();
 	}
 
-	public getCategoria(id){
-		return this.afdatabase.object('/categories/'+id).valueChanges();
+	public getCategoryById(id){
+		return this.afdatabase.object('/category/'+id).valueChanges();
 	}
 	
-	public getRecicladores(){
-		return this.afdatabase.list('/recicladores').valueChanges();
+	public getRecycler(){
+		return this.afdatabase.list('/recycler').valueChanges();
 	}
 
-	public getRecicle(id){
-		return this.afdatabase.object('/recicladores/'+id).valueChanges();
+	public getRecyclerById(id){
+		return this.afdatabase.object('/recycler/'+id).valueChanges();
 	}
 
-	public getReciclables(id){
-		console.log("CATEGORY ID",id);
-		return this.afdatabase.list('/recyclable', ref => ref.orderByChild('categorie').equalTo(id))
+	public getSubcategory(id){
+		return this.afdatabase.list('/subcategory', ref => ref.orderByChild('category').equalTo(id))
 	}
 
-	public getUsuario(){
-		return this.afdatabase.object('/Users/1').valueChanges();
+	public getUser(){
+		return this.afdatabase.object('/user/1').valueChanges();
 	}
 }
 /*Usuario=[

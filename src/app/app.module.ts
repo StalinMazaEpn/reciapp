@@ -19,6 +19,7 @@ import { EntregaPageModule } from '../pages/entrega/entrega.module';
 import { RecicladorPageModule } from '../pages/reciclador/reciclador.module';
 import { CategoriaPageModule } from '../pages/categoria/categoria.module';
 import { DetallePageModule } from '../pages/detalle/detalle.module';
+import { TabsPageModule } from '../pages/tabs/tabs.module';
 
 import { HttpModule } from '@angular/http';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -55,7 +56,8 @@ const firebaseConfig = {
     EntregaPageModule,
     RecicladorPageModule,
     CategoriaPageModule,
-    DetallePageModule
+    DetallePageModule,
+    TabsPageModule
 
   ],
   bootstrap: [IonicApp],

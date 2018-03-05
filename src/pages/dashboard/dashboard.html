@@ -29,9 +29,9 @@
 
   <ion-list>
     <ion-list-header color="light"> Tus Recicladores </ion-list-header>
-    <ion-item *ngFor='let reciclador of recicladores | async'>
-      {{reciclador.name}}
-      <button ion-button clear small item-end (click)="verReciclador(reciclador.id)">
+    <ion-item *ngFor='let recycler of recyclers | async'>
+      {{recycler.name}}
+      <button ion-button clear small item-end (click)="goRecycler(recycler.id)">
         <ion-icon ios="ios-eye" md="md-eye"></ion-icon>
       </button>
     </ion-item>
@@ -40,7 +40,7 @@
 </ion-content>
 
 
-<ion-footer>
+<!--ion-footer>
   <ion-toolbar>
     <ion-row text-center>
       <ion-col>
@@ -58,7 +58,7 @@
           <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
         </button>
       </ion-col>
-      <!--ion-col >
+      <ion-col >
         <button ion-button icon-left clear small (click)="Dashboard()">
           <ion-icon name="text"></ion-icon>
         </button>
@@ -67,7 +67,7 @@
         <button ion-button icon-left clear small (click)="Dashboard()">
           <ion-icon name="text"></ion-icon>
         </button>
-      </ion-col-->
+      </ion-col>
     </ion-row>
   </ion-toolbar>
-</ion-footer>
+</ion-footer-->
