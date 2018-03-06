@@ -12,7 +12,7 @@ import { InicioPage } from '../pages/inicio/inicio';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  tour:any=false;
+  tour:any=true;
   ruta:any="";
   login:any=false;
 

@@ -6,6 +6,8 @@ import {RecicladorPage} from '../reciclador/reciclador';
 import {EntregaPage} from '../entrega/entrega';
 import {CategoriaPage} from '../categoria/categoria';
 
+import { User } from '../../models/user';
+
 @IonicPage()
 @Component({
   selector: 'page-dashboard',
@@ -13,13 +15,15 @@ import {CategoriaPage} from '../categoria/categoria';
 })
 export class DashboardPage {
 
-  user:any;
+  user={}as User;
   recyclers:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public userSrv: ReciappService,public recyclerSrv: ReciappService) {
     this.recyclers = this.recyclerSrv.getRecycler();
 
-    this.user = this.userSrv.getUser();
+    //this.user = this.userSrv.getUser();
+    this.user = this.navParams.get('userData');
+    
   }
 
   /*addReciclador() {

@@ -31,11 +31,15 @@ export class ReciappService{
 	}
 
 	public getUser(){
-		return this.afdatabase.object('/user/1').valueChanges();
+		return this.afdatabase.object('/user' ).valueChanges();
 	}
 
 	public createUser(user) {
 	    this.afdatabase.list('/user').push(user);
+	}
+
+	public login(userData){
+		return this.afAuth.auth.signInWithEmailAndPassword(userData.mail,userData.password);
 	}
 	/*public registerUser(user:User){
 		this.afAuth.auth.signInAnonymously().then(()=>{
