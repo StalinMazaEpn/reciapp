@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Tour3Page } from '../tour3/tour3';
-import { InicioPage } from '../inicio/inicio';
+import { DashboardPage } from './../dashboard/dashboard';
 /**
  * Generated class for the Tour4Page page.
  *
@@ -25,7 +25,8 @@ export class Tour4Page {
   }
 
   Avanzar():void{
-  	this.navCtrl.push(InicioPage);
+    //this.navCtrl.push(InicioPage);
+    this.navCtrl.push(DashboardPage);
   }
 
   Retroceder():void{

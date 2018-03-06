@@ -25,6 +25,7 @@ import { HttpModule } from '@angular/http';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireModule } from 'angularfire2';
 import { FirebaseProvider } from '../providers/firebase/firebase';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -70,6 +71,7 @@ const firebaseConfig = {
     SplashScreen,
     ReciappService,
     FirebaseProvider,
+    NativeStorage,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

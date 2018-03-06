@@ -1,3 +1,4 @@
+import { Tour1Page } from './../tour1/tour1';
 import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {ReciappService} from '../../services/reciapp.service';
@@ -48,5 +49,9 @@ export class DashboardPage {
 
   goRecycler(id) {
     this.navCtrl.push(RecicladorPage, {id: id});
+  }
+
+  goToTour(){
+    this.navCtrl.push(Tour1Page);
   }
 }

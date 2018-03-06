@@ -5,42 +5,60 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-toolbar text-center>
+  <ion-toolbar text-center color="tourFour">
 	<ion-title>COMPARTE  <ion-icon ios="ios-chatbubbles" md="md-chatbubbles"></ion-icon></ion-title>
   </ion-toolbar>
 </ion-header>
 
-
-
 <ion-content padding>
-<h2><span style="font-weight: bold;">¡Recibe notificaciones</span> antes de que pase tu camión recolector!</h2>
-<img src="">
-<img src="">
-<p style="font-weight: bold;">Sé voluntario o embajador en tu barrio.</p>
-<p style="font-weight: bold;">Y comparte tus didas y experiencias con tus amigos</p>
-
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col col-10 text-center>
+          <h2><span style="font-weight: bold;">¡Recibe notificaciones</span> antes de que pase tu camión recolector!</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        <img src="">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        <img src="">
+      </ion-col>
+    </ion-row>
+    <ion-row justify-content-center>
+      <ion-col col-12 >
+        <p style="font-weight: bold;">Sé voluntario o embajador en tu barrio.</p>
+      </ion-col>
+    </ion-row> 
+    <ion-row justify-content-center>
+      <ion-col col-12>
+        <p style="font-weight: bold;">Y comparte tus didas y experiencias con tus amigos</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 <ion-row text-center>
     <ion-col>
       <button ion-button icon-left clear large>
-        <ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon>
+        <ion-icon ios="logo-facebook" md="logo-facebook" color="light"></ion-icon>
       </button>
     </ion-col>
     <ion-col>
       <button ion-button icon-left clear large>
-        <ion-icon ios="logo-twitter" md="logo-twitter"></ion-icon>
+        <ion-icon ios="logo-twitter" md="logo-twitter" color="light"></ion-icon>
       </button>
     </ion-col>
     <ion-col center text-center>
       <button ion-button icon-left clear large>
-        <ion-icon clear large ios="logo-instagram" md="logo-instagram"></ion-icon>
+        <ion-icon clear large ios="logo-instagram" md="logo-instagram" color="light"></ion-icon>
       </button>    
     </ion-col>
   </ion-row>
 </ion-content>
 
-
 <ion-footer>
-  <ion-toolbar>
+  <ion-toolbar color="tourFour">
     <ion-buttons start>
       <button ion-button icon-only (click)="Retroceder()">
         <ion-icon name="arrow-dropleft" ></ion-icon>

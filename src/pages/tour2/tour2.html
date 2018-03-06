@@ -6,27 +6,60 @@
 -->
 
 <ion-header>
-  <ion-toolbar text-center>
-	<ion-title>SEPARA <ion-icon ios="ios-hand" md="md-hand"></ion-icon></ion-title>
+  <ion-toolbar text-center color="tourTwo">
+	<ion-title text-uppercase >SEPARA <ion-icon ios="ios-hand" md="md-hand"></ion-icon></ion-title>
   </ion-toolbar>
 </ion-header>
 
 
 
 <ion-content padding>
-<h2>¿QUÉ ES RECICLABLE Y QUÉ NO ES?</h2>
-<img src="">
-<p>Conoce cuáles desperdicios son materiales reciclables y cuáles no lo son. Encontrarás ejemplos de cada uno de estos.</p>
+  <ion-grid margin-bottom>
+    <ion-row justify-content-center>
+      <ion-col col-10>
+        <h3 text-center text-uppercase>¿QUÉ ES RECICLABLE Y QUÉ NO ES?</h3>
+      </ion-col>
+    </ion-row>
+    <ion-row justify-content-center>
+        <ion-col col-6>
+          <img src="">
+        </ion-col>
+      </ion-row>
+    <ion-row justify-content-center>
+      <ion-col col-12>
+        <p text-lowercase>Conoce cuáles desperdicios son materiales reciclables y cuáles no lo son. Encontrarás ejemplos de cada uno de estos.</p>
+      </ion-col>
+    </ion-row>
+    <ion-row justify-content-center>
+      <ion-col col-4 text-center>
+          <ion-icon id="hand" ios="ios-hand" md="md-hand"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-<h2>¡NO LO SABÍAS!</h2>
-<img src="">
-<p>NO IMPORTA DÓNDE VIVAS, SIEMPRE HAY ALGUIEN QUE SEPARA LOS DESECHOS.</p>
-<p>Aprende cómo ayudar al reciclador(a) de tu barrio, aunque todavía no lo conozcas, aprende a identicarlo!</p>
+  <ion-grid margin-top>
+    <ion-row justify-content-center>
+      <ion-col col-8>
+        <h2 text-center text-uppercase>¡NO LO SABÍAS!</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row justify-content-center>
+      <ion-col col-6>
+        <img src="">
+      </ion-col>
+      </ion-row>
+    <ion-row justify-content-center>
+      <ion-col col-12>
+        <p text-uppercase>NO IMPORTA DÓNDE VIVAS, SIEMPRE HAY ALGUIEN QUE SEPARA LOS DESECHOS.</p>
+        <p text-lowercase>Aprende cómo ayudar al reciclador(a) de tu barrio, aunque todavía no lo conozcas, aprende a identicarlo!</p>        
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
 
 
 <ion-footer>
-  <ion-toolbar>
+  <ion-toolbar color="tourTwo">
     <ion-buttons start>
       <button ion-button icon-only (click)="Retroceder()">
         <ion-icon name="arrow-dropleft" ></ion-icon>
