@@ -52,6 +52,6 @@ export class DashboardPage {
   }
 
   goToTour(){
-    this.navCtrl.push(Tour1Page);
+    this.navCtrl.setRoot(Tour1Page); 
   }
 }
