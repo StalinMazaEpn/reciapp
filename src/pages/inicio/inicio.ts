@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { RecicladorPage } from '../../pages/reciclador/reciclador';
+import { LoginPage }  from '../../pages/login/login';
+import { RegisterPage }  from '../../pages/register/register';
+
 @IonicPage()
 @Component({
   selector: 'page-inicio',
@@ -16,12 +19,18 @@ export class InicioPage {
     console.log('ionViewDidLoad InicioPage');
   }
 
-  login_gmail():any{
-  	console.log('gmail');
+  register_mail():any{
+  	//console.log('mail');
+    this.navCtrl.push('RegisterPage');
   }
 
-  login_fb():any{
+  register_fb():any{
   	console.log('fb');
+  }
+
+  login(){
+    this.navCtrl.push('LoginPage');
+    //console.log('inicio');
   }
 
   verReciclador(){

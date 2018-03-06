@@ -22,18 +22,28 @@
       </button>
     </ion-item>
   </ion-list>
-  <br><br>
-  
+
+  <br>
+  <ion-row text-center>
+    <ion-col col-12>
+      <button ion-button round (click)="login()">Iniciar Sesión</button>
+    </ion-col>
+   </ion-row>
+  <br>
+
   <ion-list>
   <ion-list-header color="light"> Perzonaliza tu experiencia. </ion-list-header>
     <ion-row text-center>
+      <!--ion-col col-12>
+        <span ion-button clear>Registrate</span>
+      </ion-col-->
       <ion-col>
-        <button ion-button icon-left clear large (click)="login_gmail()">
-          <ion-icon ios="logo-googleplus" md="logo-googleplus" ></ion-icon>
+        <button ion-button icon-left clear large (click)="register_mail()">
+          <ion-icon ios="ios-mail" md="md-mail" ></ion-icon>
         </button>
       </ion-col>
       <ion-col>
-        <button ion-button icon-left clear large (click)="login_fb()">
+        <button ion-button icon-left clear large (click)="register_fb()">
           <ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon>
         </button>
       </ion-col>
