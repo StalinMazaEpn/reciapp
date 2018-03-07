@@ -25,6 +25,8 @@ import { HttpModule } from '@angular/http';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireModule } from 'angularfire2';
 import { FirebaseProvider } from '../providers/firebase/firebase';
+import { EmailComposer } from '@ionic-native/email-composer';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -70,6 +72,8 @@ const firebaseConfig = {
     SplashScreen,
     ReciappService,
     FirebaseProvider,
+    EmailComposer,
+    InAppBrowser,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
