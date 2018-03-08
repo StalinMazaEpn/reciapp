@@ -1,10 +1,8 @@
-import { TabsPage } from './../tabs/tabs';
- import { Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import { Tour1Page } from '../tour1/tour1';
-import { InicioPage } from '../inicio/inicio';
-import { DashboardPage } from '../dashboard/dashboard';
+import { TourPage } from './../tour/tour';
+import { TabsPage } from './../tabs/tabs';
 
 @Component({
   selector: 'page-home',
@@ -30,21 +28,16 @@ export class HomePage {
 
     // verify if exits localstorage firsTime
     if (this.getFirstTime() == null) { // if don´t exists go to the Tour
-      this.setFirstTime(); // And set the localstorage firsTime.
-      this.ruta = Tour1Page;
+      this.ruta = TourPage;
     }else{ // if exists go to the TabsPage
       this.ruta = TabsPage;
-    }
+    } 
     setTimeout(()=>{
-      this.navCtrl.push(this.ruta) 
+      this.navCtrl.setRoot(this.ruta) 
     },1000);
   }
 
   getFirstTime():string {
-    return localStorage.getItem('firstTime');
-  }
-
-  setFirstTime():void {
-    localStorage.setItem('firstTime','true');
+    return localStorage.getItem('tourDone');
   }
 }

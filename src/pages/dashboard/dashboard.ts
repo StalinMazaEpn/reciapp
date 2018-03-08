@@ -1,4 +1,3 @@
-import { Tour1Page } from './../tour1/tour1';
 import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {ReciappService} from '../../services/reciapp.service';
@@ -6,6 +5,7 @@ import {ReciappService} from '../../services/reciapp.service';
 import {RecicladorPage} from '../reciclador/reciclador';
 import {EntregaPage} from '../entrega/entrega';
 import {CategoriaPage} from '../categoria/categoria';
+import { TourPage } from './../tour/tour';
 
 @IonicPage()
 @Component({
@@ -52,6 +52,6 @@ export class DashboardPage {
   }
 
   goToTour(){
-    this.navCtrl.setRoot(Tour1Page); 
+    this.navCtrl.push(TourPage); 
   }
 }
