@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { ToastController } from 'ionic-angular';
 
+import { RegisterPage } from '../../pages/register/register';
 import { ReciappService } from '../../services/reciapp.service';
 import { TabsPage } from '../../pages/tabs/tabs';
 import { User } from '../../models/user';
@@ -54,5 +55,9 @@ export class LoginPage {
       position:'top'
     });
     toast.present();
+  }
+
+  register(){
+    this.navCtrl.push('RegisterPage');
   }
 }

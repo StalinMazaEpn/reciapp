@@ -12,16 +12,16 @@ import { InicioPage } from '../pages/inicio/inicio';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  tour:any=true;
+  tour:any=false;
   ruta:any="";
-  login:any=false;
+  login:any=true;
 
-  rootPage:any;
+  rootPage:any=InicioPage;
   //rootPage:any = HomePage;
   //rootPage:any = TabsPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
-    if (this.tour) {
+    /*if (this.tour) {
       this.tour=false;
       this.rootPage=Tour1Page;
     }else{
@@ -31,7 +31,7 @@ export class MyApp {
         //this.rootPage=DashboardPage;
         this.rootPage=InicioPage;
       }
-    }
+    }*/
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.

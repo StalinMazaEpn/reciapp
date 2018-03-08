@@ -6,14 +6,40 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Login</ion-title>
+  <ion-navbar color="primary">
+    <ion-title text-center>ReciApp</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '809111969272969',
+      cookie     : true,
+      xfbml      : true,
+      version    : '16'
+    });
+      
+    FB.AppEvents.logPageView();   
+      
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+    <div text-center>
+      <img src="http://www.reciveci.ec/images/logo_simbolo.png" width="150px" height="150px" />
+    </div>
+  
   <ion-item>
     <ion-label stacked>Correo</ion-label>
     <ion-input type="text" [(ngModel)]="user.mail"></ion-input>
@@ -28,5 +54,5 @@
   	<button ion-button round (click)="validate()" >Entrar</button>
   </div>
 
-  <p>Aún no tienes cuenta, registrate</p>
+  <p text-center>Aún no tienes cuenta, <br><a (click)="register()">Registrate</a></p>
 </ion-content>
