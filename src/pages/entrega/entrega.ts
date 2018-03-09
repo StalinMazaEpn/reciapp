@@ -5,6 +5,7 @@ import { DashboardPage } from '../dashboard/dashboard';
 import { CategoriaPage } from '../categoria/categoria';
 import { Geolocation } from '@ionic-native/geolocation';
 import { ReciappService } from './../../services/reciapp.service';
+import {RecicladorPage} from "../reciclador/reciclador";
 
 @IonicPage()
 @Component({
@@ -21,7 +22,7 @@ export class EntregaPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, public recyclerSrv: ReciappService) {
     this.getMyLocation();
-    this.getRecyclers(); 
+    this.getRecyclers();
   }
 
   ionViewDidLoad() {
@@ -36,16 +37,16 @@ export class EntregaPage {
   	this.navCtrl.push(CategoriaPage);
   }
 
-  getIdFromMarker(recycler){
-    console.log(recycler);
+  goToRecycler(id) {
+    this.navCtrl.push(RecicladorPage, {id: id});
   }
   getRecyclers(){
     this.recyclerSrv.getRecycler()
-    .subscribe((resp)=>{ 
+    .subscribe((resp)=>{
       this.recyclers = resp;
       console.log(this.recyclers);
     });
-    
+
   }
   getMyLocation(){
     this.geolocation.getCurrentPosition().then((resp) => {
