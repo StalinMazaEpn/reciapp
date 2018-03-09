@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { Tour1Page } from '../tour1/tour1';
 import { Tour3Page } from '../tour3/tour3';
 /**
  * Generated class for the Tour2Page page.
