@@ -28,6 +28,8 @@ import { AngularFireModule } from 'angularfire2';
 import { FirebaseProvider } from '../providers/firebase/firebase';
 import { Geolocation } from '@ionic-native/geolocation';
 import { TourPage } from '../pages/tour/tour';
+import { EmailComposer } from '@ionic-native/email-composer';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -75,6 +77,8 @@ const firebaseConfig = {
     ReciappService,
     FirebaseProvider,
     Geolocation,
+    EmailComposer,
+    InAppBrowser,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
