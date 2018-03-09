@@ -5,6 +5,7 @@ import {ReciappService} from '../../services/reciapp.service';
 import {RecicladorPage} from '../reciclador/reciclador';
 import {EntregaPage} from '../entrega/entrega';
 import {CategoriaPage} from '../categoria/categoria';
+import { TourPage } from './../tour/tour';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
@@ -54,6 +55,10 @@ export class DashboardPage {
 
   goRecycler(id) {
     this.navCtrl.push(RecicladorPage, {id: id});
+  }
+
+  goToTour(){
+    this.navCtrl.push(TourPage); 
   }
 
   sendEmail(){
