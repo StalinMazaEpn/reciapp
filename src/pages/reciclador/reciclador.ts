@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 
 import { ReciappService } from '../../services/reciapp.service';
-import { Observable } from 'rxjs/Observable';
+// import { Observable } from 'rxjs/Observable';
 
 @IonicPage()
 @Component({
@@ -18,7 +18,7 @@ export class RecicladorPage {
   id=null;
 
   reciclador:any;
-  
+
   constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl: ToastController, public RecicladorSrv:ReciappService) {
     this.id=navParams.get('id');
     this.reciclador=RecicladorSrv.getRecyclerById(this.id);
@@ -27,6 +27,10 @@ export class RecicladorPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RecicladorPage');
+  }
+
+  ionViewWillLeave() {
+    this.navCtrl.popToRoot();
   }
 
   seguir():void{

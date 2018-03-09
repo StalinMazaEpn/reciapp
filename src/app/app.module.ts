@@ -26,6 +26,7 @@ import { HttpModule } from '@angular/http';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireModule } from 'angularfire2';
 import { FirebaseProvider } from '../providers/firebase/firebase';
+import { NativeStorage } from '@ionic-native/native-storage';
 import { Geolocation } from '@ionic-native/geolocation';
 import { TourPage } from '../pages/tour/tour';
 import { EmailComposer } from '@ionic-native/email-composer';
@@ -76,6 +77,7 @@ const firebaseConfig = {
     SplashScreen,
     ReciappService,
     FirebaseProvider,
+    NativeStorage,
     Geolocation,
     EmailComposer,
     InAppBrowser,
