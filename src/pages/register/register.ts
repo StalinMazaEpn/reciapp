@@ -21,11 +21,16 @@ import { User } from '../../models/user';
 })
 export class RegisterPage {
 
-  user={ 
+  userData={
+    email:null,
+    pass:null,
+  }
+
+  user={
   	points:0,
   	favoritiesReciclers:{},
-  	registeredRecyclers:{}
-
+  	registeredRecyclers:{},
+    phone:null
   } as User; 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,  public afAuth:AngularFireAuth, public userSrv:ReciappService, public toastCtrl:ToastController) {
@@ -36,14 +41,18 @@ export class RegisterPage {
   }
 
   async register(user:User){
-  	let min=this.user.password;
+    //console.log(this.userData);
+    this.user.mail=this.userData.email;
+    //console.log(this.user);
+  	let min=this.userData.pass;
+
   	if (min.length<6) {
   		//console.log('caracteres:', min.length);
   		this.passFail();
   	}else{
   		//console.log('registrando');
   		try{
-	  		const result = await this.afAuth.auth.createUserWithEmailAndPassword(this.user.mail, this.user.password);
+	  		const result = await this.afAuth.auth.createUserWithEmailAndPassword(this.userData.email, this.userData.pass);
 	  		const result_ = await this.userSrv.createUser(this.user);
 	  		if (result) {
 	  			this.userOk();
