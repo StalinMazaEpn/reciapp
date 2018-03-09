@@ -63,7 +63,7 @@
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-geolocation": {
         "GEOLOCATION_USAGE_DESCRIPTION": "To locate you"
-      }
+      },
       "cordova-plugin-email-composer": {},
       "cordova-plugin-inappbrowser": {}
     },
