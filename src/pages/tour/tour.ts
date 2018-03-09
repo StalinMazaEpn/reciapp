@@ -36,6 +36,9 @@ export class TourPage {
     console.log('ionViewDidLoad TourPage');
     this.indexPages = 0;
   }
+  ionViewDidLeave(){
+   this.navCtrl.popToRoot();
+  }
 
   nextSlide(){
     console.log('next');
