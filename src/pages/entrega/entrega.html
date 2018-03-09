@@ -13,8 +13,11 @@
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+      <agm-marker [iconUrl]="'assets/imgs/recyclers.png'" *ngFor="let recycler of recyclers" (markerClick)="getIdFromMarker(recycler)" [latitude]="recycler.latitud" [longitude]="recycler.longitud"></agm-marker>
+    </agm-map>
 </ion-content>
 
 <!--ion-footer>

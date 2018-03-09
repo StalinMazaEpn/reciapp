@@ -26,6 +26,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireModule } from 'angularfire2';
 import { FirebaseProvider } from '../providers/firebase/firebase';
 import { NativeStorage } from '@ionic-native/native-storage';
+import { Geolocation } from '@ionic-native/geolocation';
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -72,6 +73,7 @@ const firebaseConfig = {
     ReciappService,
     FirebaseProvider,
     NativeStorage,
+    Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
