@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, LoadingController} from 'ionic-angular';
 import {ReciappService} from '../../services/reciapp.service';
 
+import { AngularFireAuth } from 'angularfire2/auth';
+
 import {RecicladorPage} from '../reciclador/reciclador';
-import {EntregaPage} from '../entrega/entrega';
-import {CategoriaPage} from '../categoria/categoria';
 
 import { User } from '../../models/user';
 
@@ -15,17 +15,19 @@ import { User } from '../../models/user';
 })
 export class DashboardPage {
 
-  user={}as User;
+  user:any={} as User;
   recyclers:any;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public userSrv: ReciappService,public recyclerSrv: ReciappService) {
-    this.recyclers = this.recyclerSrv.getRecycler();
-
-    //this.user = this.userSrv.getUser();
-    this.user = this.navParams.get('userData');
-    
+  //uid:any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public userSrv: ReciappService,public recyclerSrv: ReciappService, private afAuth:AngularFireAuth,public loadingCtrl: LoadingController) {
+    this.user=null;
+    this.afAuth.authState.subscribe(
+      data => {
+        //console.log(data);
+        //this.uid=data.uid;
+        this.user=this.userSrv.getUser(data.uid);
+      });
+    this.recyclers=this.recyclerSrv.getRecycler();
   }
-
   /*addReciclador() {
     this.firebaseProvider.addReciclador(this.newReciclador);
   }
@@ -36,18 +38,6 @@ export class DashboardPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DashboardPage');
-  }
-
-  /*Dashboard():void{
-  	this.navCtrl.push(DashboardPage);
-  }*/
-
-  Separa(): void {
-    this.navCtrl.push(CategoriaPage);
-  }
-
-  Entrega(): void {
-    this.navCtrl.push(EntregaPage);
   }
 
   goRecycler(id) {

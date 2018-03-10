@@ -30,12 +30,12 @@ export class ReciappService{
 		return this.afdatabase.list('/subcategory', ref => ref.orderByChild('category').equalTo(id))
 	}
 
-	public getUser(){
-		return this.afdatabase.object('/user' ).valueChanges();
+	public getUser(uid){
+		return this.afdatabase.object('/user/'+uid).valueChanges();
 	}
 
-	public createUser(user) {
-	    this.afdatabase.list('/user').push(user);
+	public createUser(uid,user) {
+	    this.afdatabase.object('/user/'+uid).set(user);
 	}
 
 	public login(userData){

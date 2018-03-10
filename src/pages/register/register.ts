@@ -51,9 +51,10 @@ export class RegisterPage {
   		//console.log('registrando');
   		try{
 	  		const result = await this.afAuth.auth.createUserWithEmailAndPassword(this.userData.email, this.userData.pass);
-	  		const result_ = await this.userSrv.createUser(this.user);
 	  		if (result) {
+          //console.log(result.uid);
 	  			this.userOk();
+          const result_ = await this.userSrv.createUser(result.uid,this.user);
           setTimeout(()=>{this.navCtrl.push('LoginPage')},1000);
 	  		}
 	  	}

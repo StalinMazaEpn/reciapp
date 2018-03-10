@@ -36,8 +36,8 @@ export class LoginPage {
   		const result=await this.userSrv.login(this.user);
   		//console.log(result);
   		if (result) {
-  			//console.log(result.email);
-  			this.navCtrl.setRoot(TabsPage,{userData:user});
+  			//console.log(result.uid);
+  			this.navCtrl.setRoot(TabsPage);
   		}else{
   			this.failValidate();
   		}
