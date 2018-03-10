@@ -6,6 +6,7 @@ import { ToastController } from 'ionic-angular';
 import { ReciappService } from '../../services/reciapp.service'
 import { AngularFireAuth } from 'angularfire2/auth';
 import { User } from '../../models/user';
+import { LoginPage } from '../../pages/login/login';
 
 /**
  * Generated class for the RegisterPage page.
@@ -27,10 +28,7 @@ export class RegisterPage {
   }
 
   user={
-  	points:0,
-  	favoritiesReciclers:{},
-  	registeredRecyclers:{},
-    phone:null
+  	points:20,
   } as User; 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,  public afAuth:AngularFireAuth, public userSrv:ReciappService, public toastCtrl:ToastController) {
@@ -56,10 +54,11 @@ export class RegisterPage {
 	  		const result_ = await this.userSrv.createUser(this.user);
 	  		if (result) {
 	  			this.userOk();
+          setTimeout(()=>{this.navCtrl.push('LoginPage')},1000);
 	  		}
 	  	}
 	  	catch(e){
-	  		//console.error('Err: ',e);
+	  		console.error('Err: ',e);
 	  		this.userFail();
 	  	}
   	}  	
@@ -80,7 +79,7 @@ export class RegisterPage {
 
   userFail() {
     let toast = this.toastCtrl.create({
-      message: 'Hemos tenido un problema con tu registro.' ,
+      message: 'La cuenta de correo ya existe.' ,
       duration: 3000,
       position:'top'
     });

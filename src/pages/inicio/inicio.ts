@@ -32,16 +32,22 @@ export class InicioPage {
 
   register_fb():any{
     let provider= new firebase.auth.FacebookAuthProvider();
-
-    firebase.auth().signInWithRedirect(provider).then(()=>{
-      firebase.auth().getRedirectResult().then((result)=>{
+    this.afAuth.auth.signInWithRedirect(provider).then(()=>{
+      this.afAuth.auth.getRedirectResult().then((result)=>{
         alert(JSON.stringify(result));
-      }).catch(function(error){
-        alert(JSON.stringify(error))
-      });
-    })
-
-  	
+      }).catch(function(e){
+        alert(JSON.stringify(e));
+      })
+    });
+    /*firebase.auth().signInWithRedirect(provider).then(()=>{
+      firebase.auth().getRedirectResult().then(
+        (result)=>{
+          alert(JSON.stringify(result));
+        }).catch(function(error){
+          alert(JSON.stringify(error))
+        });
+    })*/
+    
     /*try{
         const provider= new firebase.auth.FacebookAuthProvider();
         this.afAuth.auth

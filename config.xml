@@ -94,4 +94,5 @@
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
     <allow-navigation href="http://192.168.43.142:8100" />
     <allow-navigation href="http://192.168.56.1:8100" />
+    <plugin name="cordova-plugin-themeablebrowser" spec="^0.2.17" />
 </widget>
