@@ -5,8 +5,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { Tour1Page } from '../pages/tour1/tour1';
-import { DashboardPage } from '../pages/dashboard/dashboard';
-import { InicioPage } from '../pages/inicio/inicio';
 
 @Component({
   templateUrl: 'app.html'
@@ -14,7 +12,6 @@ import { InicioPage } from '../pages/inicio/inicio';
 export class MyApp {
   tour:any=false;
   ruta:any="";
-  login:any=true;
 
   rootPage:any;
   //rootPage:any = HomePage;
@@ -25,12 +22,7 @@ export class MyApp {
       this.tour=false;
       this.rootPage=Tour1Page;
     }else{
-      if (this.login) {
-        this.rootPage=TabsPage;
-      }else{
-        //this.rootPage=DashboardPage;
-        this.rootPage=InicioPage;
-      }
+      this.rootPage=TabsPage;
     }
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
