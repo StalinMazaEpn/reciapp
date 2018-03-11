@@ -117,4 +117,8 @@ export class DashboardPage {
     });
     toast.present();
   }
+
+  logout(){
+    window.localStorage['isLog']=false;
+  }
 }
