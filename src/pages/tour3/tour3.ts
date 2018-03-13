@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { Tour2Page } from '../tour2/tour2';
 import { Tour4Page } from '../tour4/tour4';
 
 /**

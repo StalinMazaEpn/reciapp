@@ -4,7 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { TabsPage } from '../pages/tabs/tabs';
-import { Tour1Page } from '../pages/tour1/tour1';
+import { TourPage } from '../pages/tour1/tour1';
 
 @Component({
   templateUrl: 'app.html'
@@ -12,15 +12,13 @@ import { Tour1Page } from '../pages/tour1/tour1';
 export class MyApp {
   tour:any=false;
   ruta:any="";
-
   rootPage:any;
-  //rootPage:any = HomePage;
   //rootPage:any = TabsPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     if (this.tour) {
       this.tour=false;
-      this.rootPage=Tour1Page;
+      this.rootPage=TourPage;
     }else{
       this.rootPage=TabsPage;
     }
@@ -33,6 +31,7 @@ export class MyApp {
 
     
   }
+  
 
 } 
 

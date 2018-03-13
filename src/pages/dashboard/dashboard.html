@@ -1,16 +1,38 @@
 <ion-header>
   <ion-toolbar>
+
     <div *ngIf="isLog; else elseHeader">
       <ion-title text-center>Hola, {{(user | async)?.name}}!</ion-title>
+      <ion-buttons end>
+        <button ion-button icon-only (tap)="goToTour()">
+          Tour
+          <ion-icon name="ios-walk"></ion-icon>
+        </button>
+      </ion-buttons>
     </div>
     <ng-template #elseHeader>
       <ion-title text-center>Bienvenido!</ion-title>
+      <ion-buttons end>
+        <button ion-button icon-only (tap)="goToTour()">
+          Tour
+          <ion-icon name="ios-walk"></ion-icon>
+        </button>
+      </ion-buttons>
     </ng-template>
+
+    <!--ion-title text-center>Hola, {{(user | async)?.name}}!</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only (tap)="goToTour()">
+          Tour
+          <ion-icon name="ios-walk"></ion-icon>
+        </button>
+      </ion-buttons-->
+
   </ion-toolbar>
 </ion-header>
   
 
-<ion-content padding>
+<ion-content padding> 
 
   <ion-fab top right edge>
     <button ion-fab mini><ion-icon name="menu"></ion-icon></button>
@@ -24,7 +46,7 @@
 
   <ion-list>
     <ion-list-header color="light"> Recicladores Cercanos </ion-list-header>
-    <ion-item small>  {{reciclador_tot}}  </ion-item>
+    <!--<ion-item small>  {{reciclador_tot}}  </ion-item>-->
   </ion-list>
 
   <div *ngIf="isLog; else elseLogin">
@@ -63,10 +85,20 @@
             </button>
           </ion-col>
         </ion-row>
-      </ion-list>
-      
+      </ion-list>      
     </ng-template>
   
-
+  <ion-grid class="centrado">
+      <ion-row>      
+        <ion-col col-4 align-self-center>
+            <ion-icon name="mail" class="iconsize" color="danger" (click)="sendEmail()"></ion-icon>
+        </ion-col>
+        <ion-col col-4 align-self-center>
+            <ion-icon name="logo-facebook" class="iconsize" color="primary" (click)="entrarFb()" ></ion-icon>
+        </ion-col>
+        <ion-col col-4 align-self-center>
+            <ion-icon name="logo-twitter" class="iconsize" color="twitter" (click)="entrarTw()" ></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 </ion-content>
-

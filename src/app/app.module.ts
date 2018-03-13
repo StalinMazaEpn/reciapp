@@ -20,12 +20,20 @@ import { RecicladorPageModule } from '../pages/reciclador/reciclador.module';
 import { CategoriaPageModule } from '../pages/categoria/categoria.module';
 import { DetallePageModule } from '../pages/detalle/detalle.module';
 import { TabsPageModule } from '../pages/tabs/tabs.module';
+import { TourPageModule } from './../pages/tour/tour.module';
 
 import { HttpModule } from '@angular/http';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireModule } from 'angularfire2';
 import { FirebaseProvider } from '../providers/firebase/firebase';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+
+import { NativeStorage } from '@ionic-native/native-storage';
+import { Geolocation } from '@ionic-native/geolocation';
+import { TourPage } from '../pages/tour/tour';
+import { EmailComposer } from '@ionic-native/email-composer';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -59,19 +67,24 @@ const firebaseConfig = {
     RecicladorPageModule,
     CategoriaPageModule,
     DetallePageModule,
-    TabsPageModule
-
+    TabsPageModule,
+    TourPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    TourPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     ReciappService,
     FirebaseProvider,
+    NativeStorage,
+    Geolocation,
+    EmailComposer,
+    InAppBrowser,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

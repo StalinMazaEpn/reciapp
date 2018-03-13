@@ -11,6 +11,9 @@ import { User } from '../../models/user';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app'
+import { TourPage } from './../tour/tour';
+import { EmailComposer } from '@ionic-native/email-composer';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @IonicPage()
 @Component({
@@ -21,8 +24,9 @@ export class DashboardPage {
   isLog:boolean;
   user:any={} as User;
   recyclers:any;
+
   //uid:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public userSrv: ReciappService,public recyclerSrv: ReciappService, private afAuth:AngularFireAuth,public loadingCtrl: LoadingController, public toastCtrl:ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public userSrv: ReciappService,public recyclerSrv: ReciappService, private afAuth:AngularFireAuth,public loadingCtrl: LoadingController, public toastCtrl:ToastController,private emailComposer: EmailComposer, private iab: InAppBrowser) {
     this.isLog=window.localStorage['isLog'];
     this.user=null;
     this.afAuth.authState.subscribe(
@@ -33,6 +37,12 @@ export class DashboardPage {
       });
     this.recyclers=this.recyclerSrv.getRecycler();
   }
+
+  /*constructor(public navCtrl: NavController, public navParams: NavParams, public userSrv: ReciappService,public recyclerSrv: ReciappService, private emailComposer: EmailComposer, private iab: InAppBrowser) {
+    this.recyclers = this.recyclerSrv.getRecycler();
+    this.user = this.userSrv.getUser();  
+  }*/
+  
   /*addReciclador() {
     this.firebaseProvider.addReciclador(this.newReciclador);
   }
@@ -119,6 +129,36 @@ export class DashboardPage {
   }
 
   logout(){
-    window.localStorage['isLog']=false;
+    console.log('cerrar');
+    localStorage.removeItem('isLog');
+    this.isLog=false;
+  }
+
+  goToTour(){
+    this.navCtrl.push(TourPage); 
+  }
+
+  sendEmail(){
+
+    console.log("hola");
+    let email = {
+      to: 'pilar_1304@hotmail.es',
+      cc: 'henry.red1@hotmail.com',
+      subject: 'Cordova Icons',
+      body: 'Esto es una prueba de correo desde una app',
+      isHtml: true
+    };
+
+        this.emailComposer.open(email);
+  }
+
+  entrarFb(){
+    const browser = this.iab.create('https://www.facebook.com/reciveci/');
+    browser.show();
+  }
+
+  entrarTw(){
+    const browser = this.iab.create('https://twitter.com/reciveci');
+    browser.show();
   }
 }
