@@ -1,15 +1,36 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title text-center>Hola, {{(user | async)?.name}}!</ion-title>
-    <ion-buttons end>
+
+    <div *ngIf="isLog; else elseHeader">
+      <ion-title text-center>Hola, {{(user | async)?.name}}!</ion-title>
+      <ion-buttons end>
         <button ion-button icon-only (tap)="goToTour()">
           Tour
           <ion-icon name="ios-walk"></ion-icon>
         </button>
       </ion-buttons>
+    </div>
+    <ng-template #elseHeader>
+      <ion-title text-center>Bienvenido!</ion-title>
+      <ion-buttons end>
+        <button ion-button icon-only (tap)="goToTour()">
+          Tour
+          <ion-icon name="ios-walk"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ng-template>
+
+    <!--ion-title text-center>Hola, {{(user | async)?.name}}!</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only (tap)="goToTour()">
+          Tour
+          <ion-icon name="ios-walk"></ion-icon>
+        </button>
+      </ion-buttons-->
+
   </ion-toolbar>
 </ion-header>
-
+  
 
 <ion-content padding> 
 
@@ -19,7 +40,7 @@
       <button ion-fab><ion-icon ios="ios-person" md="md-person"></ion-icon></button>
       <button ion-fab><ion-icon ios="ios-share" md="md-share"></ion-icon></button>
       <button ion-fab><ion-icon ios="ios-contacts" md="md-contacts"></ion-icon></button>
-      <button ion-fab><ion-icon ios="ios-log-out" md="md-log-out"></ion-icon></button>
+      <button ion-fab (click)="logout()"><ion-icon ios="ios-log-out" md="md-log-out"></ion-icon></button>
     </ion-fab-list>
   </ion-fab>
 
@@ -28,24 +49,47 @@
     <!--<ion-item small>  {{reciclador_tot}}  </ion-item>-->
   </ion-list>
 
-  <!--ion-list>
-    <ion-list-header color="light"> Última Entrega </ion-list-header>
-    <ion-item >  01/01/1990  </ion-item>
-  </ion-list-->
-
-  <ion-list>
-    <ion-list-header color="light"> Tus Recicladores </ion-list-header>
-    <ion-item *ngFor='let recycler of recyclers | async'>
-      {{recycler.name}}
-      <button ion-button clear small item-end (click)="goRecycler(recycler.id)">
+  <div *ngIf="isLog; else elseLogin">
+    <ion-list>
+      <ion-list-header color="light"> Tus Recicladores </ion-list-header>
+      <ion-item *ngFor='let recycler of recyclers | async'>
+        {{recycler.name}}
+        <button ion-button clear small item-end (click)="goRecycler(recycler.id)">
         <ion-icon ios="ios-eye" md="md-eye"></ion-icon>
       </button>
     </ion-item>
-  </ion-list>
+  </ion-list>  
+  </div>
+    <ng-template #elseLogin>
+      <ion-row text-center>
+        <ion-col col-12>
+          <button ion-button round (click)="login()" >Iniciar Sesión</button>
+        </ion-col>
+       </ion-row>
+      <br>
 
+      <ion-list>
+      <ion-list-header color="light"> Personaliza tu experiencia. </ion-list-header>
+        <ion-row text-center>
+          <!--ion-col col-12>
+            <span ion-button clear>Regístrate</span>
+          </ion-col-->
+          <ion-col>
+            <button ion-button icon-left clear large (click)="register_mail()">
+              <ion-icon ios="ios-mail" md="md-mail" ></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button icon-left clear large (click)="register_fb()">
+              <ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-list>      
+    </ng-template>
+  
   <ion-grid class="centrado">
-      <ion-row>
-        
+      <ion-row>      
         <ion-col col-4 align-self-center>
             <ion-icon name="mail" class="iconsize" color="danger" (click)="sendEmail()"></ion-icon>
         </ion-col>
@@ -57,38 +101,4 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-
 </ion-content>
-
-
-<!--ion-footer>
-  <ion-toolbar>
-    <ion-row text-center>
-      <ion-col>
-        <button ion-button icon-left clear small >
-          <ion-icon  ios="ios-home" md="md-home"></ion-icon>
-        </button>
-      </ion-col>
-      <ion-col>
-        <button ion-button icon-left clear small (click)="Separa()">
-          <ion-icon ios="ios-hand" md="md-hand"></ion-icon>
-        </button>
-      </ion-col>
-      <ion-col >
-        <button ion-button icon-left clear small (click)="Entrega()">
-          <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
-        </button>
-      </ion-col>
-      <ion-col >
-        <button ion-button icon-left clear small (click)="Dashboard()">
-          <ion-icon name="text"></ion-icon>
-        </button>
-      </ion-col>
-      <ion-col >
-        <button ion-button icon-left clear small (click)="Dashboard()">
-          <ion-icon name="text"></ion-icon>
-        </button>
-      </ion-col>
-    </ion-row>
-  </ion-toolbar>
-</ion-footer-->
