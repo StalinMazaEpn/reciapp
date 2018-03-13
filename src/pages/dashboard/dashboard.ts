@@ -128,15 +128,15 @@ export class DashboardPage {
     toast.present();
   }
 
-  logout(){
+  /*logout(){
     console.log('cerrar');
     localStorage.removeItem('isLog');
     this.isLog=false;
-  }
+  }*/
 
-  goToTour(){
+  /*goToTour(){
     this.navCtrl.push(TourPage); 
-  }
+  }*/
 
   sendEmail(){
 

@@ -1,104 +1,111 @@
-<ion-header>
-  <ion-toolbar>
 
-    <div *ngIf="isLog; else elseHeader">
-      <ion-title text-center>Hola, {{(user | async)?.name}}!</ion-title>
+  <ion-header>
+    <ion-toolbar>
+      <div *ngIf="isLog; else elseHeader">
+
+        <ion-buttons start>
+          <button ion-button icon-only menuToggle>
+            <ion-icon name="menu"></ion-icon>
+            <ion-title text-center>Hola, {{(user | async)?.name}}!</ion-title>
+          </button>
+        </ion-buttons>
+        <!--ion-buttons end>
+          <button ion-button icon-only (tap)="goToTour()">
+            Tour
+            <ion-icon name="ios-walk"></ion-icon>
+          </button>
+        </ion-buttons-->
+        
+      </div>
+      <ng-template #elseHeader>
+        <ion-title text-center>Bienvenido!</ion-title>
+        <!--ion-buttons end>
+          <button ion-button icon-only (tap)="goToTour()">
+            Tour
+            <ion-icon name="ios-walk"></ion-icon>
+          </button>
+        </ion-buttons-->
+      </ng-template>
+
+      <!--ion-title text-center>Hola, {{(user | async)?.name}}!</ion-title>
       <ion-buttons end>
-        <button ion-button icon-only (tap)="goToTour()">
-          Tour
-          <ion-icon name="ios-walk"></ion-icon>
-        </button>
-      </ion-buttons>
-    </div>
-    <ng-template #elseHeader>
-      <ion-title text-center>Bienvenido!</ion-title>
-      <ion-buttons end>
-        <button ion-button icon-only (tap)="goToTour()">
-          Tour
-          <ion-icon name="ios-walk"></ion-icon>
-        </button>
-      </ion-buttons>
-    </ng-template>
+          <button ion-button icon-only (tap)="goToTour()">
+            Tour
+            <ion-icon name="ios-walk"></ion-icon>
+          </button>
+        </ion-buttons-->
 
-    <!--ion-title text-center>Hola, {{(user | async)?.name}}!</ion-title>
-    <ion-buttons end>
-        <button ion-button icon-only (tap)="goToTour()">
-          Tour
-          <ion-icon name="ios-walk"></ion-icon>
-        </button>
-      </ion-buttons-->
+    </ion-toolbar>
+  </ion-header>
+    
 
-  </ion-toolbar>
-</ion-header>
-  
+  <ion-content padding> 
 
-<ion-content padding> 
+    <!--ion-fab top right edge>
+      <button ion-fab mini><ion-icon name="menu"></ion-icon></button>
+      <ion-fab-list>
+        <button ion-fab><ion-icon ios="ios-person" md="md-person"></ion-icon></button>
+        <button ion-fab><ion-icon ios="ios-share" md="md-share"></ion-icon></button>
+        <button ion-fab><ion-icon ios="ios-contacts" md="md-contacts"></ion-icon></button>
+        <button ion-fab (click)="logout()"><ion-icon ios="ios-log-out" md="md-log-out"></ion-icon></button>
+      </ion-fab-list>
+    </ion-fab-->
 
-  <ion-fab top right edge>
-    <button ion-fab mini><ion-icon name="menu"></ion-icon></button>
-    <ion-fab-list>
-      <button ion-fab><ion-icon ios="ios-person" md="md-person"></ion-icon></button>
-      <button ion-fab><ion-icon ios="ios-share" md="md-share"></ion-icon></button>
-      <button ion-fab><ion-icon ios="ios-contacts" md="md-contacts"></ion-icon></button>
-      <button ion-fab (click)="logout()"><ion-icon ios="ios-log-out" md="md-log-out"></ion-icon></button>
-    </ion-fab-list>
-  </ion-fab>
-
-  <ion-list>
-    <ion-list-header color="light"> Recicladores Cercanos </ion-list-header>
-    <!--<ion-item small>  {{reciclador_tot}}  </ion-item>-->
-  </ion-list>
-
-  <div *ngIf="isLog; else elseLogin">
     <ion-list>
-      <ion-list-header color="light"> Tus Recicladores </ion-list-header>
-      <ion-item *ngFor='let recycler of recyclers | async'>
-        {{recycler.name}}
-        <button ion-button clear small item-end (click)="goRecycler(recycler.id)">
-        <ion-icon ios="ios-eye" md="md-eye"></ion-icon>
-      </button>
-    </ion-item>
-  </ion-list>  
-  </div>
-    <ng-template #elseLogin>
-      <ion-row text-center>
-        <ion-col col-12>
-          <button ion-button round (click)="login()" >Iniciar Sesión</button>
-        </ion-col>
-       </ion-row>
-      <br>
+      <ion-list-header color="light"> Recicladores Cercanos </ion-list-header>
+      <!--<ion-item small>  {{reciclador_tot}}  </ion-item>-->
+    </ion-list>
 
+    <div *ngIf="isLog; else elseLogin">
       <ion-list>
-      <ion-list-header color="light"> Personaliza tu experiencia. </ion-list-header>
+        <ion-list-header color="light"> Tus Recicladores </ion-list-header>
+        <ion-item *ngFor='let recycler of recyclers | async'>
+          {{recycler.name}}
+          <button ion-button clear small item-end (click)="goRecycler(recycler.id)">
+          <ion-icon ios="ios-eye" md="md-eye"></ion-icon>
+        </button>
+      </ion-item>
+    </ion-list>  
+    </div>
+      <ng-template #elseLogin>
         <ion-row text-center>
-          <!--ion-col col-12>
-            <span ion-button clear>Regístrate</span>
-          </ion-col-->
-          <ion-col>
-            <button ion-button icon-left clear large (click)="register_mail()">
-              <ion-icon ios="ios-mail" md="md-mail" ></ion-icon>
-            </button>
+          <ion-col col-12>
+            <button ion-button round (click)="login()" >Iniciar Sesión</button>
           </ion-col>
-          <ion-col>
-            <button ion-button icon-left clear large (click)="register_fb()">
-              <ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon>
-            </button>
+         </ion-row>
+        <br>
+
+        <ion-list>
+        <ion-list-header color="light"> Personaliza tu experiencia. </ion-list-header>
+          <ion-row text-center>
+            <!--ion-col col-12>
+              <span ion-button clear>Regístrate</span>
+            </ion-col-->
+            <ion-col>
+              <button ion-button icon-left clear large (click)="register_mail()">
+                <ion-icon ios="ios-mail" md="md-mail" ></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col>
+              <button ion-button icon-left clear large (click)="register_fb()">
+                <ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-list>      
+      </ng-template>
+    
+    <ion-grid class="centrado">
+        <ion-row>      
+          <ion-col col-4 align-self-center>
+              <ion-icon name="mail" class="iconsize" color="danger" (click)="sendEmail()"></ion-icon>
+          </ion-col>
+          <ion-col col-4 align-self-center>
+              <ion-icon name="logo-facebook" class="iconsize" color="primary" (click)="entrarFb()" ></ion-icon>
+          </ion-col>
+          <ion-col col-4 align-self-center>
+              <ion-icon name="logo-twitter" class="iconsize" color="twitter" (click)="entrarTw()" ></ion-icon>
           </ion-col>
         </ion-row>
-      </ion-list>      
-    </ng-template>
-  
-  <ion-grid class="centrado">
-      <ion-row>      
-        <ion-col col-4 align-self-center>
-            <ion-icon name="mail" class="iconsize" color="danger" (click)="sendEmail()"></ion-icon>
-        </ion-col>
-        <ion-col col-4 align-self-center>
-            <ion-icon name="logo-facebook" class="iconsize" color="primary" (click)="entrarFb()" ></ion-icon>
-        </ion-col>
-        <ion-col col-4 align-self-center>
-            <ion-icon name="logo-twitter" class="iconsize" color="twitter" (click)="entrarTw()" ></ion-icon>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-</ion-content>
+      </ion-grid>
+  </ion-content>
