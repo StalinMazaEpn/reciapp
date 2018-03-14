@@ -2,22 +2,29 @@
   <ion-toolbar>
 
     <div *ngIf="isLog; else elseHeader">
-      <ion-title text-center>Hola, {{(user | async)?.name}}!</ion-title>
-      <ion-buttons end>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+        <ion-title text-center>Hola, {{(user | async)?.name}}!</ion-title>
+      </button>
+      <!--ion-buttons end>
         <button ion-button icon-only (tap)="goToTour()">
           Tour
           <ion-icon name="ios-walk"></ion-icon>
         </button>
-      </ion-buttons>
+      </ion-buttons-->
     </div>
     <ng-template #elseHeader>
-      <ion-title text-center>Bienvenido!</ion-title>
-      <ion-buttons end>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+        <ion-title text-center>Bienvenido!</ion-title>
+      </button>
+      <!--ion-buttons end>
         <button ion-button icon-only (tap)="goToTour()">
           Tour
           <ion-icon name="ios-walk"></ion-icon>
         </button>
-      </ion-buttons>
+      </ion-buttons-->
+
     </ng-template>
 
     <!--ion-title text-center>Hola, {{(user | async)?.name}}!</ion-title>
@@ -34,7 +41,7 @@
 
 <ion-content padding> 
 
-  <ion-fab top right edge>
+  <!--ion-fab top right edge>
     <button ion-fab mini><ion-icon name="menu"></ion-icon></button>
     <ion-fab-list>
       <button ion-fab><ion-icon ios="ios-person" md="md-person"></ion-icon></button>
@@ -42,7 +49,7 @@
       <button ion-fab><ion-icon ios="ios-contacts" md="md-contacts"></ion-icon></button>
       <button ion-fab (click)="logout()"><ion-icon ios="ios-log-out" md="md-log-out"></ion-icon></button>
     </ion-fab-list>
-  </ion-fab>
+  </ion-fab-->
 
   <ion-list>
     <ion-list-header color="light"> Recicladores Cercanos </ion-list-header>

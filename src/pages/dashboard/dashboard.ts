@@ -5,8 +5,8 @@ import {ReciappService} from '../../services/reciapp.service';
 import { ToastController } from 'ionic-angular';
 
 import { RecicladorPage } from '../../pages/reciclador/reciclador';
-import { LoginPage }  from '../../pages/login/login';
-import { RegisterPage }  from '../../pages/register/register';
+import { LoginPage }  from '../login/login';
+import { RegisterPage }  from '../register/register';
 import { User } from '../../models/user';
 
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -60,7 +60,7 @@ export class DashboardPage {
   }
   register_mail():any{
     //console.log('mail');
-    this.navCtrl.push('RegisterPage');
+    this.navCtrl.push(RegisterPage);
   }
 
   register_fb():any{
@@ -107,7 +107,7 @@ export class DashboardPage {
   }
 
   login(){
-    this.navCtrl.push('LoginPage');
+    this.navCtrl.push(LoginPage);
     //console.log('inicio');
   }
 
