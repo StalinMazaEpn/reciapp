@@ -101,4 +101,5 @@
     </plugin>
     <plugin name="cordova-plugin-email-composer" spec="^0.8.15" />
     <engine name="ios" spec="4.5.4" />
+    <plugin name="cordova-plugin-appavailability" spec="^0.4.2" />
 </widget>

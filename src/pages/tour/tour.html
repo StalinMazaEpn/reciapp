@@ -14,7 +14,7 @@
     <ion-title *ngIf="indexPages == 2" text-uppercase >
       ENTREGA <ion-icon ios="ios-pin" md="md-pin" color="red"></ion-icon>
     </ion-title> 
-    <ion-title *ngIf="indexPages == 3" text-uppercase >
+    <ion-title *ngIf="indexPages == 3 || indexPages == 4" text-uppercase >
       COMPARTE  <ion-icon ios="ios-chatbubbles" md="md-chatbubbles"></ion-icon>
     </ion-title>  
   </ion-navbar>
@@ -23,7 +23,7 @@
 
 
 <ion-content>
-  <ion-slides pager style="color:white" effect="coverflow" pager="true" paginationType="progress" (ionSlideReachStart)="slideAtBegin()" (ionSlideWillChange)="slideChanged()" (ionSlideDidChange)="slideChanged()" (ionSlideReachEnd)="slideAtEnd()">
+  <ion-slides pager style="color:white" effect="coverflow" pager="true" paginationType="progress" (ionSlideReachStart)="slideAtBegin()" (ionSlideWillChange)="slideWillChanged()" (ionSlideDidChange)="slideDidChanged()" (ionSlideReachEnd)="slideAtEnd()">
     <ion-slide style="background-color: #f59f1e">
         <ion-grid>
           <ion-row justify-content-center>
@@ -129,17 +129,17 @@
         </ion-row>
         <ion-row text-center>
           <ion-col>
-            <button ion-button icon-left clear large>
+            <button ion-button icon-left clear large (tap)="goToReciVeciPageFb()">
               <ion-icon ios="logo-facebook" md="logo-facebook" color="light"></ion-icon>
             </button>
           </ion-col>
           <ion-col>
-            <button ion-button icon-left clear large>
+            <button ion-button icon-left clear large (tap)="goToReciVeciPageTwit()">
               <ion-icon ios="logo-twitter" md="logo-twitter" color="light"></ion-icon>
             </button>
           </ion-col>
           <ion-col center text-center>
-            <button ion-button icon-left clear large>
+            <button ion-button icon-left clear large (tap)="goToReciVeciPageInst()">
               <ion-icon clear large ios="logo-instagram" md="logo-instagram" color="light"></ion-icon>
             </button>    
           </ion-col>
