@@ -37,7 +37,10 @@ export class TabsPage {
   }
 
   logout(){
-    console.log('cerrando');
+    console.log('cerrar');
+    localStorage.removeItem('isLog');
+    this.redirectLogin();
+    setTimeout(()=>{this.navCtrl.setRoot(TabsPage)},3000);
   }
 
   redirectLogin() {
