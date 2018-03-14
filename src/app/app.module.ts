@@ -19,6 +19,8 @@ import { CategoriaPageModule } from '../pages/categoria/categoria.module';
 import { DetallePageModule } from '../pages/detalle/detalle.module';
 import { TabsPageModule } from '../pages/tabs/tabs.module';
 import { TourPageModule } from './../pages/tour/tour.module';
+import { LoginPageModule } from './../pages/login/login.module';
+import { RegisterPageModule } from './../pages/register/register.module';
 
 import { HttpModule } from '@angular/http';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -64,7 +66,9 @@ const firebaseConfig = {
     CategoriaPageModule,
     DetallePageModule,
     TabsPageModule,
-    TourPageModule
+    TourPageModule,
+    LoginPageModule,
+    RegisterPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

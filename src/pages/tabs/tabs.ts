@@ -35,6 +35,7 @@ export class TabsPage {
   aboutUs() {
     //this.navCtrl.push();
   }
+
   logout(){
     console.log('cerrando');
   }

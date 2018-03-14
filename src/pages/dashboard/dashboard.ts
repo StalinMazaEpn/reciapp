@@ -11,7 +11,7 @@ import { User } from '../../models/user';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app'
-import { TourPage } from './../tour/tour';
+
 import { EmailComposer } from '@ionic-native/email-composer';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
@@ -116,7 +116,7 @@ export class DashboardPage {
   }
     
   isLogin(){
-    this.navCtrl.push('DashboardPage');
+    this.navCtrl.push(DashboardPage);
   }
 
   failLogin(){
@@ -128,15 +128,15 @@ export class DashboardPage {
     toast.present();
   }
 
-  logout(){
+  /*logout(){
     console.log('cerrar');
     localStorage.removeItem('isLog');
     this.isLog=false;
-  }
+  }*/
 
-  goToTour(){
+  /*goToTour(){
     this.navCtrl.push(TourPage); 
-  }
+  }*/
 
   sendEmail(){
 
