@@ -5,13 +5,13 @@ import {ReciappService} from '../../services/reciapp.service';
 import { ToastController } from 'ionic-angular';
 
 import { RecicladorPage } from '../../pages/reciclador/reciclador';
-import { LoginPage }  from '../../pages/login/login';
-import { RegisterPage }  from '../../pages/register/register';
+import { LoginPage }  from '../login/login';
+import { RegisterPage }  from '../register/register';
 import { User } from '../../models/user';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app'
-import { TourPage } from './../tour/tour';
+
 import { EmailComposer } from '@ionic-native/email-composer';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
@@ -60,7 +60,7 @@ export class DashboardPage {
   }
   register_mail():any{
     //console.log('mail');
-    this.navCtrl.push('RegisterPage');
+    this.navCtrl.push(RegisterPage);
   }
 
   register_fb():any{
@@ -107,7 +107,7 @@ export class DashboardPage {
   }
 
   login(){
-    this.navCtrl.push('LoginPage');
+    this.navCtrl.push(LoginPage);
     //console.log('inicio');
   }
 
@@ -116,7 +116,7 @@ export class DashboardPage {
   }
     
   isLogin(){
-    this.navCtrl.push('DashboardPage');
+    this.navCtrl.push(DashboardPage);
   }
 
   failLogin(){
@@ -128,15 +128,15 @@ export class DashboardPage {
     toast.present();
   }
 
-  logout(){
+  /*logout(){
     console.log('cerrar');
     localStorage.removeItem('isLog');
     this.isLog=false;
-  }
+  }*/
 
-  goToTour(){
+  /*goToTour(){
     this.navCtrl.push(TourPage); 
-  }
+  }*/
 
   sendEmail(){
 

@@ -8,6 +8,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { ReciappService } from '../services/reciapp.service';
 
 import { MyApp } from './app.component';
+
 import { HomePage } from '../pages/home/home';
 import { InicioPageModule } from '../pages/inicio/inicio.module';
 import { DashboardPageModule } from '../pages/dashboard/dashboard.module';
@@ -17,6 +18,8 @@ import { CategoriaPageModule } from '../pages/categoria/categoria.module';
 import { DetallePageModule } from '../pages/detalle/detalle.module';
 import { TabsPageModule } from '../pages/tabs/tabs.module';
 import { TourPageModule } from './../pages/tour/tour.module';
+import { LoginPageModule } from './../pages/login/login.module';
+import { RegisterPageModule } from './../pages/register/register.module';
 
 import { HttpModule } from '@angular/http';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -44,8 +47,7 @@ const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    MyApp,
-    HomePage
+    MyApp
   ],
   imports: [
     BrowserModule,
@@ -61,12 +63,13 @@ const firebaseConfig = {
     CategoriaPageModule,
     DetallePageModule,
     TabsPageModule,
-    TourPageModule
+    TourPageModule,
+    LoginPageModule,
+    RegisterPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
     TourPage
   ],
   providers: [
