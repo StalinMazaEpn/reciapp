@@ -160,6 +160,10 @@
   version "0.2.6"
   resolved "https://registry.yarnpkg.com/@firebase/webchannel-wrapper/-/webchannel-wrapper-0.2.6.tgz#a4b81ca8cdeb1acbc7923289a4a514f61b59db86"
 
+"@ionic-native/app-availability@^4.5.3":
+  version "4.5.3"
+  resolved "https://registry.yarnpkg.com/@ionic-native/app-availability/-/app-availability-4.5.3.tgz#076ed188d9926127806a4f88f3c1f757a19427c6"
+
 "@ionic-native/core@4.4.0":
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/@ionic-native/core/-/core-4.4.0.tgz#fb0f071543bd2725d858f5a0f5c20adbece20df4"
@@ -1227,6 +1231,10 @@ cordova-ios@4.5.4:
     shelljs "^0.5.3"
     xcode "^0.9.0"
     xml-escape "^1.1.0"
+
+cordova-plugin-appavailability@^0.4.2:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-appavailability/-/cordova-plugin-appavailability-0.4.2.tgz#a017aaf0f8827ee599dc778b6245dcc1350bcba8"
 
 cordova-plugin-browsertab@^0.2.0:
   version "0.2.0"

@@ -12,6 +12,7 @@ import { TourPage } from '../tour/tour';
   templateUrl: 'tabs.html',
 })
 export class TabsPage {
+  
   tab1Root = DashboardPage;
   tab2Root = CategoriaPage;
   tab3Root = EntregaPage;

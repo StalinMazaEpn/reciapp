@@ -46,4 +46,9 @@ export class ReciappService{
 	      return this.afAuth.auth.createUserWithEmailAndPassword(user.mail,user.password);
 	    });
 	}*/
+
+	public addNewRecycler(recyclerData){
+		//console.log(recyclerData);
+		this.afdatabase.list('/recycler/').push(recyclerData);
+	}
 }

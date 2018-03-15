@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController  } from 'ionic-angular';
 
-import { DashboardPage } from '../dashboard/dashboard';
-import { CategoriaPage } from '../categoria/categoria';
 import { Geolocation } from '@ionic-native/geolocation';
 import { ReciappService } from './../../services/reciapp.service';
 import {RecicladorPage} from "../reciclador/reciclador";
+import { RecyclerFormPage } from "../recycler-form/recycler-form";
 
 @IonicPage()
 @Component({
@@ -13,6 +12,7 @@ import {RecicladorPage} from "../reciclador/reciclador";
   templateUrl: 'entrega.html',
 })
 export class EntregaPage {
+  isLog:boolean;
 
   lat: any;
   lng: any;
@@ -20,21 +20,21 @@ export class EntregaPage {
 
   recyclers:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, public recyclerSrv: ReciappService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, public recyclerSrv: ReciappService,public modalCtrl: ModalController) {
     this.getMyLocation();
     this.getRecyclers();
+
+    this.isLog=window.localStorage['isLog'];
+    console.log(this.isLog);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EntregaPage');
   }
 
-  Dashboard():void{
-  	this.navCtrl.push(DashboardPage);
-  }
-
-  Separa():void{
-  	this.navCtrl.push(CategoriaPage);
+  addRecycler() {
+    let modal = this.modalCtrl.create(RecyclerFormPage);
+    modal.present();
   }
 
   goToRecycler(id) {
