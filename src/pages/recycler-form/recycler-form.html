@@ -12,13 +12,13 @@
 
 <ion-content>
   <ion-item>
-    <ion-label stacked>Nombres</ion-label>
+    <ion-label >Nombres: </ion-label>
     <ion-input type="text" [(ngModel)]="recycler.name"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label stacked>Teléfono</ion-label>
-    <ion-input type="text" [(ngModel)]="recycler.phone"></ion-input>
+    <ion-label >Teléfono: </ion-label>
+    <ion-input type="number" [(ngModel)]="recycler.phone"></ion-input>
   </ion-item>
 
   <ion-list>
@@ -81,9 +81,24 @@
   		<ion-item>
 			<ion-label stacked>Hora fin</ion-label>
 			<ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="recycler.date.endTime"></ion-datetime>
-		</ion-item>  		
+		</ion-item>
   	</ion-col>
   </ion-row>
+  
+  <ion-list>
+	<ion-item>
+	  <ion-label>Género: </ion-label>
+	  <ion-select [(ngModel)]="recycler.gender">
+	    <ion-option value="Mujer">Mujer</ion-option>
+	    <ion-option value="Hombre">Hombre</ion-option>
+	  </ion-select>
+	</ion-item>
+  </ion-list>
+
+  <ion-item>
+	<ion-label>Edad: </ion-label>
+	<ion-input type="number" [(ngModel)]="age"></ion-input>
+  </ion-item>
   
 </ion-content>
 

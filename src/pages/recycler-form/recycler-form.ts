@@ -15,6 +15,8 @@ import { Recycler } from '../../models/recycler';
 export class RecyclerFormPage {
   uid:any;
   days:string;
+  age:any;
+  year:any=new Date();
   recycler={
     date:{
       days:this.days,
@@ -22,11 +24,11 @@ export class RecyclerFormPage {
       endTime:null,
     },
     status:'active',
-    idUser:this.uid
+    idUser:this.uid,
   } as Recycler;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl:ToastController,public afAuth:AngularFireAuth, public userSrv:ReciappService,) {
-    
+    //console.log(this.year.getYear()+1900);
     this.afAuth.authState.subscribe(
       data => {
         //console.log(data);
@@ -43,8 +45,8 @@ export class RecyclerFormPage {
   }
 
   recyclerRegister(){
+    this.recycler.yearBirth= (this.year.getYear()+1900)-this.age;
     //console.log(this.recycler);
-   
     this.userSrv.addNewRecycler(this.recycler);
     this.registerOk();
     this.dismiss();
