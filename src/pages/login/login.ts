@@ -37,6 +37,7 @@ export class LoginPage {
   		//console.log(result);
   		if (result) {
   			//console.log(result.uid);
+        this.navCtrl.pop();
   			this.navCtrl.setRoot(TabsPage);
         window.localStorage['isLog']=true;
   		}else{
@@ -59,6 +60,6 @@ export class LoginPage {
   }
 
   register(){
-    this.navCtrl.push('RegisterPage');
+    this.navCtrl.push(RegisterPage);
   }
 }

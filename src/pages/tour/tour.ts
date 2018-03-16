@@ -1,6 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Slides, Platform } from 'ionic-angular';
 import { TabsPage } from './../tabs/tabs';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { AppAvailability } from '@ionic-native/app-availability';
 
 /**
  * Generated class for the TourPage page.
@@ -28,7 +30,7 @@ export class TourPage {
   colors:any = ["tourOne","tourTwo","tourThree","tourFour"];
   indexPages:number;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public iab: InAppBrowser, private appAvailability: AppAvailability, private platform: Platform) {
     this.colornav = "tourOne";
   }
 
@@ -49,14 +51,17 @@ export class TourPage {
     this.slides.slidePrev();
   }
 
-  slideChanged() {
+  slideDidChanged() {
     this.changeColors();
-    if(this.slides.getActiveIndex()!= 0 && this.slides.getActiveIndex().toString() != (this.slides.length()-1).toString()){
+  }
+  slideWillChanged() {
+    if(this.slides.getActiveIndex() > 0 && !this.slides.isEnd()){
       this.showFirst = true;
       this.showEnd = true;
       this.showAtEnd = false;
     }
   }
+
   slideAtEnd(){
     this.changeColors();
     this.showFirst = true;
@@ -72,13 +77,45 @@ export class TourPage {
 
   changeColors(){
     this.indexPages = this.slides.getActiveIndex();
-    this.colornav = this.colors[this.indexPages];
-    console.log(this.colornav);
+    if(this.indexPages <= 3){
+      this.colornav = this.colors[this.indexPages];
+    }
   }
 
   startApp(){
     localStorage.setItem('tourDone','true');
     this.navCtrl.setRoot(TabsPage);
+  }
+
+  goToReciVeciPageFb(){
+    this.openAppOrBrowser('fb://', 'com.facebook.katana', 'fb://page/', 'https://www.facebook.com/', '1670903246525234');
+  }
+  goToReciVeciPageTwit(){
+    this.openAppOrBrowser('twitter://', 'com.twitter.android', 'twitter://user?screen_name=', 'https://twitter.com/', 'reciveci');
+  }
+  goToReciVeciPageInst(){
+    this.openAppOrBrowser('instagram://', 'com.instagram.android', 'instagram://user?username=', 'https://www.instagram.com/', 'reciveci');
+  }
+
+  openAppOrBrowser(iosSchemaName: string, androidPackageName: string, appUrl: string, httpUrl: string, username: string){
+    let app;
+    if (this.platform.is('ios')) {
+      app = iosSchemaName;
+    } else if (this.platform.is('android')) {
+      app = androidPackageName;
+    }
+
+    this.appAvailability.check(app)
+    .then(
+      (yes: boolean) => {
+        const browser = this.iab.create(appUrl+username,'_system');
+        browser.show();
+      },
+      (no: boolean) => {
+        const browser = this.iab.create(httpUrl+username);
+        browser.show();
+      }
+    );
   }
 
 }
