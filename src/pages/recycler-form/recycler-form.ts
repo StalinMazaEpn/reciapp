@@ -68,6 +68,7 @@ export class RecyclerFormPage {
     //console.log(this.recycler);
     //console.log(this.recycler.idUser);
     let userData;
+    
     //function to get user Data
     this.userSrv.getUser(this.newRecycler.idUser).subscribe((resp)=>{
       //asigned user data
@@ -87,9 +88,12 @@ export class RecyclerFormPage {
       //Toast
       this.updatePoints();
     });
+    
     //console.log(this.newRecycler);
+    console.log(this.userSrv.getReciclerKey());
+    this.newRecycler.id=this.userSrv.getReciclerKey();
     //Call function to create new recycler
-    this.userSrv.addNewRecycler(this.newRecycler);
+    this.userSrv.addNewRecycler(this.newRecycler.id,this.newRecycler);
     //Toast
     this.registerOk();
     //Function to close modal - Form

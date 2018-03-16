@@ -47,15 +47,19 @@ export class ReciappService{
 	    });
 	}*/
 
-	public addNewRecycler(recyclerData){
+	public addNewRecycler(id,recyclerData){
 		//console.log(recyclerData);
-		this.afdatabase.list('/recycler/').push(recyclerData);
+		this.afdatabase.object('/recycler/'+id).set(recyclerData);
 	}
 
 	public updatePoints(uid,Data){
 		//console.log(uid);
 		//console.log(points);
 		//this.afdatabase.object('/user/'+uid+'/points').set(points);
-		return this.afdatabase.object('/user/'+uid).update(Data);
+		this.afdatabase.object('/user/'+uid).update(Data);
+	}
+
+	public getReciclerKey(){
+		return this.afdatabase.database.ref().child('recycler').push().key;
 	}
 }
