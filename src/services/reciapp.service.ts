@@ -51,4 +51,11 @@ export class ReciappService{
 		//console.log(recyclerData);
 		this.afdatabase.list('/recycler/').push(recyclerData);
 	}
+
+	public updatePoints(uid,Data){
+		//console.log(uid);
+		//console.log(points);
+		//this.afdatabase.object('/user/'+uid+'/points').set(points);
+		return this.afdatabase.object('/user/'+uid).update(Data);
+	}
 }

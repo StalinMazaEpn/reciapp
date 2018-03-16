@@ -10,21 +10,21 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content>    
   <ion-item>
     <ion-label >Nombres: </ion-label>
-    <ion-input type="text" [(ngModel)]="recycler.name"></ion-input>
+    <ion-input type="text" [(ngModel)]="newRecycler.name"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label >Teléfono: </ion-label>
-    <ion-input type="number" [(ngModel)]="recycler.phone"></ion-input>
+    <ion-input type="number" [(ngModel)]="newRecycler.phone"></ion-input>
   </ion-item>
 
   <ion-list>
 	<ion-item>
 	  <ion-label stacked>Días que labora</ion-label>
-	  <ion-select [(ngModel)]="recycler.date.days" multiple="true" cancelText="cancel" okText="Okay!">
+	  <ion-select [(ngModel)]="newRecycler.date.days" multiple="true" cancelText="cancel" okText="Okay!">
 	    <ion-option value="Lunes">Lunes</ion-option>
 	    <ion-option value="Martes">Martes</ion-option>
 	    <ion-option value="Miércoles">Miércoles</ion-option>
@@ -74,13 +74,13 @@
   	<ion-col>
   		<ion-item>
 			<ion-label stacked>Hora inicio</ion-label>
-			<ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="recycler.date.startTime"></ion-datetime>
+			<ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="newRecycler.date.startTime"></ion-datetime>
 		</ion-item>	
   	</ion-col>
   	<ion-col>
   		<ion-item>
 			<ion-label stacked>Hora fin</ion-label>
-			<ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="recycler.date.endTime"></ion-datetime>
+			<ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="newRecycler.date.endTime"></ion-datetime>
 		</ion-item>
   	</ion-col>
   </ion-row>
@@ -88,7 +88,7 @@
   <ion-list>
 	<ion-item>
 	  <ion-label>Género: </ion-label>
-	  <ion-select [(ngModel)]="recycler.gender">
+	  <ion-select [(ngModel)]="newRecycler.gender">
 	    <ion-option value="Mujer">Mujer</ion-option>
 	    <ion-option value="Hombre">Hombre</ion-option>
 	  </ion-select>
@@ -100,8 +100,16 @@
 	<ion-input type="number" [(ngModel)]="age"></ion-input>
   </ion-item>
   
-</ion-content>
+  <ion-item text-center>
+  	<ion-label>Donde lo encuentraste:</ion-label>
+  	<ion-input hidden></ion-input>
+  </ion-item>
+  
+  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [zoomControl]="false" (mapClick)="getRecyclerLocation($event)">
+  	<agm-marker [latitude]="lat_" [longitude]="lng_"></agm-marker>
+  </agm-map>  
 
+</ion-content>
 <ion-footer>
 	<div text-center>
 	  	<button ion-button full (click)="recyclerRegister()">Guardar</button>	
