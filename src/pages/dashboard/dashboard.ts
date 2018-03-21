@@ -12,8 +12,8 @@ import { User } from '../../models/user';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app'
 
-import { EmailComposer } from '@ionic-native/email-composer';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+/*import { EmailComposer } from '@ionic-native/email-composer';
+import { InAppBrowser } from '@ionic-native/in-app-browser';*/
 
 @IonicPage()
 @Component({
@@ -26,7 +26,7 @@ export class DashboardPage {
   recyclers:any;
 
   //uid:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public userSrv: ReciappService,public recyclerSrv: ReciappService, private afAuth:AngularFireAuth,public loadingCtrl: LoadingController, public toastCtrl:ToastController,private emailComposer: EmailComposer, private iab: InAppBrowser) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public userSrv: ReciappService,public recyclerSrv: ReciappService, private afAuth:AngularFireAuth,public loadingCtrl: LoadingController, public toastCtrl:ToastController) {
     this.isLog=window.localStorage['isLog'];
     this.user=null;
     this.afAuth.authState.subscribe(
@@ -138,27 +138,4 @@ export class DashboardPage {
     this.navCtrl.push(TourPage); 
   }*/
 
-  sendEmail(){
-
-    console.log("hola");
-    let email = {
-      to: 'pilar_1304@hotmail.es',
-      cc: 'henry.red1@hotmail.com',
-      subject: 'Cordova Icons',
-      body: 'Esto es una prueba de correo desde una app',
-      isHtml: true
-    };
-
-        this.emailComposer.open(email);
-  }
-
-  entrarFb(){
-    const browser = this.iab.create('https://www.facebook.com/reciveci/');
-    browser.show();
-  }
-
-  entrarTw(){
-    const browser = this.iab.create('https://twitter.com/reciveci');
-    browser.show();
-  }
 }
