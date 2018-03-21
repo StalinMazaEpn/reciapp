@@ -18,6 +18,7 @@ import { TabsPageModule } from '../pages/tabs/tabs.module';
 import { TourPageModule } from './../pages/tour/tour.module';
 import { LoginPageModule } from './../pages/login/login.module';
 import { RegisterPageModule } from './../pages/register/register.module';
+import { RecyclerFormPageModule } from './../pages/recycler-form/recycler-form.module';
 
 import { HttpModule } from '@angular/http';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -62,7 +63,8 @@ const firebaseConfig = {
     TabsPageModule,
     TourPageModule,
     LoginPageModule,
-    RegisterPageModule
+    RegisterPageModule,
+    RecyclerFormPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
