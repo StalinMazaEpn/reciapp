@@ -46,4 +46,20 @@ export class ReciappService{
 	      return this.afAuth.auth.createUserWithEmailAndPassword(user.mail,user.password);
 	    });
 	}*/
+
+	public addNewRecycler(id,recyclerData){
+		//console.log(recyclerData);
+		this.afdatabase.object('/recycler/'+id).set(recyclerData);
+	}
+
+	public updatePoints(uid,Data){
+		//console.log(uid);
+		//console.log(points);
+		//this.afdatabase.object('/user/'+uid+'/points').set(points);
+		this.afdatabase.object('/user/'+uid).update(Data);
+	}
+
+	public getReciclerKey(){
+		return this.afdatabase.database.ref().child('recycler').push().key;
+	}
 }

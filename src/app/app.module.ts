@@ -19,6 +19,7 @@ import { TourPageModule } from './../pages/tour/tour.module';
 import { LoginPageModule } from './../pages/login/login.module';
 import { RegisterPageModule } from './../pages/register/register.module';
 import { SocialNetworksPageModule } from '../pages/social-networks/social-networks.module';
+import { RecyclerFormPageModule } from './../pages/recycler-form/recycler-form.module';
 
 import { HttpModule } from '@angular/http';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -66,7 +67,8 @@ const firebaseConfig = {
     TourPageModule,
     LoginPageModule,
     RegisterPageModule,
-    SocialNetworksPageModule
+    SocialNetworksPageModule,
+    RecyclerFormPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
