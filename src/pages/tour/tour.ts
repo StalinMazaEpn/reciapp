@@ -89,6 +89,7 @@ export class TourPage {
 
   goToReciVeciPageFb(){
     this.openAppOrBrowser('fb://', 'com.facebook.katana', 'fb://page/', 'https://www.facebook.com/', '1670903246525234');
+    console.log(this.openAppOrBrowser('fb://', 'com.facebook.katana', 'fb://page/', 'https://www.facebook.com/', '1670903246525234'));
   }
   goToReciVeciPageTwit(){
     this.openAppOrBrowser('twitter://', 'com.twitter.android', 'twitter://user?screen_name=', 'https://twitter.com/', 'reciveci');
