@@ -40,6 +40,16 @@ export class ReciappService{
 	public login(userData){
 		return this.afAuth.auth.signInWithEmailAndPassword(userData.mail,userData.password);
 	}
+
+	public putLoveRecicler(id,iduser){
+		this.afdatabase.object('/user/'+iduser+'/favoritiesReciclers/'+id).set(true);
+		return this.afdatabase.object('/recycler/'+id+'/favoriteUsers/'+iduser).set(true);
+	}
+	
+	public removeLoveRecicler(id,iduser){
+		this.afdatabase.object('/user/'+iduser+'/favoritiesReciclers/'+id).remove();
+		return this.afdatabase.object('/recycler/'+id+'/favoriteUsers/'+iduser).remove();
+	}
 	/*public registerUser(user:User){
 		this.afAuth.auth.signInAnonymously().then(()=>{
 	      this.afdatabase.object('user/'+user.mail.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '')).set(user);

@@ -16,13 +16,18 @@ export class RecicladorPage {
 	siguiendo: boolean = false;
 	notificacion:boolean=false;
   id=null;
+  iduser=null;
 
-  reciclador:any;
+  recycler:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl: ToastController, public RecicladorSrv:ReciappService) {
-    this.id=navParams.get('id');
-    this.reciclador=RecicladorSrv.getRecyclerById(this.id);
-    console.log(this.reciclador);
+    this.recycler = navParams.get('recycler');
+    let user = new Object (this.recycler.favoriteUsers);
+
+    if(this.RecicladorSrv.afAuth.auth.currentUser.uid){
+      this.iduser = this.RecicladorSrv.afAuth.auth.currentUser.uid;
+      this.siguiendo = user.hasOwnProperty(this.iduser);
+    }
   }
 
   ionViewDidLoad() {
@@ -33,15 +38,14 @@ export class RecicladorPage {
     this.navCtrl.popToRoot();
   }
 
-  seguir():void{
+  seguir(id):void{
   	if (this.siguiendo) {
   		this.siguiendo=false;
-  		this.dejarReciclador();
+  		this.dejarReciclador(id);
   	}else{
   		this.siguiendo=true;
   		this.notificacion=true;
-  		this.seguirReciclador();
-  		setTimeout(()=>this.notificacionActivada(),2500);
+  		this.seguirReciclador(id);
   	}
   }
 
@@ -56,27 +60,42 @@ export class RecicladorPage {
   	}
   }
 
-  seguirReciclador() {
+  async seguirReciclador(id) {
     let toast = this.toastCtrl.create({
-      message: 'Ahora estas siguiendo a '+this.reciclador.name+'.',
+      message: 'Ahora estas siguiendo a '+this.recycler.name+'.',
       duration: 3000,
       position:'top'
     });
-    toast.present();
+    try {
+      const result = await this.RecicladorSrv.putLoveRecicler(id,this.iduser);
+      if(result){
+        toast.present();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    
   }
-
-  dejarReciclador() {
+  
+  async dejarReciclador(id) {
     let toast = this.toastCtrl.create({
-      message: 'Dejaste de seguir a '+this.reciclador.name+'.',
+      message: 'Dejaste de seguir a '+this.recycler.name+'.',
       duration: 3000,
       position:'top'
     });
-    toast.present();
+    try {
+      const result = await this.RecicladorSrv.removeLoveRecicler(id,this.iduser);
+      if(result){
+        toast.present();
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   notificacionActivada() {
     let toast = this.toastCtrl.create({
-      message: 'Te llegara información sobre '+this.reciclador.name+'.',
+      message: 'Te llegara información sobre '+this.recycler.name+'.',
       duration: 3000,
       position:'top'
     });
