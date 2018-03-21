@@ -64,39 +64,16 @@ export class RecyclerFormPage {
   }
 
   recyclerRegister(){
-    this.newRecycler.yearBirth= (this.year.getYear()+1900)-this.age;
-    //console.log(this.recycler);
-    //console.log(this.recycler.idUser);
-    let userData;
-    
-    //function to get user Data
-    this.userSrv.getUser(this.newRecycler.idUser).subscribe((resp)=>{
-      //asigned user data
-      userData=resp;
-      //sum points when registered a recycler
-      this.points=100+userData.points;
-      //Asigned all data
-      this.user=userData;
-      this.user.points=this.points;
-      //console.log('data fb',userData);
-      //console.log('data up',this.user);
-      //console.log(this.points);
-
-      //Function to update points
-      //this.userSrv.updatePoints(this.recycler.idUser,this.user);
-      
-      //Toast
-      this.updatePoints();
-    });
-    
     //console.log(this.newRecycler);
-    console.log(this.userSrv.getReciclerKey());
+    //console.log(this.userSrv.getReciclerKey());
+    this.newRecycler.yearBirth= (this.year.getYear()+1900)-this.age;
     this.newRecycler.id=this.userSrv.getReciclerKey();
     //Call function to create new recycler
     this.userSrv.addNewRecycler(this.newRecycler.id,this.newRecycler);
-    //Toast
+    //Toast Ok
+    this.updatePoints(); 
     this.registerOk();
-    //Function to close modal - Form
+    //Function to close modal - Form Recycler
     this.dismiss();
   }
 
