@@ -5,6 +5,7 @@ import {DashboardPage} from '../dashboard/dashboard';
 import {EntregaPage} from '../entrega/entrega';
 import {CategoriaPage} from '../categoria/categoria';
 import { TourPage } from '../tour/tour';
+import { SocialNetworksPage } from '../social-networks/social-networks';
 
 @IonicPage()
 @Component({
@@ -27,7 +28,7 @@ export class TabsPage {
     //this.navCtrl.push();
   }
   socialNetworks() {
-    //this.navCtrl.push();
+    this.navCtrl.push(SocialNetworksPage);
   }
   goToTour(){
     this.navCtrl.push(TourPage); 

@@ -18,6 +18,7 @@ import { TabsPageModule } from '../pages/tabs/tabs.module';
 import { TourPageModule } from './../pages/tour/tour.module';
 import { LoginPageModule } from './../pages/login/login.module';
 import { RegisterPageModule } from './../pages/register/register.module';
+import { SocialNetworksPageModule } from '../pages/social-networks/social-networks.module';
 import { RecyclerFormPageModule } from './../pages/recycler-form/recycler-form.module';
 
 import { HttpModule } from '@angular/http';
@@ -29,9 +30,11 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Geolocation } from '@ionic-native/geolocation';
 import { TourPage } from '../pages/tour/tour';
+import { SocialNetworksPage } from '../pages/social-networks/social-networks';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AppAvailability } from '@ionic-native/app-availability';
+
 
 
 // Initialize Firebase
@@ -64,12 +67,14 @@ const firebaseConfig = {
     TourPageModule,
     LoginPageModule,
     RegisterPageModule,
+    SocialNetworksPageModule,
     RecyclerFormPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    TourPage
+    TourPage,
+    SocialNetworksPage
   ],
   providers: [
     StatusBar,
