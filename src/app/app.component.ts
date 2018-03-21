@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { TourPage } from '../pages/tour/tour';
@@ -12,7 +13,7 @@ import { TourPage } from '../pages/tour/tour';
 export class MyApp {
   rootPage:any;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public nativeStorage: NativeStorage) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -35,6 +36,19 @@ export class MyApp {
       return false;
     }
   }
+
+  /*
+  This method will be used in future test with mobiles
+  Don`t Erase please
+  
+  isTourDone(): boolean{
+    this.nativeStorage.getItem('tourDone')
+    .then(
+      () => { return true},
+      error => { return false}
+    );
+  }
+  */
 
 }
 
