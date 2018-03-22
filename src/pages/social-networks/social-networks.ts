@@ -65,8 +65,7 @@ export class SocialNetworksPage {
     this.appAvailability.check(app)
     .then(
       (yes: boolean) => {
-        const browser = this.iab.create(appUrl+username,'_system');
-        browser.show();
+        window.open(appUrl+username, '_system', 'location=no');
       },
       (no: boolean) => {
         const browser = this.iab.create(httpUrl+username);
