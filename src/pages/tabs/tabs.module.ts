@@ -7,6 +7,14 @@ import { TabsPage } from './tabs';
     TabsPage,
   ],
   imports: [
+    IonicPageModule.forChild({
+      menuType: 'push',
+      platforms: {
+        ios: {
+          menuType: 'overlay',
+        }
+      }
+  	}),
     IonicPageModule.forChild(TabsPage),
   ],
 })
