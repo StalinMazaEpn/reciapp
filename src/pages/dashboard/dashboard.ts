@@ -25,15 +25,15 @@ export class DashboardPage {
   user:any={} as User;
   recyclers:any;
 
-  //uid:any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public userSrv: ReciappService,public recyclerSrv: ReciappService, private afAuth:AngularFireAuth,public loadingCtrl: LoadingController, public toastCtrl:ToastController) {
-    this.isLog=window.localStorage['isLog'];
+   
     this.user=null;
     this.afAuth.authState.subscribe(
       data => {
-        //console.log(data);
-        //this.uid=data.uid;
-        this.user=this.userSrv.getUser(data.uid);
+        if (data && data.uid && data.email) {
+          this.user=this.userSrv.getUser(data.uid);
+          this.isLog=window.localStorage['isLog']=true;
+        }
       });
     this.recyclers=this.recyclerSrv.getRecycler();
   }
