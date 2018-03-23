@@ -33,8 +33,8 @@ export class ReciappService{
 		return this.afdatabase.object('/user/'+uid).valueChanges();
 	}
 
-	public createUser(uid,user) {
-	    return this.afdatabase.object('/user/'+uid).set(user);
+	public async createUser(uid,user) {
+	    return await this.afdatabase.object('/user/'+uid).set(user);
 	}
 
 	public login(userData){
