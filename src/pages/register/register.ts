@@ -53,19 +53,19 @@ export class RegisterPage {
 	  		const result = await this.afAuth.auth.createUserWithEmailAndPassword(this.userData.email, this.userData.pass);
 	  		if (result) {
           //console.log(result.uid);
-          const result_ = await this.userSrv.createUser(result.uid,this.user);
+          const result_ = this.userSrv.createUser(result.uid,this.user);
           if (result_) {
             this.userOk();
             setTimeout(()=>{this.navCtrl.push(LoginPage)},1000);  
           }else{
-            this.userFail();
+            this.userMailFail();
           }
           
 	  		}
 	  	}
 	  	catch(e){
 	  		console.error('Err: ',e);
-	  		this.userFail();
+	  		this.createUserFail();
 	  	}
   	}  	
   }
@@ -83,7 +83,16 @@ export class RegisterPage {
     toast.present();
   }
 
-  userFail() {
+  createUserFail() {
+    let toast = this.toastCtrl.create({
+      message: 'Tuvimos problemas con tu registro, vuelve a intentarlo.' ,
+      duration: 3000,
+      position:'top'
+    });
+    toast.present();
+  }
+
+  userMailFail() {
     let toast = this.toastCtrl.create({
       message: 'La cuenta de correo ya existe.' ,
       duration: 3000,

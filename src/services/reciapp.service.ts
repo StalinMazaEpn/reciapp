@@ -34,7 +34,7 @@ export class ReciappService{
 	}
 
 	public createUser(uid,user) {
-	    this.afdatabase.object('/user/'+uid).set(user);
+	    return this.afdatabase.object('/user/'+uid).set(user);
 	}
 
 	public login(userData){
