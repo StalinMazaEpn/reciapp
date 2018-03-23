@@ -3,10 +3,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { ToastController } from 'ionic-angular';
 
-import { ReciappService } from '../../services/reciapp.service'
+import { ReciappService } from '../../services/reciapp.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { User } from '../../models/user';
-import { LoginPage } from '../../pages/login/login';
+import { TabsPage } from '../tabs/tabs';
 
 /**
  * Generated class for the RegisterPage page.
@@ -42,32 +42,21 @@ export class RegisterPage {
     //console.log(this.userData);
     this.user.mail=this.userData.email;
     //console.log(this.user);
-  	let min=this.userData.pass;
-
-  	if (min.length<6) {
-  		//console.log('caracteres:', min.length);
-  		this.passFail();
-  	}else{
-  		//console.log('registrando');
   		try{
 	  		const result = await this.afAuth.auth.createUserWithEmailAndPassword(this.userData.email, this.userData.pass);
 	  		if (result) {
-          //console.log(result.uid);
-          const result_ = await this.userSrv.createUser(result.uid,this.user);
+          console.log(result.uid);
+          const result_ = this.userSrv.createUser(result.uid,this.user);
           if (result_) {
             this.userOk();
-            setTimeout(()=>{this.navCtrl.push(LoginPage)},1000);  
-          }else{
-            this.userFail();
-          }
-          
+            setTimeout(()=>{this.navCtrl.setRoot(TabsPage)},1000);  
+          }          
 	  		}
 	  	}
 	  	catch(e){
 	  		console.error('Err: ',e);
-	  		this.userFail();
+	  		this.errorToast(e.code);
 	  	}
-  	}  	
   }
 
   register_fb(){
@@ -83,21 +72,25 @@ export class RegisterPage {
     toast.present();
   }
 
-  userFail() {
-    let toast = this.toastCtrl.create({
-      message: 'La cuenta de correo ya existe.' ,
-      duration: 3000,
-      position:'top'
-    });
-    toast.present();
-  }
+  errorToast(message){
+    switch (message) {
+      case "auth/email-already-in-use":
+        message="El correo ya se encuentra registrado.";
+        break;
 
-  passFail() {
+      case "auth/invalid-email":
+        message="Ingresa un correo válido.";
+        break;
+      
+      case "auth/weak-password":
+        message="La contraseña debe tener 6 caracteres.";
+        break;
+    }
     let toast = this.toastCtrl.create({
-      message: 'La contraseña debe tener 6 caracteres mínimos.' ,
+      message: message,
       duration: 3000,
       position:'top'
     });
-    toast.present();
+    toast.present(); 
   }
 }
