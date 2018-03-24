@@ -21,7 +21,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';*/
   templateUrl: 'dashboard.html',
 })
 export class DashboardPage {
-  isLog:boolean;
+  isLog:boolean=false;
   user:any={} as User;
   recyclers:any;
 
@@ -33,6 +33,8 @@ export class DashboardPage {
         if (data && data.uid && data.email) {
           this.user=this.userSrv.getUser(data.uid);
           this.isLog=window.localStorage['isLog']=true;
+        }else{
+          this.isLog=window.localStorage['isLog']=false;
         }
       });
     this.recyclers=this.recyclerSrv.getRecycler();
