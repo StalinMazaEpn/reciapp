@@ -6,13 +6,15 @@ import { ReciappService } from './../../services/reciapp.service';
 import {RecicladorPage} from "../reciclador/reciclador";
 import { RecyclerFormPage } from "../recycler-form/recycler-form";
 
+import { AngularFireAuth } from 'angularfire2/auth';
+
 @IonicPage()
 @Component({
   selector: 'page-entrega',
   templateUrl: 'entrega.html',
 })
 export class EntregaPage {
-  isLog:boolean;
+  isLog:boolean=false;
 
   lat: any;
   lng: any;
@@ -20,11 +22,17 @@ export class EntregaPage {
 
   recyclers:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, public recyclerSrv: ReciappService,public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, public recyclerSrv: ReciappService,public modalCtrl: ModalController, public afAuth:AngularFireAuth) {
     this.getMyLocation();
     this.getRecyclers();
-
-    this.isLog=window.localStorage['isLog'];
+    this.afAuth.authState.subscribe(
+      data => {
+        if (data && data.uid && data.email) {
+          this.isLog=window.localStorage['isLog']=true;
+        }else{
+          this.isLog=window.localStorage['isLog']=false;
+        }
+      });
     console.log(this.isLog);
   }
 

@@ -14,11 +14,15 @@
       <agm-marker [iconUrl]="'assets/imgs/recyclers.png'" *ngFor="let recycler of recyclers" (markerClick)="goToRecycler(recycler.id)" [latitude]="recycler.latitud " [longitude]="recycler.longitud"></agm-marker>
     </agm-map>
 
-  
-      <ion-fab bottom left>
+    
+    <div *ngIf="isLog;">
+        <ion-fab bottom left>
         <button ion-fab mini (click)="addRecycler()">
           <ion-icon ios="ios-person-add" md="md-person-add"></ion-icon>
         </button>
       </ion-fab>      
+    </div>
+
+      
     
 </ion-content>

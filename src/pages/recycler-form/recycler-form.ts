@@ -29,7 +29,7 @@ export class RecyclerFormPage {
   //user geolocation to maps and zoom
   lat:any;
   lng:any;
-  zoom:any=14;
+  zoom:any=16;
   //recycler geolocation to maps and zoom
   lat_:any;
   lng_:any;
@@ -49,7 +49,10 @@ export class RecyclerFormPage {
     this.afAuth.authState.subscribe(
       data => {
         //console.log(data);
-        this.newRecycler.idUser=data.uid;
+        if (data && data.uid && data.email) {
+          this.newRecycler.idUser=data.uid;
+        }
+        
       });
 
     this.getMyLocation();
