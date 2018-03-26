@@ -22,15 +22,16 @@ export class EntregaPage {
 
   recyclers:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, public recyclerSrv: ReciappService,public modalCtrl: ModalController, public afAuth:AngularFireAuth) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation,
+   public recyclerSrv: ReciappService,public modalCtrl: ModalController, public afAuth:AngularFireAuth) {
     this.getMyLocation();
     this.getRecyclers();
     this.afAuth.authState.subscribe(
       data => {
         if (data && data.uid && data.email) {
-          this.isLog=window.localStorage['isLog']=true;
+          this.isLog=true;
         }else{
-          this.isLog=window.localStorage['isLog']=false;
+          this.isLog=false;
         }
       });
     console.log(this.isLog);

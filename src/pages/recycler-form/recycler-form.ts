@@ -44,11 +44,10 @@ export class RecyclerFormPage {
     idUser:this.uid,
   } as Recycler;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl:ToastController,public afAuth:AngularFireAuth, public userSrv:ReciappService,private geolocation: Geolocation) {
-    //console.log(this.year.getYear()+1900);
+  constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl:ToastController,
+    public afAuth:AngularFireAuth, public userSrv:ReciappService,private geolocation: Geolocation) {
     this.afAuth.authState.subscribe(
       data => {
-        //console.log(data);
         if (data && data.uid && data.email) {
           this.newRecycler.idUser=data.uid;
         }
@@ -67,8 +66,6 @@ export class RecyclerFormPage {
   }
 
   recyclerRegister(){
-    //console.log(this.newRecycler);
-    //console.log(this.userSrv.getReciclerKey());
     this.newRecycler.yearBirth= (this.year.getYear()+1900)-this.age;
     this.newRecycler.id=this.userSrv.getReciclerKey();
     //Call function to create new recycler
