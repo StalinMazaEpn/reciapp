@@ -32,26 +32,13 @@ export class DashboardPage {
       data => {
         if (data && data.uid && data.email) {
           this.user=this.userSrv.getUser(data.uid);
-          this.isLog=window.localStorage['isLog']=true;
+          this.isLog=true;
         }else{
-          this.isLog=window.localStorage['isLog']=false;
+          this.isLog=false;
         }
       });
     this.recyclers=this.recyclerSrv.getRecycler();
   }
-
-  /*constructor(public navCtrl: NavController, public navParams: NavParams, public userSrv: ReciappService,public recyclerSrv: ReciappService, private emailComposer: EmailComposer, private iab: InAppBrowser) {
-    this.recyclers = this.recyclerSrv.getRecycler();
-    this.user = this.userSrv.getUser();  
-  }*/
-  
-  /*addReciclador() {
-    this.firebaseProvider.addReciclador(this.newReciclador);
-  }
-
-  removeReciclador(id) {
-    this.firebaseProvider.removeReciclador(id);
-  }*/
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DashboardPage');
@@ -130,14 +117,5 @@ export class DashboardPage {
     toast.present();
   }
 
-  /*logout(){
-    console.log('cerrar');
-    localStorage.removeItem('isLog');
-    this.isLog=false;
-  }*/
-
-  /*goToTour(){
-    this.navCtrl.push(TourPage); 
-  }*/
 
 }

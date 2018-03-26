@@ -18,7 +18,6 @@ import * as firebase from 'firebase/app'
   templateUrl: 'tabs.html',
 })
 export class TabsPage {
-  //isLog:boolean=false;
   tab1Root = DashboardPage;
   tab2Root = CategoriaPage;
   tab3Root = EntregaPage;
@@ -39,19 +38,14 @@ export class TabsPage {
     {title:'Acerca de...',component:null},
   ];
   
-  constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl: LoadingController, public afAuth:AngularFireAuth) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl: LoadingController, 
+    public afAuth:AngularFireAuth) {
     this.afAuth.authState.subscribe(
       data => {
         if (data && data.uid && data.email) {
-          console.log('usuario con sesion');
-          //this.isLog=window.localStorage['isLog']=true;
           this.optionsMenu=this.optionWithSession;
-          console.log(this.optionsMenu);
         }else{
-          console.log('usuario sin sesion');
-          //this.isLog=window.localStorage['isLog']=false;
           this.optionsMenu=this.optionWithoutSession;
-          console.log(this.optionsMenu);
         }
       });
   }
@@ -60,23 +54,10 @@ export class TabsPage {
     console.log('ionViewDidLoad TabsPage');
   }
 
-  /*userProfile() {
-    //this.navCtrl.push();
-  }
-  socialNetworks() {
-    this.navCtrl.push(SocialNetworksPage);
-  }
-  goToTour(){
-    this.navCtrl.push(TourPage); 
-  }
-  aboutUs() {
-    //this.navCtrl.push();
-  }*/
 
   //function to close/destroy user session
   logout(){
     //console.log('cerrar');
-    localStorage.removeItem('isLog');
     firebase.auth().signOut();
     //Toast loading while logout user session
     this.redirectLogin();
