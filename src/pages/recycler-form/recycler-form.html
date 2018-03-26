@@ -130,6 +130,10 @@
 	  <ion-input type="number" [(ngModel)]="age" formControlName="birth" (ionChange)="infoCheck()"></ion-input>
     </ion-item>
   </form>
+
+  	<img src="newRecycler.image" width="60px" height="60px"><span><button ion-button (click)="takePhoto()">camara</button></span>
+
+
     <ion-item text-center>
    	  <ion-label> <span>*</span> Donde lo encuentraste:</ion-label>
   	  <ion-input hidden></ion-input>
@@ -138,7 +142,6 @@
     <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [zoomControl]="false" (mapClick)="getRecyclerLocation($event)">
   	  <agm-marker [latitude]="lat_" [longitude]="lng_"></agm-marker>
     </agm-map> 
-    
   
 </ion-content>
 <ion-footer>

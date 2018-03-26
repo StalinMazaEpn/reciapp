@@ -11,6 +11,9 @@ import { Recycler } from '../../models/recycler';
 
 import { FormBuilder,FormGroup,Validators,AbstractControl} from '@angular/forms';
 
+import { storage } from "firebase";
+import { Camera, CameraOptions } from "@ionic-native/camera";
+
 @IonicPage()
 @Component({
   selector: 'page-recycler-form',
@@ -46,6 +49,8 @@ export class RecyclerFormPage {
     idUser:this.uid,
   } as Recycler;
 
+  //photo
+  photoRecycler:any;
   //enabled or disabled button
   buttonDisabled:boolean=true;
 
@@ -60,18 +65,32 @@ export class RecyclerFormPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl:ToastController,
     public afAuth:AngularFireAuth, public userSrv:ReciappService,private geolocation: Geolocation,
-    public formBuilder:FormBuilder) {
+    public formBuilder:FormBuilder,private camera: Camera) {
     this.isDisabled(true);  
-    //console.log(this.year.getYear()+1900);
-    //this.buttonDisabled=true;
     this.afAuth.authState.subscribe(
       data => {
-        //console.log(data);
         this.newRecycler.idUser=data.uid;
       });
 
     this.getMyLocation();
     this.formValidation();
+  }
+
+  takePhoto(){
+    try{
+      const options: CameraOptions = {
+        quality: 100,
+        targetHeight:600,
+        targetWidth:600,
+        destinationType: this.camera.DestinationType.DATA_URL,
+        encodingType: this.camera.EncodingType.JPEG,
+        mediaType: this.camera.MediaType.PICTURE
+      }
+      this.photoRecycler=this.camera.getPicture(options);
+    }
+    catch(e){
+      console.log(e);
+    }
   }
 
   ionViewDidLoad() {
@@ -83,12 +102,19 @@ export class RecyclerFormPage {
   }
 
   recyclerRegister(){
-    //console.log(this.newRecycler);
-    //console.log(this.userSrv.getReciclerKey());
     this.newRecycler.yearBirth= (this.year.getYear()+1900)-this.age;
-    this.newRecycler.id=this.userSrv.getReciclerKey();
+    //Get a new id and asign to id and image recycler
+    this.newRecycler.image=this.newRecycler.id=this.userSrv.getReciclerKey();
     //Call function to create new recycler
     this.userSrv.addNewRecycler(this.newRecycler.id,this.newRecycler);
+    //Save photo on Firebase Storage
+    this.photoRecycler.then((imageData) => {
+        let image = 'data:image/jpeg;base64,' + imageData;
+        let pictures=storage().ref('recicladores/'+this.newRecycler.id);
+        pictures.putString(image,'data_url');
+      }, (err) => {        
+        console.log(err);
+      });
     //Toast Ok
     this.updatePoints(); 
     this.registerOk();
@@ -156,19 +182,12 @@ export class RecyclerFormPage {
   }
 
   infoCheck(){
-    /*.log(this.newRecycler.name);
-    console.log(this.newRecycler.date.days);
-    console.log(this.newRecycler.date.startTime);
-    console.log(this.newRecycler.date.endTime);
-    console.log(this.newRecycler.gender);
-    console.log(this.age);*/
     if(this.lat_!=null && this.lng_!=null && this.newRecycler.name!=null && this.newRecycler.date.days!=null
       && this.newRecycler.date.startTime!=null && this.newRecycler.date.endTime!=null && this.newRecycler.gender!=null
        && this.age!=null){
 
       this.isDisabled(false);
     }else{
-      //console.log('falta llenar campos');
       this.isDisabled(true);
     }
   }
