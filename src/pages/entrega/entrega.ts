@@ -16,7 +16,16 @@ export class EntregaPage {
 
   lat: any;
   lng: any;
-  zoom: any = 16;
+
+  latView: any;
+  lngView: any;
+
+  zoom: any;
+
+  // values by default 
+  latViewDef: any = -0.184713; 
+  lngViewDef: any = -78.484771;
+  zoomDef: any = 10;
 
   recyclers:any;
 
@@ -24,6 +33,8 @@ export class EntregaPage {
     this.getMyLocation();
     this.getRecyclers();
 
+    this.valuesByDefault();
+    
     this.isLog=window.localStorage['isLog'];
     console.log(this.isLog);
   }
@@ -52,9 +63,37 @@ export class EntregaPage {
     this.geolocation.getCurrentPosition().then((resp) => {
       this.lat = resp.coords.latitude;
       this.lng = resp.coords.longitude;
+      this.latView = resp.coords.latitude;
+      this.lngView = resp.coords.longitude;
+      this.zoom =  16;
      }).catch((error) => {
        console.log('Error getting location', error);
      });
   }
+
+  centerChange(LatLongChange){
+    this.latView = LatLongChange.lat;
+    this.lngView = LatLongChange.lng;
+  }
+
+  zoomChange(ZoomChange){
+    this.zoom = ZoomChange;
+  }
+
+  getViewLocation(){
+    if(this.lat ==  null && this.lng == null){
+      this.getMyLocation();
+    }else{
+      this.latView = this.lat;
+      this.lngView = this.lng;
+    }
+  }
+
+  valuesByDefault(){
+    this.latView = this.latViewDef;
+    this.lngView = this.lngViewDef;
+    this.zoom =  this.zoomDef;
+  }
+
 
 }
