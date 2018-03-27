@@ -34,6 +34,7 @@ import { SocialNetworksPage } from '../pages/social-networks/social-networks';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AppAvailability } from '@ionic-native/app-availability';
+ import {AuthenticationService} from "../services/authenticationService";
 
 
 
@@ -86,6 +87,7 @@ const firebaseConfig = {
     EmailComposer,
     InAppBrowser,
     AppAvailability,
+    AuthenticationService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
