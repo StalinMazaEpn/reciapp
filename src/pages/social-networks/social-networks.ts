@@ -31,7 +31,6 @@ export class SocialNetworksPage {
     console.log("hola");
     let email = {
       to: 'info@reciveci.ec',
-      cc: 'pilar_1304@hotmail.es',
       subject: 'ReciVeci Correo',
       body: 'Escribe a continuación tus inquietudes:',
       isHtml: true
