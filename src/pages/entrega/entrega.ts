@@ -22,12 +22,19 @@ export class EntregaPage {
 
   zoom: any;
 
+  // values by default 
+  latViewDef: any = -0.184713; 
+  lngViewDef: any = -78.484771;
+  zoomDef: any = 10;
+
   recyclers:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, public recyclerSrv: ReciappService,public modalCtrl: ModalController) {
     this.getMyLocation();
     this.getRecyclers();
 
+    this.valuesByDefault();
+    
     this.isLog=window.localStorage['isLog'];
     console.log(this.isLog);
   }
@@ -80,6 +87,13 @@ export class EntregaPage {
       this.latView = this.lat;
       this.lngView = this.lng;
     }
-   }
+  }
+
+  valuesByDefault(){
+    this.latView = this.latViewDef;
+    this.lngView = this.lngViewDef;
+    this.zoom =  this.zoomDef;
+  }
+
 
 }
