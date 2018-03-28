@@ -17,36 +17,36 @@
   
   <div>
     <ion-list>
-      <ion-item class="centrado">
+      <ion-item class="centrado" (click)="sendEmail()">
         <ion-thumbnail item-start  class="iconCenter">
-            <ion-icon name="mail" class="iconsize" color="danger" (click)="sendEmail()"></ion-icon>
+            <ion-icon name="mail" class="iconsize" color="danger" ></ion-icon>
         </ion-thumbnail>
         <h2>Correo Electronico</h2>
       </ion-item>
     </ion-list>
   
     <ion-list>
-      <ion-item class="centrado">
+      <ion-item class="centrado" (click)="goFacebook()">
         <ion-thumbnail item-start  class="iconCenter">
-            <ion-icon name="logo-facebook" class="iconsize" color="primary" (click)="goFacebook()" ></ion-icon>
+            <ion-icon name="logo-facebook" class="iconsize" color="primary" ></ion-icon>
         </ion-thumbnail>
         <h2>Facebook</h2>
       </ion-item>
     </ion-list>
 
     <ion-list>
-        <ion-item class="centrado">
+        <ion-item class="centrado" (click)="goTwitter()">
           <ion-thumbnail item-start  class="iconCenter">
-              <ion-icon name="logo-twitter" class="iconsize" color="twitter" (click)="goTwitter()" ></ion-icon>
+              <ion-icon name="logo-twitter" class="iconsize" color="twitter" ></ion-icon>
           </ion-thumbnail>
           <h2>Twitter</h2>
         </ion-item>
       </ion-list>
 
       <ion-list>
-          <ion-item class="centrado">
+          <ion-item class="centrado" (click)="goInstagram()">
             <ion-thumbnail item-start  class="iconCenter">
-                <ion-icon name="logo-instagram" class="iconsize" color="instagram" (click)="goInstagram()" ></ion-icon>
+                <ion-icon name="logo-instagram" class="iconsize" color="instagram" ></ion-icon>
             </ion-thumbnail>
             <h2>Instagram</h2>
           </ion-item>

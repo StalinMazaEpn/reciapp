@@ -9,6 +9,8 @@ import { User } from '../../models/user';
 import { ReciappService } from '../../services/reciapp.service'
 import { Recycler } from '../../models/recycler';
 
+import { FormBuilder,FormGroup,Validators,AbstractControl} from '@angular/forms';
+
 @IonicPage()
 @Component({
   selector: 'page-recycler-form',
@@ -44,8 +46,24 @@ export class RecyclerFormPage {
     idUser:this.uid,
   } as Recycler;
 
+  //enabled or disabled button
+  buttonDisabled:boolean=true;
+
+  //form to validate
+  formGroup:FormGroup;
+  name:AbstractControl;
+  daysValidator:AbstractControl;
+  hourStart:AbstractControl;
+  hourEnd:AbstractControl;
+  genre:AbstractControl;
+  birth:AbstractControl;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl:ToastController,
-    public afAuth:AngularFireAuth, public userSrv:ReciappService,private geolocation: Geolocation) {
+    public afAuth:AngularFireAuth, public userSrv:ReciappService,private geolocation: Geolocation,
+    public formBuilder:FormBuilder) {
+    this.isDisabled(true);  
+    //console.log(this.year.getYear()+1900);
+    //this.buttonDisabled=true;
     this.afAuth.authState.subscribe(
       data => {
         if (data && data.uid && data.email) {
@@ -55,6 +73,7 @@ export class RecyclerFormPage {
       });
 
     this.getMyLocation();
+    this.formValidation();
   }
 
   ionViewDidLoad() {
@@ -110,6 +129,48 @@ export class RecyclerFormPage {
     this.lng_=event.coords.lng;
     this.newRecycler.latitude=event.coords.lat;
     this.newRecycler.longitude=event.coords.lng;
+    this.infoCheck();
+  }
+
+  isDisabled(val){
+    this.buttonDisabled=val;
+  }
+
+  formValidation(){
+    //validations
+    this.formGroup=this.formBuilder.group({
+      name:['',Validators.required],
+      daysValidator:['',Validators.required],
+      hourStart:['',Validators.required],
+      hourEnd:['',Validators.required],
+      genre:['',Validators.required],
+      birth:['',Validators.required]
+    });
+    //controls
+    this.name=this.formGroup.controls['name'];
+    this.daysValidator=this.formGroup.controls['daysValidator'];
+    this.hourStart=this.formGroup.controls['hourStart'];
+    this.hourEnd=this.formGroup.controls['hourEnd'];
+    this.genre=this.formGroup.controls['genre'];
+    this.birth=this.formGroup.controls['birth'];
+  }
+
+  infoCheck(){
+    /*.log(this.newRecycler.name);
+    console.log(this.newRecycler.date.days);
+    console.log(this.newRecycler.date.startTime);
+    console.log(this.newRecycler.date.endTime);
+    console.log(this.newRecycler.gender);
+    console.log(this.age);*/
+    if(this.lat_!=null && this.lng_!=null && this.newRecycler.name!=null && this.newRecycler.date.days!=null
+      && this.newRecycler.date.startTime!=null && this.newRecycler.date.endTime!=null && this.newRecycler.gender!=null
+       && this.age!=null){
+
+      this.isDisabled(false);
+    }else{
+      //console.log('falta llenar campos');
+      this.isDisabled(true);
+    }
   }
 }
 
