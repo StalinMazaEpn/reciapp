@@ -14,9 +14,6 @@ import * as firebase from 'firebase/app'
 import {MyApp} from "../../app/app.component";
 import {AuthenticationService} from "../../services/authenticationService";
 
-/*import { EmailComposer } from '@ionic-native/email-composer';
-import { InAppBrowser } from '@ionic-native/in-app-browser';*/
-
 @IonicPage()
 @Component({
   selector: 'page-dashboard',
@@ -36,19 +33,6 @@ export class DashboardPage {
     }
     this.recyclers=this.recyclerSrv.getRecycler();
   }
-
-  /*constructor(public navCtrl: NavController, public navParams: NavParams, public userSrv: ReciappService,public recyclerSrv: ReciappService, private emailComposer: EmailComposer, private iab: InAppBrowser) {
-    this.recyclers = this.recyclerSrv.getRecycler();
-    this.user = this.userSrv.getUser();
-  }*/
-
-  /*addReciclador() {
-    this.firebaseProvider.addReciclador(this.newReciclador);
-  }
-
-  removeReciclador(id) {
-    this.firebaseProvider.removeReciclador(id);
-  }*/
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DashboardPage');
@@ -126,15 +110,5 @@ export class DashboardPage {
     });
     toast.present();
   }
-
-  /*logout(){
-    console.log('cerrar');
-    localStorage.removeItem('isLog');
-    this.isLog=false;
-  }*/
-
-  /*goToTour(){
-    this.navCtrl.push(TourPage);
-  }*/
 
 }

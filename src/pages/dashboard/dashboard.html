@@ -3,16 +3,18 @@
     <ion-toolbar>
       
       <div *ngIf="isLog; else elseHeader">
+        <ion-title text-center showWhen="ios">Hola, {{(user | async)?.name}}!</ion-title>
         <button ion-button icon-only menuToggle>
           <ion-icon name="menu"></ion-icon>
-          <ion-title text-center>Hola, {{(user | async)?.name}}!</ion-title>
+          <ion-title text-center showWhen="android,windows">Hola, {{(user | async)?.name}}!</ion-title>
         </button>
       </div>
       <ng-template #elseHeader>
+        <ion-title showWhen="ios" text-center>Bienvenido!</ion-title>
         <button ion-button icon-only menuToggle>
           <ion-icon name="menu"></ion-icon>
-          <ion-title text-center>Bienvenido!</ion-title>
-        </button>
+          <ion-title text-center showWhen="android,windows,ios">Bienvenido!</ion-title>
+        </button> 
       </ng-template>      
 
     </ion-toolbar>
