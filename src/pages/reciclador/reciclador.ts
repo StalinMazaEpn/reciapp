@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
-
 import { ReciappService } from '../../services/reciapp.service';
-// import { Observable } from 'rxjs/Observable';
+import { CallNumber } from '@ionic-native/call-number';
+import { AlertController } from 'ionic-angular';
+
 
 @IonicPage()
 @Component({
@@ -12,16 +13,19 @@ import { ReciappService } from '../../services/reciapp.service';
 })
 
 
-export class RecicladorPage {
+export class RecicladorPage implements OnInit {
 	siguiendo: boolean = false;
 	notificacion:boolean=false;
   id=null;
 
   reciclador:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl: ToastController, public RecicladorSrv:ReciappService) {
-    this.id=navParams.get('id');
-    this.reciclador=RecicladorSrv.getRecyclerById(this.id);
+  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public RecicladorSrv: ReciappService, public callNumber: CallNumber, private alertCtrl: AlertController) {
+  }
+
+  ngOnInit() {
+    this.id = this.navParams.get('id');
+    this.reciclador = this.RecicladorSrv.getRecyclerById(this.id);
     console.log(this.reciclador);
   }
 
@@ -91,4 +95,30 @@ export class RecicladorPage {
     });
     toast.present();
   }
+
+  doCallNumber() {
+    let alert = this.alertCtrl.create({
+      title: 'Llamada',
+      message: 'Desea realizar la llamada?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Llamar',
+          handler: () => {
+            this.callNumber.callNumber('0984582618', true)
+            .then(res => console.log('Launched dialer!', res))
+            .catch(err => console.log('Error launching dialer', err));
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
 }
