@@ -22,6 +22,7 @@ export class RecicladorPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl: ToastController, public RecicladorSrv:ReciappService) {
     this.recycler = navParams.get('recycler');
+    console.log(this.recycler);
     let user = new Object (this.recycler.favoriteUsers);
 
     if(this.RecicladorSrv.afAuth.auth.currentUser.uid){

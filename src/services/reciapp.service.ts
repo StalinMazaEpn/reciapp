@@ -7,6 +7,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 @Injectable()
 export class ReciappService{
 
+	favorities:any=[];
+
 	constructor(public afdatabase: AngularFireDatabase, public afAuth:AngularFireAuth) {}
 
 	public getCategory(){
@@ -42,13 +44,19 @@ export class ReciappService{
 	}
 
 	public putLoveRecicler(id,iduser){
+		this.favorities = [];
 		this.afdatabase.object('/user/'+iduser+'/favoritiesReciclers/'+id).set(true);
 		return this.afdatabase.object('/recycler/'+id+'/favoriteUsers/'+iduser).set(true);
 	}
 	
 	public removeLoveRecicler(id,iduser){
+		this.favorities = [];
 		this.afdatabase.object('/user/'+iduser+'/favoritiesReciclers/'+id).remove();
 		return this.afdatabase.object('/recycler/'+id+'/favoriteUsers/'+iduser).remove();
+	}
+
+	public getFavoritiesRecycler(uid):any{
+		return this.afdatabase.list(`/user/${uid}/favoritiesReciclers`).snapshotChanges(['child_added', 'child_removed'])
 	}
 	/*public registerUser(user:User){
 		this.afAuth.auth.signInAnonymously().then(()=>{
