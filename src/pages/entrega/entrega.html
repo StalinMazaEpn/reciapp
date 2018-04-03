@@ -13,9 +13,9 @@
       <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
       <agm-marker [iconUrl]="'assets/imgs/recyclers.png'" *ngFor="let recycler of recyclers" (markerClick)="goToRecycler(recycler.id)" [latitude]="recycler.latitude" [longitude]="recycler.longitude"></agm-marker>
     </agm-map>
-
-  
+ 
       <ion-fab bottom right>
+
         <button ion-fab mini (click)="addRecycler()">
           <ion-icon ios="ios-person-add" md="md-person-add"></ion-icon>
         </button>

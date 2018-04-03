@@ -12,8 +12,6 @@ import { RecyclerFormPage } from "../recycler-form/recycler-form";
   templateUrl: 'entrega.html',
 })
 export class EntregaPage {
-  isLog:boolean;
-
   lat: any;
   lng: any;
 
@@ -29,14 +27,11 @@ export class EntregaPage {
 
   recyclers:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation, public recyclerSrv: ReciappService,public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation,
+   public recyclerSrv: ReciappService,public modalCtrl: ModalController) {
     this.getMyLocation();
     this.getRecyclers();
-
     this.valuesByDefault();
-    
-    this.isLog=window.localStorage['isLog'];
-    console.log(this.isLog);
   }
 
   ionViewDidLoad() {
