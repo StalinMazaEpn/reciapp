@@ -7,11 +7,11 @@ import { ToastController } from 'ionic-angular';
 import { RecicladorPage } from '../../pages/reciclador/reciclador';
 import { LoginPage }  from '../login/login';
 import { RegisterPage }  from '../register/register';
-import { User } from '../../models/user';
+//import { User } from '../../models/user';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app'
-import {MyApp} from "../../app/app.component";
+//import {MyApp} from "../../app/app.component";
 import {AuthenticationService} from "../../services/authenticationService";
 
 @IonicPage()
@@ -28,7 +28,7 @@ export class DashboardPage {
 
     this.isLog = this.authenticationService.isAuthenticated();
     if(this.isLog) {
-      console.log("UID", this.authenticationService.getCurrentUser().uid);
+      //console.log("UID", this.authenticationService.getCurrentUser().uid);
       this.user = this.userSrv.getUser(this.authenticationService.getCurrentUser().uid);
     }
     this.recyclers=this.recyclerSrv.getRecycler();

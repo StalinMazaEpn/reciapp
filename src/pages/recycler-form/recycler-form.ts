@@ -39,13 +39,13 @@ export class RecyclerFormPage {
   lng_:any;
   //Recycler object
   newRecycler={
+    id:null,
     date:{
       days:this.days,
       startTime:null,
       endTime:null,
     },
     status:'active',
-    idUser:this.uid,
   } as Recycler;
 
 
@@ -72,6 +72,8 @@ export class RecyclerFormPage {
     if(this.isLog) {
       //console.log("UID", this.authenticationService.getCurrentUser().uid);
       this.userData = this.userSrv.getUser(this.authenticationService.getCurrentUser().uid);
+      //console.log('Formulario',this.authenticationService.getCurrentUser().uid);
+      this.newRecycler.idUser=this.authenticationService.getCurrentUser().uid;
       this.getMyLocation();
       this.formValidation();
     }
@@ -88,13 +90,20 @@ export class RecyclerFormPage {
   recyclerRegister(){
     this.newRecycler.yearBirth= (this.year.getYear()+1900)-this.age;
     this.newRecycler.id=this.userSrv.getReciclerKey();
+    //console.log(this.newRecycler.id);
     //Call function to create new recycler
-    this.userSrv.addNewRecycler(this.newRecycler.id,this.newRecycler);
-    //Toast Ok
-    this.updatePoints(); 
-    this.registerOk();
-    //Function to close modal - Form Recycler
-    this.dismiss();
+    this.userSrv.addNewRecycler(this.newRecycler.id,this.newRecycler).then(()=>{
+      //Toast Ok
+      this.registerOk();
+      this.updatePoints(); 
+      //Function to close modal - Form Recycler
+      this.dismiss();  
+    })
+    .catch((e)=>{
+      console.log(e);
+    });
+
+      
   }
 
   registerOk() {
