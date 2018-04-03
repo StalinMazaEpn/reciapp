@@ -27,16 +27,14 @@
 		</ng-template>
 	  </ion-fab>
 
-	  <ion-item>
-	    <ion-icon ios="ios-call" md="md-call" item-start large></ion-icon>
-	    <h2>Teléfono</h2>
-	    <p>{{(reciclador | async)?.phone}}</p>
+	  <ion-item (click)="doCallNumber()">
+	    <ion-icon ios="ios-call" md="md-call" color="vibrant" item-start large></ion-icon>
+	    <h2>{{(reciclador | async)?.phone}}</h2>
 	  </ion-item>
 
 	  <ion-item>
 	    <ion-icon ios="ios-calendar" md="md-calendar" item-left large ></ion-icon>
-	    <h2>Horario</h2>
-	    <p>{{(reciclador | async)?.date.day}}<br>{{(reciclador | async)?.date.startTime}} - {{(reciclador | async)?.date.endTime}}</p>
+	    <h2>{{(reciclador | async)?.date?.days}}<br>{{(reciclador | async)?.date?.startTime}} - {{(reciclador | async)?.date?.endTime}}</h2>
 	  </ion-item>
 
 	  <ion-item>
