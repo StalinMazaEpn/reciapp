@@ -34,7 +34,6 @@ export class DashboardPage {
       //console.log("UID", this.authenticationService.getCurrentUser().uid);
       this.user = this.userSrv.getUser(this.authenticationService.getCurrentUser().uid);
     }
-    this.recyclers=this.recyclerSrv.getRecycler();
   }
 
   /*removeReciclador(id) {
