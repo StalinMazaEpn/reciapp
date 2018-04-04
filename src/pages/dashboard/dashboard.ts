@@ -52,7 +52,7 @@ export class DashboardPage {
     console.log("Entrara");
     this.afAuth.authState.subscribe(
       data => {
-        if(data.uid){
+        if(data && data.uid){
           console.log("UID", data.uid);
           this.recyclers = this.recyclerSrv.getFavoritiesRecycler(data.uid)
           .map((recyclerId)=>{
@@ -70,14 +70,14 @@ export class DashboardPage {
       console.log(this.recyclers);
     }*/
   }
-  ionViewDidEnter(){
-    console.log("Entro");
-    if(this.isLog && this.recyclers == null && this.uid != null){
-      console.log(this.uid);
-      this.recyclers = this.recyclerSrv.getFavoritiesRecycler(this.uid);
-      console.log(this.recyclers);
-    }
-  }
+  // ionViewDidEnter(){
+  //   console.log("Entro");
+  //   if(this.isLog && this.recyclers == null && this.uid != null){
+  //     console.log(this.uid);
+  //     this.recyclers = this.recyclerSrv.getFavoritiesRecycler(this.uid);
+  //     console.log(this.recyclers);
+  //   }
+  // }
 
   ionViewDidLeave(){
     this.recyclerSrv.favorities = [];
