@@ -5,7 +5,9 @@ import {DashboardPage} from '../dashboard/dashboard';
 import {EntregaPage} from '../entrega/entrega';
 import {CategoriaPage} from '../categoria/categoria';
 import { TourPage } from '../tour/tour';
+import { SocialNetworksPage } from '../social-networks/social-networks';
 
+import * as firebase from 'firebase/app'
 @IonicPage()
 @Component({
   selector: 'page-tabs',
@@ -27,7 +29,7 @@ export class TabsPage {
     //this.navCtrl.push();
   }
   socialNetworks() {
-    //this.navCtrl.push();
+    this.navCtrl.push(SocialNetworksPage);
   }
   goToTour(){
     this.navCtrl.push(TourPage); 
@@ -39,6 +41,7 @@ export class TabsPage {
   logout(){
     console.log('cerrar');
     localStorage.removeItem('isLog');
+    firebase.auth().signOut();
     this.redirectLogin();
     setTimeout(()=>{this.navCtrl.setRoot(TabsPage)},3000);
   }

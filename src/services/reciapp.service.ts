@@ -35,8 +35,8 @@ export class ReciappService{
 		return this.afdatabase.object('/user/'+uid).valueChanges();
 	}
 
-	public createUser(uid,user) {
-	    this.afdatabase.object('/user/'+uid).set(user);
+	public async createUser(uid,user) {
+	    return await this.afdatabase.object('/user/'+uid).set(user);
 	}
 
 	public login(userData){
@@ -64,4 +64,13 @@ export class ReciappService{
 	      return this.afAuth.auth.createUserWithEmailAndPassword(user.mail,user.password);
 	    });
 	}*/
+
+	public async addNewRecycler(id,recyclerData){
+		//console.log(recyclerData);
+		await this.afdatabase.object('/recycler/'+id).set(recyclerData);
+	}
+
+	public getReciclerKey(){
+		return this.afdatabase.database.ref().child('recycler').push().key;
+	}
 }

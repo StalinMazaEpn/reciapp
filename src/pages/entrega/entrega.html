@@ -1,9 +1,4 @@
-<!--
-  Generated template for the EntregaPage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
@@ -14,40 +9,21 @@
 
 
 <ion-content>
-    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+    <agm-map [latitude]="latView" [longitude]="lngView" [zoom]="zoom" [fullscreenControlOptions]="false" [zoomControl]="false" [streetViewControl]="false" [usePanning]="true" (centerChange)="centerChange($event)" (zoomChange)="zoomChange($event)">
       <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-      <agm-marker [iconUrl]="'assets/imgs/recyclers.png'" *ngFor="let recycler of recyclers" (markerClick)="goToRecycler(recycler)" [latitude]="recycler.latitud" [longitude]="recycler.longitud"></agm-marker>
+      <agm-marker [iconUrl]="'assets/imgs/recyclers.png'" *ngFor="let recycler of recyclers" (markerClick)="goToRecycler(recycler.id)" [latitude]="recycler.latitude" [longitude]="recycler.longitude"></agm-marker>
     </agm-map>
-</ion-content>
+ 
+      <ion-fab bottom right>
 
-<!--ion-footer>
-  <ion-toolbar>
-    <ion-row text-center>
-      <ion-col>
-        <button ion-button icon-left clear small (click)="Dashboard()">
-          <ion-icon  ios="ios-home" md="md-home"></ion-icon>
+        <button ion-fab mini (click)="addRecycler()">
+          <ion-icon ios="ios-person-add" md="md-person-add"></ion-icon>
         </button>
-      </ion-col>
-      <ion-col>
-        <button ion-button icon-left clear small (click)="Separa()">
-          <ion-icon ios="ios-hand" md="md-hand"></ion-icon>
+      </ion-fab>      
+      <ion-fab bottom left >
+        <button ion-fab mini (tap)="getViewLocation()" >
+          <ion-icon name="locate"></ion-icon>
         </button>
-      </ion-col>
-      <ion-col >
-        <button ion-button icon-left clear small>
-          <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
-        </button>
-      </ion-col>
-      <ion-col >
-        <button ion-button icon-left clear small (click)="Dashboard()">
-          <ion-icon name="text"></ion-icon>
-        </button>
-      </ion-col>
-      <ion-col >
-        <button ion-button icon-left clear small (click)="Dashboard()">
-          <ion-icon name="text"></ion-icon>
-        </button>
-      </ion-col>
-    </ion-row>
-  </ion-toolbar>
-</ion-footer-->
+      </ion-fab>  
+    
+</ion-content>

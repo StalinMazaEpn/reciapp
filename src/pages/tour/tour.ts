@@ -85,6 +85,15 @@ export class TourPage {
   startApp(){
     localStorage.setItem('tourDone','true');
     this.navCtrl.setRoot(TabsPage);
+    /*
+    This method will be used in future test with mobiles
+    Don`t Erase please
+    this.nativeStorage.setItem('tourDone', {property: 'true'})
+    .then(
+      () => console.log('Stored item!'),
+      error => console.error('Error storing item', error)
+    );
+    */
   }
 
   goToReciVeciPageFb(){
@@ -108,8 +117,7 @@ export class TourPage {
     this.appAvailability.check(app)
     .then(
       (yes: boolean) => {
-        const browser = this.iab.create(appUrl+username,'_system');
-        browser.show();
+        window.open(appUrl+username, '_system', 'location=no');
       },
       (no: boolean) => {
         const browser = this.iab.create(httpUrl+username);
