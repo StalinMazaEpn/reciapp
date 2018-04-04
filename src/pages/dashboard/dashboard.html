@@ -29,16 +29,73 @@
     </ion-list>
 
     <div *ngIf="isLog; else elseLogin">
-      <ion-list>
         <ion-list-header color="light"> Tus Recicladores </ion-list-header>
-        <ion-item *ngFor='let recycler of recyclers | async'>
-          {{recycler.name}}
-          <button ion-button clear small item-end (click)="goRecycler(recycler.id)">
-          <ion-icon ios="ios-eye" md="md-eye"></ion-icon>
-        </button>
-      </ion-item>
-    </ion-list>  
+        <ion-list>
+          <ion-row *ngIf="(recyclers | async)?.length==0" text-center>
+            <ion-card text-center>
+              <ion-card-content>
+                <ion-item text-center>No tienes recicladores favoritos</ion-item>
+                <div >Encuentra tu reciclador más cercano en el mapa</div>
+                <div text-center>
+                    <button ion-button outline item-end icon-left (click)="openMap()">
+                        <ion-icon name="add-circle"></ion-icon>
+                        Agregar Favorito
+                      </button>
+                      <!--a href="index.html" class="button"  ion-button outline item-end icon-left><ion-icon name="add-circle"></ion-icon>
+                        Agregar Favoritos</a-->
+                </div>
+                    
+                  <!--ion-list>
+                      <ion-item>
+                          No tienes recicladores favoritos. Encuentra tu reciclador más cercano en el mapa.
+                        <button ion-button outline item-end icon-left>
+                          <ion-icon name="star"></ion-icon>
+                          Mapa
+                        </button>
+                      </ion-item>
+                    </ion-list-->
+              </ion-card-content>
+            </ion-card>
+          </ion-row>
+
+          <ion-row *ngFor='let recycler$ of recyclers | async'>            
+              <ion-col *ngIf="recycler$ | async as recycler;  else loading" > <!-- then loggedout;-->
+              <ion-item (tap)="goRecycler(recycler)">
+                  <ion-avatar item-start>
+                    <img src="{{recycler.image}}">
+                  </ion-avatar>
+                  <h2>{{recycler.name}}</h2>
+              </ion-item>
+            </ion-col>
+            <ng-template #loading>
+                <ion-grid>
+                    <ion-row justify-content-center>
+                        <ion-col col-2>
+                            <ion-spinner name="circles"></ion-spinner>
+                        </ion-col>
+                        <ion-col col-6>
+                            Cargando favoritos...
+                          </ion-col>
+                      </ion-row>
+                </ion-grid>
+              </ng-template>
+          </ion-row>
+
+          <!--ng-template #loggedout>
+            <ion-grid>
+                <ion-row justify-content-center>
+                    <ion-col col-2>
+                        <ion-spinner name="circles"></ion-spinner>
+                    </ion-col>
+                    <ion-col col-6>
+                        No tiene favoritos
+                      </ion-col>
+                  </ion-row>
+            </ion-grid>
+          </ng-template-->
+        </ion-list>
     </div>
+
       <ng-template #elseLogin>
         <ion-row text-center>
           <ion-col col-12>
