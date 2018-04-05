@@ -7,13 +7,12 @@ import { ToastController } from 'ionic-angular';
 import { RecicladorPage } from '../../pages/reciclador/reciclador';
 import { LoginPage }  from '../login/login';
 import { RegisterPage }  from '../register/register';
-import { User } from '../../models/user';
+//import { User } from '../../models/user';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app'
-
-/*import { EmailComposer } from '@ionic-native/email-composer';
-import { InAppBrowser } from '@ionic-native/in-app-browser';*/
+//import {MyApp} from "../../app/app.component";
+import {AuthenticationService} from "../../services/authenticationService";
 
 @IonicPage()
 @Component({
@@ -21,22 +20,19 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';*/
   templateUrl: 'dashboard.html',
 })
 export class DashboardPage {
-  isLog:boolean=false;
-  user:any={} as User;
+  isAuthenticated:boolean;
+  user:any;
   recyclers:any;
+  
+  constructor(public navCtrl: NavController, public navParams: NavParams, public userSrv: ReciappService,
+    public recyclerSrv: ReciappService, private afAuth:AngularFireAuth,public loadingCtrl: LoadingController,
+     public toastCtrl:ToastController, public authenticationService:AuthenticationService) {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public userSrv: ReciappService,public recyclerSrv: ReciappService, private afAuth:AngularFireAuth,public loadingCtrl: LoadingController, public toastCtrl:ToastController) {
-   
-    this.user=null;
-    this.afAuth.authState.subscribe(
-      data => {
-        if (data && data.uid && data.email) {
-          this.user=this.userSrv.getUser(data.uid);
-          this.isLog=true;
-        }else{
-          this.isLog=false;
-        }
-      });
+    this.isAuthenticated = this.authenticationService.isAuthenticated();
+    if(this.isAuthenticated) {
+      //console.log("UID", this.authenticationService.getCurrentUser().uid);
+      this.user = this.userSrv.getUser(this.authenticationService.getCurrentUser().uid);
+    }
     this.recyclers=this.recyclerSrv.getRecycler();
   }
 
@@ -69,13 +65,13 @@ export class DashboardPage {
           alert(JSON.stringify(error))
         });
     })*/
-    
+
     /*try{
         const provider= new firebase.auth.FacebookAuthProvider();
         this.afAuth.auth
         .signInWithPopup(provider)
         .then(res => {
-            //console.log(res); 
+            //console.log(res);
             //console.log(res.user.displayName);
             //console.log(res.user.email);
             //alert(JSON.stringify(res));
@@ -84,9 +80,9 @@ export class DashboardPage {
             }else{
               this.failLogin();
             }
-            
+
           })
-        .catch(function(e){ 
+        .catch(function(e){
             console.log(e)
           });
       }
@@ -103,7 +99,7 @@ export class DashboardPage {
   verReciclador(){
     this.navCtrl.push(RecicladorPage);
   }
-    
+
   isLogin(){
     this.navCtrl.push(DashboardPage);
   }
@@ -116,6 +112,4 @@ export class DashboardPage {
     });
     toast.present();
   }
-
-
 }

@@ -1,5 +1,5 @@
 
-<ion-menu type="overlay" [content]="content">
+<!--ion-menu type="overlay" [content]="content">
   <ion-content padding>
     <ion-list>
       <button *ngFor='let option of optionsMenu' menuClose ion-item (tap)="optionPageMenu(option.component)">
@@ -7,11 +7,11 @@
       </button>
     </ion-list>
   </ion-content>  
-</ion-menu>
+</ion-menu-->
 
 <ion-tabs>
 
-  <ion-tab [root]="tab1Root" #content tabIcon="ios-home" swipeBackEnabled="false"></ion-tab>
+  <ion-tab [root]="tab1Root"  tabIcon="ios-home" ></ion-tab>
 
   <ion-tab [root]="tab2Root"  tabIcon="ios-hand"></ion-tab>
   <ion-tab [root]="tab3Root"  tabIcon="ios-pin"></ion-tab>

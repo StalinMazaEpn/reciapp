@@ -47,9 +47,9 @@ export class ReciappService{
 	    });
 	}*/
 
-	public addNewRecycler(id,recyclerData){
+	public async addNewRecycler(id,recyclerData){
 		//console.log(recyclerData);
-		this.afdatabase.object('/recycler/'+id).set(recyclerData);
+		await this.afdatabase.object('/recycler/'+id).set(recyclerData);
 	}
 
 	public getReciclerKey(){

@@ -39,7 +39,7 @@ export class LoginPage {
   			//console.log(result.uid);
         this.navCtrl.pop();
   			this.navCtrl.setRoot(TabsPage);
-        window.localStorage['isLog']=true;
+        //window.localStorage['isLog']=true;
   		}else{
   			this.failValidate();
   		}
