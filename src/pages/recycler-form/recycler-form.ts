@@ -8,8 +8,10 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { User } from '../../models/user';
 import { ReciappService } from '../../services/reciapp.service'
 import { Recycler } from '../../models/recycler';
+import { LoginPage } from '../login/login';
 
 import { FormBuilder,FormGroup,Validators,AbstractControl} from '@angular/forms';
+import {AuthenticationService} from "../../services/authenticationService";
 
 @IonicPage()
 @Component({
@@ -31,22 +33,22 @@ export class RecyclerFormPage {
   //user geolocation to maps and zoom
   lat:any;
   lng:any;
-  zoom:any=14;
+  zoom:any=16;
   //recycler geolocation to maps and zoom
   lat_:any;
   lng_:any;
   //Recycler object
   newRecycler={
+    id:null,
     date:{
       days:this.days,
       startTime:null,
       endTime:null,
     },
     status:'active',
-    idUser:this.uid,
   } as Recycler;
 
-  //enabled or disabled button
+
   buttonDisabled:boolean=true;
 
   //form to validate
@@ -58,20 +60,23 @@ export class RecyclerFormPage {
   genre:AbstractControl;
   birth:AbstractControl;
 
+  isLog:boolean;
+  userData:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl:ToastController,
     public afAuth:AngularFireAuth, public userSrv:ReciappService,private geolocation: Geolocation,
-    public formBuilder:FormBuilder) {
-    this.isDisabled(true);  
-    //console.log(this.year.getYear()+1900);
-    //this.buttonDisabled=true;
-    this.afAuth.authState.subscribe(
-      data => {
-        //console.log(data);
-        this.newRecycler.idUser=data.uid;
-      });
+    public formBuilder:FormBuilder,public authenticationService:AuthenticationService) {
 
-    this.getMyLocation();
-    this.formValidation();
+    this.isDisabled(true);  
+
+    this.isLog = this.authenticationService.isAuthenticated();
+    if(this.isLog) {
+      //console.log("UID", this.authenticationService.getCurrentUser().uid);
+      this.userData = this.userSrv.getUser(this.authenticationService.getCurrentUser().uid);
+      //console.log('Formulario',this.authenticationService.getCurrentUser().uid);
+      this.newRecycler.idUser=this.authenticationService.getCurrentUser().uid;
+      this.getMyLocation();
+      this.formValidation();
+    }
   }
 
   ionViewDidLoad() {
@@ -79,21 +84,26 @@ export class RecyclerFormPage {
   }
 
   dismiss(){
-  	this.navCtrl.pop();
+    this.navCtrl.pop();
   }
 
   recyclerRegister(){
-    //console.log(this.newRecycler);
-    //console.log(this.userSrv.getReciclerKey());
     this.newRecycler.yearBirth= (this.year.getYear()+1900)-this.age;
     this.newRecycler.id=this.userSrv.getReciclerKey();
+    //console.log(this.newRecycler.id);
     //Call function to create new recycler
-    this.userSrv.addNewRecycler(this.newRecycler.id,this.newRecycler);
-    //Toast Ok
-    this.updatePoints(); 
-    this.registerOk();
-    //Function to close modal - Form Recycler
-    this.dismiss();
+    this.userSrv.addNewRecycler(this.newRecycler.id,this.newRecycler).then(()=>{
+      //Toast Ok
+      this.registerOk();
+      this.updatePoints(); 
+      //Function to close modal - Form Recycler
+      this.dismiss();  
+    })
+    .catch((e)=>{
+      console.log(e);
+    });
+
+      
   }
 
   registerOk() {
@@ -156,12 +166,6 @@ export class RecyclerFormPage {
   }
 
   infoCheck(){
-    /*.log(this.newRecycler.name);
-    console.log(this.newRecycler.date.days);
-    console.log(this.newRecycler.date.startTime);
-    console.log(this.newRecycler.date.endTime);
-    console.log(this.newRecycler.gender);
-    console.log(this.age);*/
     if(this.lat_!=null && this.lng_!=null && this.newRecycler.name!=null && this.newRecycler.date.days!=null
       && this.newRecycler.date.startTime!=null && this.newRecycler.date.endTime!=null && this.newRecycler.gender!=null
        && this.age!=null){
@@ -171,6 +175,10 @@ export class RecyclerFormPage {
       //console.log('falta llenar campos');
       this.isDisabled(true);
     }
+  }
+
+  loginRedirect(){
+    this.navCtrl.push(LoginPage);
   }
 }
 

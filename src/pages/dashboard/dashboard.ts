@@ -7,13 +7,13 @@ import { ToastController } from 'ionic-angular';
 import { RecicladorPage } from '../../pages/reciclador/reciclador';
 import { LoginPage }  from '../login/login';
 import { RegisterPage }  from '../register/register';
-import { User } from '../../models/user';
+//import { User } from '../../models/user';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app'
 
-/*import { EmailComposer } from '@ionic-native/email-composer';
-import { InAppBrowser } from '@ionic-native/in-app-browser';*/
+import { EntregaPage } from '../entrega/entrega';
+import {AuthenticationService} from "../../services/authenticationService";
 
 @IonicPage()
 @Component({
@@ -22,42 +22,75 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';*/
 })
 export class DashboardPage {
   isLog:boolean;
-  user:any={} as User;
+  user:any;
   recyclers:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public userSrv: ReciappService,public recyclerSrv: ReciappService, private afAuth:AngularFireAuth,public loadingCtrl: LoadingController, public toastCtrl:ToastController) {
-   
-    this.user=null;
-    this.afAuth.authState.subscribe(
-      data => {
-        if (data && data.uid && data.email) {
-          this.user=this.userSrv.getUser(data.uid);
-          this.isLog=window.localStorage['isLog']=true;
-        }
-      });
-    this.recyclers=this.recyclerSrv.getRecycler();
+  constructor(public navCtrl: NavController, public navParams: NavParams, public userSrv: ReciappService,public recyclerSrv: ReciappService, private afAuth:AngularFireAuth,public loadingCtrl: LoadingController, public toastCtrl:ToastController, public authenticationService:AuthenticationService) {
+
+    this.isLog = this.authenticationService.isAuthenticated();
+    if(this.isLog) {
+      //console.log("UID", this.authenticationService.getCurrentUser().uid);
+      this.user = this.userSrv.getUser(this.authenticationService.getCurrentUser().uid);
+    }
   }
 
-  /*constructor(public navCtrl: NavController, public navParams: NavParams, public userSrv: ReciappService,public recyclerSrv: ReciappService, private emailComposer: EmailComposer, private iab: InAppBrowser) {
-    this.recyclers = this.recyclerSrv.getRecycler();
-    this.user = this.userSrv.getUser();  
-  }*/
-  
-  /*addReciclador() {
-    this.firebaseProvider.addReciclador(this.newReciclador);
-  }
-
-  removeReciclador(id) {
+  /*removeReciclador(id) {
     this.firebaseProvider.removeReciclador(id);
   }*/
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad DashboardPage');
+  // ionViewDidLoad() {
+  //   this.afAuth.authState.subscribe(
+  //     data => {
+  //       this.uid=data.uid;
+  //     });
+  // }
+
+  ionViewWillEnter(){
+    console.log("Entrara");
+    this.afAuth.authState.subscribe(
+      data => {
+        if(data && data.uid){
+          console.log("UID", data.uid);
+          this.recyclers = this.recyclerSrv.getFavoritiesRecycler(data.uid)
+          .map((recyclerId)=>{
+            return recyclerId.map(recyclerObj => {
+              return this.recyclerSrv.getRecyclerById(recyclerObj.payload.key);
+            })
+          })
+          console.log("RECICLADORES", this.recyclers);
+        }
+      });
+    /*this.recyclers = null;
+    if(this.uid != null){
+      console.log(this.uid);
+      this.recyclers = this.recyclerSrv.getFavoritiesRecycler(this.uid);
+      console.log(this.recyclers);
+    }*/
+  }
+  // ionViewDidEnter(){
+  //   console.log("Entro");
+  //   if(this.isLog && this.recyclers == null && this.uid != null){
+  //     console.log(this.uid);
+  //     this.recyclers = this.recyclerSrv.getFavoritiesRecycler(this.uid);
+  //     console.log(this.recyclers);
+  //   }
+  // }
+
+  ionViewDidLeave(){
+    this.recyclerSrv.favorities = [];
+    this.recyclers = null;
+  }
+  goRecycler(recycler) {
+    console.log(recycler);
+    this.navCtrl.push(RecicladorPage, {recycler});
+
   }
 
-  goRecycler(id) {
-    this.navCtrl.push(RecicladorPage, {id: id});
+  openMap(){
+    this.navCtrl.push(EntregaPage);
   }
+
+
   register_mail():any{
     //console.log('mail');
     this.navCtrl.push(RegisterPage);
@@ -80,13 +113,13 @@ export class DashboardPage {
           alert(JSON.stringify(error))
         });
     })*/
-    
+
     /*try{
         const provider= new firebase.auth.FacebookAuthProvider();
         this.afAuth.auth
         .signInWithPopup(provider)
         .then(res => {
-            //console.log(res); 
+            //console.log(res);
             //console.log(res.user.displayName);
             //console.log(res.user.email);
             //alert(JSON.stringify(res));
@@ -95,9 +128,9 @@ export class DashboardPage {
             }else{
               this.failLogin();
             }
-            
+
           })
-        .catch(function(e){ 
+        .catch(function(e){
             console.log(e)
           });
       }
@@ -114,7 +147,7 @@ export class DashboardPage {
   verReciclador(){
     this.navCtrl.push(RecicladorPage);
   }
-    
+
   isLogin(){
     this.navCtrl.push(DashboardPage);
   }
@@ -127,15 +160,5 @@ export class DashboardPage {
     });
     toast.present();
   }
-
-  /*logout(){
-    console.log('cerrar');
-    localStorage.removeItem('isLog');
-    this.isLog=false;
-  }*/
-
-  /*goToTour(){
-    this.navCtrl.push(TourPage); 
-  }*/
 
 }

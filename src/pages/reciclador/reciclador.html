@@ -1,14 +1,14 @@
 
 <ion-header>
   <ion-navbar>
-    <ion-title > {{(reciclador | async)?.name}} </ion-title>
+    <ion-title > {{recycler.name}} </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 	<ion-row align-items-center>
       <ion-col center text-center>
-        <img src="{{(reciclador | async)?.image}}" center 
+        <img src="{{recycler.image}}" center 
         style="border-radius: 100px; height: 200px; width: 200px;">
       </ion-col>
     </ion-row>
@@ -16,12 +16,12 @@
 	<ion-card>
 	  <ion-fab right top>
 	    <div *ngIf="siguiendo; else elseBlockFavorite">
-			<button (click)="seguir()" ion-fab color="danger">
+			<button (click)="seguir(recycler.id)" ion-fab color="danger">
 				<ion-icon ios="ios-heart" md="md-heart"></ion-icon>
 			</button>    	
 	    </div>
 	    <ng-template #elseBlockFavorite>
-	    	<button (click)="seguir()" ion-fab color="light">
+	    	<button (click)="seguir(recycler.id)" ion-fab color="light">
 				<ion-icon ios="ios-heart-outline" md="md-heart-outline"></ion-icon>
 			</button>
 		</ng-template>
@@ -29,12 +29,12 @@
 
 	  <ion-item (click)="doCallNumber()">
 	    <ion-icon ios="ios-call" md="md-call" color="vibrant" item-start large></ion-icon>
-	    <h2>{{(reciclador | async)?.phone}}</h2>
+	    <h2>{{recycler.phone}}</h2>
 	  </ion-item>
 
 	  <ion-item>
 	    <ion-icon ios="ios-calendar" md="md-calendar" item-left large ></ion-icon>
-	    <h2>{{(reciclador | async)?.date?.days}}<br>{{(reciclador | async)?.date?.startTime}} - {{(reciclador | async)?.date?.endTime}}</h2>
+	    <h2>{{recycler.date.day}}<br>{{recycler.date.startTime}} - {{recycler.date.endTime}}</h2>
 	  </ion-item>
 
 	  <ion-item>
