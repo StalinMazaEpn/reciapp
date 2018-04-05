@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
-
 import { ReciappService } from '../../services/reciapp.service';
-// import { Observable } from 'rxjs/Observable';
+import { CallNumber } from '@ionic-native/call-number';
+import { AlertController } from 'ionic-angular';
+
 
 @IonicPage()
 @Component({
@@ -20,7 +21,7 @@ export class RecicladorPage {
 
   recycler:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl: ToastController, public RecicladorSrv:ReciappService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public RecicladorSrv: ReciappService, public callNumber: CallNumber, private alertCtrl: AlertController) {
     this.recycler = navParams.get('recycler');
     console.log(this.recycler);
     let user = new Object (this.recycler.favoriteUsers);
@@ -111,4 +112,30 @@ export class RecicladorPage {
     });
     toast.present();
   }
+
+  doCallNumber() {
+    let alert = this.alertCtrl.create({
+      title: 'Llamada',
+      message: 'Desea realizar la llamada?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Llamar',
+          handler: () => {
+            this.callNumber.callNumber('0984582618', true)
+            .then(res => console.log('Launched dialer!', res))
+            .catch(err => console.log('Error launching dialer', err));
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
 }

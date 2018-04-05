@@ -12,8 +12,6 @@ import { RegisterPage }  from '../register/register';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app'
 
-import { EmailComposer } from '@ionic-native/email-composer';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { EntregaPage } from '../entrega/entrega';
 import {AuthenticationService} from "../../services/authenticationService";
 
