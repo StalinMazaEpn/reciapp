@@ -43,8 +43,8 @@ export class EntregaPage {
     modal.present();
   }
 
-  goToRecycler(id) {
-    this.navCtrl.push(RecicladorPage, {id: id});
+  goToRecycler(recycler) {
+    this.navCtrl.push(RecicladorPage, {recycler: recycler});
   }
   getRecyclers(){
     this.recyclerSrv.getRecycler()

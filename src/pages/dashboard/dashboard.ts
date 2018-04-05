@@ -11,7 +11,10 @@ import { RegisterPage }  from '../register/register';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app'
-//import {MyApp} from "../../app/app.component";
+
+import { EmailComposer } from '@ionic-native/email-composer';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { EntregaPage } from '../entrega/entrega';
 import {AuthenticationService} from "../../services/authenticationService";
 
 @IonicPage()
@@ -33,16 +36,65 @@ export class DashboardPage {
       //console.log("UID", this.authenticationService.getCurrentUser().uid);
       this.user = this.userSrv.getUser(this.authenticationService.getCurrentUser().uid);
     }
-    this.recyclers=this.recyclerSrv.getRecycler();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad DashboardPage');
+  /*removeReciclador(id) {
+    this.firebaseProvider.removeReciclador(id);
+  }*/
+
+  // ionViewDidLoad() {
+  //   this.afAuth.authState.subscribe(
+  //     data => {
+  //       this.uid=data.uid;
+  //     });
+  // }
+
+  ionViewWillEnter(){
+    console.log("Entrara");
+    this.afAuth.authState.subscribe(
+      data => {
+        if(data && data.uid){
+          console.log("UID", data.uid);
+          this.recyclers = this.recyclerSrv.getFavoritiesRecycler(data.uid)
+          .map((recyclerId)=>{
+            return recyclerId.map(recyclerObj => {
+              return this.recyclerSrv.getRecyclerById(recyclerObj.payload.key);
+            })
+          })
+          console.log("RECICLADORES", this.recyclers);
+        }
+      });
+    /*this.recyclers = null;
+    if(this.uid != null){
+      console.log(this.uid);
+      this.recyclers = this.recyclerSrv.getFavoritiesRecycler(this.uid);
+      console.log(this.recyclers);
+    }*/
+  }
+  // ionViewDidEnter(){
+  //   console.log("Entro");
+  //   if(this.isLog && this.recyclers == null && this.uid != null){
+  //     console.log(this.uid);
+  //     this.recyclers = this.recyclerSrv.getFavoritiesRecycler(this.uid);
+  //     console.log(this.recyclers);
+  //   }
+  // }
+
+  ionViewDidLeave(){
+    this.recyclerSrv.favorities = [];
+    this.recyclers = null;
+  }
+  goRecycler(recycler) {
+    console.log(recycler);
+    this.navCtrl.push(RecicladorPage, {recycler});
+
   }
 
-  goRecycler(id) {
-    this.navCtrl.push(RecicladorPage, {id: id});
+  openMap(){
+    this.navCtrl.push(EntregaPage);
   }
+
+
   register_mail():any{
     //console.log('mail');
     this.navCtrl.push(RegisterPage);

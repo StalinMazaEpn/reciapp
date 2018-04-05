@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,LoadingController } from 'ionic-angular';
 
 import { ToastController } from 'ionic-angular';
 
@@ -23,7 +23,7 @@ import { User } from '../../models/user';
 export class LoginPage {
 
   user= {} as User;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public userSrv:ReciappService, public toastCtrl:ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public userSrv:ReciappService, public toastCtrl:ToastController,public loadingCtrl: LoadingController) {
   	
   }
 
@@ -37,6 +37,7 @@ export class LoginPage {
   		//console.log(result);
   		if (result) {
   			//console.log(result.uid);
+        this.waiting();
         this.navCtrl.pop();
   			this.navCtrl.setRoot(TabsPage);
         //window.localStorage['isLog']=true;
@@ -59,6 +60,13 @@ export class LoginPage {
     toast.present();
   }
 
+  waiting() {
+    let loader = this.loadingCtrl.create({
+      content: "Espera...",
+      dismissOnPageChange:true
+    });
+    loader.present();
+  }
   register(){
     this.navCtrl.push(RegisterPage);
   }
