@@ -113,7 +113,7 @@ export class RecicladorPage {
     toast.present();
   }
 
-  doCallNumber() {
+  doCallNumber(phoneNumber: string) {
     let alert = this.alertCtrl.create({
       title: 'Llamada',
       message: 'Desea realizar la llamada?',
@@ -128,7 +128,7 @@ export class RecicladorPage {
         {
           text: 'Llamar',
           handler: () => {
-            this.callNumber.callNumber('0984582618', true)
+            this.callNumber.callNumber(phoneNumber, true)
             .then(res => console.log('Launched dialer!', res))
             .catch(err => console.log('Error launching dialer', err));
           }
