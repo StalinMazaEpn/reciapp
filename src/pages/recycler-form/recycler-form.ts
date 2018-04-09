@@ -8,8 +8,10 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { User } from '../../models/user';
 import { ReciappService } from '../../services/reciapp.service'
 import { Recycler } from '../../models/recycler';
+import { LoginPage } from '../login/login';
 
 import { FormBuilder,FormGroup,Validators,AbstractControl} from '@angular/forms';
+import {AuthenticationService} from "../../services/authenticationService";
 
 import { storage } from "firebase";
 import { Camera, CameraOptions } from "@ionic-native/camera";
@@ -34,7 +36,7 @@ export class RecyclerFormPage {
   //user geolocation to maps and zoom
   lat:any;
   lng:any;
-  zoom:any=14;
+  zoom:any=16;
   //recycler geolocation to maps and zoom
   lat_:any;
   lng_:any;
@@ -46,11 +48,11 @@ export class RecyclerFormPage {
       endTime:null,
     },
     status:'active',
-    idUser:this.uid,
   } as Recycler;
 
   //photo
   photoRecycler:any;
+  tmp_image: any = null;
   //enabled or disabled button
   buttonDisabled:boolean=true;
 
@@ -63,33 +65,19 @@ export class RecyclerFormPage {
   genre:AbstractControl;
   birth:AbstractControl;
 
+  isAuthenticated:boolean;
+  userData:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl:ToastController,
     public afAuth:AngularFireAuth, public userSrv:ReciappService,private geolocation: Geolocation,
-    public formBuilder:FormBuilder,private camera: Camera) {
+    public formBuilder:FormBuilder,public authenticationService:AuthenticationService,private camera: Camera) {
+    this.recyclerPhoto(null);
     this.isDisabled(true);  
-    this.afAuth.authState.subscribe(
-      data => {
-        this.newRecycler.idUser=data.uid;
-      });
-
     this.getMyLocation();
-    this.formValidation();
-  }
-
-  takePhoto(){
-    try{
-      const options: CameraOptions = {
-        quality: 100,
-        targetHeight:600,
-        targetWidth:600,
-        destinationType: this.camera.DestinationType.DATA_URL,
-        encodingType: this.camera.EncodingType.JPEG,
-        mediaType: this.camera.MediaType.PICTURE
-      }
-      this.photoRecycler=this.camera.getPicture(options);
-    }
-    catch(e){
-      console.log(e);
+    this.isAuthenticated = this.authenticationService.isAuthenticated();
+    if(this.isAuthenticated) {
+      this.userData = this.userSrv.getUser(this.authenticationService.getCurrentUser().uid);
+      this.newRecycler.idUser=this.authenticationService.getCurrentUser().uid;      
+      this.formValidation();
     }
   }
 
@@ -98,28 +86,39 @@ export class RecyclerFormPage {
   }
 
   dismiss(){
-  	this.navCtrl.pop();
+    this.navCtrl.pop();
   }
 
   recyclerRegister(){
     this.newRecycler.yearBirth= (this.year.getYear()+1900)-this.age;
-    //Get a new id and asign to id and image recycler
-    this.newRecycler.image=this.newRecycler.id=this.userSrv.getReciclerKey();
-    //Call function to create new recycler
-    this.userSrv.addNewRecycler(this.newRecycler.id,this.newRecycler);
-    //Save photo on Firebase Storage
-    this.photoRecycler.then((imageData) => {
-        let image = 'data:image/jpeg;base64,' + imageData;
-        let pictures=storage().ref('recicladores/'+this.newRecycler.id);
-        pictures.putString(image,'data_url');
-      }, (err) => {        
-        console.log(err);
+    //Get a new id and asign to image recycler
+    this.newRecycler.id=this.userSrv.getReciclerKey();
+    
+    if (this.photoRecycler!=null) {
+      this.newRecycler.image=this.newRecycler.id;
+      //Storage on firebase
+      this.photoRecycler.then((imageData) => {
+          let pictures=storage().ref('recicladores/'+this.newRecycler.id+'.png');
+          pictures.putString(this.tmp_image,'data_url');
+        }, (err) => {        
+          console.log(err);
+        })
+      .catch((e)=>{
+        console.log(e);
       });
-    //Toast Ok
-    this.updatePoints(); 
-    this.registerOk();
-    //Function to close modal - Form Recycler
-    this.dismiss();
+    }
+    
+    //Call function to create new recycler
+    this.userSrv.addNewRecycler(this.newRecycler.id,this.newRecycler).then(()=>{
+      //Toast Ok
+      this.registerOk();
+      this.updatePoints(); 
+      //Function to close modal - Form Recycler
+      this.dismiss();  
+    })
+    .catch((e)=>{
+      console.log(e);
+    });
   }
 
   registerOk() {
@@ -188,8 +187,57 @@ export class RecyclerFormPage {
 
       this.isDisabled(false);
     }else{
+      //console.log('falta llenar campos');
       this.isDisabled(true);
     }
+
+    if (this.newRecycler.gender!=null && this.photoRecycler==null) {
+      this.recyclerPhoto(this.newRecycler.gender);
+      //console.log(this.newRecycler.gender);
+    }
+  }
+
+  loginRedirect(){
+    this.navCtrl.push(LoginPage);
+  }
+
+  takePhoto(){
+    try{
+      const options: CameraOptions = {
+        quality: 100,
+        targetHeight:600,
+        targetWidth:600,
+        destinationType: this.camera.DestinationType.DATA_URL,
+        encodingType: this.camera.EncodingType.PNG,
+        mediaType: this.camera.MediaType.PICTURE,
+        correctOrientation:true
+      }
+      this.photoRecycler=this.camera.getPicture(options)
+          .then((resp)=>{
+            this.tmp_image='data:image/png;base64,' + resp;
+          })
+          .catch((e)=>{
+            console.log(e);
+            this.photoRecycler=null;
+          });
+    }
+    catch(e){
+      console.log(e);
+      this.photoRecycler=null;
+    }
+  }
+
+  //function add a image when user not take photo
+  recyclerPhoto(genre){
+    //console.log(genre);
+    if (genre==null) {
+      this.tmp_image='assets/imgs/recycler_women.png';
+    }else if (genre=='Mujer') {
+      this.tmp_image='assets/imgs/recycler_women.png'; 
+    }else{
+      this.tmp_image='assets/imgs/recycler_men.png';
+    }
+    
   }
 }
 

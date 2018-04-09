@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
-
 import { ReciappService } from '../../services/reciapp.service';
-// import { Observable } from 'rxjs/Observable';
+import { CallNumber } from '@ionic-native/call-number';
+import { AlertController } from 'ionic-angular';
+
 
 @IonicPage()
 @Component({
@@ -16,13 +17,19 @@ export class RecicladorPage {
 	siguiendo: boolean = false;
 	notificacion:boolean=false;
   id=null;
+  iduser=null;
 
-  reciclador:any;
+  recycler:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl: ToastController, public RecicladorSrv:ReciappService) {
-    this.id=navParams.get('id');
-    this.reciclador=RecicladorSrv.getRecyclerById(this.id);
-    console.log(this.reciclador);
+  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public RecicladorSrv: ReciappService, public callNumber: CallNumber, private alertCtrl: AlertController) {
+    this.recycler = navParams.get('recycler');
+    console.log(this.recycler);
+    let user = new Object (this.recycler.favoriteUsers);
+
+    if(this.RecicladorSrv.afAuth.auth.currentUser.uid){
+      this.iduser = this.RecicladorSrv.afAuth.auth.currentUser.uid;
+      this.siguiendo = user.hasOwnProperty(this.iduser);
+    }
   }
 
   ionViewDidLoad() {
@@ -33,15 +40,14 @@ export class RecicladorPage {
     this.navCtrl.popToRoot();
   }
 
-  seguir():void{
+  seguir(id):void{
   	if (this.siguiendo) {
   		this.siguiendo=false;
-  		this.dejarReciclador();
+  		this.dejarReciclador(id);
   	}else{
   		this.siguiendo=true;
   		this.notificacion=true;
-  		this.seguirReciclador();
-  		setTimeout(()=>this.notificacionActivada(),2500);
+  		this.seguirReciclador(id);
   	}
   }
 
@@ -56,27 +62,42 @@ export class RecicladorPage {
   	}
   }
 
-  seguirReciclador() {
+  async seguirReciclador(id) {
     let toast = this.toastCtrl.create({
-      message: 'Ahora estas siguiendo a '+this.reciclador.name+'.',
+      message: 'Ahora estas siguiendo a '+this.recycler.name+'.',
       duration: 3000,
       position:'top'
     });
-    toast.present();
+    try {
+      const result = await this.RecicladorSrv.putLoveRecicler(id,this.iduser);
+      if(result){
+        toast.present();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    
   }
-
-  dejarReciclador() {
+  
+  async dejarReciclador(id) {
     let toast = this.toastCtrl.create({
-      message: 'Dejaste de seguir a '+this.reciclador.name+'.',
+      message: 'Dejaste de seguir a '+this.recycler.name+'.',
       duration: 3000,
       position:'top'
     });
-    toast.present();
+    try {
+      const result = await this.RecicladorSrv.removeLoveRecicler(id,this.iduser);
+      if(result){
+        toast.present();
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   notificacionActivada() {
     let toast = this.toastCtrl.create({
-      message: 'Te llegara información sobre '+this.reciclador.name+'.',
+      message: 'Te llegara información sobre '+this.recycler.name+'.',
       duration: 3000,
       position:'top'
     });
@@ -91,4 +112,30 @@ export class RecicladorPage {
     });
     toast.present();
   }
+
+  doCallNumber() {
+    let alert = this.alertCtrl.create({
+      title: 'Llamada',
+      message: 'Desea realizar la llamada?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Llamar',
+          handler: () => {
+            this.callNumber.callNumber('0984582618', true)
+            .then(res => console.log('Launched dialer!', res))
+            .catch(err => console.log('Error launching dialer', err));
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
 }
