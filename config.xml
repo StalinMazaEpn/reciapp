@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="ec.reciveci.reciapp" version="2.2.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="ec.reciveci.reciapp" version="2.3.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>ReciApp</name>
     <description>ReciApp by ReciVeci.</description>
     <author email="info@reciveci.ec" href="http://www.reciveci.ec/">ReciVeci</author>
@@ -95,4 +95,5 @@
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
     <engine name="android" spec="7.0.0" />
     <engine name="ios" spec="4.5.4" />
+    <plugin name="mx.ferreyra.callnumber" spec="~0.0.2" />
 </widget>

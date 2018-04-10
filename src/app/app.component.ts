@@ -1,13 +1,11 @@
 import { Component,ViewChild } from '@angular/core';
-import { Nav, Platform, LoadingController } from 'ionic-angular';
+import { Nav, Platform, LoadingController,App, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NativeStorage } from '@ionic-native/native-storage';
-
 import { TabsPage } from '../pages/tabs/tabs';
 import { TourPage } from '../pages/tour/tour';
 import { SocialNetworksPage } from '../pages/social-networks/social-networks';
-
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 @Component({
@@ -18,7 +16,7 @@ export class MyApp {
   rootPage:any;
 
   isAuthenticated:any;
-
+  platform: Platform;
   optionsMenu:any;
 
   optionWithSession:any=[
@@ -36,8 +34,11 @@ export class MyApp {
   ];
 
   constructor(public platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public nativeStorage: NativeStorage, 
-    public loadingCtrl:LoadingController,public afAuth:AngularFireAuth) {
+    public loadingCtrl:LoadingController,public afAuth:AngularFireAuth,public app: App, private alertCtrl: AlertController) {
     platform.ready().then(() => {
+
+      this.platform = platform;
+
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
@@ -48,7 +49,18 @@ export class MyApp {
         this.rootPage = TourPage;
         splashScreen.hide();
       }
-      
+
+
+      platform.registerBackButtonAction(() => {
+        let nav = this.app.getActiveNav();
+        if (nav.canGoBack()){ //Can we go back?
+          nav.pop();
+        }else{
+          this.exitApp(); //Exit from app with confirmation
+        }
+      });
+
+
     });
 
     this.afAuth.authState.subscribe(
@@ -94,6 +106,29 @@ export class MyApp {
     }else{
       return false;
     }
+  }
+
+  exitApp() {
+    let alert = this.alertCtrl.create({
+      title: 'Salir',
+      message: 'Desea salir de la App?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Salir',
+          handler: () => {
+            this.platform.exitApp();
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
   /*
