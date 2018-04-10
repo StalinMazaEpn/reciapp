@@ -13,6 +13,9 @@ import { LoginPage } from '../login/login';
 import { FormBuilder,FormGroup,Validators,AbstractControl} from '@angular/forms';
 import {AuthenticationService} from "../../services/authenticationService";
 
+import { storage } from "firebase";
+import { Camera, CameraOptions } from "@ionic-native/camera";
+
 @IonicPage()
 @Component({
   selector: 'page-recycler-form',
@@ -39,7 +42,6 @@ export class RecyclerFormPage {
   lng_:any;
   //Recycler object
   newRecycler={
-    id:null,
     date:{
       days:this.days,
       startTime:null,
@@ -48,7 +50,10 @@ export class RecyclerFormPage {
     status:'active',
   } as Recycler;
 
-
+  //photo
+  photoRecycler:any;
+  tmp_image: any = null;
+  //enabled or disabled button
   buttonDisabled:boolean=true;
 
   //form to validate
@@ -60,21 +65,18 @@ export class RecyclerFormPage {
   genre:AbstractControl;
   birth:AbstractControl;
 
-  isLog:boolean;
+  isAuthenticated:boolean;
   userData:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl:ToastController,
     public afAuth:AngularFireAuth, public userSrv:ReciappService,private geolocation: Geolocation,
-    public formBuilder:FormBuilder,public authenticationService:AuthenticationService) {
-
+    public formBuilder:FormBuilder,public authenticationService:AuthenticationService,private camera: Camera) {
+    this.recyclerPhoto(null);
     this.isDisabled(true);  
-
-    this.isLog = this.authenticationService.isAuthenticated();
-    if(this.isLog) {
-      //console.log("UID", this.authenticationService.getCurrentUser().uid);
+    this.getMyLocation();
+    this.isAuthenticated = this.authenticationService.isAuthenticated();
+    if(this.isAuthenticated) {
       this.userData = this.userSrv.getUser(this.authenticationService.getCurrentUser().uid);
-      //console.log('Formulario',this.authenticationService.getCurrentUser().uid);
-      this.newRecycler.idUser=this.authenticationService.getCurrentUser().uid;
-      this.getMyLocation();
+      this.newRecycler.idUser=this.authenticationService.getCurrentUser().uid;      
       this.formValidation();
     }
   }
@@ -89,8 +91,23 @@ export class RecyclerFormPage {
 
   recyclerRegister(){
     this.newRecycler.yearBirth= (this.year.getYear()+1900)-this.age;
+    //Get a new id and asign to image recycler
     this.newRecycler.id=this.userSrv.getReciclerKey();
-    //console.log(this.newRecycler.id);
+    
+    if (this.photoRecycler!=null) {
+      this.newRecycler.image=this.newRecycler.id;
+      //Storage on firebase
+      this.photoRecycler.then((imageData) => {
+          let pictures=storage().ref('recicladores/'+this.newRecycler.id+'.jpeg');
+          pictures.putString(this.tmp_image,'data_url');
+        }, (err) => {        
+          console.log(err);
+        })
+      .catch((e)=>{
+        console.log(e);
+      });
+    }
+    
     //Call function to create new recycler
     this.userSrv.addNewRecycler(this.newRecycler.id,this.newRecycler).then(()=>{
       //Toast Ok
@@ -102,8 +119,6 @@ export class RecyclerFormPage {
     .catch((e)=>{
       console.log(e);
     });
-
-      
   }
 
   registerOk() {
@@ -175,10 +190,54 @@ export class RecyclerFormPage {
       //console.log('falta llenar campos');
       this.isDisabled(true);
     }
+
+    if (this.newRecycler.gender!=null && this.photoRecycler==null) {
+      this.recyclerPhoto(this.newRecycler.gender);
+      //console.log(this.newRecycler.gender);
+    }
   }
 
   loginRedirect(){
     this.navCtrl.push(LoginPage);
+  }
+
+  takePhoto(){
+    try{
+      const options: CameraOptions = {
+        quality: 100,
+        targetHeight:600,
+        targetWidth:600,
+        destinationType: this.camera.DestinationType.DATA_URL,
+        encodingType: this.camera.EncodingType.JPEG,
+        mediaType: this.camera.MediaType.PICTURE,
+        correctOrientation:true
+      }
+      this.photoRecycler=this.camera.getPicture(options)
+          .then((resp)=>{
+            this.tmp_image='data:image/jpeg;base64,' + resp;
+          })
+          .catch((e)=>{
+            console.log(e);
+            this.photoRecycler=null;
+          });
+    }
+    catch(e){
+      console.log(e);
+      this.photoRecycler=null;
+    }
+  }
+
+  //function add a image when user not take photo
+  recyclerPhoto(genre){
+    //console.log(genre);
+    if (genre==null) {
+      this.tmp_image='assets/imgs/recycler_women.png';
+    }else if (genre=='Mujer') {
+      this.tmp_image='assets/imgs/recycler_women.png'; 
+    }else{
+      this.tmp_image='assets/imgs/recycler_men.png';
+    }
+    
   }
 }
 

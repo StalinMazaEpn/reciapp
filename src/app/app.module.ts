@@ -34,10 +34,9 @@ import { SocialNetworksPage } from '../pages/social-networks/social-networks';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AppAvailability } from '@ionic-native/app-availability';
- import {AuthenticationService} from "../services/authenticationService";
+import {AuthenticationService} from "../services/authenticationService";
 import { CallNumber } from '@ionic-native/call-number';
-
-
+import { Camera } from '@ionic-native/camera';
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -88,6 +87,7 @@ const firebaseConfig = {
     EmailComposer,
     InAppBrowser,
     AppAvailability,
+    Camera,
     AuthenticationService,
     CallNumber,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

@@ -1,5 +1,5 @@
 <ion-header>
-	<div *ngIf="isLog; else formHeader">
+	<div *ngIf="isAuthenticated; else formHeader">
 	  <ion-toolbar color="primary">
 	    <ion-title text-center >Nuevo Reciclador</ion-title>
 	    <ion-buttons start>
@@ -23,9 +23,18 @@
 	</ng-template>
 </ion-header>        
 <ion-content>   
-	<div *ngIf="isLog; else formContent">
+	<div *ngIf="isAuthenticated; else formContent">
+
 	  <form [formGroup]="formGroup">
 		<ion-label text-center><span class="formItems">Los campos con * son obligatorios.</span></ion-label>
+		<div text-center>
+			<div>
+				<img src="{{tmp_image}}" circle width="120" height="120">
+			</div>
+			<button ion-button outline color="dark" (click)="takePhoto()">
+				<ion-icon ios="ios-camera" md="md-camera"></ion-icon>
+			</button>
+		</div>
 		<ion-item>
 		    <ion-label>
 		    	<span>*</span>
@@ -108,6 +117,7 @@
 		  <ion-input type="number" [(ngModel)]="age" formControlName="birth" (ionChange)="infoCheck()"></ion-input>
 	    </ion-item>
 	  </form>
+
 	    <ion-item text-center>
 	   	  <ion-label> <span>*</span> Donde lo encontraste:</ion-label>
 	  	  <ion-input hidden></ion-input>
@@ -131,7 +141,7 @@
 
 
 <ion-footer>
-	<div *ngIf="isLog;">
+	<div *ngIf="isAuthenticated;">
 		<div text-center>
 		  	<button ion-button full [disabled]="buttonDisabled" (click)="recyclerRegister()">Guardar</button>	
 		</div>
