@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { ReciappService } from '../../services/reciapp.service';
+import { AuthenticationService } from '../../services/authenticationService';
 import { CallNumber } from '@ionic-native/call-number';
 import { AlertController } from 'ionic-angular';
 
@@ -21,14 +22,21 @@ export class RecicladorPage {
 
   recycler:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public RecicladorSrv: ReciappService, public callNumber: CallNumber, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public RecicladorSrv: ReciappService, public callNumber: CallNumber, private alertCtrl: AlertController, public authService:AuthenticationService) {
     this.recycler = navParams.get('recycler');
     console.log(this.recycler);
     let user = new Object (this.recycler.favoriteUsers);
 
-    if(this.RecicladorSrv.afAuth.auth.currentUser.uid){
+    /*if(this.RecicladorSrv.afAuth.auth.currentUser.uid){
       this.iduser = this.RecicladorSrv.afAuth.auth.currentUser.uid;
       this.siguiendo = user.hasOwnProperty(this.iduser);
+    }*/
+
+    if(this.authService.isAuthenticated()){
+      this.iduser=this.authService.getCurrentUser().uid;
+      this.siguiendo = user.hasOwnProperty(this.iduser);
+    }else{
+      console.log('sin sesion');
     }
   }
 
