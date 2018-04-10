@@ -30,7 +30,6 @@
     <div *ngIf="isAuthenticated; else elseLogin">
       <ion-list>
         <ion-list-header color="light"> Tus Recicladores </ion-list-header>
-        <ion-list>
           <ion-row *ngIf="(recyclers | async)?.length==0" text-center>
             <ion-card text-center>
               <ion-card-content>
