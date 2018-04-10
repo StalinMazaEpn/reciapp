@@ -98,7 +98,7 @@ export class RecyclerFormPage {
       this.newRecycler.image=this.newRecycler.id;
       //Storage on firebase
       this.photoRecycler.then((imageData) => {
-          let pictures=storage().ref('recicladores/'+this.newRecycler.id+'.png');
+          let pictures=storage().ref('recicladores/'+this.newRecycler.id+'.jpeg');
           pictures.putString(this.tmp_image,'data_url');
         }, (err) => {        
           console.log(err);
@@ -208,13 +208,13 @@ export class RecyclerFormPage {
         targetHeight:600,
         targetWidth:600,
         destinationType: this.camera.DestinationType.DATA_URL,
-        encodingType: this.camera.EncodingType.PNG,
+        encodingType: this.camera.EncodingType.JPEG,
         mediaType: this.camera.MediaType.PICTURE,
         correctOrientation:true
       }
       this.photoRecycler=this.camera.getPicture(options)
           .then((resp)=>{
-            this.tmp_image='data:image/png;base64,' + resp;
+            this.tmp_image='data:image/jpeg;base64,' + resp;
           })
           .catch((e)=>{
             console.log(e);
