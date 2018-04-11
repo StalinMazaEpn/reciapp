@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController  } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, Platform, AlertController  } from 'ionic-angular';
 
 import { Geolocation } from '@ionic-native/geolocation';
 import { ReciappService } from './../../services/reciapp.service';
 import {RecicladorPage} from "../reciclador/reciclador";
 import { RecyclerFormPage } from "../recycler-form/recycler-form";
+import { Diagnostic } from '@ionic-native/diagnostic';
+import { LocationAccuracy } from '@ionic-native/location-accuracy';
 
 @IonicPage()
 @Component({
@@ -28,10 +30,38 @@ export class EntregaPage {
   recyclers:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation,
-   public recyclerSrv: ReciappService,public modalCtrl: ModalController) {
+   public recyclerSrv: ReciappService,public modalCtrl: ModalController, private locationAccuracy: LocationAccuracy, 
+   private diagnostic: Diagnostic, private platform: Platform, 
+   private alertCtrl: AlertController) {
     this.getMyLocation();
     this.getRecyclers();
     this.valuesByDefault();
+
+    if (this.platform.is('ios')) {
+      this.locationAccuracy.canRequest().then(
+        (canRequest: boolean) => {
+          if(canRequest) {
+            this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+              () => {
+                this.verifyGps();
+                this.getMyLocation();
+              },
+              error => {
+                this.valuesByDefault();
+              }
+            );
+          }
+      });
+    } else if (this.platform.is('android')) {
+      this.diagnostic.isGpsLocationEnabled()
+      .then((enabled)=>{
+        if(enabled){
+          this.getMyLocation();
+        }else{
+          this.presentConfirm("Encender su GPS por favor");
+        }
+      });
+    }
   }
 
   ionViewDidLoad() {
@@ -88,6 +118,35 @@ export class EntregaPage {
     this.latView = this.latViewDef;
     this.lngView = this.lngViewDef;
     this.zoom =  this.zoomDef;
+  }
+
+  presentConfirm(message) {
+    let alert = this.alertCtrl.create({
+      title: 'Confirm purchase',
+      message: message
+    });
+    alert.present();
+  }
+
+  verifyGps(){
+    this.diagnostic.isLocationAuthorized()
+    .then((appAutorized)=>{
+      if(appAutorized){
+        this.diagnostic.isLocationEnabled()
+        .then((enabled)=>{
+          if(enabled){
+            this.getMyLocation();
+          }else{
+            this.presentConfirm("Encender su GPS por favor");
+          }
+        })
+      }else{
+        this.diagnostic.requestLocationAuthorization("always")
+        .then(()=>{
+          this.getMyLocation();
+        })
+      }
+    })
   }
 
 

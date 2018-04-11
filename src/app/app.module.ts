@@ -34,8 +34,10 @@ import { SocialNetworksPage } from '../pages/social-networks/social-networks';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AppAvailability } from '@ionic-native/app-availability';
- import {AuthenticationService} from "../services/authenticationService";
+import {AuthenticationService} from "../services/authenticationService";
 import { CallNumber } from '@ionic-native/call-number';
+import { LocationAccuracy } from '@ionic-native/location-accuracy';
+import { Diagnostic } from '@ionic-native/diagnostic';
 
 
 
@@ -90,6 +92,8 @@ const firebaseConfig = {
     AppAvailability,
     AuthenticationService,
     CallNumber,
+    LocationAccuracy,
+    Diagnostic,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
