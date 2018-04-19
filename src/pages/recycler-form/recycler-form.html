@@ -1,5 +1,4 @@
 <ion-header>
-	<div *ngIf="isAuthenticated; else formHeader">
 	  <ion-toolbar color="primary">
 	    <ion-title text-center >Nuevo Reciclador</ion-title>
 	    <ion-buttons start>
@@ -8,33 +7,12 @@
 	        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
 	      </button>
 	    </ion-buttons>
-	  </ion-toolbar>
-	</div>
-	<ng-template #formHeader>	
-	  <ion-toolbar color="danger">
-	    <ion-title text-center>Consejo</ion-title>
-	    <ion-buttons start>
-	      <button ion-button (click)="dismiss()">
-	        <span ion-text showWhen="ios">Cancel</span>
-	        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
-	      </button>
-	    </ion-buttons>
-	  </ion-toolbar>
-	</ng-template>
-</ion-header>        
+	  </ion-toolbar>	
+</ion-header>  
+      
 <ion-content>   
-	<div *ngIf="isAuthenticated; else formContent">
-
 	  <form [formGroup]="formGroup">
 		<ion-label text-center><span class="formItems">Los campos con * son obligatorios.</span></ion-label>
-		<div text-center>
-			<div>
-				<img src="{{tmp_image}}" circle width="120" height="120">
-			</div>
-			<button ion-button outline color="dark" (click)="takePhoto()">
-				<ion-icon ios="ios-camera" md="md-camera"></ion-icon>
-			</button>
-		</div>
 		<ion-item>
 		    <ion-label>
 		    	<span>*</span>
@@ -117,7 +95,6 @@
 		  <ion-input type="number" [(ngModel)]="age" formControlName="birth" (ionChange)="infoCheck()"></ion-input>
 	    </ion-item>
 	  </form>
-
 	    <ion-item text-center>
 	   	  <ion-label> <span>*</span> Donde lo encontraste:</ion-label>
 	  	  <ion-input hidden></ion-input>
@@ -126,24 +103,10 @@
 	    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [zoomControl]="false" [streetViewControl]="false" (mapClick)="getRecyclerLocation($event)">
 	  	  <agm-marker [latitude]="lat_" [longitude]="lng_"></agm-marker>
 	    </agm-map> 
-	</div>	    
-	<ng-template #formContent>
-
-		<p>Debes iniciar sesión para registrar un Reciclador.</p>
-		<ion-row text-center>
-          <ion-col col-12>
-            <button ion-button round (click)="loginRedirect()" >Iniciar Sesión</button>
-          </ion-col>
-         </ion-row>
-	</ng-template>
 </ion-content>
 
-
-
 <ion-footer>
-	<div *ngIf="isAuthenticated;">
 		<div text-center>
 		  	<button ion-button full [disabled]="buttonDisabled" (click)="recyclerRegister()">Guardar</button>	
 		</div>
-	</div>
 </ion-footer>
