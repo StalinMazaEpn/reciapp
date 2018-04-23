@@ -60,6 +60,8 @@ export class RecyclerFormPage {
   latViewDef: any = -0.184713; 
   lngViewDef: any = -78.484771;
   zoomDef: any = 10;
+  //errors
+  errHour:boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl:ToastController,
     public afAuth:AngularFireAuth, public userSrv:ReciappService,private geolocation: Geolocation,
@@ -124,9 +126,6 @@ export class RecyclerFormPage {
       this.zoom=16;
      }).catch((error) => {
       console.log('Error getting location', error);
-      this.lat=this.latViewDef;
-      this.lng=this.lngViewDef;
-      this.zoom=10;
      });
   }
 
@@ -167,15 +166,22 @@ export class RecyclerFormPage {
 
   //Function to check information to active button
   infoCheck(){
+    this.errHour=false;
     if(this.lat_!=null && this.lng_!=null && this.newRecycler.name!=null && this.newRecycler.date.days!=null
       && this.newRecycler.date.startTime!=null && this.newRecycler.date.endTime!=null && this.newRecycler.gender!=null
-       && this.age!=null){
+       && this.age!=null && this.newRecycler.date.startTime<this.newRecycler.date.endTime){
       //Enabled buttom
       this.isDisabled(false);
+      this.errHour=false;
     }else{
       //Disabled buttom
       //console.log('falta llenar campos');
       this.isDisabled(true);
+      this.errHour=true;
     }
+  }
+
+  hourCheck(){
+
   }
 }
