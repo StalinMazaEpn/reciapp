@@ -116,7 +116,12 @@
 		  </ion-label>
 		  <ion-input type="number" [(ngModel)]="age" formControlName="birth" (ionChange)="infoCheck()"></ion-input>
 	    </ion-item>
-	  </form>
+		</form>
+		
+		<ion-item>
+	    <ion-label>Su sueño es: </ion-label>
+	    <ion-input type="text" [(ngModel)]="newRecycler.dream" (ionChange)="infoCheck()"></ion-input>
+	  </ion-item>
 
 	    <ion-item text-center>
 	   	  <ion-label> <span>*</span> Donde lo encontraste:</ion-label>
