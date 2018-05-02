@@ -40,7 +40,6 @@ export class LoginPage {
         this.waiting();
         this.navCtrl.pop();
   			this.navCtrl.setRoot(TabsPage);
-        window.localStorage['isLog']=true;
   		}else{
   			this.failValidate();
   		}

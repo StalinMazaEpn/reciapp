@@ -6,6 +6,7 @@ import {EntregaPage} from '../entrega/entrega';
 import {CategoriaPage} from '../categoria/categoria';
 import { TourPage } from '../tour/tour';
 import { SocialNetworksPage } from '../social-networks/social-networks';
+import {DeliveryPage} from '../delivery/delivery';
 
 import * as firebase from 'firebase/app'
 @IonicPage()
@@ -17,6 +18,7 @@ export class TabsPage {
   tab1Root = DashboardPage;
   tab2Root = CategoriaPage;
   tab3Root = EntregaPage;
+  tab4Root = DeliveryPage;
   
   constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl: LoadingController) {
   }
@@ -40,7 +42,7 @@ export class TabsPage {
 
   logout(){
     console.log('cerrar');
-    localStorage.removeItem('isLog');
+    //localStorage.removeItem('isLog');
     firebase.auth().signOut();
     this.redirectLogin();
     setTimeout(()=>{this.navCtrl.setRoot(TabsPage)},3000);
