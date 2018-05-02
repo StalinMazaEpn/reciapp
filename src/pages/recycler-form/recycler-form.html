@@ -1,149 +1,140 @@
 <ion-header>
-	<div *ngIf="isAuthenticated; else formHeader">
-	  <ion-toolbar color="primary">
-	    <ion-title text-center >Nuevo Reciclador</ion-title>
-	    <ion-buttons start>
-	      <button ion-button (click)="dismiss()">
-	        <span ion-text showWhen="ios">Cancel</span>
-	        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
-	      </button>
-	    </ion-buttons>
-	  </ion-toolbar>
-	</div>
-	<ng-template #formHeader>	
-	  <ion-toolbar color="danger">
-	    <ion-title text-center>Consejo</ion-title>
-	    <ion-buttons start>
-	      <button ion-button (click)="dismiss()">
-	        <span ion-text showWhen="ios">Cancel</span>
-	        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
-	      </button>
-	    </ion-buttons>
-	  </ion-toolbar>
-	</ng-template>
-</ion-header>        
-<ion-content>   
-	<div *ngIf="isAuthenticated; else formContent">
+  <ion-toolbar color="primary">
+    <ion-title text-center>Nuevo Reciclador</ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text showWhen="ios">Cancel</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
 
-	  <form [formGroup]="formGroup">
-		<ion-label text-center><span class="formItems">Los campos con * son obligatorios.</span></ion-label>
-		<div text-center>
-			<div>
-				<img src="{{tmp_image}}" circle width="120" height="120">
-			</div>
-			<button ion-button outline color="dark" (click)="takePhoto()">
-				<ion-icon ios="ios-camera" md="md-camera"></ion-icon>
-			</button>
-		</div>
-		<ion-item>
-		    <ion-label>
-		    	<span>*</span>
-		    	 Nombres: 
-		    	<span *ngIf="name.hasError('required') && name.touched" class="validations"> * El nombre es requerido</span>
-		    </ion-label>
-		    <ion-input type="text" [(ngModel)]="newRecycler.name" formControlName="name" (ionChange)="infoCheck()"></ion-input>
-		</ion-item>
-	  </form> 
+  <form [formGroup]="formGroup">
+    <ion-label text-center><span class="formItems">Los campos con * son obligatorios.</span></ion-label>
+    <div text-center>
+      <div>
+        <img src="{{tmp_image || default_image}}" circle width="120" height="120">
+      </div>
+      <button ion-button outline color="dark" (click)="takePhoto()">
+        <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
+      </button>
+    </div>
+    <ion-item>
+      <ion-label>
+        <span>*</span>
+        Nombres:
+        <span *ngIf="name.hasError('required') && name.touched" class="validations"> * El nombre es requerido</span>
+      </ion-label>
+      <ion-input type="text" [(ngModel)]="newRecycler.name" formControlName="name"></ion-input>
+    </ion-item>
+  </form>
 
-	  <ion-item>
-	    <ion-label>Teléfono: </ion-label>
-	    <ion-input type="number" [(ngModel)]="newRecycler.phone"></ion-input>
-	  </ion-item>
+  <ion-item>
+    <ion-label>Teléfono:</ion-label>
+    <ion-input type="number" [(ngModel)]="newRecycler.phone"></ion-input>
+  </ion-item>
 
-	  <form [formGroup]="formGroup">
-	    <ion-list>
-		  <ion-item>
-		    <ion-label stacked>
-		    	<span>*</span> 
-		    	Días que labora 
-		    	<span *ngIf="daysValidator.hasError('required') && daysValidator.touched" class="validations"> (Debes seleccionar uno o varios días)</span>
-		    </ion-label>
-	  	    <ion-select [(ngModel)]="newRecycler.date.days" formControlName="daysValidator" multiple="true" cancelText="cancel" okText="Ok" (ionChange)="infoCheck()">
-		      <ion-option value="Lunes">Lunes</ion-option>
-		      <ion-option value="Martes">Martes</ion-option>
-		      <ion-option value="Miércoles">Miércoles</ion-option>
-		      <ion-option value="Jueves">Jueves</ion-option>
-		      <ion-option value="Viernes">Viernes</ion-option>
-		      <ion-option value="Sábado">Sábado</ion-option>
-		      <ion-option value="Domingo">Domingo</ion-option>
-		    </ion-select>
-		  </ion-item>
-		  
-	    </ion-list>
+  <form [formGroup]="formGroup">
+    <ion-list>
+      <ion-item>
+        <ion-label stacked>
+          <span>*</span>
+          Días que labora
+          <span *ngIf="daysValidator.hasError('required') && daysValidator.touched" class="validations"> (Debes seleccionar uno o varios días)</span>
+        </ion-label>
+        <ion-select [(ngModel)]="newRecycler.date.days" formControlName="daysValidator" multiple="true"
+                    cancelText="cancel" okText="Ok">
+          <ion-option value="Lunes">Lunes</ion-option>
+          <ion-option value="Martes">Martes</ion-option>
+          <ion-option value="Miércoles">Miércoles</ion-option>
+          <ion-option value="Jueves">Jueves</ion-option>
+          <ion-option value="Viernes">Viernes</ion-option>
+          <ion-option value="Sábado">Sábado</ion-option>
+          <ion-option value="Domingo">Domingo</ion-option>
+        </ion-select>
+      </ion-item>
 
-	    <ion-row>
-	  	  <ion-col>
-	  		<ion-item>
-				<ion-label stacked>
-					<span>*</span> 
-					Hora inicio
-				</ion-label>
-				<ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="newRecycler.date.startTime" formControlName="hourStart" (ionChange)="infoCheck()"></ion-datetime>
-		 	</ion-item>	
-		 	<ion-label *ngIf="hourStart.hasError('required') && hourStart.touched"><p class="err validations">* Hora inicio requerida</p></ion-label>
-	  	  </ion-col>
-	  	  <ion-col>
-	  		  <ion-item>
-				<ion-label stacked> 
-					<span>*</span> 
-					Hora fin
-				</ion-label>
-			 	<ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="newRecycler.date.endTime" formControlName="hourEnd" (ionChange)="infoCheck()"></ion-datetime>
-		  	  </ion-item>
-		  	  <ion-label *ngIf="hourEnd.hasError('required') && hourEnd.touched"><p class="validations">* Hora fin requerida</p></ion-label>
-	  	  </ion-col>
-	    </ion-row>
-	  
-	    <ion-list>
-		  <ion-item>
-		    <ion-label> 
-		    	<span>*</span> 
-		    	Género: 
-		    	<span *ngIf="genre.hasError('required') && genre.touched" class="validations"> * El género es requerido</span> 
-		    </ion-label>
-		    <ion-select [(ngModel)]="newRecycler.gender" formControlName="genre" (ionChange)="infoCheck()">
-		      <ion-option value="Mujer">Mujer</ion-option>
-		      <ion-option value="Hombre">Hombre</ion-option>
-		    </ion-select>
-		  </ion-item>
-	    </ion-list>
+    </ion-list>
 
-	    <ion-item>
-		  <ion-label> 
-		  	<span>*</span> 
-		  	Edad: 
-		  	<span *ngIf="birth.hasError('required') && birth.touched" class="validations"> * La edad es requerida</span>
-		  </ion-label>
-		  <ion-input type="number" [(ngModel)]="age" formControlName="birth" (ionChange)="infoCheck()"></ion-input>
-	    </ion-item>
-	  </form>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label stacked>
+            <span>*</span>
+            Hora inicio
+          </ion-label>
+          <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="newRecycler.date.startTime"
+                        formControlName="hourStart"></ion-datetime>
+        </ion-item>
+        <ion-label *ngIf="hourStart.hasError('required') && hourStart.touched"><p class="err validations">* Hora
+          inicio requerida</p></ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label stacked>
+            <span>*</span>
+            Hora fin
+          </ion-label>
+          <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="newRecycler.date.endTime"
+                        formControlName="hourEnd"></ion-datetime>
+        </ion-item>
+        <ion-label *ngIf="hourEnd.hasError('required') && hourEnd.touched"><p class="validations">* Hora fin
+          requerida</p></ion-label>
+      </ion-col>
+      <span *ngIf="(hourStart.touched && !hourStart.valid) || (hourEnd.touched && !hourEnd.valid)" class="validations">La hora de inicio debe ser menor a la hora de fin</span>
+    </ion-row>
 
-	    <ion-item text-center>
-	   	  <ion-label> <span>*</span> Donde lo encontraste:</ion-label>
-	  	  <ion-input hidden></ion-input>
-	    </ion-item>
+    <ion-list>
+      <ion-item>
+        <ion-label>
+          <span>*</span>
+          Género:
+          <span *ngIf="gender.hasError('required') && gender.touched"
+                class="validations"> * El género es requerido</span>
+        </ion-label>
+        <ion-select [(ngModel)]="newRecycler.gender" formControlName="gender"
+                    (ionChange)="tmpPhoto(); disableButton()">
+          <ion-option value="Mujer">Mujer</ion-option>
+          <ion-option value="Hombre">Hombre</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
 
-	    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [zoomControl]="false" [streetViewControl]="false" (mapClick)="getRecyclerLocation($event)">
-	  	  <agm-marker [latitude]="lat_" [longitude]="lng_"></agm-marker>
-	    </agm-map> 
-	</div>	    
-	<ng-template #formContent>
+    <ion-item>
+      <ion-label>
+        <span>*</span>
+        Edad:
+        <span *ngIf="birth.hasError('required') && birth.touched" class="validations"> * La edad es requerida</span>
+      </ion-label>
+      <ion-input type="number" [(ngModel)]="age" formControlName="birth"></ion-input>
+    </ion-item>
+  </form>
 
-		<p>Debes iniciar sesión para registrar un Reciclador.</p>
-		<ion-row text-center>
-          <ion-col col-12>
-            <button ion-button round (click)="loginRedirect()" >Iniciar Sesión</button>
-          </ion-col>
-         </ion-row>
-	</ng-template>
+  <ion-item>
+	  <ion-label>Su sueño es: </ion-label>
+	  <ion-input type="text" [(ngModel)]="newRecycler.dream"></ion-input>
+	</ion-item>
+
+  <ion-item text-center>
+    <ion-label><span>*</span> Donde lo encontraste:</ion-label>
+    <ion-input hidden></ion-input>
+  </ion-item>
+
+  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [zoomControl]="false" [streetViewControl]="false"
+           (mapClick)="getRecyclerLocation($event)">
+    <agm-marker [latitude]="lat_" [longitude]="lng_"></agm-marker>
+  </agm-map>
 </ion-content>
 
 
-
 <ion-footer>
-	<div *ngIf="isAuthenticated;">
-		<div text-center>
-		  	<button ion-button full [disabled]="buttonDisabled" (click)="recyclerRegister()">Guardar</button>	
-		</div>
-	</div>
+  <div text-center>
+    <button ion-button full [disabled]="!formGroup.valid || this.lat_ === undefined || this.lng_ === undefined || this.saving"
+            (click)="recyclerRegister()">
+      <ion-spinner [hidden]="!this.saving"></ion-spinner>
+      {{this.saving ? 'Guardando' : 'Guardar'}}
+    </button>
+  </div>
 </ion-footer>
