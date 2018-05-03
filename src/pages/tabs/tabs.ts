@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams,LoadingController } from 'ionic-ang
 
 import {DashboardPage} from '../dashboard/dashboard';
 import {EntregaPage} from '../entrega/entrega';
-import {CategoriaPage} from '../categoria/categoria';
 import { TourPage } from '../tour/tour';
 import { SocialNetworksPage } from '../social-networks/social-networks';
 import {DeliveryPage} from '../delivery/delivery';
@@ -16,9 +15,8 @@ import * as firebase from 'firebase/app'
 })
 export class TabsPage {
   tab1Root = DashboardPage;
-  tab2Root = CategoriaPage;
+  tab2Root = DeliveryPage;
   tab3Root = EntregaPage;
-  tab4Root = DeliveryPage;
   
   constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl: LoadingController) {
   }

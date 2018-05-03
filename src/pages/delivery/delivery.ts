@@ -5,7 +5,7 @@ import { LoginPage } from "../login/login";
 import { RecyclerFormPage } from "../recycler-form/recycler-form";
 import { ReciappService } from "../../services/reciapp.service";
 import { AuthenticationService } from "../../services/authenticationService";
-import { storage } from "firebase";
+import { storage, database } from "firebase";
 import { Camera, CameraOptions } from "@ionic-native/camera";
 
 @IonicPage()
@@ -28,9 +28,22 @@ export class DeliveryPage {
   compuestoCtrl:any;
 
   selRecycler:any;
+  tmp_selRecycler:any;
+  error:boolean;
+
+  userDelivery:any={
+    delivery:{
+      plastico:undefined,
+      papel:undefined,
+      chatarra:undefined,
+      vidrio:undefined,
+      compuesto:undefined
+    }
+  };
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public authenticationService:AuthenticationService,
   	private camera: Camera, public userSrv:ReciappService) {
+    this.error=false;
   	this.tmpPhoto="assets/imgs/suggestion.png"
   	
   	if(this.authenticationService.getCurrentUser()!=null){
@@ -42,7 +55,6 @@ export class DeliveryPage {
               return this.userSrv.getRecyclerById(recyclerObj.payload.key);
             })
           })
-          console.log("RECICLADORES", this.recyclers);
   	}
   	
   }
@@ -79,12 +91,95 @@ export class DeliveryPage {
   }
 
   delivery(){
-  	console.log('Plastico',this.plasticoCtrl);
-  	console.log('papel',this.papelCtrl);
-  	console.log('chatarra',this.chatarraCtrl);
-  	console.log('vidrio',this.vidrioCtrl);
-  	console.log('compuesto',this.compuestoCtrl);
-  	console.log('Reciclador',this.recyclerId);
+    //Validate data 
+    if (this.recyclerId!=null && (this.plasticoCtrl!=null && this.plasticoCtrl!=undefined ||
+     this.papelCtrl!=null && this.papelCtrl!=undefined || this.vidrioCtrl!=null && this.vidrioCtrl!=undefined ||
+     this.compuestoCtrl!=null && this.compuestoCtrl!=undefined || this.chatarraCtrl!=null && this.chatarraCtrl!=undefined)) {
+      //When user select a recycler
+      this.userDelivery.idUser=this.uid;
+      this.userDelivery.idRecycler=this.recyclerId;
+      //this.userDelivery.date= database['ServerValue']['TIMESTAMP'];
+      this.userDelivery.date=database.ServerValue.TIMESTAMP;
+      this.rangeData();
+      //function to save on firebase
+      this.userSrv.addNewDelivery(this.userDelivery)
+      .then(()=>{
+        console.log('ok');
+        document.getElementById(this.recyclerId).style.border="0";
+        this.cleanForm();
+      })
+      .catch((e)=>{
+        console.log('Hubo un error',e);
+      });
+    }else if(this.recyclerId==null && this.tmp_selRecycler==="Anónimo" && (this.plasticoCtrl!=null && this.plasticoCtrl!=undefined ||
+     this.papelCtrl!=null && this.papelCtrl!=undefined || this.vidrioCtrl!=null && this.vidrioCtrl!=undefined ||
+     this.compuestoCtrl!=null && this.compuestoCtrl!=undefined || this.chatarraCtrl!=null && this.chatarraCtrl!=undefined)){
+      //When user not select a recycler
+      this.userDelivery.idUser=this.uid;
+      this.userDelivery.idRecycler=null;
+      //this.userDelivery.date= database['ServerValue']['TIMESTAMP'];
+      this.userDelivery.date=database.ServerValue.TIMESTAMP;
+      this.rangeData();
+      //function to save on firebase
+      this.userSrv.addNewDelivery(this.userDelivery)
+      .then(()=>{
+        console.log('Anonimo ok');
+        if (this.recyclerId!=null) {
+          document.getElementById(this.recyclerId).style.border="0";
+        }
+        this.cleanForm();
+      })
+      .catch((e)=>{
+        console.log('Hubo un error',e);
+      });
+    }else{
+      console.log('falta llenar campos');
+      this.error=true;
+    }
+  }
+
+  cleanForm(){
+    document.getElementById('anonymousRecycler').style.border="0";
+    this.plasticoCtrl=null;
+    this.papelCtrl=null;
+    this.vidrioCtrl=null;
+    this.compuestoCtrl=null;
+    this.chatarraCtrl=null;
+    this.uid=this.authenticationService.getCurrentUser().uid;
+    this.error=false;
+  }
+
+  //Function to assign 
+  rangeData(){
+    if (this.plasticoCtrl!=null && this.plasticoCtrl!=undefined) {
+        this.userDelivery.delivery.plastico=this.plasticoCtrl;
+      }else{
+        this.userDelivery.delivery.plastico=null;
+      }
+
+      if (this.papelCtrl!=null && this.papelCtrl!=undefined) {
+        this.userDelivery.delivery.papel=this.papelCtrl;
+      }else{
+        this.userDelivery.delivery.papel=null;
+      }
+
+      if (this.vidrioCtrl!=null && this.vidrioCtrl!=undefined) {
+        this.userDelivery.delivery.vidrio=this.vidrioCtrl;
+      }else{
+        this.userDelivery.delivery.vidrio=null;
+      }
+
+      if (this.compuestoCtrl!=null && this.compuestoCtrl!=undefined) {
+        this.userDelivery.delivery.compuesto=this.compuestoCtrl;
+      }else{
+        this.userDelivery.delivery.compuesto=null;
+      }
+
+      if (this.chatarraCtrl!=null && this.chatarraCtrl!=undefined) {
+        this.userDelivery.delivery.chatarra=this.chatarraCtrl;
+      }else{
+        this.userDelivery.delivery.chatarra=null;
+      }
   }
 
   goToLogin(){
@@ -101,6 +196,7 @@ export class DeliveryPage {
   	}
   	
   	if (recyclerId==="Anónimo") {
+      this.tmp_selRecycler="Anónimo";
   		//console.log("Anónimo",recyclerId);
   		this.selRecycler="1px solid green";
   		//console.log(this.selRecycler);
@@ -110,6 +206,7 @@ export class DeliveryPage {
 	  		this.recyclerId=null;
 	  	}
   	}else{
+      this.tmp_selRecycler=null;
   		document.getElementById('anonymousRecycler').style.border="0";
   		this.recyclerId=recyclerId;
   		this.selRecycler="1px solid green";
