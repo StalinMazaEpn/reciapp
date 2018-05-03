@@ -32,43 +32,37 @@
 	
 
 	<div *ngIf="isAuthenticated; else needLoggin">
-
-		<ion-row> 
-			<!--Agregar-->
-			<ion-col col-2 text-center (tap)="addRecycler()">
-                <ion-avatar>
-	                <img class="recyclers" src="assets/imgs/add-user.png" >
-	            </ion-avatar>
-	            <p text-center style="height: auto !important;overfloat: auto; font-size:10px;">Agregar</p>
-	        </ion-col>	
-			<!--Anonimo-->
-			<ion-col col-2 (tap)="selectRecycler('Anónimo')">
-                <ion-avatar>
-	                <img class="recyclers" src="assets/imgs/recycler_women.png" id="anonymousRecycler">
-	            </ion-avatar>
-	            <p text-center style="height: auto !important;overfloat: auto; font-size:10px;">Anónimo</p>
-	        </ion-col>	
-	        <!--Favoritos-->
-			<div *ngFor="let recycler$ of recyclers | async; let i = 'index'" >
-				<div *ngIf="i<='3'">
-				  <ion-col col-2 *ngIf="recycler$ | async as recycler;" (tap)="selectRecycler(recycler.id)">
-                	<ion-avatar>
-	                  <img class="recyclers" src="{{recycler.image}}" id="{{recycler.id}}">
-	                </ion-avatar>
-	                <p block text-wrap style="height: auto !important;overfloat: auto; font-size:10px;">{{recycler.name}}</p>
-	              </ion-col>	
-	            </div>
-			</div>
-			<!--Cercanos-->
-			<!--div *ngFor='let recycler$ of recyclers | async'>
-				<ion-col col-2 *ngIf="recycler$ | async as recycler;">
-                	<ion-avatar>
-	                  <img class="recyclers" src="{{recycler.image}}">
-	                </ion-avatar>
-	                <p block text-wrap style="height: auto !important;overfloat: auto; font-size:10px;">{{recycler.name}}</p>
-	            </ion-col>	
-			</div-->
-		</ion-row>
+			<ion-scroll scrollX="true" style="width: 100%; height: 100px; white-space: nowrap;">
+				<ul>
+					<!--Agregar-->
+					<li text-center (tap)="addRecycler()">
+						<ion-avatar >
+		                	<img class="recyclers" src="assets/imgs/add-user.png" >
+			            </ion-avatar>
+			            <p text-center style="height: auto !important;overfloat: auto; font-size:10px;">Agregar</p>	
+					</li>
+					<!--Anonimo-->
+					<li text-center (tap)="selectRecycler('Anónimo')">
+		                <ion-avatar>
+			                <img class="recyclers" src="assets/imgs/recycler_women.png" id="anonymousRecycler">
+			            </ion-avatar>
+			            <p text-center style="height: auto !important;overfloat: auto; font-size:10px;">Anónimo</p>
+			        </li>	
+			        <!--Favoritos-->
+					<li *ngFor="let recycler$ of recyclers | async;" >
+						<span *ngIf="recycler$ | async as recycler;" (tap)="selectRecycler(recycler.id)">
+		                	<ion-avatar>
+			                  <img class="recyclers" src="{{recycler.image}}" id="{{recycler.id}}">
+			                </ion-avatar>
+			                <p block text-wrap style="height: auto !important;overfloat: auto; font-size:10px;">{{recycler.name}}</p>
+			            </span>	
+			            
+					</li>
+					<!--Cercanos-->
+					<!--EndCercanos-->
+				</ul>
+			</ion-scroll>
+	  
 	</div>
 
 	<ng-template #needLoggin>
@@ -87,14 +81,14 @@
 	  	</ion-col>
 	  </ion-row>	
 	  <ion-row>
-		<ion-col col-4>
+		<ion-col col-4 text-center>
 		  <ion-label class="title">Plástico</ion-label>
 		  <ion-label class="title material">Papel</ion-label>
 		  <ion-label class="title material">Chatarra</ion-label>
 		  <ion-label class="title material">Vidrio</ion-label>
 		  <ion-label class="title material">Compuesto</ion-label>
 		</ion-col>
-		<ion-col>
+		<ion-col col-7>
 		  <ion-range pin="false" snaps="true" min="0" max="3" step="1" color="secondary" [(ngModel)]="plasticoCtrl" #ctrl="ngModel">
 		  	<!--ion-icon range-left small ios="ios-radio-button-off" md="md-radio-button-off"></ion-icon>
 		  	<ion-icon range-right small ios="ios-radio-button-on" md="md-radio-button-on"></ion-icon-->

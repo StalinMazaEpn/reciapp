@@ -1,7 +1,7 @@
 page-delivery {
 	img{
-		width: 100%;
-		height: 90px;
+		width: 40%;
+		height: 110px;
 		border: 1px solid;
 		border-radius: 5px;
 	}
@@ -47,7 +47,7 @@ page-delivery {
 		margin-right: 20% !important;
 	}
 	span.label1{
-		margin-left: 14% !important;	
+		margin-left: 10% !important;	
 	}
 	/*
 	span.label{
@@ -63,5 +63,17 @@ page-delivery {
 	.validations{
     	font-size: 10px;
     	color: red;	
+    }
+
+    ul{
+    	padding-left: 0 !important;
+    	display: inline-block;
+    }
+    ul li{
+    	display: inline-block;
+    }
+
+    .scroll-content{
+    	padding: 0 !important;
     }
 }
