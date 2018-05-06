@@ -28,7 +28,14 @@ export class RegisterPage {
   }
 
   user={
-  	points:20,
+  	pointsTotal:{
+      pts_register:20,
+      pts_entrega:0,
+      pts_favorite:0,
+      pts_recycler:0
+    },
+    lastDelivery:0,
+    totalDeliveries:0
   } as User; 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,  public afAuth:AngularFireAuth, public userSrv:ReciappService, public toastCtrl:ToastController) {
