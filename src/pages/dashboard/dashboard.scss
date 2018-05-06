@@ -9,4 +9,42 @@ page-dashboard {
       }
       
 
+    .avatarsize{
+        width: 100% !important;  
+        height : 100% !important;  
+        max-width: 83px !important;  //any size
+        max-height: 83px !important; //any size
+    }
+
+    ion-slides {
+      height: 50%;
+      padding: 0%;
+    }
+
+    .swiper-pagination-bullet-active{
+      background: white;
+    }
+
+    .image{
+      //max-width: 100px;
+      //max-height: 100px;
+      border-radius:50%;
+    }
+
+    .grid{
+      font-size: 12px;
+    }
+
+    .icon{
+      padding-top: 3%;
+    }
+
+    .fab{
+      height: 40px;
+      width: 40px;
+      background: #2C3E50;
+    }
+
+
+
 }

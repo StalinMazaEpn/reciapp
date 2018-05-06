@@ -13,7 +13,10 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app'
 
 import { EntregaPage } from '../entrega/entrega';
+import { DetallePageModule } from '../detalle/detalle.module';
 import {AuthenticationService} from "../../services/authenticationService";
+//import { Slides } from 'ionic-angular';
+
 
 @IonicPage()
 @Component({
@@ -21,6 +24,8 @@ import {AuthenticationService} from "../../services/authenticationService";
   templateUrl: 'dashboard.html',
 })
 export class DashboardPage {
+
+  //@ViewChild(Slides) slides: Slides;
   isLog:boolean;
   user:any;
   recyclers:any;
@@ -88,6 +93,10 @@ export class DashboardPage {
 
   openMap(){
     this.navCtrl.push(EntregaPage);
+  }
+
+  openTips(){
+    this.navCtrl.push(DetallePageModule);
   }
 
 
@@ -160,5 +169,9 @@ export class DashboardPage {
     });
     toast.present();
   }
+
+ /* goToSlide() {
+    this.slides.slideTo(2, 500);
+  }*/
 
 }

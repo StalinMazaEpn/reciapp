@@ -1,35 +1,131 @@
 
   <ion-header>
-    <ion-toolbar>
-      
-      <div *ngIf="isLog; else elseHeader">
-        <ion-title text-center showWhen="ios">Hola, {{(user | async)?.name}}!</ion-title>
-        <button ion-button icon-only menuToggle>
-          <ion-icon name="menu"></ion-icon>
-          <ion-title text-center showWhen="android,windows">Hola, {{(user | async)?.name}}!</ion-title>
-        </button>
-      </div>
-      <ng-template #elseHeader>
-        <ion-title showWhen="ios" text-center>Bienvenido!</ion-title>
-        <button ion-button icon-only menuToggle>
-          <ion-icon name="menu"></ion-icon>
-          <ion-title text-center showWhen="android,windows">Bienvenido!</ion-title>
-        </button> 
-      </ng-template>      
+      <!--div *ngIf="isLog; else elseHeader">
+        <ion-grid>
+            <ion-row>
+              <ion-col col-2 class="icon">
+                <button ion-button icon-only menuToggle >
+                  <ion-icon name="menu"></ion-icon>
+                </button>
+              </ion-col>
+              <ion-col col-8 text-center>
+                <ion-title showWhen="ios" item-center>VECI</ion-title>
+              </ion-col>
+              <ion-col col-2 >
+                  <ion-fab right center>
+                      <button style="background: #013243" ion-fab icon-only (click)="openMap()">
+                          <ion-icon ios="ios-eye" md="md-eye"></ion-icon>
+                      </button> 
+                  </ion-fab>              
+              </ion-col>
+            </ion-row>
+          </ion-grid>      
+      </div-->
 
-    </ion-toolbar>
+        <ion-navbar>
+            <button ion-button icon-only menuToggle start>
+                <ion-icon name="menu"></ion-icon>
+              </button>
+
+          <ion-title text-center>VECI</ion-title>
+        
+          <ion-buttons end>
+            <button ion-button icon-only (click)="addRecycler()">
+                <ion-icon ios="ios-eye" md="md-eye"></ion-icon>
+            </button>
+          </ion-buttons>
+        </ion-navbar>
+      
+
+      <ng-template #elseHeader>
+        <ion-title showWhen="ios" item-center >Bienvenido!</ion-title>
+        <button ion-button icon-only menuToggle>
+          <ion-icon name="menu"></ion-icon>
+          <ion-title showWhen="android,windows" item-center>Bienvenido!</ion-title>
+        </button> 
+      </ng-template> 
   </ion-header>
   
 
   <ion-content padding> 
-
-    <ion-list>
+    <!--ion-list>
       <ion-list-header color="light"> Recicladores Cercanos </ion-list-header>
-      <!--<ion-item small>  {{reciclador_tot}}  </ion-item>-->
-    </ion-list>
+    </ion-list-->
 
     <div *ngIf="isLog; else elseLogin">
-        <ion-list-header color="light"> Tus Recicladores </ion-list-header>
+
+        <ion-list>
+          <ion-item>
+            <ion-avatar item-start >
+              <img class="avatarsize" src="../../assets/imgs/hombre.jpg">
+            </ion-avatar>
+            <h2>{{(user | async)?.name}}</h2>
+            <p>20 pts.</p>
+              <!--p item-end > 12:40</p-->
+            <button ion-button icon-left item-end>
+              <ion-icon ios="ios-brush" md="md-brush"></ion-icon>
+                Cambiar perfil
+            </button>
+          </ion-item>
+        </ion-list>
+
+        <ion-list-header color="light"> Última entrega </ion-list-header>
+        <ion-item>Hace 10 días</ion-item>
+
+        <ion-list-header color="light"> Mis entregas </ion-list-header>
+        <ion-list>
+            <ion-item>
+                <ion-grid>
+                    <ion-row>
+                      <ion-col col-8 center text-right>
+                        <h2>TOTAL:</h2>
+                      </ion-col>
+                      <ion-col col-4 center text-center>
+                        120
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+              </ion-item>  
+            <ion-item>
+                <ion-grid>
+                    <ion-row>
+                      <ion-col col-6 center text-center>
+                        <h2>Papel</h2>
+                      </ion-col>
+                      <ion-col col-6 center text-center>
+                        10%
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+            </ion-item>
+            <ion-item>
+                <ion-grid>
+                    <ion-row>
+                      <ion-col col-6 center text-center>
+                        <h2>Plástico</h2>
+                      </ion-col>
+                      <ion-col col-6 center text-center>
+                        70%
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+            </ion-item>
+            
+            <ion-item>
+                <ion-grid>
+                    <ion-row>
+                      <ion-col col-6 center text-center>
+                        <h2>Vidrio</h2>
+                      </ion-col>
+                      <ion-col col-6 center text-center>
+                        20%
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+            </ion-item>
+          </ion-list>
+
+        <!--ion-list-header color="light"> Tus Recicladores </ion-list-header>
         <ion-list>
           <ion-row *ngIf="(recyclers | async)?.length==0" text-center>
             <ion-card text-center>
@@ -41,25 +137,13 @@
                         <ion-icon name="add-circle"></ion-icon>
                         Agregar Favorito
                       </button>
-                      <!--a href="index.html" class="button"  ion-button outline item-end icon-left><ion-icon name="add-circle"></ion-icon>
-                        Agregar Favoritos</a-->
                 </div>
-                    
-                  <!--ion-list>
-                      <ion-item>
-                          No tienes recicladores favoritos. Encuentra tu reciclador más cercano en el mapa.
-                        <button ion-button outline item-end icon-left>
-                          <ion-icon name="star"></ion-icon>
-                          Mapa
-                        </button>
-                      </ion-item>
-                    </ion-list-->
               </ion-card-content>
             </ion-card>
           </ion-row>
 
           <ion-row *ngFor='let recycler$ of recyclers | async'>            
-              <ion-col *ngIf="recycler$ | async as recycler;  else loading" > <!-- then loggedout;-->
+              <ion-col *ngIf="recycler$ | async as recycler;  else loading" >
               <ion-item (tap)="goRecycler(recycler)">
                   <ion-avatar item-start>
                     <img src="{{recycler.image}}">
@@ -80,20 +164,68 @@
                 </ion-grid>
               </ng-template>
           </ion-row>
+        </ion-list-->
 
-          <!--ng-template #loggedout>
-            <ion-grid>
-                <ion-row justify-content-center>
-                    <ion-col col-2>
-                        <ion-spinner name="circles"></ion-spinner>
-                    </ion-col>
-                    <ion-col col-6>
-                        No tiene favoritos
-                      </ion-col>
-                  </ion-row>
-            </ion-grid>
-          </ng-template-->
-        </ion-list>
+        <ion-slides autoplay="2000" loop="true" speed="3000" pager="true">
+            <ion-slide style="background-color:#F5AB35">
+                <ion-fab right bottom>
+                  <button ion-fab (click)="openMap()">
+                      <ion-icon ios="ios-hand" md="md-hand"></ion-icon>
+                  </button>
+                </ion-fab>                
+              <ion-grid>
+                <ion-row>
+                  <ion-col col-8 center text-center>
+                    <h2>PAPEL</h2>
+                    <p text-justify >Este material que más contamina al planeta</p>
+                  </ion-col>
+                  <ion-col col-4 center text-center>
+                    <img class="image" src="../../assets/imgs/papel.png">
+                  </ion-col>
+                </ion-row>
+              </ion-grid>            
+            </ion-slide>
+            
+            <ion-slide style="background-color: #4B77BE">
+                <ion-fab right bottom>
+                    <button ion-fab>
+                        <ion-icon ios="ios-hand" md="md-hand"></ion-icon>
+                    </button>
+                  </ion-fab>   
+              <ion-grid>
+                <ion-row>
+                  <ion-col col-8 center text-center>
+                    <h2>PLÁSTICO</h2>
+                    <p text-justify >Este material es el más reciclado</p>
+                  </ion-col>
+                  <ion-col col-4 center text-center>
+                    <img class="image" src="../../assets/imgs/plastico.png">
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-slide>
+            
+            <ion-slide style="background-color:#1BBC9B">
+                <ion-fab right bottom>
+                    <button ion-fab>
+                        <ion-icon ios="ios-hand" md="md-hand"></ion-icon>
+                    </button>
+                  </ion-fab>   
+              <ion-grid>
+                <ion-row>
+                  <ion-col col-8 center text-center>
+                    <h2>VIDRIO</h2>
+                    <p text-justify >Sabias que, el vidrio tambien se puede reciclar</p>
+                  </ion-col>
+                  <ion-col col-4 center text-center>
+                    <img class="image" src="../../assets/imgs/vidrio.png">
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-slide>
+            
+          </ion-slides>
+    
     </div>
 
       <ng-template #elseLogin>
@@ -123,4 +255,6 @@
           </ion-row>
         </ion-list>      
       </ng-template>
+
+      
   </ion-content>
