@@ -62,10 +62,10 @@ ref('deliveries/{deliveryId}').onCreate((event)=>{
 *
 */
 admin.initializeApp();
-exports.onAddRecycler = functions.database.
-    ref('recycler/{recyclerId}').onCreate((event) => {
+//Function to update points when user registered a ner recycler
+exports.onAddRecycler = functions.database.ref('recycler/{recyclerId}').onCreate((snap, context) => {
     //Get user id to object
-    const uid = event.data.val().idUser;
+    const uid = snap.val().idUser;
     //Use admin to exec specific function at admin into firebase
     return admin.database().ref(`user/${uid}`).once('value').then((userSnapshot) => {
         //Get points data
@@ -75,9 +75,28 @@ exports.onAddRecycler = functions.database.
         admin.database().ref(`user/${uid}/pointsTotal/pts_recycler`).set(userPoints + 100);
     });
 });
-//Function to update points when user registered a ner recycler
-exports.onAddRecycler = functions.database.ref('recycler/{recyclerId}').onCreate((snap, context) => {
+//Function to update points when user delivery material
+exports.onDeliveryMaterial = functions.database.ref('deliveries/{deliveryId}').onCreate((snap, context) => {
+    //Get user id to object
     const uid = snap.val().idUser;
-    console.log('DATA', uid);
+    const dateDelivery = snap.val().date;
+    const rid = snap.val().idRecycler;
+    //Use admin to exec specific function at admin into firebase
+    return admin.database().ref(`user/${uid}`).once('value').then((userSnapshot) => {
+        //Get points data
+        const userPoints = userSnapshot.val().pointsTotal.pts_entrega;
+        const totalDeliveries = userSnapshot.val().totalDeliveries;
+        //Sum 60 points and update
+        admin.database().ref(`user/${uid}/pointsTotal/pts_entrega`).set(userPoints + 60);
+        //Update date to last delivery
+        admin.database().ref(`user/${uid}/lastDelivery`).set(dateDelivery);
+        //Update user total deliveries
+        admin.database().ref(`user/${uid}/totalDeliveries`).set(totalDeliveries + 1);
+        //Reference to recycler
+        admin.database().ref(`recycler/${rid}`).once(`value`).then((recyclerSnapshot) => {
+            const totalReceives = recyclerSnapshot.val().totalReceives;
+            admin.database().ref(`recycler/${rid}/totalReceives`).set(totalReceives + 1);
+        });
+    });
 });
 //# sourceMappingURL=index.js.map
