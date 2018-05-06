@@ -94,44 +94,76 @@ export class DeliveryPage {
     //Validate data 
     if (this.recyclerId!=null && (this.plasticoCtrl!=null && this.plasticoCtrl!=undefined ||
      this.papelCtrl!=null && this.papelCtrl!=undefined || this.vidrioCtrl!=null && this.vidrioCtrl!=undefined ||
-     this.compuestoCtrl!=null && this.compuestoCtrl!=undefined || this.chatarraCtrl!=null && this.chatarraCtrl!=undefined)) {
+     this.compuestoCtrl!=null && this.compuestoCtrl!=undefined || this.chatarraCtrl!=null && this.chatarraCtrl!=undefined )) {
       //When user select a recycler
       this.userDelivery.idUser=this.uid;
       this.userDelivery.idRecycler=this.recyclerId;
       //this.userDelivery.date= database['ServerValue']['TIMESTAMP'];
       this.userDelivery.date=database.ServerValue.TIMESTAMP;
       this.rangeData();
-      //function to save on firebase
-      this.userSrv.addNewDelivery(this.userDelivery)
-      .then(()=>{
-        console.log('ok');
-        document.getElementById(this.recyclerId).style.border="0";
-        this.cleanForm();
-      })
-      .catch((e)=>{
-        console.log('Hubo un error',e);
-      });
+      //Storage photo
+      if (this.tmpPhoto !== undefined) {
+        //Storage on firebase
+        const pictures =storage().ref('deliveries/' + this.userDelivery.date + '.jpeg');
+        pictures.putString(this.tmpPhoto, 'data_url')
+          .then((snapshot) => {
+            // Upload completed successfully, now we can get the download URL
+            this.userDelivery.image = snapshot.downloadURL;
+            //function to save on firebase
+            this.userSrv.addNewDelivery(this.userDelivery)
+            .then(()=>{
+              console.log('ok');
+              document.getElementById(this.recyclerId).style.border="0";
+              this.cleanForm();
+            })
+            .catch((e)=>{
+              console.log('Hubo un error',e);
+            });
+          })
+          .catch((error) => {
+            //this.buttonDisabled = false;
+            console.log("NOT UPLOADED", error);
+          });
+      } else {
+        console.log("REGISTER NO PHOTO");
+        this.error=true;
+      }
     }else if(this.recyclerId==null && this.tmp_selRecycler==="Anónimo" && (this.plasticoCtrl!=null && this.plasticoCtrl!=undefined ||
      this.papelCtrl!=null && this.papelCtrl!=undefined || this.vidrioCtrl!=null && this.vidrioCtrl!=undefined ||
-     this.compuestoCtrl!=null && this.compuestoCtrl!=undefined || this.chatarraCtrl!=null && this.chatarraCtrl!=undefined)){
+     this.compuestoCtrl!=null && this.compuestoCtrl!=undefined || this.chatarraCtrl!=null && this.chatarraCtrl!=undefined )){
       //When user not select a recycler
       this.userDelivery.idUser=this.uid;
       this.userDelivery.idRecycler=null;
       //this.userDelivery.date= database['ServerValue']['TIMESTAMP'];
       this.userDelivery.date=database.ServerValue.TIMESTAMP;
       this.rangeData();
-      //function to save on firebase
-      this.userSrv.addNewDelivery(this.userDelivery)
-      .then(()=>{
-        console.log('Anonimo ok');
-        if (this.recyclerId!=null) {
-          document.getElementById(this.recyclerId).style.border="0";
-        }
-        this.cleanForm();
-      })
-      .catch((e)=>{
-        console.log('Hubo un error',e);
-      });
+      //Storage photo
+      if (this.tmpPhoto !== undefined) {
+        //Storage on firebase
+        const pictures =storage().ref('deliveries/' + this.userDelivery.date + '.jpeg');
+        pictures.putString(this.tmpPhoto, 'data_url')
+          .then((snapshot) => {
+            // Upload completed successfully, now we can get the download URL
+            this.userDelivery.image = snapshot.downloadURL;
+            //function to save on firebase
+            this.userSrv.addNewDelivery(this.userDelivery)
+            .then(()=>{
+              console.log('ok',this.userDelivery);
+              document.getElementById(this.recyclerId).style.border="0";
+              this.cleanForm();
+            })
+            .catch((e)=>{
+              console.log('Hubo un error',e);
+            });
+          })
+          .catch((error) => {
+            //this.buttonDisabled = false;
+            console.log("NOT UPLOADED", error);
+          });
+
+      } else {
+        console.log("REGISTER NO PHOTO");
+      }
     }else{
       console.log('falta llenar campos');
       this.error=true;
