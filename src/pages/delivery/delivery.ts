@@ -41,6 +41,9 @@ export class DeliveryPage {
     }
   };
 
+  tmpDate;;
+  date;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,public authenticationService:AuthenticationService,
   	private camera: Camera, public userSrv:ReciappService,public toastCtrl:ToastController) {
     this.error=false;
@@ -56,7 +59,8 @@ export class DeliveryPage {
             })
           })
   	}
-  	
+    this.tmpDate =new Date();
+    this.date=this.tmpDate.getFullYear()+""+this.tmpDate.getMonth()+""+this.tmpDate.getDay()+""+this.tmpDate.getHours()+""+this.tmpDate.getMinutes()+""+this.tmpDate.getSeconds()+""+this.tmpDate.getMilliseconds();
   }
 
   ionViewDidLoad() {
@@ -77,7 +81,7 @@ export class DeliveryPage {
       this.recyclablePhoto=this.camera.getPicture(options)
           .then((resp)=>{
             this.tmpPhoto='data:image/jpeg;base64,' + resp;
-            console.log(this.tmpPhoto);
+            //console.log(this.tmpPhoto);
           })
           .catch((e)=>{
             console.log(e);
@@ -91,6 +95,9 @@ export class DeliveryPage {
   }
 
   delivery(){
+    this.tmpDate=new Date()
+    this.date=this.tmpDate.getFullYear()+""+this.tmpDate.getMonth()+""+this.tmpDate.getDay()+""+this.tmpDate.getHours()+""+this.tmpDate.getMinutes()+""+this.tmpDate.getSeconds()+""+this.tmpDate.getMilliseconds();
+
     //Validate data 
     if (this.recyclerId!=null && (this.plasticoCtrl!=null && this.plasticoCtrl!=undefined ||
      this.papelCtrl!=null && this.papelCtrl!=undefined || this.vidrioCtrl!=null && this.vidrioCtrl!=undefined ||
@@ -104,7 +111,7 @@ export class DeliveryPage {
       //Storage photo
       if (this.tmpPhoto !== undefined) {
         //Storage on firebase
-        const pictures =storage().ref('deliveries/' + this.userDelivery.date + '.jpeg');
+        const pictures =storage().ref('deliveries/' + this.userDelivery.idUser +'/'+ this.date + '.jpeg');
         pictures.putString(this.tmpPhoto, 'data_url')
           .then((snapshot) => {
             // Upload completed successfully, now we can get the download URL
@@ -141,7 +148,7 @@ export class DeliveryPage {
       //Storage photo
       if (this.tmpPhoto !== undefined) {
         //Storage on firebase
-        const pictures =storage().ref('deliveries/' + this.userDelivery.date + '.jpeg');
+        const pictures =storage().ref('deliveries/' + this.userDelivery.idUser +'/'+ this.date + '.jpeg');
         pictures.putString(this.tmpPhoto, 'data_url')
           .then((snapshot) => {
             // Upload completed successfully, now we can get the download URL
@@ -181,7 +188,8 @@ export class DeliveryPage {
     this.chatarraCtrl=null;
     this.uid=this.authenticationService.getCurrentUser().uid;
     this.error=false;
-    this.tmpPhoto="assets/imgs/suggestion.png"
+    this.tmpPhoto="assets/imgs/suggestion.png";
+    console.log(this.date);
   }
 
   //Function to assign 
