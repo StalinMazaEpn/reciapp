@@ -11,4 +11,5 @@ export interface Recycler{
 	latitude:any;
 	longitude:any;
 	status:string;
+	totalReceives:number;
 }

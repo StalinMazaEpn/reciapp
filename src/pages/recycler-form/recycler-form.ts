@@ -48,6 +48,7 @@ export class RecyclerFormPage {
       endTime: undefined,
     },
     status: 'active',
+    totalReceives:0
   } as Recycler;
 
   //photo
