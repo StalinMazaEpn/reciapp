@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 
 import { LoginPage } from "../login/login";
 import { RecyclerFormPage } from "../recycler-form/recycler-form";
@@ -42,9 +42,9 @@ export class DeliveryPage {
   };
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public authenticationService:AuthenticationService,
-  	private camera: Camera, public userSrv:ReciappService) {
+  	private camera: Camera, public userSrv:ReciappService,public toastCtrl:ToastController) {
     this.error=false;
-  	this.tmpPhoto="assets/imgs/suggestion.png"
+  	this.tmpPhoto="assets/imgs/suggestion.png";
   	
   	if(this.authenticationService.getCurrentUser()!=null){
   		this.isAuthenticated=this.authenticationService.isAuthenticated();  		
@@ -115,6 +115,7 @@ export class DeliveryPage {
               console.log('ok');
               document.getElementById(this.recyclerId).style.border="0";
               this.cleanForm();
+              this.addDeliveryPoints();
             })
             .catch((e)=>{
               console.log('Hubo un error',e);
@@ -149,11 +150,12 @@ export class DeliveryPage {
             this.userSrv.addNewDelivery(this.userDelivery)
             .then(()=>{
               console.log('ok',this.userDelivery);
-              document.getElementById(this.recyclerId).style.border="0";
+              document.getElementById('anonymousRecycler').style.border="0";
               this.cleanForm();
+              this.addDeliveryPoints();
             })
             .catch((e)=>{
-              console.log('Hubo un error',e);
+              console.log('Hubo un error Anónimo',e);
             });
           })
           .catch((error) => {
@@ -179,6 +181,7 @@ export class DeliveryPage {
     this.chatarraCtrl=null;
     this.uid=this.authenticationService.getCurrentUser().uid;
     this.error=false;
+    this.tmpPhoto="assets/imgs/suggestion.png"
   }
 
   //Function to assign 
@@ -246,5 +249,14 @@ export class DeliveryPage {
   		document.getElementById(recyclerId).style.border=this.selRecycler;
   	}
   	
+  }
+
+  addDeliveryPoints() {
+    let toast = this.toastCtrl.create({
+      message: 'Haz ganado 60 puntos, por realizar una entrega.' ,
+      duration: 3000,
+      position:'top'
+    });
+    toast.present();
   }
 }
