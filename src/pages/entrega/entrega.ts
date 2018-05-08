@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, Platform, AlertController  } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, ToastController, Platform, AlertController } from 'ionic-angular';
 
 import { Geolocation } from '@ionic-native/geolocation';
 import { ReciappService } from './../../services/reciapp.service';
@@ -7,6 +7,8 @@ import {RecicladorPage} from "../reciclador/reciclador";
 import { RecyclerFormPage } from "../recycler-form/recycler-form";
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { LocationAccuracy } from '@ionic-native/location-accuracy';
+import { LoginPage } from '../login/login';
+import {AuthenticationService} from "../../services/authenticationService";
 
 @IonicPage()
 @Component({
@@ -29,10 +31,13 @@ export class EntregaPage {
 
   recyclers:any;
 
+  isAuthenticated:any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation,
-   public recyclerSrv: ReciappService,public modalCtrl: ModalController, private locationAccuracy: LocationAccuracy, 
+   public recyclerSrv: ReciappService,public modalCtrl: ModalController, public authService:AuthenticationService, public toastCtrl:ToastController, private locationAccuracy: LocationAccuracy, 
    private diagnostic: Diagnostic, private platform: Platform, 
    private alertCtrl: AlertController) {
+    this.isAuthenticated=this.authService.isAuthenticated();
     this.getMyLocation();
     this.getRecyclers();
     this.valuesByDefault();
@@ -69,8 +74,16 @@ export class EntregaPage {
   }
 
   addRecycler() {
-    let modal = this.modalCtrl.create(RecyclerFormPage);
-    modal.present();
+    console.log('Logueado',this.isAuthenticated);
+
+    if (this.isAuthenticated) {
+      let modal = this.modalCtrl.create(RecyclerFormPage);
+      modal.present();
+    }else{
+      this.navCtrl.push(LoginPage);
+      this.isNotAuthenticated();
+    }
+    
   }
 
   goToRecycler(recycler) {
@@ -120,9 +133,18 @@ export class EntregaPage {
     this.zoom =  this.zoomDef;
   }
 
+  isNotAuthenticated() {
+    let toast = this.toastCtrl.create({
+      message: 'Debes iniciar sesión para registrar un nuevo reciclador.' ,
+      duration: 3000,
+      position:'top'
+    });
+    toast.present();
+  }
+
   presentConfirm(message) {
     let alert = this.alertCtrl.create({
-      title: 'Confirm purchase',
+      title: 'Ubicación',
       message: message
     });
     alert.present();
