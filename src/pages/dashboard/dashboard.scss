@@ -12,8 +12,12 @@ page-dashboard {
     .avatarsize{
         width: 100% !important;  
         height : 100% !important;  
-        max-width: 83px !important;  //any size
-        max-height: 83px !important; //any size
+        max-width: 75px !important;  //any size
+        max-height: 75px !important; //any size
+    }
+
+    .ion-list{
+      margin-bottom: 20px !important;
     }
 
     ion-slides {

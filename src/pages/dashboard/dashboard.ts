@@ -13,7 +13,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app'
 
 import { EntregaPage } from '../entrega/entrega';
-import { DetallePageModule } from '../detalle/detalle.module';
+import {CategoriaPage} from '../categoria/categoria';
 import {AuthenticationService} from "../../services/authenticationService";
 //import { Slides } from 'ionic-angular';
 
@@ -35,7 +35,12 @@ export class DashboardPage {
     this.isLog = this.authenticationService.isAuthenticated();
     if(this.isLog) {
       //console.log("UID", this.authenticationService.getCurrentUser().uid);
-      this.user = this.userSrv.getUser(this.authenticationService.getCurrentUser().uid);
+      //this.user = this.userSrv.getUser(this.authenticationService.getCurrentUser().uid);
+      this.userSrv.getUser(this.authenticationService.getCurrentUser().uid).subscribe(
+        (data)=>{
+          this.user =data;
+          console.log(this.user.lastDelivery);
+        });
     }
   }
 
@@ -96,7 +101,7 @@ export class DashboardPage {
   }
 
   openTips(){
-    this.navCtrl.push(DetallePageModule);
+    this.navCtrl.push(CategoriaPage);
   }
 
 
