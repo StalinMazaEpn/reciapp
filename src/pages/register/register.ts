@@ -29,10 +29,10 @@ export class RegisterPage {
 
   user={
   	pointsTotal:{
-      pts_register:20,
-      pts_entrega:0,
-      pts_favorite:0,
-      pts_recycler:0
+      pointsRegister:20,
+      pointsDelivery:0,
+      pointsFavorite:0,
+      pointsRecycler:0
     },
     lastDelivery:0,
     totalDeliveries:0
