@@ -30,12 +30,12 @@
 	</div>
 
 	<div text-center>
-		<span *ngIf="error" class="validations"> *Debe seleccionar un <b>Reciclador Favorito, Cercano o Anónimo</b> e identificar la cantidad de material reciclable a entregar.</span>	
+		<span *ngIf="error" class="validations"> *Debe seleccionar un <b>Reciclador Favorito, Cercano o Anónimo</b></span>	
 	</div>
 	
 
 	<div *ngIf="isAuthenticated; else needLoggin">
-			<ion-scroll scrollX="true" style="width: 100%; height: 100px; white-space: nowrap;">
+			<ion-scroll scrollX="true" style="width: 100%; height: 73px; white-space: nowrap;">
 				<ul>
 					<!--Agregar-->
 					<li text-center (tap)="addRecycler()">
@@ -101,7 +101,9 @@
 	  		</ion-label>
 	  	</ion-col>
 	  </ion-row-->	
-
+	  <div text-center>
+		<span *ngIf="error" class="validations"> *Identifica la cantidad de material reciclable a entregar.</span>	
+	</div>
 	  <ion-row>
 		<ion-col col-4 text-center>
 		  <ion-label class="title">Plástico</ion-label>

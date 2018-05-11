@@ -8,13 +8,14 @@ import { AuthenticationService } from "../../services/authenticationService";
 import { storage, database } from "firebase";
 import { Camera, CameraOptions } from "@ionic-native/camera";
 
+
 @IonicPage()
 @Component({
   selector: 'page-delivery',
   templateUrl: 'delivery.html',
 })
 export class DeliveryPage {
-  isAuthenticated:boolean;
+  isAuthenticated:boolean=false;
   uid:any;
   recyclers:any;
   tmpPhoto:any=null;
@@ -41,15 +42,22 @@ export class DeliveryPage {
     }
   };
 
-  tmpDate;;
+  tmpDate;
   date;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public authenticationService:AuthenticationService,
   	private camera: Camera, public userSrv:ReciappService,public toastCtrl:ToastController) {
     this.error=false;
   	this.tmpPhoto="assets/imgs/suggestion.png";
+    if (this.isAuthenticated==null || this.isAuthenticated==undefined || this.isAuthenticated==false) {
+      this.isAuthenticated=this.authenticationService.isAuthenticated();
+      console.log('SESSION ',this.isAuthenticated);  
+    }else{
+      console.log('SESSION',this.isAuthenticated);  
+    }
+    
   	if(this.authenticationService.getCurrentUser()!=null){
-  		this.isAuthenticated=this.authenticationService.isAuthenticated();  		
+  		this.isAuthenticated=this.authenticationService.isAuthenticated();
   		this.uid=this.authenticationService.getCurrentUser().uid;
   		this.recyclers = this.userSrv.getFavoritiesRecycler(this.uid)
           .map((recyclerId)=>{
@@ -98,9 +106,9 @@ export class DeliveryPage {
     this.date=this.tmpDate.getFullYear()+""+this.tmpDate.getMonth()+""+this.tmpDate.getDay()+""+this.tmpDate.getHours()+""+this.tmpDate.getMinutes()+""+this.tmpDate.getSeconds()+""+this.tmpDate.getMilliseconds();
 
     //Validate data 
-    if (this.recyclerId!=null && (this.plasticoCtrl!=null && this.plasticoCtrl!=undefined ||
-     this.papelCtrl!=null && this.papelCtrl!=undefined || this.vidrioCtrl!=null && this.vidrioCtrl!=undefined ||
-     this.compuestoCtrl!=null && this.compuestoCtrl!=undefined || this.chatarraCtrl!=null && this.chatarraCtrl!=undefined )) {
+    if (this.recyclerId!=null && (this.plasticoCtrl!=null && this.plasticoCtrl!=undefined && this.plasticoCtrl!=0 ||
+     this.papelCtrl!=null && this.papelCtrl!=undefined && this.papelCtrl!=0 || this.vidrioCtrl!=null && this.vidrioCtrl!=undefined && this.vidrioCtrl!=0 ||
+     this.compuestoCtrl!=null && this.compuestoCtrl!=undefined && this.compuestoCtrl!=0 || this.chatarraCtrl!=null && this.chatarraCtrl!=undefined && this.chatarraCtrl!=0)) {
       //When user select a recycler
       this.userDelivery.idUser=this.uid;
       this.userDelivery.idRecycler=this.recyclerId;
@@ -135,9 +143,9 @@ export class DeliveryPage {
         console.log("REGISTER NO PHOTO");
         this.error=true;
       }
-    }else if(this.recyclerId==null && this.tmp_selRecycler==="Anónimo" && (this.plasticoCtrl!=null && this.plasticoCtrl!=undefined ||
-     this.papelCtrl!=null && this.papelCtrl!=undefined || this.vidrioCtrl!=null && this.vidrioCtrl!=undefined ||
-     this.compuestoCtrl!=null && this.compuestoCtrl!=undefined || this.chatarraCtrl!=null && this.chatarraCtrl!=undefined )){
+    }else if(this.recyclerId==null && this.tmp_selRecycler==="Anónimo" && (this.plasticoCtrl!=null && this.plasticoCtrl!=undefined && this.plasticoCtrl!=0 ||
+     this.papelCtrl!=null && this.papelCtrl!=undefined && this.papelCtrl!=0 || this.vidrioCtrl!=null && this.vidrioCtrl!=undefined && this.vidrioCtrl!=0 ||
+     this.compuestoCtrl!=null && this.compuestoCtrl!=undefined && this.compuestoCtrl!=0 || this.chatarraCtrl!=null && this.chatarraCtrl!=undefined && this.chatarraCtrl!=0)){
       //When user not select a recycler
       this.userDelivery.idUser=this.uid;
       this.userDelivery.idRecycler=null;
@@ -180,6 +188,8 @@ export class DeliveryPage {
 
   cleanForm(){
     document.getElementById('anonymousRecycler').style.border="0";
+    this.userDelivery.idRecycler=null;
+    this.recyclerId=null;
     this.plasticoCtrl=null;
     this.papelCtrl=null;
     this.vidrioCtrl=null;
