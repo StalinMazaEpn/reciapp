@@ -12,7 +12,7 @@ import { RegisterPage }  from '../register/register';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app'
 
-import { EntregaPage } from '../entrega/entrega';
+import { MapPage } from '../map/map';
 import {AuthenticationService} from "../../services/authenticationService";
 
 @IonicPage()
@@ -87,7 +87,7 @@ export class DashboardPage {
   }
 
   openMap(){
-    this.navCtrl.push(EntregaPage);
+    this.navCtrl.push(MapPage);
   }
 
 

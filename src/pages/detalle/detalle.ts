@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { ReciappService } from '../../services/reciapp.service';
 
-import { EntregaPage } from '../entrega/entrega';
 import { DashboardPage } from '../dashboard/dashboard';
 import { CategoriaPage } from '../categoria/categoria';
 
@@ -40,7 +39,4 @@ export class DetallePage {
   	this.navCtrl.push(CategoriaPage);
   }
 
-  Entrega():void{
-  	this.navCtrl.push(EntregaPage);
-  }
 }

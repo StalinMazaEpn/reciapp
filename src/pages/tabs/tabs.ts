@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,LoadingController } from 'ionic-angular';
 
 import {DashboardPage} from '../dashboard/dashboard';
-import {EntregaPage} from '../entrega/entrega';
+import {MapPage} from '../map/map';
 import {CategoriaPage} from '../categoria/categoria';
 import { TourPage } from '../tour/tour';
 import { SocialNetworksPage } from '../social-networks/social-networks';
@@ -16,7 +16,7 @@ import * as firebase from 'firebase/app'
 export class TabsPage {
   tab1Root = DashboardPage;
   tab2Root = CategoriaPage;
-  tab3Root = EntregaPage;
+  tab3Root = MapPage;
   
   constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl: LoadingController) {
   }

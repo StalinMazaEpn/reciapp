@@ -10,7 +10,7 @@ import { ReciappService } from '../services/reciapp.service';
 import { MyApp } from './app.component';
 
 import { DashboardPageModule } from '../pages/dashboard/dashboard.module';
-import { EntregaPageModule } from '../pages/entrega/entrega.module';
+import { MapPageModule } from '../pages/map/map.module';
 import { RecicladorPageModule } from '../pages/reciclador/reciclador.module';
 import { CategoriaPageModule } from '../pages/categoria/categoria.module';
 import { DetallePageModule } from '../pages/detalle/detalle.module';
@@ -62,7 +62,7 @@ const firebaseConfig = {
     AngularFireAuthModule,
     IonicModule.forRoot(MyApp),
     DashboardPageModule,
-    EntregaPageModule,
+    MapPageModule,
     RecicladorPageModule,
     CategoriaPageModule,
     DetallePageModule,
