@@ -25,9 +25,17 @@ page-delivery {
 		font-weight: bold;
 	}
 	p.title-small{
-		font-size: 13px;
+		font-size: 12px;
 		font-weight: bold;
 		margin:0;
+	}
+
+	.title-small1{
+		font-size: 6px;
+		font-weight: bold;
+		margin-left:3%;
+		color: gray;
+		position: relative;
 	}
 
 	ion-range{
@@ -68,6 +76,7 @@ page-delivery {
     ul{
     	padding-left: 0 !important;
     	display: inline-block;
+    	margin: 0;
     }
     ul li{
     	display: inline-block;

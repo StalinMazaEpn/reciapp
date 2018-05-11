@@ -48,7 +48,6 @@ export class DeliveryPage {
   	private camera: Camera, public userSrv:ReciappService,public toastCtrl:ToastController) {
     this.error=false;
   	this.tmpPhoto="assets/imgs/suggestion.png";
-  	
   	if(this.authenticationService.getCurrentUser()!=null){
   		this.isAuthenticated=this.authenticationService.isAuthenticated();  		
   		this.uid=this.authenticationService.getCurrentUser().uid;
