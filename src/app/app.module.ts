@@ -37,6 +37,8 @@ import { AppAvailability } from '@ionic-native/app-availability';
 import {AuthenticationService} from "../services/authenticationService";
 import { CallNumber } from '@ionic-native/call-number';
 import { Camera } from '@ionic-native/camera';
+import { LocationAccuracy } from '@ionic-native/location-accuracy';
+import { Diagnostic } from '@ionic-native/diagnostic';
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -90,6 +92,8 @@ const firebaseConfig = {
     Camera,
     AuthenticationService,
     CallNumber,
+    LocationAccuracy,
+    Diagnostic,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

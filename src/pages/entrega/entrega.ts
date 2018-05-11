@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController,ToastController  } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, ToastController, Platform, AlertController } from 'ionic-angular';
 
 import { Geolocation } from '@ionic-native/geolocation';
 import { ReciappService } from './../../services/reciapp.service';
 import {RecicladorPage} from "../reciclador/reciclador";
 import { RecyclerFormPage } from "../recycler-form/recycler-form";
+import { Diagnostic } from '@ionic-native/diagnostic';
+import { LocationAccuracy } from '@ionic-native/location-accuracy';
 import { LoginPage } from '../login/login';
-
-
 import {AuthenticationService} from "../../services/authenticationService";
 import { AngularFireAuth } from 'angularfire2/auth';
 
@@ -34,12 +34,13 @@ export class EntregaPage {
   recyclersFavorites:any;
 
   isAuthenticated:boolean;
-  isLog:boolean;
   user:any;
   recyclerm:string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation,public recyclerSrv: ReciappService,
-   public modalCtrl: ModalController, public authService:AuthenticationService,public toastCtrl:ToastController, private afAuth:AngularFireAuth) {
+   public modalCtrl: ModalController, public authService:AuthenticationService,public toastCtrl:ToastController, private afAuth:AngularFireAuth, private locationAccuracy: LocationAccuracy, 
+   private diagnostic: Diagnostic, private platform: Platform, 
+   private alertCtrl: AlertController) {
     this.isAuthenticated=this.authService.isAuthenticated();
     this.getMyLocation();
     this.getRecyclers();
@@ -47,7 +48,32 @@ export class EntregaPage {
     if(this.isAuthenticated) {
       this.user = this.recyclerSrv.getUser(this.authService.getCurrentUser().uid);
     }
+    if (this.platform.is('ios')) {
+      this.locationAccuracy.canRequest().then(
+        (canRequest: boolean) => {
+          if(canRequest) {
+            this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+              () => {
+                this.verifyGps();
+                this.getMyLocation();
+              },
+              error => {
+                this.valuesByDefault();
+              }
+            );
+          }
+      });
+    } else if (this.platform.is('android')) {
+      this.diagnostic.isGpsLocationEnabled()
+      .then((enabled)=>{
+        if(enabled){
+          this.getMyLocation();
+        }else{
+          this.presentConfirm("Encender su GPS por favor");
+        }
+      });
   }
+}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EntregaPage');
@@ -90,7 +116,6 @@ export class EntregaPage {
   goToRecycler(recycler) {
     this.navCtrl.push(RecicladorPage, {recycler: recycler});
   }
-
   getRecyclers(){
     this.recyclerSrv.getRecycler()
     .subscribe((resp)=>{
@@ -147,4 +172,35 @@ export class EntregaPage {
   login(){
     this.navCtrl.push(LoginPage);
   }
+
+  verifyGps(){
+    this.diagnostic.isLocationAuthorized()
+    .then((appAutorized)=>{
+      if(appAutorized){
+        this.diagnostic.isLocationEnabled()
+        .then((enabled)=>{
+          if(enabled){
+            this.getMyLocation();
+          }else{
+            this.presentConfirm("Encender su GPS por favor");
+          }
+        })
+      }else{
+        this.diagnostic.requestLocationAuthorization("always")
+        .then(()=>{
+          this.getMyLocation();
+        })
+      }
+    })
+  }
+
+  presentConfirm(message) {
+    let alert = this.alertCtrl.create({
+      title: 'Ubicación',
+      message: message
+    });
+    alert.present();
+}
+
+
 }
