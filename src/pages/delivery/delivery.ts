@@ -115,8 +115,9 @@ export class DeliveryPage {
       //this.userDelivery.date= database['ServerValue']['TIMESTAMP'];
       this.userDelivery.date=database.ServerValue.TIMESTAMP;
       this.rangeData();
+      console.log(this.tmpPhoto);
       //Storage photo
-      if (this.tmpPhoto !== undefined) {
+      if (this.tmpPhoto !== undefined && this.tmpPhoto != "assets/imgs/suggestion.png") {
         //Storage on firebase
         const pictures =storage().ref('deliveries/' + this.userDelivery.idUser +'/'+ this.date + '.jpeg');
         pictures.putString(this.tmpPhoto, 'data_url')
@@ -138,6 +139,7 @@ export class DeliveryPage {
           .catch((error) => {
             //this.buttonDisabled = false;
             console.log("NOT UPLOADED", error);
+            this.error=true;
           });
       } else {
         console.log("REGISTER NO PHOTO");
@@ -153,7 +155,7 @@ export class DeliveryPage {
       this.userDelivery.date=database.ServerValue.TIMESTAMP;
       this.rangeData();
       //Storage photo
-      if (this.tmpPhoto !== undefined) {
+      if (this.tmpPhoto !== undefined && this.tmpPhoto != "assets/imgs/suggestion.png") {
         //Storage on firebase
         const pictures =storage().ref('deliveries/' + this.userDelivery.idUser +'/'+ this.date + '.jpeg');
         pictures.putString(this.tmpPhoto, 'data_url')
@@ -179,6 +181,7 @@ export class DeliveryPage {
 
       } else {
         console.log("REGISTER NO PHOTO");
+        this.error=true;
       }
     }else{
       console.log('falta llenar campos');
@@ -198,6 +201,7 @@ export class DeliveryPage {
     this.uid=this.authenticationService.getCurrentUser().uid;
     this.error=false;
     this.tmpPhoto="assets/imgs/suggestion.png";
+    this.recyclablePhoto=null;
     console.log(this.date);
   }
 
