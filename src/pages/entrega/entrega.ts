@@ -9,6 +9,7 @@ import { Diagnostic } from '@ionic-native/diagnostic';
 import { LocationAccuracy } from '@ionic-native/location-accuracy';
 import { LoginPage } from '../login/login';
 import {AuthenticationService} from "../../services/authenticationService";
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @IonicPage()
 @Component({
@@ -30,18 +31,23 @@ export class EntregaPage {
   zoomDef: any = 10;
 
   recyclers:any;
+  recyclersFavorites:any;
 
-  isAuthenticated:any;
+  isAuthenticated:boolean;
+  user:any;
+  recyclerm:string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation,
-   public recyclerSrv: ReciappService,public modalCtrl: ModalController, public authService:AuthenticationService, public toastCtrl:ToastController, private locationAccuracy: LocationAccuracy, 
+  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation,public recyclerSrv: ReciappService,
+   public modalCtrl: ModalController, public authService:AuthenticationService,public toastCtrl:ToastController, private afAuth:AngularFireAuth, private locationAccuracy: LocationAccuracy, 
    private diagnostic: Diagnostic, private platform: Platform, 
    private alertCtrl: AlertController) {
     this.isAuthenticated=this.authService.isAuthenticated();
     this.getMyLocation();
     this.getRecyclers();
     this.valuesByDefault();
-
+    if(this.isAuthenticated) {
+      this.user = this.recyclerSrv.getUser(this.authService.getCurrentUser().uid);
+    }
     if (this.platform.is('ios')) {
       this.locationAccuracy.canRequest().then(
         (canRequest: boolean) => {
@@ -66,11 +72,32 @@ export class EntregaPage {
           this.presentConfirm("Encender su GPS por favor");
         }
       });
-    }
   }
+}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EntregaPage');
+    this.recyclerm = "favorite";
+    this.isAuthenticated=this.authService.isAuthenticated();
+  }
+
+  ionViewWillEnter(){
+    console.log("Entrara");
+    this.recyclerm = "favorite";
+    this.isAuthenticated=this.authService.isAuthenticated();
+    this.afAuth.authState.subscribe(
+      data => {
+        if(data && data.uid){
+          console.log("UID", data.uid);
+          this.recyclersFavorites = this.recyclerSrv.getFavoritiesRecycler(data.uid)
+          .map((recyclerId)=>{
+            return recyclerId.map(recyclerObj => {
+              return this.recyclerSrv.getRecyclerById(recyclerObj.payload.key);
+            })
+          })
+          console.log("RECICLADORES", this.recyclers);
+        }
+      });
   }
 
   addRecycler() {
@@ -142,12 +169,8 @@ export class EntregaPage {
     toast.present();
   }
 
-  presentConfirm(message) {
-    let alert = this.alertCtrl.create({
-      title: 'Ubicación',
-      message: message
-    });
-    alert.present();
+  login(){
+    this.navCtrl.push(LoginPage);
   }
 
   verifyGps(){
@@ -170,6 +193,14 @@ export class EntregaPage {
       }
     })
   }
+
+  presentConfirm(message) {
+    let alert = this.alertCtrl.create({
+      title: 'Ubicación',
+      message: message
+    });
+    alert.present();
+}
 
 
 }

@@ -1,9 +1,26 @@
 page-entrega {
     agm-map {
-        height: 100%;
+        height: 82%;
         width: 100%;
         position:absolute; 
         top:0; 
         bottom:0; 
+    }
+
+    .botonR{
+        border-radius: 50%;
+    }
+
+    .fabButton{
+        padding-bottom: 68%;
+        position: absolute;
+    }
+
+    .segmentText{
+        margin-top: 100%;
+    }
+
+    ion-fab[middle] {
+        margin-top: 10px;
     }
 }

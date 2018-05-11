@@ -1,29 +1,136 @@
 
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>Entrega</ion-title>
-  </ion-navbar>
-
-</ion-header>
+  <!--ion-header>
+    <ion-navbar>
+      <ion-title text-center>RECICLADORES</ion-title>
+    
+      <ion-buttons end>
+        <button ion-button icon-only (click)="addRecycler()">
+          <ion-icon name="person-add"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header-->
 
 
 <ion-content>
-    <agm-map [latitude]="latView" [longitude]="lngView" [zoom]="zoom" [fullscreenControlOptions]="false" [zoomControl]="false" [streetViewControl]="false" [usePanning]="true" (centerChange)="centerChange($event)" (zoomChange)="zoomChange($event)">
-      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-      <agm-marker [iconUrl]="'assets/imgs/recyclers.png'" *ngFor="let recycler of recyclers" (markerClick)="goToRecycler(recycler)" [latitude]="recycler.latitude" [longitude]="recycler.longitude"></agm-marker>
-    </agm-map>
+    
 
-      <ion-fab bottom right>
+    <ion-card no-margin>
+        <agm-map [latitude]="latView" [longitude]="lngView" [zoom]="zoom" [fullscreenControlOptions]="false" [zoomControl]="false" [streetViewControl]="false" [usePanning]="true" (centerChange)="centerChange($event)" (zoomChange)="zoomChange($event)">
+            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+            <agm-marker [iconUrl]="'assets/imgs/recyclers1.png'" *ngFor="let recycler of recyclers" (markerClick)="goToRecycler(recycler)" [latitude]="recycler.latitude" [longitude]="recycler.longitude"></agm-marker>
+          </agm-map>
+          <ion-fab left middle>
+            <button ion-fab mini (tap)="getViewLocation()" >
+              <ion-icon ios="ios-locate" md="md-locate"></ion-icon>
+            </button>
+          </ion-fab>
+          <ion-fab right middle>
+            <button ion-fab mini (click)="addRecycler()">
+              <ion-icon ios="ios-person-add" md="md-person-add"></ion-icon>
+            </button>
+          </ion-fab>
+          
+      </ion-card>
 
-        <button ion-fab mini (click)="addRecycler()">
-          <ion-icon ios="ios-person-add" md="md-person-add"></ion-icon>
-        </button>
-      </ion-fab>
-      <ion-fab bottom left >
-        <button ion-fab mini (tap)="getViewLocation()" >
-          <ion-icon name="locate"></ion-icon>
-        </button>
-      </ion-fab>
+      <ion-row *ngIf="!isAuthenticated" text-center style="margin-top: 15%;">
+        <ion-card text-center class="segmentText">
+          <ion-card-content>
+            <ion-item text-center>Debes iniciar sesión</ion-item>
+            <div >Para registrar tus recicladores favoritos</div>
+            <ion-row text-center>
+              <ion-col col-12>
+                <button ion-button round (click)="login()" >Iniciar Sesión</button>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-row>
+      
+      
+
+      <!-- -->
+      <ion-item *ngIf="isAuthenticated" class="segmentText">
+          <ion-toolbar >
+              <ion-segment style="background: #2C3E50" [(ngModel)]="recyclerm" >
+                <ion-segment-button  value="favorite"  style="color: white" > <!--*ngIf="isAuthenticated"-->
+                  Favoritos
+                </ion-segment-button>
+                <!--ion-segment-button value="near" style="color:white" >
+                  Negocios Asociados
+                </ion-segment-button-->
+              </ion-segment>
+          </ion-toolbar>
+          <div [ngSwitch]="recyclerm">         
+            <ion-list *ngSwitchCase="'favorite'">
+              <ion-row *ngIf="(recyclersFavorites | async)?.length==0" text-center>
+                <ion-card text-center>
+                  <ion-card-content>
+                    <ion-item text-wrap text-center>No tienes recicladores favoritos</ion-item>
+                    <div text-wrap text-center>Encuentra tu reciclador más cercano en el mapa</div>
+                    <!--div text-center>
+                        <button ion-button outline item-end icon-left (click)="openMap()">
+                          <ion-icon name="add-circle"></ion-icon>
+                            Agregar Favorito
+                        </button>
+                    </div-->
+                  </ion-card-content>
+                </ion-card>
+              </ion-row>
+
+              <ion-row *ngFor='let recycler$ of recyclersFavorites | async'>            
+                <ion-col *ngIf="recycler$ | async as recycler;  else loading" >
+                  <ion-item (tap)="goToRecycler(recycler)">
+                    <ion-avatar item-start>
+                      <img src="{{recycler.image}}">
+                    </ion-avatar>
+                    <h2>{{recycler.name}}</h2>
+                    <ion-icon ios="ios-call" md="md-call" color="vibrant" item-end large></ion-icon>
+                  </ion-item>
+                </ion-col>
+
+                <ng-template #loading>
+                  <ion-grid>
+                    <ion-row justify-content-center>
+                      <ion-col col-2>
+                        <ion-spinner name="circles"></ion-spinner>
+                      </ion-col>
+                      <ion-col col-6>
+                        Cargando favoritos...
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ng-template>
+              </ion-row>
+
+                <!--ion-card text-center>
+                  <ion-card-content>
+                    <ion-item text-center>Debes iniciar sesión</ion-item>
+                    <div >Y registra tus registradores favoritos</div>
+                    <ion-row text-center>
+                      <ion-col col-12>
+                        <button ion-button round>Iniciar Sesión</button>
+                      </ion-col>
+                     </ion-row>
+                  </ion-card-content>
+                </ion-card-->
+
+            </ion-list>
+
+            <!--ion-list *ngSwitchCase="'near'" >
+                <ion-card text-center>
+                  <ion-card-content>
+                    <ion-item text-center>Debes iniciar sesión</ion-item>
+                    <div >Para ver nuestros negocios asociados</div>
+                    <ion-row text-center>
+                      <ion-col col-12>
+                        <button ion-button round>Iniciar Sesión</button>
+                      </ion-col>
+                     </ion-row>
+                  </ion-card-content>
+                </ion-card>
+            </ion-list-->
+          </div>
+        </ion-item>
 
 </ion-content>
