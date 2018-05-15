@@ -13,10 +13,10 @@ import { AngularFireAuth } from 'angularfire2/auth';
 
 @IonicPage()
 @Component({
-  selector: 'page-entrega',
-  templateUrl: 'entrega.html',
+  selector: 'page-map',
+  templateUrl: 'map.html',
 })
-export class EntregaPage {
+export class MapPage {
   lat: any;
   lng: any;
 
@@ -76,33 +76,27 @@ export class EntregaPage {
 }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad EntregaPage');
     this.recyclerm = "favorite";
     this.isAuthenticated=this.authService.isAuthenticated();
   }
 
   ionViewWillEnter(){
-    console.log("Entrara");
     this.recyclerm = "favorite";
     this.isAuthenticated=this.authService.isAuthenticated();
     this.afAuth.authState.subscribe(
       data => {
         if(data && data.uid){
-          console.log("UID", data.uid);
           this.recyclersFavorites = this.recyclerSrv.getFavoritiesRecycler(data.uid)
           .map((recyclerId)=>{
             return recyclerId.map(recyclerObj => {
               return this.recyclerSrv.getRecyclerById(recyclerObj.payload.key);
             })
           })
-          console.log("RECICLADORES", this.recyclers);
         }
       });
   }
 
   addRecycler() {
-    console.log('Logueado',this.isAuthenticated);
-
     if (this.isAuthenticated) {
       let modal = this.modalCtrl.create(RecyclerFormPage);
       modal.present();
@@ -120,7 +114,6 @@ export class EntregaPage {
     this.recyclerSrv.getRecycler()
     .subscribe((resp)=>{
       this.recyclers = resp;
-      console.log(this.recyclers);
     });
 
   }

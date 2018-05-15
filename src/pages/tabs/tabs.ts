@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,LoadingController } from 'ionic-angular';
 
-import {DashboardPage} from '../dashboard/dashboard';
-import {EntregaPage} from '../entrega/entrega';
+import { DashboardPage } from '../dashboard/dashboard';
+import { MapPage } from '../map/map';
 import { TourPage } from '../tour/tour';
 import { SocialNetworksPage } from '../social-networks/social-networks';
-import {DeliveryPage} from '../delivery/delivery';
+import { DeliveryPage } from '../delivery/delivery';
 
 import * as firebase from 'firebase/app'
 @IonicPage()
@@ -16,7 +16,7 @@ import * as firebase from 'firebase/app'
 export class TabsPage {
   tab1Root = DashboardPage;
   tab2Root = DeliveryPage;
-  tab3Root = EntregaPage;
+  tab3Root = MapPage;
   
   constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl: LoadingController) {
   }
@@ -40,7 +40,6 @@ export class TabsPage {
 
   logout(){
     console.log('cerrar');
-    //localStorage.removeItem('isLog');
     firebase.auth().signOut();
     this.redirectLogin();
     setTimeout(()=>{this.navCtrl.setRoot(TabsPage)},3000);
