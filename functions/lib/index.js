@@ -69,10 +69,12 @@ exports.onAddRecycler = functions.database.ref('recycler/{recyclerId}').onCreate
     //Use admin to exec specific function at admin into firebase
     return admin.database().ref(`user/${uid}`).once('value').then((userSnapshot) => {
         //Get points data
-        const userPoints = userSnapshot.val().pointsTotal.pointsRecycler;
+        const userPoints = userSnapshot.val().points.pointsRecycler;
+        const userPointsTotal = userSnapshot.val().points.total;
         //Sum 100 points and update
         //admin.database().ref(`user/${uid}/points`).set(userPoints+100);
-        admin.database().ref(`user/${uid}/pointsTotal/pointsRecycler`).set(userPoints + 100);
+        admin.database().ref(`user/${uid}/points/pointsRecycler`).set(userPoints + 100);
+        admin.database().ref(`user/${uid}/points/total`).set(userPointsTotal + 100);
     });
 });
 //Function to update points when user delivery material
@@ -84,10 +86,12 @@ exports.onDeliveryMaterial = functions.database.ref('deliveries/{deliveryId}').o
     //Use admin to exec specific function at admin into firebase
     return admin.database().ref(`user/${uid}`).once('value').then((userSnapshot) => {
         //Get points data
-        const userPoints = userSnapshot.val().pointsTotal.pointsDelivery;
+        const userPoints = userSnapshot.val().points.pointsDelivery;
+        const userPointsTotal = userSnapshot.val().points.total;
         const totalDeliveries = userSnapshot.val().totalDeliveries;
         //Sum 60 points and update
-        admin.database().ref(`user/${uid}/pointsTotal/pointsDelivery`).set(userPoints + 60);
+        admin.database().ref(`user/${uid}/points/pointsDelivery`).set(userPoints + 60);
+        admin.database().ref(`user/${uid}/points/total`).set(userPointsTotal + 60);
         //Update date to last delivery
         admin.database().ref(`user/${uid}/lastDelivery`).set(dateDelivery);
         //Update user total deliveries

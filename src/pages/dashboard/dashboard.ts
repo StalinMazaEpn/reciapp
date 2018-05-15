@@ -13,7 +13,11 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app'
 
 import { MapPage } from '../map/map';
+
 import {AuthenticationService} from "../../services/authenticationService";
+import {CategoriaPage} from "../categoria/categoria";
+//import { Slides } from 'ionic-angular';
+
 
 @IonicPage()
 @Component({
@@ -21,6 +25,8 @@ import {AuthenticationService} from "../../services/authenticationService";
   templateUrl: 'dashboard.html',
 })
 export class DashboardPage {
+
+  //@ViewChild(Slides) slides: Slides;
   isLog:boolean;
   user:any;
   recyclers:any;
@@ -30,7 +36,12 @@ export class DashboardPage {
     this.isLog = this.authenticationService.isAuthenticated();
     if(this.isLog) {
       //console.log("UID", this.authenticationService.getCurrentUser().uid);
-      this.user = this.userSrv.getUser(this.authenticationService.getCurrentUser().uid);
+      //this.user = this.userSrv.getUser(this.authenticationService.getCurrentUser().uid);
+      this.userSrv.getUser(this.authenticationService.getCurrentUser().uid).subscribe(
+        (data)=>{
+          this.user =data;
+          console.log(this.user.lastDelivery);
+        });
     }
   }
 
@@ -88,6 +99,10 @@ export class DashboardPage {
 
   openMap(){
     this.navCtrl.push(MapPage);
+  }
+
+  openTips(){
+    this.navCtrl.push(CategoriaPage);
   }
 
 
@@ -160,5 +175,9 @@ export class DashboardPage {
     });
     toast.present();
   }
+
+ /* goToSlide() {
+    this.slides.slideTo(2, 500);
+  }*/
 
 }
