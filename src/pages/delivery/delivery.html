@@ -54,9 +54,20 @@
 			        <!--Favoritos-->
 					<li *ngFor="let recycler$ of recyclers | async;" >
 						<span *ngIf="recycler$ | async as recycler;" (tap)="selectRecycler(recycler.id)">
-		                	<ion-avatar>
-			                  <img class="recyclers" src="{{recycler.image}}" id="{{recycler.id}}">
-			                </ion-avatar>
+							<span *ngIf="recycler.image!=undefined; else firstLetter">
+								<ion-avatar>
+				                  <img class="recyclers" src="{{recycler.image}}" id="{{recycler.id}}">
+				                </ion-avatar>	
+							</span>
+							<ng-template #firstLetter>
+								<ion-avatar>
+									<span text-center>
+										<p class="firstLetter" >{{recycler.name.charAt(0).toUpperCase()}}</p>
+										<img class="recyclers imgfirstLetter" style="background-color: #32db64" id="{{recycler.id}}">
+									</span>
+				               	</ion-avatar>	
+							</ng-template>
+		                	
 			                <p block text-wrap style="height: auto !important;overfloat: auto; font-size:10px;">{{recycler.name}}</p>
 			            </span>	
 			            
