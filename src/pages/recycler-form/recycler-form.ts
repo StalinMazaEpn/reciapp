@@ -62,6 +62,7 @@ export class RecyclerFormPage {
   //form to validate
   formGroup: FormGroup;
   name: AbstractControl;
+  lastName: AbstractControl;
   daysValidator: AbstractControl;
   hourStart: AbstractControl;
   hourEnd: AbstractControl;
@@ -182,6 +183,7 @@ export class RecyclerFormPage {
     //validations
     this.formGroup = this.formBuilder.group({
       name: ['', Validators.required],
+      lastName: ['', Validators.required],
       daysValidator: ['', Validators.required],
       hourStart: ['', Validators.compose([Validators.required, (control: FormControl) => {
         if (this.newRecycler.date.startTime > this.newRecycler.date.endTime) {
@@ -204,6 +206,7 @@ export class RecyclerFormPage {
     });
     //controls
     this.name = this.formGroup.controls['name'];
+    this.lastName = this.formGroup.controls['lastName'];
     this.daysValidator = this.formGroup.controls['daysValidator'];
     this.hourStart = this.formGroup.controls['hourStart'];
     this.hourEnd = this.formGroup.controls['hourEnd'];

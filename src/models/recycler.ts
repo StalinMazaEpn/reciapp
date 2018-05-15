@@ -1,8 +1,11 @@
 export interface Recycler{
 	id:any;
 	name:string;
+	lastName:string;
 	phone:string;
 	image:any;
+	dream:string;
+	yearsRecycling:string;
 	gender:any;
 	yearBirth:any;
 	date:any;
