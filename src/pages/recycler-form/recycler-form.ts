@@ -101,8 +101,7 @@ export class RecyclerFormPage {
         .then((snapshot) => {
           // Upload completed successfully, now we can get the download URL
           this.newRecycler.image = snapshot.downloadURL;
-
-          console.log("IAMGE", this.newRecycler.image);
+          console.log("IMAGE", this.newRecycler.image);
           //Call function to create new recycler
           this.userSrv.addNewRecycler(this.newRecycler.id, this.newRecycler).then(() => {
             //Toast Ok

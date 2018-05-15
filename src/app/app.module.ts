@@ -4,9 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
 import { ReciappService } from '../services/reciapp.service';
-
 import { MyApp } from './app.component';
 
 import { DashboardPageModule } from '../pages/dashboard/dashboard.module';
@@ -20,6 +18,7 @@ import { LoginPageModule } from './../pages/login/login.module';
 import { RegisterPageModule } from './../pages/register/register.module';
 import { SocialNetworksPageModule } from '../pages/social-networks/social-networks.module';
 import { RecyclerFormPageModule } from './../pages/recycler-form/recycler-form.module';
+import { DeliveryPageModule } from '../pages/delivery/delivery.module';
 
 import { HttpModule } from '@angular/http';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -71,7 +70,8 @@ const firebaseConfig = {
     LoginPageModule,
     RegisterPageModule,
     SocialNetworksPageModule,
-    RecyclerFormPageModule
+    RecyclerFormPageModule,
+    DeliveryPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

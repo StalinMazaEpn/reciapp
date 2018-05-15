@@ -3,9 +3,9 @@ import { IonicPage, NavController, NavParams,LoadingController } from 'ionic-ang
 
 import {DashboardPage} from '../dashboard/dashboard';
 import {EntregaPage} from '../entrega/entrega';
-import {CategoriaPage} from '../categoria/categoria';
 import { TourPage } from '../tour/tour';
 import { SocialNetworksPage } from '../social-networks/social-networks';
+import {DeliveryPage} from '../delivery/delivery';
 
 import * as firebase from 'firebase/app'
 @IonicPage()
@@ -15,7 +15,7 @@ import * as firebase from 'firebase/app'
 })
 export class TabsPage {
   tab1Root = DashboardPage;
-  tab2Root = CategoriaPage;
+  tab2Root = DeliveryPage;
   tab3Root = EntregaPage;
   
   constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl: LoadingController) {
@@ -40,7 +40,7 @@ export class TabsPage {
 
   logout(){
     console.log('cerrar');
-    localStorage.removeItem('isLog');
+    //localStorage.removeItem('isLog');
     firebase.auth().signOut();
     this.redirectLogin();
     setTimeout(()=>{this.navCtrl.setRoot(TabsPage)},3000);
