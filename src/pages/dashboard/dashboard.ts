@@ -15,6 +15,7 @@ import * as firebase from 'firebase/app'
 import { MapPage } from '../map/map';
 
 import {AuthenticationService} from "../../services/authenticationService";
+import {CategoriaPage} from "../categoria/categoria";
 //import { Slides } from 'ionic-angular';
 
 

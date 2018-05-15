@@ -28,15 +28,16 @@ export class RegisterPage {
   }
 
   user={
-  	pointsTotal:{
+  	points:{
       pointsRegister:20,
       pointsDelivery:0,
       pointsFavorite:0,
-      pointsRecycler:0
+      pointsRecycler:0,
+      total: 20
     },
     lastDelivery:0,
     totalDeliveries:0
-  } as User; 
+  } as User;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,  public afAuth:AngularFireAuth, public userSrv:ReciappService, public toastCtrl:ToastController) {
   }
@@ -56,8 +57,8 @@ export class RegisterPage {
           const result_ = this.userSrv.createUser(result.uid,this.user);
           if (result_) {
             this.userOk();
-            setTimeout(()=>{this.navCtrl.setRoot(TabsPage)},1000);  
-          }          
+            setTimeout(()=>{this.navCtrl.setRoot(TabsPage)},1000);
+          }
 	  		}
 	  	}
 	  	catch(e){
@@ -67,7 +68,7 @@ export class RegisterPage {
   }
 
   register_fb(){
-  	console.log('registro fb');	 
+  	console.log('registro fb');
   }
 
   userOk() {
@@ -88,7 +89,7 @@ export class RegisterPage {
       case "auth/invalid-email":
         message="Ingresa un correo válido.";
         break;
-      
+
       case "auth/weak-password":
         message="La contraseña debe tener 6 caracteres.";
         break;
@@ -98,6 +99,6 @@ export class RegisterPage {
       duration: 3000,
       position:'top'
     });
-    toast.present(); 
+    toast.present();
   }
 }

@@ -1,251 +1,170 @@
+<ion-header>
+  <ion-toolbar>
 
-
-  <ion-header>
-    <ion-toolbar>
-      
-      <div *ngIf="isLog; else elseHeader">
-        <!--ion-title showWhen="ios">VECI</ion-title>
-        <button ion-button icon-only menuToggle>
-          <ion-icon name="menu"></ion-icon>
-        </button>
-        <ion-title showWhen="android,windows">VECI</ion-title>
-        <ion-buttons item-end>
-          <button ion-button icon-only (click)="addRecycler()">
-            <ion-icon ios="ios-bulb" md="md-bulb"></ion-icon>
-          </button>
-        </ion-buttons-->
-
-
-
-        <ion-grid>
-          <ion-row>
-              <ion-title text-center showWhen="ios">VECI</ion-title>
-            <ion-col col-2>
-              <button ion-button icon-only menuToggle>
-                <ion-icon name="menu"></ion-icon>
-              </button>
-            </ion-col>
-            <ion-col col-8>
-                <ion-title text-center showWhen="android,windows">VECI</ion-title>
-            </ion-col>
-            <ion-col col-2>
-              <ion-buttons item-end>
-          <button ion-button icon-only (click)="openTips()">
-            <ion-icon ios="ios-bulb" md="md-bulb"></ion-icon>
-          </button>
-        </ion-buttons>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-
-      </div>
-      <ng-template #elseHeader>
-        <ion-title showWhen="ios" text-center>Bienvenido!</ion-title>
-        <button ion-button icon-only menuToggle>
-          <ion-icon name="menu"></ion-icon>
-          <ion-title text-center showWhen="android,windows">Bienvenido!</ion-title>
-        </button> 
-      </ng-template>      
-
-    </ion-toolbar>
-  </ion-header>
-  <br/>
-  <br/>
-  
-
-  <ion-content padding> 
-    <!--ion-list>
-      <ion-list-header color="light"> Recicladores Cercanos </ion-list-header>
-    </ion-list-->
-
-    <div *ngIf="isLog; else elseLogin">
-
-        <ion-list >
-          <ion-item>
-            <ion-avatar item-start >
-              <img class="avatarsize" src="../../assets/imgs/hombre.jpg">
-            </ion-avatar>
-            <h2>{{(user)?.name}}</h2>
-            <!--p>20 pts.</p-->
-            <p>{{( (user)?.pointsTotal.pts_entrega + (user)?.pointsTotal.pts_recycler + (user)?.pointsTotal.pts_favorite + (user)?.pointsTotal.pts_register )}} pts.</p>
-              <!--p item-end > 12:40</p-->
-            <!--button ion-button icon-left item-end class="ion-list">
-              <ion-icon ios="ios-brush" md="md-brush"></ion-icon>
-                Cambiar perfil
-            </button-->
-            <ion-fab right bottom icon-only item-end>
-                <button ion-fab>
-                    <ion-icon ios="ios-brush" md="md-brush"></ion-icon>
-                </button>
-              </ion-fab>  
-          </ion-item>
-        </ion-list>
-
-        <!--ion-list-header color="light"> Mi última entrega <span style="margin-left:10%;"> {{(user|async)?.lastDelivery}}</span>  </ion-list-header-->
-        <!--ion-row>
-            <ion-col >Mi última entrega</ion-col>
-            <ion-col >{{(user)?.lastDelivery | amLocale:'es' | amTimeAgo:true}}</ion-col>
-          </ion-rowp-->
-
-          <!--ion-list-header color="light"> Mi última entrega
-              <span style="margin-left: 20%;">{{(user)?.lastDelivery | amLocale:'es' | amTimeAgo:true}}</span> 
-            </ion-list-header-->
-
-
-            <ion-card>
-              <ion-card-content>
-                <ion-card-title>
-                  Mi última entrega
-                  </ion-card-title>
-                <p *ngIf="(user)?.lastDelivery; else elseMessage">
-                  {{(user)?.lastDelivery | amLocale:'es' | amTimeAgo:true}}
-                </p>
-
-                <ng-template #elseMessage>
-                  <p>Aún no tienes entregas</p>
-                </ng-template>  
-
-
-                
-              </ion-card-content>
-            </ion-card>
-
-
-            <ion-card>
-              <ion-card-content>
-                <ion-card-title>
-                  Mis entregas
-                  </ion-card-title>
-                <p>
-                  Todas: {{(user)?.totalDeliveries}}
-                </p>
-                
-              </ion-card-content>
-            </ion-card>
-
-          <br/>
-          <br/> 
-
-        <!--ion-list-header color="light"> Mis entregas 
-          <span style="margin-left: 20%;">(Todas): {{(user)?.totalDeliveries}}</span> 
-        </ion-list-header-->
-      
-
-        <!--ion-list-header color="light"> Tus Recicladores </ion-list-header>
-        <ion-list>
-          <ion-row *ngIf="(recyclers | async)?.length==0" text-center>
-            <ion-card text-center>
-              <ion-card-content>
-                <ion-item text-center>No tienes recicladores favoritos</ion-item>
-                <div >Encuentra tu reciclador más cercano en el mapa</div>
-                <div text-center>
-                    <button ion-button outline item-end icon-left (click)="openMap()">
-                        <ion-icon name="add-circle"></ion-icon>
-                        Agregar Favorito
-                      </button>
-                </div>
-              </ion-card-content>
-            </ion-card>
-          </ion-row>
-
-          <ion-row *ngFor='let recycler$ of recyclers | async'>            
-              <ion-col *ngIf="recycler$ | async as recycler;  else loading" >
-              <ion-item (tap)="goRecycler(recycler)">
-                  <ion-avatar item-start>
-                    <img src="{{recycler.image}}">
-                  </ion-avatar>
-                  <h2>{{recycler.name}}</h2>
-              </ion-item>
-            </ion-col>
-            <ng-template #loading>
-                <ion-grid>
-                    <ion-row justify-content-center>
-                        <ion-col col-2>
-                            <ion-spinner name="circles"></ion-spinner>
-                        </ion-col>
-                        <ion-col col-6>
-                            Cargando favoritos...
-                          </ion-col>
-                      </ion-row>
-                </ion-grid>
-              </ng-template>
-          </ion-row>
-        </ion-list-->
-
-        <ion-slides autoplay="2000" loop="true" speed="3000" pager="true">
-            <ion-slide style="background-color:#F5AB35">               
-              <ion-grid>
-                <ion-row>
-                  <ion-col col-8 center text-center>
-                    <h2>PAPEL</h2>
-                    <p text-justify >Este material que más contamina al planeta</p>
-                  </ion-col>
-                  <ion-col col-4 center text-center>
-                    <img class="image" src="../../assets/imgs/papel.png">
-                  </ion-col>
-                </ion-row>
-              </ion-grid>            
-            </ion-slide>
-            
-            <ion-slide style="background-color: #4B77BE">  
-              <ion-grid>
-                <ion-row>
-                  <ion-col col-8 center text-center>
-                    <h2>PLÁSTICO</h2>
-                    <p text-justify >Este material es el más reciclado</p>
-                  </ion-col>
-                  <ion-col col-4 center text-center>
-                    <img class="image" src="../../assets/imgs/plastico.png">
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
-            </ion-slide>
-            
-            <ion-slide style="background-color:#1BBC9B">
-              <ion-grid>
-                <ion-row>
-                  <ion-col col-8 center text-center>
-                    <h2>VIDRIO</h2>
-                    <p text-justify >Sabias que, el vidrio tambien se puede reciclar</p>
-                  </ion-col>
-                  <ion-col col-4 center text-center>
-                    <img class="image" src="../../assets/imgs/vidrio.png">
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
-            </ion-slide>
-            
-          </ion-slides>
-    
-    </div>
-
-      <ng-template #elseLogin>
-        <ion-row text-center>
-          <ion-col col-12>
-            <button ion-button round (click)="login()" >Iniciar Sesión</button>
+    <div *ngIf="isLog; else elseHeader">
+      <ion-grid>
+        <ion-row>
+          <ion-title text-center showWhen="ios">VECI</ion-title>
+          <ion-col col-2>
+            <button ion-button icon-only menuToggle>
+              <ion-icon name="menu"></ion-icon>
+            </button>
           </ion-col>
-         </ion-row>
-        <br>
-
-        <ion-list>
-        <ion-list-header color="light"> Personaliza tu experiencia. </ion-list-header>
-          <ion-row text-center>
-            <!--ion-col col-12>
-              <span ion-button clear>Regístrate</span>
-            </ion-col-->
-            <ion-col>
-              <button ion-button icon-left clear large (click)="register_mail()">
-                <ion-icon ios="ios-mail" md="md-mail" ></ion-icon>
+          <ion-col col-8>
+            <ion-title text-center showWhen="android,windows">VECI</ion-title>
+          </ion-col>
+          <ion-col col-2>
+            <ion-buttons item-end>
+              <button ion-button icon-only (click)="openTips()">
+                <ion-icon ios="ios-bulb" md="md-bulb"></ion-icon>
               </button>
-            </ion-col>
-            <ion-col>
-              <button ion-button icon-left clear large (click)="register_fb()">
-                <ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon>
-              </button>
-            </ion-col>
-          </ion-row>
-        </ion-list>      
-      </ng-template>
+            </ion-buttons>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
 
-      
-  </ion-content>
+    </div>
+    <ng-template #elseHeader>
+      <ion-title showWhen="ios" text-center>Bienvenido!</ion-title>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+        <ion-title text-center showWhen="android,windows">Bienvenido!</ion-title>
+      </button>
+    </ng-template>
+
+  </ion-toolbar>
+</ion-header>
+<br/>
+<br/>
+
+
+<ion-content padding>
+
+  <div *ngIf="isLog; else elseLogin">
+
+    <div *ngIf="user !== undefined; else loading">
+      <ion-list>
+        <ion-item>
+          <h2>{{(user)?.name}}</h2>
+          <p>{{ (user)?.points.total }} pts.</p>
+          <!--<ion-fab right bottom icon-only item-end>-->
+          <!--<button ion-fab>-->
+          <!--<ion-icon ios="ios-brush" md="md-brush"></ion-icon>-->
+          <!--</button>-->
+          <!--</ion-fab>-->
+        </ion-item>
+      </ion-list>
+
+      <ion-card>
+        <ion-card-content>
+          <ion-card-title>
+            Mi última entrega
+          </ion-card-title>
+          <p *ngIf="(user)?.lastDelivery; else elseMessage">
+            hace {{(user)?.lastDelivery | amLocale:'es' | amTimeAgo:true}}
+          </p>
+
+          <ng-template #elseMessage>
+            <p>Aún no tienes entregas</p>
+          </ng-template>
+        </ion-card-content>
+      </ion-card>
+
+
+      <ion-card>
+        <ion-card-content>
+          <ion-card-title>
+            Mis entregas
+          </ion-card-title>
+          <p>
+            Has registrado {{(user)?.totalDeliveries}} entrega{{(user)?.totalDeliveries > 1 ? 's' : ''}}
+          </p>
+        </ion-card-content>
+      </ion-card>
+
+      <br/>
+      <br/>
+
+      <ion-slides autoplay="2000" loop="true" speed="3000" pager="true">
+        <ion-slide style="background-color:#F5AB35">
+          <ion-grid>
+            <ion-row>
+              <ion-col col-8 center text-center>
+                <h2>PAPEL</h2>
+                <p text-justify>Este material que más contamina al planeta</p>
+              </ion-col>
+              <ion-col col-4 center text-center>
+                <img class="image" src="../../assets/imgs/papel.png">
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-slide>
+
+        <ion-slide style="background-color: #4B77BE">
+          <ion-grid>
+            <ion-row>
+              <ion-col col-8 center text-center>
+                <h2>PLÁSTICO</h2>
+                <p text-justify>Este material es el más reciclado</p>
+              </ion-col>
+              <ion-col col-4 center text-center>
+                <img class="image" src="../../assets/imgs/plastico.png">
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-slide>
+
+        <ion-slide style="background-color:#1BBC9B">
+          <ion-grid>
+            <ion-row>
+              <ion-col col-8 center text-center>
+                <h2>VIDRIO</h2>
+                <p text-justify>Sabias que, el vidrio tambien se puede reciclar</p>
+              </ion-col>
+              <ion-col col-4 center text-center>
+                <img class="image" src="../../assets/imgs/vidrio.png">
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-slide>
+
+      </ion-slides>
+
+    </div>
+  </div>
+
+  <ng-template #loading>
+    <ion-spinner name="circles"></ion-spinner>
+    Cargando...
+  </ng-template>
+
+  <ng-template #elseLogin>
+    <ion-row text-center>
+      <ion-col col-12>
+        <button ion-button round (click)="login()">Iniciar Sesión</button>
+      </ion-col>
+    </ion-row>
+    <br>
+
+    <ion-list>
+      <ion-list-header color="light"> Personaliza tu experiencia.</ion-list-header>
+      <ion-row text-center>
+        <!--ion-col col-12>
+          <span ion-button clear>Regístrate</span>
+        </ion-col-->
+        <ion-col>
+          <button ion-button icon-left clear large (click)="register_mail()">
+            <ion-icon ios="ios-mail" md="md-mail"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-left clear large (click)="register_fb()">
+            <ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+  </ng-template>
+
+
+</ion-content>
