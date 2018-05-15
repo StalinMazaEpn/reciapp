@@ -1,0 +1,148 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Entrega</ion-title>
+    <ion-buttons end>
+      <button ion-button mini icon-only (tap)="delivery()">
+        <!--ion-icon ios="ios-attach" md="md-attach"></ion-icon-->
+        <!--ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon-->
+        <ion-icon ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline" color="secondary"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+	<div text-center>
+		<div>
+			<img src="{{tmpPhoto}}">
+		</div>
+
+		<ion-fab top right>
+	        <button ion-fab mini outline color="secondary" (click)="takePhoto()">
+				<ion-icon ios="ios-camera" md="md-camera"></ion-icon>
+			</button>
+	    </ion-fab>
+	    <div text-center>
+			<span *ngIf="error" class="validations"> *Toma una foto para validar la información.</span>	
+		</div>
+	</div>
+
+	<div text-center>
+		<span *ngIf="error" class="validations"> *Debe seleccionar un <b>Reciclador Favorito, Cercano o Anónimo</b></span>	
+	</div>
+	
+
+	<div *ngIf="isAuthenticated; else needLoggin">
+			<ion-scroll scrollX="true" style="width: 100%; height: 73px; white-space: nowrap;">
+				<ul>
+					<!--Agregar-->
+					<li text-center (tap)="addRecycler()">
+						<ion-avatar >
+		                	<img class="recyclers" src="assets/imgs/add-user.png" >
+			            </ion-avatar>
+			            <p text-center style="height: auto !important;overfloat: auto; font-size:10px;">Agregar</p>	
+					</li>
+					<!--Anonimo-->
+					<li text-center (tap)="selectRecycler('Anónimo')">
+		                <ion-avatar>
+			                <img class="recyclers" src="assets/imgs/recycler_women.png" id="anonymousRecycler">
+			            </ion-avatar>
+			            <p text-center style="height: auto !important;overfloat: auto; font-size:10px;">Anónimo</p>
+			        </li>	
+			        <!--Favoritos-->
+					<li *ngFor="let recycler$ of recyclers | async;" >
+						<span *ngIf="recycler$ | async as recycler;" (tap)="selectRecycler(recycler.id)">
+							<span *ngIf="recycler.image!=undefined; else firstLetter">
+								<ion-avatar>
+				                  <img class="recyclers" src="{{recycler.image}}" id="{{recycler.id}}">
+				                </ion-avatar>	
+							</span>
+							<ng-template #firstLetter>
+								<ion-avatar>
+									<span text-center>
+										<p class="firstLetter" >{{recycler.name.charAt(0).toUpperCase()}}</p>
+										<img class="recyclers imgfirstLetter" style="background-color: #32db64" id="{{recycler.id}}">
+									</span>
+				               	</ion-avatar>	
+							</ng-template>
+		                	
+			                <p block text-wrap style="height: auto !important;overfloat: auto; font-size:10px;">{{recycler.name}}</p>
+			            </span>	
+			            
+					</li>
+					<!--Cercanos-->
+					<!--EndCercanos-->
+				</ul>
+			</ion-scroll>
+	  
+	</div>
+
+	<ng-template #needLoggin>
+		<p text-center style="color: red;" class="title">Necesitas <b> <!--(tap)="goToLogin()"-->Iniciar Sesión</b> para ver tus recicladores favoritos.</p>
+	</ng-template>
+	<div>
+	  <ion-row>
+	  	<ion-col col-3 text-center><p class="title-small">Tamaño de la funda</p></ion-col>
+	  	<ion-col>
+	  		<ion-label class="labels title">
+	  			<span class="label label1">N</span>
+	  			<span class="label">P</span>
+	  			<span class="label">M</span>
+	  			<span >G</span>
+	  		</ion-label>
+	  	</ion-col>
+	  </ion-row>	
+	  
+	  <!--ion-row>
+	  	<ion-col >
+	  		<ion-label style="margin-left: 32%; margin-top: 0;margin-bottom: -5px;">
+	  			<span class="title-small1">0</span>
+	  			<span class="title-small1">10</span>
+	  			<span class="title-small1">20</span>
+	  			<span class="title-small1">30</span>
+	  			<span class="title-small1">40</span>
+	  			<span class="title-small1">50</span>
+	  			<span class="title-small1">60</span>
+	  			<span class="title-small1">70</span>
+	  			<span class="title-small1">80</span>
+	  			<span class="title-small1">90</span>
+	  			<span class="title-small1">100</span>
+	  		</ion-label>
+	  	</ion-col>
+	  </ion-row-->	
+	  <div text-center>
+		<span *ngIf="error" class="validations"> *Identifica la cantidad de material reciclable a entregar.</span>	
+	</div>
+	  <ion-row>
+		<ion-col col-4 text-center>
+		  <ion-label class="title">Plástico</ion-label>
+		  <ion-label class="title material">Papel</ion-label>
+		  <ion-label class="title material">Chatarra</ion-label>
+		  <ion-label class="title material">Vidrio</ion-label>
+		  <ion-label class="title material">Compuesto</ion-label>
+		</ion-col>
+		<ion-col col-7>
+		  <ion-range pin="true" snaps="true" min="0" max="3" step="1" color="secondary" [(ngModel)]="plasticoCtrl" #ctrl="ngModel">
+		  	<!--ion-icon range-left small ios="ios-radio-button-off" md="md-radio-button-off"></ion-icon>
+		  	<ion-icon range-right small ios="ios-radio-button-on" md="md-radio-button-on"></ion-icon-->
+		  </ion-range>
+		  <ion-range pin="true" snaps="true" min="0" max="3" step="1" color="secondary" [(ngModel)]="papelCtrl" #ctrl="ngModel">
+		  </ion-range>
+		  <ion-range pin="true" snaps="true" min="0" max="3" step="1" color="secondary" [(ngModel)]="chatarraCtrl" #ctrl="ngModel">
+		  </ion-range>
+		  <ion-range pin="true" snaps="true" min="0" max="3" step="1" color="secondary" [(ngModel)]="vidrioCtrl" #ctrl="ngModel">
+		  </ion-range>
+		  <ion-range pin="true" snaps="true" min="0" max="3" step="1" color="secondary" [(ngModel)]="compuestoCtrl" #ctrl="ngModel">
+		  </ion-range>
+		</ion-col>
+	  </ion-row>
+	</div>
+	<!--div text-center (click)="delivery()">
+  	  <button ion-button large outline class="roundBtn">
+  		<ion-icon ios="ios-heart-outline" md="md-heart-outline"></ion-icon>
+  	  </button>
+  	  <ion-label class="title delivery">Entregar</ion-label>
+    </div-->
+</ion-content>

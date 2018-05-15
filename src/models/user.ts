@@ -3,7 +3,9 @@ export interface User{
 	name:string;
 	lastname:string;
 	phone:string;
-	points:number;
+	pointsTotal:any;
 	favoritiesReciclers:any;
 	registeredRecyclers:any;
+	lastDelivery:any;
+	totalDeliveries:number;
 }

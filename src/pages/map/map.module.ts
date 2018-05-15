@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { EntregaPage } from './entrega';
+import { MapPage } from './map';
 
 import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
-    EntregaPage,
+    MapPage,
   ],
   imports: [
-    IonicPageModule.forChild(EntregaPage),
+    IonicPageModule.forChild(MapPage),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCrgG7pOWMbLgR5xFR3oEjkrP6PBN4WyiY'
     })
   ],
 })
-export class EntregaPageModule {}
+export class MapPageModule {}

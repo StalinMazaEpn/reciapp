@@ -2,18 +2,18 @@
   <ion-content padding>
 
   	<ion-list>
-      <button menuClose ion-item (click)="userProfile()">
+      <!--button menuClose ion-item (click)="userProfile()">
      	Perfil 	
-      </button>
+      </button-->
       <button menuClose ion-item (click)="socialNetworks()">
      	Redes Sociales	
       </button>
       <button menuClose ion-item (click)="goToTour()">
      	Tour
       </button>
-      <button menuClose ion-item (click)="aboutUs()">
+      <!--button menuClose ion-item (click)="aboutUs()">
      	Acerca de...
-      </button>
+      </button-->
       <button menuClose ion-item (click)="logout()">
      	Cerrar Sesión
       </button>
@@ -25,7 +25,6 @@
 <ion-tabs>
 
   <ion-tab [root]="tab1Root" #content tabIcon="ios-home" swipeBackEnabled="false"></ion-tab>
-
-  <ion-tab [root]="tab2Root"  tabIcon="ios-hand"></ion-tab>
-  <ion-tab [root]="tab3Root"  tabIcon="ios-pin"></ion-tab>
+  <ion-tab [root]="tab2Root"  tabIcon="ios-heart"></ion-tab>
+  <ion-tab [root]="tab3Root"  tabIcon="ios-hand"></ion-tab>
 </ion-tabs>

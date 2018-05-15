@@ -73,4 +73,10 @@ export class ReciappService{
 	public getReciclerKey(){
 		return this.afdatabase.database.ref().child('recycler').push().key;
 	}
+
+	/*Function to add a new delivery*/
+	public async addNewDelivery(deliveryData){
+		//console.log(deliveryData);
+		await this.afdatabase.list('/deliveries').push(deliveryData);
+	}
 }
