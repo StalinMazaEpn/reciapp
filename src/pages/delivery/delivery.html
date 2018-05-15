@@ -95,46 +95,88 @@
 	  	</ion-col>
 	  </ion-row>	
 	  
-	  <!--ion-row>
-	  	<ion-col >
-	  		<ion-label style="margin-left: 32%; margin-top: 0;margin-bottom: -5px;">
-	  			<span class="title-small1">0</span>
-	  			<span class="title-small1">10</span>
-	  			<span class="title-small1">20</span>
-	  			<span class="title-small1">30</span>
-	  			<span class="title-small1">40</span>
-	  			<span class="title-small1">50</span>
-	  			<span class="title-small1">60</span>
-	  			<span class="title-small1">70</span>
-	  			<span class="title-small1">80</span>
-	  			<span class="title-small1">90</span>
-	  			<span class="title-small1">100</span>
+	  <ion-row>
+	  	<ion-col>
+	  		<ion-label>
+	  			<span class="title-small1" style="margin-left: 32%; margin-top: 0;margin-bottom: -5px;">0</span>
+	  			
+	  			<span *ngIf="totalMaterialRecyclable>0 && totalMaterialRecyclable==10; else sectionTotalMaterial10" class="title-small1 validations">10%</span>
+	  			<ng-template #sectionTotalMaterial10>
+					<span class="title-small1">10%</span>
+				</ng-template>
+				
+				<span *ngIf="totalMaterialRecyclable>0 && totalMaterialRecyclable==20; else sectionTotalMaterial20" class="title-small1 validations">20%</span>
+	  			<ng-template #sectionTotalMaterial20>
+					<span class="title-small1">20%</span>
+				</ng-template>
+	  			
+	  			<span *ngIf="totalMaterialRecyclable>0 && totalMaterialRecyclable==30; else sectionTotalMaterial30" class="title-small1 validations">30%</span>
+	  			<ng-template #sectionTotalMaterial30>
+					<span class="title-small1">30%</span>
+				</ng-template>
+
+				<span *ngIf="totalMaterialRecyclable>0 && totalMaterialRecyclable==40; else sectionTotalMaterial40" class="title-small1 validations">40%</span>
+	  			<ng-template #sectionTotalMaterial40>
+					<span class="title-small1">40%</span>
+				</ng-template>
+
+				<span *ngIf="totalMaterialRecyclable>0 && totalMaterialRecyclable==50; else sectionTotalMaterial50" class="title-small1 validations">50%</span>
+	  			<ng-template #sectionTotalMaterial50>
+					<span class="title-small1">50%</span>
+				</ng-template>
+
+				<span *ngIf="totalMaterialRecyclable>0 && totalMaterialRecyclable==60; else sectionTotalMaterial60" class="title-small1 validations">60%</span>
+	  			<ng-template #sectionTotalMaterial60>
+					<span class="title-small1">60%</span>
+				</ng-template>
+
+				<span *ngIf="totalMaterialRecyclable>0 && totalMaterialRecyclable==70; else sectionTotalMaterial70" class="title-small1 validations">70%</span>
+	  			<ng-template #sectionTotalMaterial70>
+					<span class="title-small1">70%</span>
+				</ng-template>
+
+				<span *ngIf="totalMaterialRecyclable>0 && totalMaterialRecyclable==80; else sectionTotalMaterial80" class="title-small1 validations">80%</span>
+	  			<ng-template #sectionTotalMaterial80>
+					<span class="title-small1">80%</span>
+				</ng-template>
+
+				<span *ngIf="totalMaterialRecyclable>0 && totalMaterialRecyclable==90; else sectionTotalMaterial90" class="title-small1 validations">90%</span>
+	  			<ng-template #sectionTotalMaterial90>
+					<span class="title-small1">90%</span>
+				</ng-template>
+
+				<span *ngIf="totalMaterialRecyclable>0 && totalMaterialRecyclable==100; else sectionTotalMaterial100" class="title-small1 validations">100%</span>
+	  			<ng-template #sectionTotalMaterial100>
+					<span class="title-small1">100%</span>
+				</ng-template>
 	  		</ion-label>
 	  	</ion-col>
-	  </ion-row-->	
+	  </ion-row>
 	  <div text-center>
-		<span *ngIf="error" class="validations"> *Identifica la cantidad de material reciclable a entregar.</span>	
-	</div>
+		<span *ngIf="error" class="validations"> *Identifica la cantidad de material reciclable a entregar.</span>
+		<span *ngIf="(totalMaterialRecyclable)==100" class="title-small1" >La funda esta llena <span class="validations" (tap)="editForm()">editar</span> porcentajes.</span>
+	  </div>
 	  <ion-row>
-		<ion-col col-4 text-center>
-		  <ion-label class="title">Plástico</ion-label>
-		  <ion-label class="title material">Papel</ion-label>
-		  <ion-label class="title material">Chatarra</ion-label>
-		  <ion-label class="title material">Vidrio</ion-label>
-		  <ion-label class="title material">Compuesto</ion-label>
+		<ion-col col-4>
+		  <ion-label class="title">Plástico <span *ngIf="plasticoCtrl!=0 && plasticoCtrl!=undefined" class="title-small1 validations">({{plasticoCtrl}}%)</span></ion-label>
+		  <ion-label class="title material">Papel <span *ngIf="papelCtrl!=0 && papelCtrl!=undefined" class="title-small1 validations">({{papelCtrl}}%)</span></ion-label>
+		  <ion-label class="title material">Cartón <span *ngIf="cartonCtrl!=0 && cartonCtrl!=undefined" class="title-small1 validations">({{cartonCtrl}}%)</span></ion-label>
+		  <ion-label class="title material">Metal <span *ngIf="chatarraCtrl!=0 && chatarraCtrl!=undefined" class="title-small1 validations">({{chatarraCtrl}}%)</span></ion-label>
+		  <ion-label class="title material">Vidrio <span *ngIf="vidrioCtrl!=0 && vidrioCtrl!=undefined" class="title-small1 validations">({{vidrioCtrl}}%)</span></ion-label>
+		  <ion-label class="title material">Tetrapack <span *ngIf="compuestoCtrl!=0 && compuestoCtrl!=undefined" class="title-small1 validations">({{compuestoCtrl}}%)</span></ion-label>
 		</ion-col>
 		<ion-col col-7>
-		  <ion-range pin="true" snaps="true" min="0" max="3" step="1" color="secondary" [(ngModel)]="plasticoCtrl" #ctrl="ngModel">
-		  	<!--ion-icon range-left small ios="ios-radio-button-off" md="md-radio-button-off"></ion-icon>
-		  	<ion-icon range-right small ios="ios-radio-button-on" md="md-radio-button-on"></ion-icon-->
+		  <ion-range upper="false" pin="true" snaps="true" min="0" max="100" step="10" color="secondary" id="range_34" [(ngModel)]="plasticoCtrl" #ctrl="ngModel" (ionChange)="totalMaterial(plasticoCtrl,'plastico')" [disabled]="btnDisabled">
 		  </ion-range>
-		  <ion-range pin="true" snaps="true" min="0" max="3" step="1" color="secondary" [(ngModel)]="papelCtrl" #ctrl="ngModel">
+		  <ion-range  pin="true" snaps="true" min="0" max="100" step="10" color="secondary" [(ngModel)]="papelCtrl" #ctrl="ngModel" (ionChange)="totalMaterial(papelCtrl,'papel')" [disabled]="btnDisabled">
 		  </ion-range>
-		  <ion-range pin="true" snaps="true" min="0" max="3" step="1" color="secondary" [(ngModel)]="chatarraCtrl" #ctrl="ngModel">
+		  <ion-range  pin="true" snaps="true" min="0" max="100" step="10" color="secondary" [(ngModel)]="cartonCtrl" #ctrl="ngModel" (ionChange)="totalMaterial(cartonCtrl,'carton')" [disabled]="btnDisabled">
 		  </ion-range>
-		  <ion-range pin="true" snaps="true" min="0" max="3" step="1" color="secondary" [(ngModel)]="vidrioCtrl" #ctrl="ngModel">
+		  <ion-range  pin="true" snaps="true" min="0" max="100" step="10" color="secondary" [(ngModel)]="chatarraCtrl" #ctrl="ngModel" (ionChange)="totalMaterial(chatarraCtrl,'chatarra')" [disabled]="btnDisabled">
 		  </ion-range>
-		  <ion-range pin="true" snaps="true" min="0" max="3" step="1" color="secondary" [(ngModel)]="compuestoCtrl" #ctrl="ngModel">
+		  <ion-range  pin="true" snaps="true" min="0" max="100" step="10" color="secondary" [(ngModel)]="vidrioCtrl" #ctrl="ngModel" (ionChange)="totalMaterial(vidrioCtrl,'vidrio')" [disabled]="btnDisabled">
+		  </ion-range>
+		  <ion-range  pin="true" snaps="true" min="0" max="100" step="10" color="secondary" [(ngModel)]="compuestoCtrl" #ctrl="ngModel" (ionChange)="totalMaterial(compuestoCtrl,'compuesto')" [disabled]="btnDisabled">
 		  </ion-range>
 		</ion-col>
 	  </ion-row>

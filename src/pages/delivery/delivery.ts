@@ -27,6 +27,7 @@ export class DeliveryPage {
   chatarraCtrl:any;
   vidrioCtrl:any;
   compuestoCtrl:any;
+  cartonCtrl:any;
 
   selRecycler:any;
   tmp_selRecycler:any;
@@ -38,12 +39,14 @@ export class DeliveryPage {
       papel:undefined,
       chatarra:undefined,
       vidrio:undefined,
-      compuesto:undefined
+      compuesto:undefined,
+      carton:undefined,
     }
   };
 
   tmpDate;
   date;
+  totalMaterialRecyclable:number=0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public authenticationService:AuthenticationService,
   	private camera: Camera, public userSrv:ReciappService,public toastCtrl:ToastController) {
@@ -108,14 +111,17 @@ export class DeliveryPage {
     //Validate data 
     if (this.recyclerId!=null && (this.plasticoCtrl!=null && this.plasticoCtrl!=undefined && this.plasticoCtrl!=0 ||
      this.papelCtrl!=null && this.papelCtrl!=undefined && this.papelCtrl!=0 || this.vidrioCtrl!=null && this.vidrioCtrl!=undefined && this.vidrioCtrl!=0 ||
-     this.compuestoCtrl!=null && this.compuestoCtrl!=undefined && this.compuestoCtrl!=0 || this.chatarraCtrl!=null && this.chatarraCtrl!=undefined && this.chatarraCtrl!=0)) {
+     this.compuestoCtrl!=null && this.compuestoCtrl!=undefined && this.compuestoCtrl!=0 || this.chatarraCtrl!=null && this.chatarraCtrl!=undefined && this.chatarraCtrl!=0
+     || this.cartonCtrl!=null && this.cartonCtrl!=undefined && this.cartonCtrl!=0)) {
       //When user select a recycler
       this.userDelivery.idUser=this.uid;
       this.userDelivery.idRecycler=this.recyclerId;
+      //Tomamos la hora del servidor (Arreglo)
       //this.userDelivery.date= database['ServerValue']['TIMESTAMP'];
+      //Tomamos la hora del servidor (Métodos)
       this.userDelivery.date=database.ServerValue.TIMESTAMP;
-      this.rangeData();
-      console.log(this.tmpPhoto);
+      this.rangeData();      
+      //console.log(this.tmpPhoto);
       //Storage photo
       if (this.tmpPhoto !== undefined && this.tmpPhoto != "assets/imgs/suggestion.png") {
         //Storage on firebase
@@ -147,7 +153,8 @@ export class DeliveryPage {
       }
     }else if(this.recyclerId==null && this.tmp_selRecycler==="Anónimo" && (this.plasticoCtrl!=null && this.plasticoCtrl!=undefined && this.plasticoCtrl!=0 ||
      this.papelCtrl!=null && this.papelCtrl!=undefined && this.papelCtrl!=0 || this.vidrioCtrl!=null && this.vidrioCtrl!=undefined && this.vidrioCtrl!=0 ||
-     this.compuestoCtrl!=null && this.compuestoCtrl!=undefined && this.compuestoCtrl!=0 || this.chatarraCtrl!=null && this.chatarraCtrl!=undefined && this.chatarraCtrl!=0)){
+     this.compuestoCtrl!=null && this.compuestoCtrl!=undefined && this.compuestoCtrl!=0 || this.chatarraCtrl!=null && this.chatarraCtrl!=undefined && this.chatarraCtrl!=0
+     || this.cartonCtrl!=null && this.cartonCtrl!=undefined && this.cartonCtrl!=0)){
       //When user not select a recycler
       this.userDelivery.idUser=this.uid;
       this.userDelivery.idRecycler=null;
@@ -198,6 +205,7 @@ export class DeliveryPage {
     this.vidrioCtrl=null;
     this.compuestoCtrl=null;
     this.chatarraCtrl=null;
+    this.cartonCtrl=null;
     this.uid=this.authenticationService.getCurrentUser().uid;
     this.error=false;
     this.tmpPhoto="assets/imgs/suggestion.png";
@@ -208,34 +216,40 @@ export class DeliveryPage {
   //Function to assign 
   rangeData(){
     if (this.plasticoCtrl!=null && this.plasticoCtrl!=undefined) {
-        this.userDelivery.delivery.plastico=this.plasticoCtrl;
-      }else{
-        this.userDelivery.delivery.plastico=null;
-      }
+      this.userDelivery.delivery.plastico=this.plasticoCtrl;
+    }else{
+      this.userDelivery.delivery.plastico=null;
+    }
 
-      if (this.papelCtrl!=null && this.papelCtrl!=undefined) {
-        this.userDelivery.delivery.papel=this.papelCtrl;
-      }else{
-        this.userDelivery.delivery.papel=null;
-      }
+    if (this.papelCtrl!=null && this.papelCtrl!=undefined) {
+      this.userDelivery.delivery.papel=this.papelCtrl;
+    }else{
+      this.userDelivery.delivery.papel=null;
+    }
+    
+    if (this.vidrioCtrl!=null && this.vidrioCtrl!=undefined) {
+      this.userDelivery.delivery.vidrio=this.vidrioCtrl;
+    }else{
+      this.userDelivery.delivery.vidrio=null;
+    }
 
-      if (this.vidrioCtrl!=null && this.vidrioCtrl!=undefined) {
-        this.userDelivery.delivery.vidrio=this.vidrioCtrl;
-      }else{
-        this.userDelivery.delivery.vidrio=null;
-      }
+    if (this.compuestoCtrl!=null && this.compuestoCtrl!=undefined) {
+      this.userDelivery.delivery.compuesto=this.compuestoCtrl;
+    }else{
+      this.userDelivery.delivery.compuesto=null;
+    }
 
-      if (this.compuestoCtrl!=null && this.compuestoCtrl!=undefined) {
-        this.userDelivery.delivery.compuesto=this.compuestoCtrl;
-      }else{
-        this.userDelivery.delivery.compuesto=null;
-      }
+    if (this.chatarraCtrl!=null && this.chatarraCtrl!=undefined) {
+      this.userDelivery.delivery.chatarra=this.chatarraCtrl;
+    }else{
+      this.userDelivery.delivery.chatarra=null;
+    }
 
-      if (this.chatarraCtrl!=null && this.chatarraCtrl!=undefined) {
-        this.userDelivery.delivery.chatarra=this.chatarraCtrl;
-      }else{
-        this.userDelivery.delivery.chatarra=null;
-      }
+    if (this.cartonCtrl!=null && this.cartonCtrl!=undefined) {
+      this.userDelivery.delivery.carton=this.cartonCtrl;
+    }else{
+      this.userDelivery.delivery.carton=null;
+    }
   }
 
   goToLogin(){
@@ -279,5 +293,61 @@ export class DeliveryPage {
       position:'top'
     });
     toast.present();
+  }
+
+
+  aux1=0;
+  aux2=0;
+  aux3=0;
+  aux4=0;
+  aux5=0;
+  aux6=0;
+  btnDisabled:boolean=false;
+
+  totalMaterial(number,name){
+    
+    switch (name) {
+      case "plastico":
+        this.aux1=number;
+        //console.log('plastico',this.aux1);
+        break;
+      
+      case "papel":
+        this.aux2=number;
+        //console.log('papel',this.aux2);
+        break;
+
+      case "vidrio":
+        this.aux3=number;
+        //console.log('vidrio',this.aux3);
+        break;
+
+      case "compuesto":
+        this.aux4=number;
+        //console.log('compuesto',this.aux4);
+        break;
+
+      case "chatarra":
+        this.aux5=number;
+        //console.log('chatarra',this.aux5);
+        break;
+
+      case "carton":
+        this.aux6=number;
+        //console.log('chatarra',this.aux5);
+        break;
+    }
+    if ((this.totalMaterialRecyclable=this.aux1+this.aux2+this.aux3+this.aux4+this.aux5+this.aux6)>=100){
+      this.totalMaterialRecyclable=100;
+      console.log('La funda ya esta llena');
+      this.btnDisabled=true;
+    }else if ((this.aux1+this.aux2+this.aux3+this.aux4+this.aux5+this.aux6)>0 && (this.aux1+this.aux2+this.aux3+this.aux4+this.aux5+this.aux6)<=100) {
+      this.totalMaterialRecyclable=this.aux1+this.aux2+this.aux3+this.aux4+this.aux5+this.aux6;
+      this.btnDisabled=false;
+    }
+  }
+
+  editForm(){
+     this.btnDisabled=false;
   }
 }
