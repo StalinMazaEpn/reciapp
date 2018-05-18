@@ -154,7 +154,8 @@
 	  </ion-row>
 	  <div text-center>
 		<span *ngIf="error" class="validations"> *Identifica la cantidad de material reciclable a entregar.</span>
-		<span *ngIf="(totalMaterialRecyclable)==100" class="title-small1" >La funda esta llena <span class="validations" (tap)="editForm()">editar</span> porcentajes.</span>
+		<span *ngIf="(totalMaterialRecyclable)==100" class="title-small1 secondary" >La funda ya esta llena, enviar en este momento.</span>
+		<span *ngIf="(_totalMaterialRecyclable)>100 && errTotalMaterialRecyclable" class="title-small1 validations" >No puedes entregar más de su capacidad.</span>
 	  </div>
 	  <ion-row>
 		<ion-col col-4>
@@ -166,17 +167,17 @@
 		  <ion-label class="title material">Tetrapack <span *ngIf="compuestoCtrl!=0 && compuestoCtrl!=undefined" class="title-small1 validations">({{compuestoCtrl}}%)</span></ion-label>
 		</ion-col>
 		<ion-col col-7>
-		  <ion-range upper="false" pin="true" snaps="true" min="0" max="100" step="10" color="secondary" id="range_34" [(ngModel)]="plasticoCtrl" #ctrl="ngModel" (ionChange)="totalMaterial(plasticoCtrl,'plastico')" [disabled]="btnDisabled">
+		  <ion-range upper="false" pin="true" snaps="true" min="0" max="100" step="10" color="secondary" id="range_34" [(ngModel)]="plasticoCtrl" #ctrl="ngModel" (ionChange)="totalMaterial(plasticoCtrl,'plastico')">
 		  </ion-range>
-		  <ion-range  pin="true" snaps="true" min="0" max="100" step="10" color="secondary" [(ngModel)]="papelCtrl" #ctrl="ngModel" (ionChange)="totalMaterial(papelCtrl,'papel')" [disabled]="btnDisabled">
+		  <ion-range  pin="true" snaps="true" min="0" max="100" step="10" color="secondary" [(ngModel)]="papelCtrl" #ctrl="ngModel" (ionChange)="totalMaterial(papelCtrl,'papel')">
 		  </ion-range>
-		  <ion-range  pin="true" snaps="true" min="0" max="100" step="10" color="secondary" [(ngModel)]="cartonCtrl" #ctrl="ngModel" (ionChange)="totalMaterial(cartonCtrl,'carton')" [disabled]="btnDisabled">
+		  <ion-range  pin="true" snaps="true" min="0" max="100" step="10" color="secondary" [(ngModel)]="cartonCtrl" #ctrl="ngModel" (ionChange)="totalMaterial(cartonCtrl,'carton')">
 		  </ion-range>
-		  <ion-range  pin="true" snaps="true" min="0" max="100" step="10" color="secondary" [(ngModel)]="chatarraCtrl" #ctrl="ngModel" (ionChange)="totalMaterial(chatarraCtrl,'chatarra')" [disabled]="btnDisabled">
+		  <ion-range  pin="true" snaps="true" min="0" max="100" step="10" color="secondary" [(ngModel)]="chatarraCtrl" #ctrl="ngModel" (ionChange)="totalMaterial(chatarraCtrl,'chatarra')">
 		  </ion-range>
-		  <ion-range  pin="true" snaps="true" min="0" max="100" step="10" color="secondary" [(ngModel)]="vidrioCtrl" #ctrl="ngModel" (ionChange)="totalMaterial(vidrioCtrl,'vidrio')" [disabled]="btnDisabled">
+		  <ion-range  pin="true" snaps="true" min="0" max="100" step="10" color="secondary" [(ngModel)]="vidrioCtrl" #ctrl="ngModel" (ionChange)="totalMaterial(vidrioCtrl,'vidrio')">
 		  </ion-range>
-		  <ion-range  pin="true" snaps="true" min="0" max="100" step="10" color="secondary" [(ngModel)]="compuestoCtrl" #ctrl="ngModel" (ionChange)="totalMaterial(compuestoCtrl,'compuesto')" [disabled]="btnDisabled">
+		  <ion-range  pin="true" snaps="true" min="0" max="100" step="10" color="secondary" [(ngModel)]="compuestoCtrl" #ctrl="ngModel" (ionChange)="totalMaterial(compuestoCtrl,'compuesto')">
 		  </ion-range>
 		</ion-col>
 	  </ion-row>
