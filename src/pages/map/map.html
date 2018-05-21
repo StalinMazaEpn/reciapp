@@ -42,9 +42,9 @@
                 <ion-segment-button  value="favorite"  style="color: white" > <!--*ngIf="isAuthenticated"-->
                   Favoritos
                 </ion-segment-button>
-                <!--ion-segment-button value="near" style="color:white" >
+                <ion-segment-button value="near" style="color:white" >
                   Negocios Asociados
-                </ion-segment-button-->
+                </ion-segment-button>
               </ion-segment>
           </ion-toolbar>
           <div [ngSwitch]="recyclerm">         
@@ -103,8 +103,96 @@
 
             </ion-list>
 
-            <!--ion-list *ngSwitchCase="'near'" >
-                <ion-card text-center>
+            <ion-list *ngSwitchCase="'near'" >
+              <ion-slides pager="true">
+                <ion-slide style="background-color: #4B77BE">
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col col-3 style="padding-left: 6%;" >
+                        <ion-avatar (click)="openModal()">
+				                  <img  src="../../assets/imgs/hornero.png" > <!-- id="{{recycler.id}}-->
+				                </ion-avatar>
+                      </ion-col>
+                      <ion-col col-3 style="padding-left: 6%;">
+                        <ion-avatar  (click)="openModal()">
+				                  <img class="recyclers" src="../../assets/imgs/kicos.jpg">
+				                </ion-avatar>
+                      </ion-col>
+                      <ion-col col-3 style="padding-left: 6%;">
+                        <ion-avatar  (click)="openModal()">
+				                  <img class="recyclers" src="../../assets/imgs/kiwi.jpg">
+				                </ion-avatar>
+                      </ion-col>
+                      <ion-col col-3 style="padding-left: 6%;">
+                        <ion-avatar (click)="openModal()">
+				                  <img class="recyclers" src="../../assets/imgs/hornero.png">
+				                </ion-avatar>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-slide>
+        
+                <ion-slide style="background-color: #4B77BE">
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col col-3 style="padding-left: 6%;" >
+                        <ion-avatar (click)="openModal()">
+				                  <img  src="../../assets/imgs/hornero.png" > <!-- id="{{recycler.id}}-->
+				                </ion-avatar>
+                      </ion-col>
+                      <ion-col col-3 style="padding-left: 6%;">
+                        <ion-avatar (click)="openModal()">
+				                  <img class="recyclers" src="../../assets/imgs/kicos.jpg">
+				                </ion-avatar>
+                      </ion-col>
+                      <ion-col col-3 style="padding-left: 6%;">
+                        <ion-avatar  (click)="openModal()">
+				                  <img class="recyclers" src="../../assets/imgs/kiwi.jpg">
+				                </ion-avatar>
+                      </ion-col>
+                      <ion-col col-3 style="padding-left: 6%;">
+                        <ion-avatar (click)="openModal()">
+				                  <img class="recyclers" src="../../assets/imgs/hornero.png">
+				                </ion-avatar>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-slide>
+        
+                <ion-slide style="background-color: #4B77BE">
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col col-3 style="padding-left: 6%;" >
+                        <ion-avatar (click)="openModal()">
+				                  <img  src="../../assets/imgs/hornero.png" > <!-- id="{{recycler.id}}-->
+				                </ion-avatar>
+                      </ion-col>
+                      <ion-col col-3 style="padding-left: 6%;">
+                        <ion-avatar (click)="openModal()">
+				                  <img class="recyclers" src="../../assets/imgs/kicos.jpg">
+				                </ion-avatar>
+                      </ion-col>
+                      <ion-col col-3 style="padding-left: 6%;">
+                        <ion-avatar (click)="openModal()">
+				                  <img class="recyclers" src="../../assets/imgs/kiwi.jpg">
+				                </ion-avatar>
+                      </ion-col>
+                      <ion-col col-3 style="padding-left: 6%;">
+                        <ion-avatar (click)="openModal()">
+				                  <img class="recyclers" src="../../assets/imgs/hornero.png">
+				                </ion-avatar>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-slide>
+        
+              </ion-slides>
+            </ion-list>
+          </div>
+        </ion-item>
+
+
+        <!--<ion-card text-center>
                   <ion-card-content>
                     <ion-item text-center>Debes iniciar sesión</ion-item>
                     <div >Para ver nuestros negocios asociados</div>
@@ -114,9 +202,6 @@
                       </ion-col>
                      </ion-row>
                   </ion-card-content>
-                </ion-card>
-            </ion-list-->
-          </div>
-        </ion-item>
+                </ion-card>-->
 
 </ion-content>

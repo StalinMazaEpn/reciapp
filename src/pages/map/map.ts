@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, ToastController, Platform, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, ToastController, Platform, AlertController, Modal, ModalOptions } from 'ionic-angular';
 
 import { Geolocation } from '@ionic-native/geolocation';
 import { ReciappService } from './../../services/reciapp.service';
@@ -193,6 +193,24 @@ export class MapPage {
       message: message
     });
     alert.present();
+}
+
+openModal(){
+
+  const myModalOptions: ModalOptions ={
+    enableBackdropDismiss:false
+  };
+
+  const myData = {
+    name:'Paul',
+    occupation:'Developer'
+  };
+  const myModal: Modal = this.modalCtrl.create('ModalPage', { data: myData}, myModalOptions);
+  myModal.present();
+  myModal.onDidDismiss((data) => {
+    console.log(data);
+
+  });
 }
 
 
