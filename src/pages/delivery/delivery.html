@@ -35,7 +35,8 @@
 	
 
 	<div *ngIf="isAuthenticated; else needLoggin">
-			<ion-scroll scrollX="true" style="width: 100%; height: 73px; white-space: nowrap;">
+		<div *ngIf="!hideFavorites; else selectFavorite">
+			<ion-scroll scrollX="true" style="width: 100%; height: 73px; white-space: nowrap;" [hidden]="hideFavorites">
 				<ul>
 					<!--Agregar-->
 					<li text-center (tap)="addRecycler()">
@@ -76,7 +77,31 @@
 					<!--EndCercanos-->
 				</ul>
 			</ion-scroll>
-	  
+		</div>
+		<ng-template #selectFavorite>
+			<ion-item (tap)="showFavorites()">
+				<span *ngIf="tmp_selRecycler==null; else selectAnounymous">
+					<ion-avatar item-start>
+						<span *ngIf="tmpRecyclerImage != undefined && tmpRecyclerImage != null; else firstLetterRecycler">
+							<img class="recyclers" src="{{tmpRecyclerImage}}" >
+						</span>
+						<ng-template #firstLetterRecycler>
+							<span text-center>
+								<p class="firstLetter1" >{{tmpRecyclerFirstLetterName}}</p>
+								<img class="recyclers" style="background-color: #32db64">
+							</span>
+						</ng-template>
+					</ion-avatar>	
+					<h2>{{tmpRecyclerName}}</h2>		
+				</span>
+				<ng-template #selectAnounymous>
+					<ion-avatar item-start>
+						<img src="" >
+					</ion-avatar>	
+					<h2>Anónimo</h2>
+				</ng-template>
+            </ion-item>
+		</ng-template>
 	</div>
 
 	<ng-template #needLoggin>
@@ -84,20 +109,31 @@
 	</ng-template>
 	<div>
 	  <ion-row>
-	  	<ion-col col-3 text-center><p class="title-small">Tamaño de la funda</p></ion-col>
-	  	<ion-col>
-	  		<ion-label class="labels title">
-	  			<span class="label label1">N</span>
-	  			<span class="label">P</span>
-	  			<span class="label">M</span>
-	  			<span >G</span>
-	  		</ion-label>
+	  	<ion-col col-4 text-center><p class="title-small2">Cantidad estimada</p></ion-col>
+	  	<ion-col col-7>
+	  		<ion-row>
+	  			<ion-col>
+	  				<ion-label class="labels">
+	  					<span style="margin-left: 37%; margin-top: 0;" class="title-small1">P</span>
+	  					<span style="margin-left: 24%; margin-top: 0;" class="title-small1">M</span>
+	  					<span style="margin-left: 22%; margin-top: 0;" class="title-small1">G</span>
+	  				</ion-label>
+	  			</ion-col>
+	  		</ion-row>
+	  		<ion-row>
+	  		  <ion-col>
+	  		  	<ion-range pin="false" snaps="true" min="0" max="3" step="1" color="secondary" [(ngModel)]="fundaCtrl" #ctrl="ngModel">
+	  			</ion-range>
+	  		  </ion-col>
+	  		</ion-row>
 	  	</ion-col>
-	  </ion-row>	
-	  
+	  </ion-row>
+	  <div text-center>
+		<span *ngIf="errorSize" class="validations"> *Selecciona un tamaño de Funda.</span>
+	  </div>	
 	  <ion-row>
 	  	<ion-col>
-	  		<ion-label>
+	  		<ion-label class="labels">
 	  			<span class="title-small1" style="margin-left: 32%; margin-top: 0;margin-bottom: -5px;">0</span>
 	  			
 	  			<span *ngIf="totalMaterialRecyclable>0 && totalMaterialRecyclable==10; else sectionTotalMaterial10" class="title-small1 validations">10%</span>
@@ -154,8 +190,9 @@
 	  </ion-row>
 	  <div text-center>
 		<span *ngIf="error" class="validations"> *Identifica la cantidad de material reciclable a entregar.</span>
-		<span *ngIf="(totalMaterialRecyclable)==100" class="title-small1 secondary" >La funda ya esta llena, enviar en este momento.</span>
-		<span *ngIf="(_totalMaterialRecyclable)>100 && errTotalMaterialRecyclable" class="title-small1 validations" >No puedes entregar más de su capacidad.</span>
+		<span *ngIf="(totalMaterialRecyclable)==100" class="title-small" style="color: green" >La funda ya esta llena</span>
+		<span *ngIf="(_totalMaterialRecyclable)>100" class="title-small validations" >(No puedes entregar más de su capacidad.)</span>
+		<span *ngIf="(_totalMaterialRecyclable)>100 && errTotalMaterialRecyclable" class="title-small1 validations">Reduce los porcentajes en el formulario y verifica que no sobrepase el 100% de la funda.</span>
 	  </div>
 	  <ion-row>
 		<ion-col col-4>
@@ -167,7 +204,7 @@
 		  <ion-label class="title material">Tetrapack <span *ngIf="compuestoCtrl!=0 && compuestoCtrl!=undefined" class="title-small1 validations">({{compuestoCtrl}}%)</span></ion-label>
 		</ion-col>
 		<ion-col col-7>
-		  <ion-range upper="false" pin="true" snaps="true" min="0" max="100" step="10" color="secondary" id="range_34" [(ngModel)]="plasticoCtrl" #ctrl="ngModel" (ionChange)="totalMaterial(plasticoCtrl,'plastico')">
+		  <ion-range upper="false" pin="true" snaps="true" min="0" max="100" step="10" color="secondary" [(ngModel)]="plasticoCtrl" #ctrl="ngModel" (ionChange)="totalMaterial(plasticoCtrl,'plastico')">
 		  </ion-range>
 		  <ion-range  pin="true" snaps="true" min="0" max="100" step="10" color="secondary" [(ngModel)]="papelCtrl" #ctrl="ngModel" (ionChange)="totalMaterial(papelCtrl,'papel')">
 		  </ion-range>
