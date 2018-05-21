@@ -9,9 +9,11 @@
 	<ion-row align-items-center>
       <ion-col center text-center>
         <img src="{{recycler.image}}" center 
-        style="border-radius: 100px; height: 200px; width: 200px;">
-      </ion-col>
-    </ion-row>
+				style="border-radius: 100px; height: 200px; width: 200px;"><!--../../assets/imgs/recycler_women.png-->
+				<p><i>"{{recycler.dream}}"</i></p>
+					
+			</ion-col>
+		</ion-row>
 
 	<ion-card>
 	  <ion-fab right top>
@@ -27,23 +29,81 @@
 		</ng-template>
 	  </ion-fab>
 
-	  <ion-item (click)="doCallNumber(recycler.phone)">
-	    <ion-icon ios="ios-call" md="md-call" color="vibrant" item-start large></ion-icon>
-	    <h2>{{recycler.phone}}</h2>
-		</ion-item>
+		<!--ion-card>
+			<ion-card-content>
+				<p *ngIf="(recyclers)?.phone; elseComent" (click)="doCallNumber(recycler.phone)">
+					<!--ion-icon ios="ios-call" md="md-call" color="vibrant" item-start large></ion-icon-->
+					<!--h2>{{recycler.phone}}</h2>
+				</p>
 		
-		<ion-item>
+					<ng-template #elseComent>
+						<p>Aún no tienes entregas</p>
+					</ng-template>
+			</ion-card-content>
+		</ion-card-->
+
+		<!--ion-item>
+				<ion-icon ios="ios-call" md="md-call" color="vibrant" item-start large></ion-icon>
+				<p *ngIf="(recycler)?.phone; else elseMessage">	
+						{{(recycler)?.phone}}
+					</p>
+	
+					<ng-template #elseMessage>
+						<p>No tiene telefono</p>
+					</ng-template>  
+		</ion-item-->
+
+		<button ion-button round icon-end *ngIf="(recycler)?.phone; else elseMessage" (click)="doCallNumber(recycler.phone)">
+				Llamar
+				<ion-icon ios="ios-call" md="md-call"></ion-icon>
+		</button>
+		<ng-template #elseMessage>
+			<ion-item>
+				<ion-icon ios="ios-call" md="md-call"  item-start large></ion-icon>
+				<p>No tiene telefono</p>
+			</ion-item>
+		</ng-template>
+
+		 
+		<!--ion-item>
 			<ion-icon ios="ios-star" md="md-star" color="yellow" item-start large></ion-icon>
-	    <h2>{{recycler.dream}}</h2>
-		</ion-item>
-		
+	    <h2>"{{recycler.dream}}"</h2>
+		</ion-item-->
 
 	  <ion-item>
 	    <ion-icon ios="ios-calendar" md="md-calendar" item-left large ></ion-icon>
-	    <h2>{{recycler.date.day}}<br>{{recycler.date.startTime}} - {{recycler.date.endTime}}</h2>
-	  </ion-item>
+	    <p>{{recycler.date.days}}<br>{{recycler.date.startTime}} - {{recycler.date.endTime}}</p>
+		</ion-item>
 
-	  <ion-item>
+		<ion-item>
+			
+			<ion-icon ios="ios-ribbon" md="md-ribbon" item-left large></ion-icon>
+	    <h2>{{recycler.recyclingFor}}</h2>
+		</ion-item>
+
+		<ion-item>
+			<ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle" item-left large></ion-icon>
+	    <h2>{{recycler.totalReceives}}</h2>
+		</ion-item>
+		
+		<ion-item>
+			<ion-icon ios="ios-body" md="md-body" item-left large></ion-icon>
+			<p>{{recycler.yearBirth}}</p>
+		</ion-item>
+
+		<ion-item>
+			<ion-icon ios="ios-leaf" md="md-leaf" item-left large></ion-icon>
+			<p>{{recycler.material}}</p>
+		</ion-item>
+
+		<!--ion-card no-margin>
+			<agm-map [latitude]="latView" [longitude]="lngView" [zoom]="zoom" [fullscreenControlOptions]="false" [zoomControl]="false" [streetViewControl]="false" [usePanning]="true" (centerChange)="centerChange($event)" (zoomChange)="zoomChange($event)">
+					<agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+					<agm-marker [iconUrl]="'assets/imgs/recyclers1.png'" *ngFor="let recycler of recyclers" (markerClick)="goToRecycler(recycler)" [latitude]="recycler.latitude" [longitude]="recycler.longitude"></agm-marker>
+				</agm-map>				
+		</ion-card-->
+
+	  <!--ion-item>
 	    <span item-left>Notificaciones</span>
 	    
 	    <div *ngIf="notificacion; else elseBlockNotification" >
@@ -57,6 +117,6 @@
 			</button>
 		</ng-template>
 	    
-	  </ion-item>
+	  </ion-item-->
 	</ion-card>
 </ion-content>

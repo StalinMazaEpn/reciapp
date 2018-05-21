@@ -15,6 +15,7 @@ import {AuthenticationService} from "../../services/authenticationService";
 
 import firebase from "firebase";
 import {Camera, CameraOptions} from "@ionic-native/camera";
+import { database } from 'firebase';
 
 @IonicPage()
 @Component({
@@ -26,6 +27,9 @@ export class RecyclerFormPage {
   uid: any;
   //array to get select days
   days: string;
+
+  //array to get select material recycleble
+  material: string;
   //Recycler age
   age: any;
   //get to actually date
@@ -62,6 +66,7 @@ export class RecyclerFormPage {
   //form to validate
   formGroup: FormGroup;
   name: AbstractControl;
+  lastName: AbstractControl;
   daysValidator: AbstractControl;
   hourStart: AbstractControl;
   hourEnd: AbstractControl;
@@ -93,6 +98,7 @@ export class RecyclerFormPage {
     this.newRecycler.id = this.userSrv.getReciclerKey();
 
     this.newRecycler.yearBirth = this.year.getFullYear() - this.age;
+    this.newRecycler.createdAt = database.ServerValue.TIMESTAMP;
 
     if (this.tmp_image !== undefined) {
       //Storage on firebase
@@ -181,6 +187,7 @@ export class RecyclerFormPage {
     //validations
     this.formGroup = this.formBuilder.group({
       name: ['', Validators.required],
+      lastName: ['', Validators.required],
       daysValidator: ['', Validators.required],
       hourStart: ['', Validators.compose([Validators.required, (control: FormControl) => {
         if (this.newRecycler.date.startTime > this.newRecycler.date.endTime) {
@@ -203,6 +210,7 @@ export class RecyclerFormPage {
     });
     //controls
     this.name = this.formGroup.controls['name'];
+    this.lastName = this.formGroup.controls['lastName'];
     this.daysValidator = this.formGroup.controls['daysValidator'];
     this.hourStart = this.formGroup.controls['hourStart'];
     this.hourEnd = this.formGroup.controls['hourEnd'];
