@@ -80,25 +80,33 @@
 		</div>
 		<ng-template #selectFavorite>
 			<ion-item (tap)="showFavorites()">
-				<span *ngIf="tmp_selRecycler==null; else selectAnounymous">
-					<ion-avatar item-start>
-						<span *ngIf="tmpRecyclerImage != undefined && tmpRecyclerImage != null; else firstLetterRecycler">
+				<span *ngIf="tmp_selRecycler!=null; else selectFavoriteRecycler">
+					<ion-row>
+						<ion-col col-2>
 							<img class="recyclers" src="{{tmpRecyclerImage}}" >
-						</span>
-						<ng-template #firstLetterRecycler>
-							<span text-center>
-								<p class="firstLetter1" >{{tmpRecyclerFirstLetterName}}</p>
-								<img class="recyclers" style="background-color: #32db64">
-							</span>
-						</ng-template>
-					</ion-avatar>	
-					<h2>{{tmpRecyclerName}}</h2>		
+						</ion-col>
+						<ion-col>
+							<h2 style="margin-top: 4.5% !important;">Anónimo</h2>
+						</ion-col>
+					</ion-row>
 				</span>
-				<ng-template #selectAnounymous>
-					<ion-avatar item-start>
-						<img src="" >
-					</ion-avatar>	
-					<h2>Anónimo</h2>
+				<ng-template #selectFavoriteRecycler>
+					<ion-row>
+						<ion-col col-2>
+							<span *ngIf="tmpRecyclerImage != undefined; else firstLetterRecycler">
+								<img class="recyclers" src="{{tmpRecyclerImage}}" >
+							</span>
+							<ng-template #firstLetterRecycler>
+								<span text-center>
+									<p class="firstLetter1" >{{tmpRecyclerFirstLetterName}}</p>
+									<img class="recyclers" style="background-color: #32db64">
+								</span>
+							</ng-template>
+						</ion-col>
+						<ion-col>
+							<h2 style="margin-top: 4.5% !important;">{{tmpRecyclerName}}</h2>
+						</ion-col>
+					</ion-row>
 				</ng-template>
             </ion-item>
 		</ng-template>

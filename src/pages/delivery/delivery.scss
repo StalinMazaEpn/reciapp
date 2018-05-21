@@ -11,6 +11,7 @@ page-delivery {
 		height: 40px;
 		border-radius: 100%;
 		border:0;
+
 	}
 
 	ion-label.material{
@@ -97,11 +98,10 @@ page-delivery {
     }
 
     .firstLetter1{
+    	left: 20% !important;
+    	top: 15% !important;
     	position: absolute;
     	font-size: 25px;
-    	margin-top: 2% !important;
-    	margin-bottom:0 !important;
-    	margin-left: 3.3% !important;
     	color:white;
     }
 

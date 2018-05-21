@@ -19,9 +19,8 @@ export class DeliveryPage {
   uid:any;
   recyclers:any;
   tmpPhoto:any=null;
-  tmpRecycler:any;
-  tmpRecyclerImage:any;
-  tmpRecyclerName:any;
+  tmpRecyclerImage="assets/imgs/recycler_women.png";
+  tmpRecyclerName=null;
   tmpRecyclerFirstLetterName:any;  
 
   recyclablePhoto:any=null;
@@ -337,8 +336,8 @@ export class DeliveryPage {
       //this.tmpRecycler=this.userSrv.getRecyclerById(recyclerId);
       
       this.userSrv.getRecyclerById(recyclerId).subscribe(data=>{
-        this.tmpRecyclerImage=data.image;
-        this.tmpRecyclerName=data.name;
+        this.tmpRecyclerImage=data['image'];
+        this.tmpRecyclerName=data['name'];
         this.tmpRecyclerFirstLetterName=this.tmpRecyclerName.charAt(0).toUpperCase();
       });
   }
