@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, LoadingController} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, LoadingController, ModalController} from 'ionic-angular';
 import {ReciappService} from '../../services/reciapp.service';
 
 import { ToastController } from 'ionic-angular';
@@ -8,6 +8,7 @@ import { RecicladorPage } from '../../pages/reciclador/reciclador';
 import { LoginPage }  from '../login/login';
 import { RegisterPage }  from '../register/register';
 //import { User } from '../../models/user';
+import { ExchangePage }  from '../exchange/exchange';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app'
@@ -31,7 +32,7 @@ export class DashboardPage {
   user:any;
   recyclers:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public userSrv: ReciappService,public recyclerSrv: ReciappService, private afAuth:AngularFireAuth,public loadingCtrl: LoadingController, public toastCtrl:ToastController, public authenticationService:AuthenticationService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public userSrv: ReciappService,public recyclerSrv: ReciappService, private afAuth:AngularFireAuth,public loadingCtrl: LoadingController, public toastCtrl:ToastController, public authenticationService:AuthenticationService,public modalCtrl: ModalController) {
 
     this.isLog = this.authenticationService.isAuthenticated();
     if(this.isLog) {
@@ -174,6 +175,11 @@ export class DashboardPage {
       position:'top'
     });
     toast.present();
+  }
+
+  exchange(){
+    let modal = this.modalCtrl.create(ExchangePage);
+    modal.present();
   }
 
  /* goToSlide() {

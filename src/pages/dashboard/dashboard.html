@@ -44,7 +44,7 @@
 
     <div *ngIf="user !== undefined; else loading">
       <ion-list>
-        <ion-item>
+        <ion-item (tap)="exchange()">
           <h2>{{(user)?.name}}</h2>
           <p>{{ (user)?.points.total }} pts.</p>
           <!--<ion-fab right bottom icon-only item-end>-->

@@ -19,6 +19,7 @@ import { RegisterPageModule } from './../pages/register/register.module';
 import { SocialNetworksPageModule } from '../pages/social-networks/social-networks.module';
 import { RecyclerFormPageModule } from './../pages/recycler-form/recycler-form.module';
 import { DeliveryPageModule } from '../pages/delivery/delivery.module';
+import { ExchangePageModule } from '../pages/exchange/exchange.module';
 
 import { HttpModule } from '@angular/http';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -71,7 +72,8 @@ const firebaseConfig = {
     RegisterPageModule,
     SocialNetworksPageModule,
     RecyclerFormPageModule,
-    DeliveryPageModule
+    DeliveryPageModule,
+    ExchangePageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
