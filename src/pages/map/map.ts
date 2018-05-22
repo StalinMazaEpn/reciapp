@@ -10,6 +10,7 @@ import { LocationAccuracy } from '@ionic-native/location-accuracy';
 import { LoginPage } from '../login/login';
 import {AuthenticationService} from "../../services/authenticationService";
 import { AngularFireAuth } from 'angularfire2/auth';
+import { CallNumber } from '@ionic-native/call-number';
 
 @IonicPage()
 @Component({
@@ -38,7 +39,7 @@ export class MapPage {
   recyclerm:string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation,public recyclerSrv: ReciappService,
-   public modalCtrl: ModalController, public authService:AuthenticationService,public toastCtrl:ToastController, private afAuth:AngularFireAuth, private locationAccuracy: LocationAccuracy, 
+   public modalCtrl: ModalController, public authService:AuthenticationService,public toastCtrl:ToastController, private afAuth:AngularFireAuth, private locationAccuracy: LocationAccuracy, public callNumber: CallNumber,
    private diagnostic: Diagnostic, private platform: Platform, 
    private alertCtrl: AlertController) {
     this.isAuthenticated=this.authService.isAuthenticated();
@@ -211,6 +212,30 @@ openModal(){
     console.log(data);
 
   });
+
+doCallNumber(phoneNumber: string) {
+  let alert = this.alertCtrl.create({
+    title: 'Llamada',
+    message: 'Desea realizar la llamada?',
+    buttons: [
+      {
+        text: 'Cancelar',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      },
+      {
+        text: 'Llamar',
+        handler: () => {
+          this.callNumber.callNumber(phoneNumber, true)
+          .then(res => console.log('Launched dialer!', res))
+          .catch(err => console.log('Error launching dialer', err));
+        }
+      }
+    ]
+  });
+  alert.present();
 }
 
 

@@ -39,4 +39,22 @@ page-map {
       .swiper-pagination-bullet-active{
         background: white;
       }
+
+    .firstLetter{
+    	position: absolute;
+    	font-size: 25px;
+    	margin-top: 2.5% !important;
+    	margin-bottom:0 !important;
+    	margin-left: 20% !important;
+        color:white;
+        text-align: center;
+    }
+
+    img.recyclers{
+		width: 40px;
+		height: 40px;
+		border-radius: 100%;
+		border:0;
+	}
+
 }

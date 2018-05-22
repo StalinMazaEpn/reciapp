@@ -66,13 +66,45 @@
 
               <ion-row *ngFor='let recycler$ of recyclersFavorites | async'>            
                 <ion-col *ngIf="recycler$ | async as recycler;  else loading" >
-                  <ion-item (tap)="goToRecycler(recycler)">
-                    <ion-avatar item-start>
-                      <img src="{{recycler.image}}">
-                    </ion-avatar>
-                    <h2>{{recycler.name}}</h2>
-                    <ion-icon ios="ios-call" md="md-call" color="vibrant" item-end large></ion-icon>
-                  </ion-item>
+                    <ion-grid>
+                        <ion-row >
+                          <ion-col col-2 style="margin-top: 2%">
+                              <!--ion-item (tap)="goToRecycler(recycler)">
+                                  <ion-avatar item-start>
+                                    <img src="{{recycler.image}}">
+                                  </ion-avatar>
+                                  <h2>{{recycler.name}}</h2>
+                                </ion-item-->
+                                <span  (tap)="goToRecycler(recycler)" >
+                                    <ion-row *ngIf="recycler.image!=undefined; else firstLetter">
+                                            <ion-col col-4>
+                                              <ion-avatar>
+                                                <img class="recyclers" src="{{recycler.image}}" id="{{recycler.id}}">
+                                              </ion-avatar>	
+                                            </ion-col>
+                                    </ion-row>
+                                    
+                                      <ng-template #firstLetter item-center>
+                                        <ion-avatar>
+                                          <span text-center>
+                                            <p class="firstLetter" >{{recycler.name.charAt(0).toUpperCase()}}</p>
+                                            <img class="recyclers" style="background-color: #32db64" id="{{recycler.id}}">
+                                          </span>
+                                        </ion-avatar>	
+                                      </ng-template>
+                                    </span>
+                                
+                          </ion-col>
+                          <ion-col col-8 text-center style="margin-top: 5%" (tap)="goToRecycler(recycler)">
+                              <h2>{{recycler.name}}</h2>
+                          </ion-col>
+                          <ion-col col-2>
+                              <ion-item (click)="doCallNumber(recycler.phone)">
+                                <ion-icon ios="ios-call" md="md-call" color="vibrant" item-start large></ion-icon>
+                              </ion-item>
+                          </ion-col>
+                        </ion-row>
+                      </ion-grid>
                 </ion-col>
 
                 <ng-template #loading>
@@ -88,6 +120,10 @@
                   </ion-grid>
                 </ng-template>
               </ion-row>
+
+
+              
+              
 
                 <!--ion-card text-center>
                   <ion-card-content>
