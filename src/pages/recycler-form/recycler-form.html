@@ -29,6 +29,14 @@
       </ion-label>
       <ion-input type="text" [(ngModel)]="newRecycler.name" formControlName="name"></ion-input>
     </ion-item>
+    <ion-item>
+      <ion-label>
+        <span>*</span>
+        Apellido:
+        <span *ngIf="lastName.hasError('required') && lastName.touched" class="validations"> * El apellido es requerido</span>
+      </ion-label>
+      <ion-input type="text" [(ngModel)]="newRecycler.lastName" formControlName="lastName"></ion-input>
+    </ion-item>
   </form>
 
   <ion-item>
@@ -102,6 +110,26 @@
       </ion-item>
     </ion-list>
 
+    <ion-list>
+      <ion-item>
+        <ion-label stacked>
+          <span>*</span>
+          Material que recibe:
+          <!--span *ngIf="daysValidator.hasError('required') && daysValidator.touched" class="validations"> (Debes seleccionar uno o varios días)</span-->
+        </ion-label>
+        <ion-select [(ngModel)]="newRecycler.material" formControlName="daysValidator" multiple="true"
+                    cancelText="cancel" okText="Ok">
+          <ion-option value="Papel">Papel</ion-option>
+          <ion-option value="Carton">Carton</ion-option>
+          <ion-option value="Plastico">Plastico</ion-option>
+          <ion-option value="Metal">Metal</ion-option>
+          <ion-option value="Vidrio">Vidrio</ion-option>
+          <ion-option value="Tetrapack">Tetrapack</ion-option>
+        </ion-select>
+      </ion-item>
+  
+    </ion-list>
+
     <ion-item>
       <ion-label>
         <span>*</span>
@@ -113,9 +141,15 @@
   </form>
 
   <ion-item>
-	  <ion-label>Su sueño es: </ion-label>
-	  <ion-input type="text" [(ngModel)]="newRecycler.dream"></ion-input>
-	</ion-item>
+	  <ion-label floating>Su sueño es: </ion-label>
+	  <ion-input type="text" [(ngModel)]="newRecycler.dream" rows="3" maxlength="140"></ion-input>
+  </ion-item>
+
+  <ion-item>
+	  <ion-label>Recicla por: </ion-label>
+			<ion-input type="number" [(ngModel)]="newRecycler.recyclingFor" maxlength="4"></ion-input>
+  </ion-item>
+  
 
   <ion-item text-center>
     <ion-label><span>*</span> Donde lo encontraste:</ion-label>
