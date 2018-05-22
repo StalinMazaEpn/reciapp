@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, ToastController, Platform, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, ToastController, Platform, AlertController, Modal, ModalOptions } from 'ionic-angular';
 
 import { Geolocation } from '@ionic-native/geolocation';
 import { ReciappService } from './../../services/reciapp.service';
@@ -26,8 +26,8 @@ export class MapPage {
 
   zoom: any;
 
-  // values by default 
-  latViewDef: any = -0.184713; 
+  // values by default
+  latViewDef: any = -0.184713;
   lngViewDef: any = -78.484771;
   zoomDef: any = 10;
 
@@ -40,7 +40,7 @@ export class MapPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation,public recyclerSrv: ReciappService,
    public modalCtrl: ModalController, public authService:AuthenticationService,public toastCtrl:ToastController, private afAuth:AngularFireAuth, private locationAccuracy: LocationAccuracy, public callNumber: CallNumber,
-   private diagnostic: Diagnostic, private platform: Platform, 
+   private diagnostic: Diagnostic, private platform: Platform,
    private alertCtrl: AlertController) {
     this.isAuthenticated=this.authService.isAuthenticated();
     this.getMyLocation();
@@ -105,7 +105,7 @@ export class MapPage {
       this.navCtrl.push(LoginPage);
       this.isNotAuthenticated();
     }
-    
+
   }
 
   goToRecycler(recycler) {
@@ -194,6 +194,24 @@ export class MapPage {
       message: message
     });
     alert.present();
+}
+
+openModal() {
+
+  const myModalOptions : ModalOptions = {
+    enableBackdropDismiss: false
+  };
+
+  const myData = {
+    name: 'Paul',
+    occupation: 'Developer'
+  };
+  const myModal : Modal = this.modalCtrl.create( 'ModalPage', { data: myData }, myModalOptions );
+  myModal.present();
+  myModal.onDidDismiss( ( data ) => {
+    console.log( data );
+
+  } );
 }
 
 doCallNumber(phoneNumber: string) {

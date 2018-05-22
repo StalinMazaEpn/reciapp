@@ -1,5 +1,5 @@
 <ion-content>
-    
+
 
     <ion-card no-margin>
         <agm-map [latitude]="latView" [longitude]="lngView" [zoom]="zoom" [fullscreenControlOptions]="false" [zoomControl]="false" [streetViewControl]="false" [usePanning]="true" (centerChange)="centerChange($event)" (zoomChange)="zoomChange($event)">
@@ -16,7 +16,7 @@
               <ion-icon ios="ios-person-add" md="md-person-add"></ion-icon>
             </button>
           </ion-fab>
-          
+
       </ion-card>
 
       <ion-row *ngIf="!isAuthenticated" text-center style="margin-top: 15%;">
@@ -32,8 +32,8 @@
           </ion-card-content>
         </ion-card>
       </ion-row>
-      
-      
+
+
 
       <!-- -->
       <ion-item *ngIf="isAuthenticated" class="segmentText">
@@ -42,12 +42,12 @@
                 <ion-segment-button  value="favorite"  style="color: white" > <!--*ngIf="isAuthenticated"-->
                   Favoritos
                 </ion-segment-button>
-                <!--ion-segment-button value="near" style="color:white" >
+                <ion-segment-button value="near" style="color:white" >
                   Negocios Asociados
-                </ion-segment-button-->
+                </ion-segment-button>
               </ion-segment>
           </ion-toolbar>
-          <div [ngSwitch]="recyclerm">         
+          <div [ngSwitch]="recyclerm">
             <ion-list *ngSwitchCase="'favorite'">
               <ion-row *ngIf="(recyclersFavorites | async)?.length==0" text-center>
                 <ion-card text-center>
@@ -64,7 +64,7 @@
                 </ion-card>
               </ion-row>
 
-              <ion-row *ngFor='let recycler$ of recyclersFavorites | async'>            
+              <ion-row *ngFor='let recycler$ of recyclersFavorites | async'>
                 <ion-col *ngIf="recycler$ | async as recycler;  else loading" >
                     <ion-grid>
                         <ion-row >
@@ -80,20 +80,20 @@
                                             <ion-col col-4>
                                               <ion-avatar>
                                                 <img class="recyclers" src="{{recycler.image}}" id="{{recycler.id}}">
-                                              </ion-avatar>	
+                                              </ion-avatar>
                                             </ion-col>
                                     </ion-row>
-                                    
+
                                       <ng-template #firstLetter item-center>
                                         <ion-avatar>
                                           <span text-center>
                                             <p class="firstLetter" >{{recycler.name.charAt(0).toUpperCase()}}</p>
                                             <img class="recyclers" style="background-color: #32db64" id="{{recycler.id}}">
                                           </span>
-                                        </ion-avatar>	
+                                        </ion-avatar>
                                       </ng-template>
                                     </span>
-                                
+
                           </ion-col>
                           <ion-col col-8 text-center style="margin-top: 5%" (tap)="goToRecycler(recycler)">
                               <h2>{{recycler.name}}</h2>
@@ -122,8 +122,8 @@
               </ion-row>
 
 
-              
-              
+
+
 
                 <!--ion-card text-center>
                   <ion-card-content>
@@ -139,8 +139,96 @@
 
             </ion-list>
 
-            <!--ion-list *ngSwitchCase="'near'" >
-                <ion-card text-center>
+            <ion-list *ngSwitchCase="'near'" >
+              <ion-slides pager="true">
+                <ion-slide style="background-color: #4B77BE">
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col col-3 style="padding-left: 6%;" >
+                        <ion-avatar (click)="openModal()">
+				                  <img  src="http://todoaki.com/wp-content/uploads/16553_206825829550_7533145_n49.jpg" > <!-- id="{{recycler.id}}-->
+				                </ion-avatar>
+                      </ion-col>
+                      <ion-col col-3 style="padding-left: 6%;">
+                        <ion-avatar  (click)="openModal()">
+				                  <img class="recyclers" src="http://www.ccelrecreo.com/wp-content/uploads/2014/07/kikos.jpg">
+				                </ion-avatar>
+                      </ion-col>
+                      <ion-col col-3 style="padding-left: 6%;">
+                        <ion-avatar  (click)="openModal()">
+				                  <img class="recyclers" src="https://www.malteriaplaza.com/sites/malteria/files/2017-10/kiwi.jpg">
+				                </ion-avatar>
+                      </ion-col>
+                      <ion-col col-3 style="padding-left: 6%;">
+                        <ion-avatar (click)="openModal()">
+				                  <img class="recyclers" src="http://lapiazzaecuador.com/wp-content/uploads/2017/07/fybeca.jpg">
+				                </ion-avatar>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-slide>
+
+                <ion-slide style="background-color: #4B77BE">
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col col-3 style="padding-left: 6%;" >
+                        <ion-avatar (click)="openModal()">
+                          <img  src="http://todoaki.com/wp-content/uploads/16553_206825829550_7533145_n49.jpg" > <!-- id="{{recycler.id}}-->
+                        </ion-avatar>
+                      </ion-col>
+                      <ion-col col-3 style="padding-left: 6%;">
+                        <ion-avatar  (click)="openModal()">
+                          <img class="recyclers" src="http://www.ccelrecreo.com/wp-content/uploads/2014/07/kikos.jpg">
+                        </ion-avatar>
+                      </ion-col>
+                      <ion-col col-3 style="padding-left: 6%;">
+                        <ion-avatar  (click)="openModal()">
+                          <img class="recyclers" src="https://www.malteriaplaza.com/sites/malteria/files/2017-10/kiwi.jpg">
+                        </ion-avatar>
+                      </ion-col>
+                      <ion-col col-3 style="padding-left: 6%;">
+                        <ion-avatar (click)="openModal()">
+                          <img class="recyclers" src="http://lapiazzaecuador.com/wp-content/uploads/2017/07/fybeca.jpg">
+                        </ion-avatar>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-slide>
+
+                <ion-slide style="background-color: #4B77BE">
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col col-3 style="padding-left: 6%;" >
+                        <ion-avatar (click)="openModal()">
+                          <img  src="http://todoaki.com/wp-content/uploads/16553_206825829550_7533145_n49.jpg" > <!-- id="{{recycler.id}}-->
+                        </ion-avatar>
+                      </ion-col>
+                      <ion-col col-3 style="padding-left: 6%;">
+                        <ion-avatar  (click)="openModal()">
+                          <img class="recyclers" src="http://www.ccelrecreo.com/wp-content/uploads/2014/07/kikos.jpg">
+                        </ion-avatar>
+                      </ion-col>
+                      <ion-col col-3 style="padding-left: 6%;">
+                        <ion-avatar  (click)="openModal()">
+                          <img class="recyclers" src="https://www.malteriaplaza.com/sites/malteria/files/2017-10/kiwi.jpg">
+                        </ion-avatar>
+                      </ion-col>
+                      <ion-col col-3 style="padding-left: 6%;">
+                        <ion-avatar (click)="openModal()">
+                          <img class="recyclers" src="http://lapiazzaecuador.com/wp-content/uploads/2017/07/fybeca.jpg">
+                        </ion-avatar>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-slide>
+
+              </ion-slides>
+            </ion-list>
+          </div>
+        </ion-item>
+
+
+        <!--<ion-card text-center>
                   <ion-card-content>
                     <ion-item text-center>Debes iniciar sesión</ion-item>
                     <div >Para ver nuestros negocios asociados</div>
@@ -150,9 +238,6 @@
                       </ion-col>
                      </ion-row>
                   </ion-card-content>
-                </ion-card>
-            </ion-list-->
-          </div>
-        </ion-item>
+                </ion-card>-->
 
 </ion-content>

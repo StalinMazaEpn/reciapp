@@ -24,6 +24,22 @@ page-map {
         margin-top: 10px;
     }
 
+    .grid{
+        margin-top: 8%;
+        margin-bottom: 8%;
+      }
+
+      .item-ios ion-avatar ion-img, .item-ios ion-avatar img {
+        border-radius: 50%;
+        overflow: hidden;
+        width: 62px;
+        height: 62px;
+      }
+
+      .swiper-pagination-bullet-active{
+        background: white;
+      }
+
     .firstLetter{
     	position: absolute;
     	font-size: 25px;
@@ -40,6 +56,5 @@ page-map {
 		border-radius: 100%;
 		border:0;
 	}
-
 
 }
