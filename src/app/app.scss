@@ -1,6 +1,5 @@
 // http://ionicframework.com/docs/theming/
 
-
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -14,3 +13,199 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+@font-face {
+  font-family: "WorkSans";
+  src: url("../assets/fonts/WorkSans-Regular.ttf")
+}
+
+*{
+  font-family: "WorkSans", serif;
+}
+
+.content {
+  background-color: $darkBlue;
+  color: $fontColor;
+}
+
+.toolbar {
+  .toolbar-background {
+    background-color: $skyBlue;
+  }
+
+  .toolbar-title {
+    color: $fontColor;
+    padding: 6px 0;
+  }
+
+  .bar-button {
+    color: $fontColor;
+  }
+}
+
+
+
+/* HEADER */
+.grid-header {
+  padding: 0;
+
+  .logo-header-wrapper {
+    padding: 0;
+  }
+
+  img.logo-header {
+    height: 25px;
+  }
+}
+
+
+/* TABS */
+.tabs {
+  .tabbar {
+    background-color: $skyBlue;
+
+    .tab-button {
+      padding: 0;
+
+      .tab-button-icon {
+        color: $fontColor;
+      }
+    }
+  }
+}
+
+.tabbar, .tabs-ios, .tabs-md , .tabs-wp{
+  .tab-button-icon {
+    background-repeat:no-repeat;
+    background-position:center;
+    height:48px;
+    width:100%;
+    margin: 0;
+    background-size:contain;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    &:before {
+      display:none;
+    }
+  }
+}
+
+.tabs-ios {
+  a[aria-selected=false]{
+    .tab-button-icon[ng-reflect-name="left-hand"], .tab-button-icon[aria-label="left-hand"] {
+      background-image: url(../assets/imgs/left-hand-off.png);
+      background-size: 70px 30px;
+      background-position: left;
+    }
+    .tab-button-icon[ng-reflect-name="heart-reciveci"], .tab-button-icon[aria-label="heart-reciveci"] {
+      background-image: url(../assets/imgs/heart-reciveci-off.png);
+      background-size: 37px 30px;
+    }
+    .tab-button-icon[ng-reflect-name="right-hand"], .tab-button-icon[aria-label="right-hand"] {
+      background-image: url(../assets/imgs/right-hand-off.png);
+      background-size: 70px 30px;
+      background-position: right;
+    }
+  }
+  a[aria-selected=true] {
+    //führ eventuellen text
+    //span {
+    //color: #f00; //whatever colour you want to use for the text
+    //}
+    .tab-button-icon[ng-reflect-name="left-hand"], .tab-button-icon[aria-label="left-hand"] {
+      background-image: url(../assets/imgs/left-hand-on.png);
+      background-size: 70px 30px;
+      background-position: left;
+    }
+    .tab-button-icon[ng-reflect-name="heart-reciveci"], .tab-button-icon[aria-label="heart-reciveci"] {
+      background-image: url(../assets/imgs/heart-reciveci-on.png);
+      background-size: 37px 30px;
+    }
+    .tab-button-icon[ng-reflect-name="right-hand"], .tab-button-icon[aria-label="right-hand"] {
+      background-image: url(../assets/imgs/right-hand-on.png);
+      background-size: 70px 30px;
+      background-position: right;
+    }
+  }
+}
+
+.tabs-md {
+  a[aria-selected=false]{
+    .tab-button-icon[ng-reflect-name="left-hand"], .tab-button-icon[aria-label="left-hand"] {
+      background-image: url(../assets/imgs/left-hand-off.png);
+      background-size: 70px 30px;
+      background-position: left;
+    }
+    .tab-button-icon[ng-reflect-name="heart-reciveci"], .tab-button-icon[aria-label="heart-reciveci"] {
+      background-image: url(../assets/imgs/heart-reciveci-off.png);
+      background-size: 37px 30px;
+    }
+    .tab-button-icon[ng-reflect-name="right-hand"], .tab-button-icon[aria-label="right-hand"] {
+      background-image: url(../assets/imgs/right-hand-off.png);
+      background-size: 70px 30px;
+      background-position: right;
+    }
+  }
+
+  a[aria-selected=true] {
+    //führ eventuellen text
+    //span {
+    //color: #f00; //whatever colour you want to use for the text
+    //}
+    .tab-button-icon[ng-reflect-name="left-hand"], .tab-button-icon[aria-label="left-hand"] {
+      background-image: url(../assets/imgs/left-hand-on.png);
+      background-size: 70px 30px;
+      background-position: left;
+    }
+    .tab-button-icon[ng-reflect-name="heart-reciveci"], .tab-button-icon[aria-label="heart-reciveci"] {
+      background-image: url(../assets/imgs/heart-reciveci-on.png);
+      background-size: 37px 30px;
+    }
+    .tab-button-icon[ng-reflect-name="right-hand"], .tab-button-icon[aria-label="right-hand"] {
+      background-image: url(../assets/imgs/right-hand-on.png);
+      background-size: 70px 30px;
+      background-position: right;
+    }
+  }
+}
+
+.tabs-wp {
+  a[aria-selected=false]{
+    .tab-button-icon[ng-reflect-name="left-hand"], .tab-button-icon[aria-label="left-hand"] {
+      background-image: url(../assets/imgs/left-hand-off.png);
+      background-size: 70px 30px;
+      background-position: left;
+    }
+    .tab-button-icon[ng-reflect-name="heart-reciveci"], .tab-button-icon[aria-label="heart-reciveci"] {
+      background-image: url(../assets/imgs/heart-reciveci-off.png);
+      background-size: 37px 30px;
+    }
+    .tab-button-icon[ng-reflect-name="right-hand"], .tab-button-icon[aria-label="right-hand"] {
+      background-image: url(../assets/imgs/right-hand-off.png);
+      background-size: 70px 30px;
+      background-position: right;
+    }
+  }
+
+  a[aria-selected=true] {
+    //führ eventuellen text
+    //span {
+    //color: #f00; //whatever colour you want to use for the text
+    //}
+    .tab-button-icon[ng-reflect-name="left-hand"], .tab-button-icon[aria-label="left-hand"] {
+      background-image: url(../assets/imgs/left-hand-on.png);
+      background-size: 70px 30px;
+      background-position: left;
+    }
+    .tab-button-icon[ng-reflect-name="heart-reciveci"], .tab-button-icon[aria-label="heart-reciveci"] {
+      background-image: url(../assets/imgs/heart-reciveci-on.png);
+      background-size: 37px 30px;
+    }
+    .tab-button-icon[ng-reflect-name="right-hand"], .tab-button-icon[aria-label="right-hand"] {
+      background-image: url(../assets/imgs/right-hand-on.png);
+      background-size: 70px 30px;
+      background-position: right;
+    }
+  }
+}

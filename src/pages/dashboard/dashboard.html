@@ -2,16 +2,20 @@
   <ion-toolbar>
 
     <div *ngIf="isLog; else elseHeader">
-      <ion-grid>
+      <ion-grid class="grid-header">
         <ion-row>
-          <ion-title text-center showWhen="ios">VECI</ion-title>
+          <ion-title text-center showWhen="ios">
+            <img src="../../assets/imgs/logo-header.png" class="logo-header"/>
+          </ion-title>
           <ion-col col-2>
             <button ion-button icon-only menuToggle>
               <ion-icon name="menu"></ion-icon>
             </button>
           </ion-col>
-          <ion-col col-8>
-            <ion-title text-center showWhen="android,windows">VECI</ion-title>
+          <ion-col col-8 class="logo-header-wrapper">
+            <ion-title text-center showWhen="android,windows">
+              <img src="../../assets/imgs/logo-header.png" class="logo-header"/>
+            </ion-title>
           </ion-col>
           <ion-col col-2>
             <ion-buttons item-end>
