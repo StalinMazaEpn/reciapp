@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, LoadingController} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, LoadingController, ModalController} from 'ionic-angular';
 import {ReciappService} from '../../services/reciapp.service';
 
 import { ToastController } from 'ionic-angular';
@@ -8,12 +8,17 @@ import { RecicladorPage } from '../../pages/reciclador/reciclador';
 import { LoginPage }  from '../login/login';
 import { RegisterPage }  from '../register/register';
 //import { User } from '../../models/user';
+import { ExchangePage }  from '../exchange/exchange';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app'
 
 import { MapPage } from '../map/map';
+
 import {AuthenticationService} from "../../services/authenticationService";
+import {CategoriaPage} from "../categoria/categoria";
+//import { Slides } from 'ionic-angular';
+
 
 @IonicPage()
 @Component({
@@ -21,16 +26,23 @@ import {AuthenticationService} from "../../services/authenticationService";
   templateUrl: 'dashboard.html',
 })
 export class DashboardPage {
+
+  //@ViewChild(Slides) slides: Slides;
   isLog:boolean;
   user:any;
   recyclers:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public userSrv: ReciappService,public recyclerSrv: ReciappService, private afAuth:AngularFireAuth,public loadingCtrl: LoadingController, public toastCtrl:ToastController, public authenticationService:AuthenticationService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public userSrv: ReciappService,public recyclerSrv: ReciappService, private afAuth:AngularFireAuth,public loadingCtrl: LoadingController, public toastCtrl:ToastController, public authenticationService:AuthenticationService,public modalCtrl: ModalController) {
 
     this.isLog = this.authenticationService.isAuthenticated();
     if(this.isLog) {
       //console.log("UID", this.authenticationService.getCurrentUser().uid);
-      this.user = this.userSrv.getUser(this.authenticationService.getCurrentUser().uid);
+      //this.user = this.userSrv.getUser(this.authenticationService.getCurrentUser().uid);
+      this.userSrv.getUser(this.authenticationService.getCurrentUser().uid).subscribe(
+        (data)=>{
+          this.user =data;
+          console.log(this.user.lastDelivery);
+        });
     }
   }
 
@@ -88,6 +100,10 @@ export class DashboardPage {
 
   openMap(){
     this.navCtrl.push(MapPage);
+  }
+
+  openTips(){
+    this.navCtrl.push(CategoriaPage);
   }
 
 
@@ -160,5 +176,14 @@ export class DashboardPage {
     });
     toast.present();
   }
+
+  exchange(){
+    let modal = this.modalCtrl.create(ExchangePage);
+    modal.present();
+  }
+
+ /* goToSlide() {
+    this.slides.slideTo(2, 500);
+  }*/
 
 }

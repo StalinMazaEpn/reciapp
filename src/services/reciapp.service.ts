@@ -35,6 +35,10 @@ export class ReciappService{
 		return this.afdatabase.object('/user/'+uid).valueChanges();
 	}
 
+	public getExchangeList(){
+		return this.afdatabase.list('/partner').valueChanges();
+	}
+
 	public async createUser(uid,user) {
 	    return await this.afdatabase.object('/user/'+uid).set(user);
 	}
@@ -79,4 +83,5 @@ export class ReciappService{
 		//console.log(deliveryData);
 		await this.afdatabase.list('/deliveries').push(deliveryData);
 	}
+
 }
