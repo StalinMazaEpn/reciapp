@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, NavParams, ViewController,ToastController } from 'ionic-angular';
+import { ReciappService } from "../../services/reciapp.service";
+import { AuthenticationService } from "../../services/authenticationService";
+import { database } from "firebase";
 
 /**
  * Generated class for the ModalPage page.
@@ -14,18 +17,27 @@ import { IonicPage, NavParams, ViewController } from 'ionic-angular';
   templateUrl: 'modal.html',
 })
 export class ModalPage {
+  userData;
+  objExchange:any;
+  usrPoints:any;
+  exchangeData:any={};
 
-  constructor( private navParams: NavParams, private view: ViewController) {
+  constructor( private navParams: NavParams, private view: ViewController,public userSrv:ReciappService, public authSrv:AuthenticationService,
+    public toastCtrl:ToastController) {
+    this.userData=this.navParams.get('userData');
+    this.objExchange=this.navParams.get('objectExchange');
+    console.log(this.userData);
+    this.usrPoints=this.userData.points.total;
   }
 
- /* ionViewDidLoad() {
+  ionViewDidLoad() {
     console.log('ionViewDidLoad ModalPage');
-  }*/
+  }
 
-  ionViewWillLoad(){
+  /*ionViewWillLoad(){
     const data = this.navParams.get('data');
     console.log(data);
-  }
+  }*/
 
   closeModal(){
     const data = {
@@ -36,4 +48,26 @@ export class ModalPage {
     this.view.dismiss(data);
   }
 
+  exchangeGift(obj){
+    this.exchangeData.date=database.ServerValue.TIMESTAMP;
+    this.exchangeData.uid=this.authSrv.getCurrentUser().uid;
+    this.exchangeData.exchange=obj;
+    this.userSrv.exchangePoints(this.exchangeData)
+    .then((resp)=>{
+      this.usrPoints-=this.exchangeData.exchange.points;
+      this.okExchange();
+    })
+    .catch(e=>console.log(e));
+    //console.log(this.exchangeData);
+  }
+
+  okExchange(){
+    let toast = this.toastCtrl.create({
+      message: 'Tu canje a sido correcto.' ,
+      duration: 3000,
+      position:'middle'
+    });
+    toast.present();
+  }
 }
+

@@ -116,3 +116,16 @@ exports.onDeliveryMaterial = functions.database.ref('deliveries/{deliveryId}').o
 
 	});
 })
+
+//Function to update points when user registered a ner recycler
+exports.onExchange = functions.database.ref('exchange/{exchangeId}').onCreate((snap,context)=>{
+	//Get user id to object
+	const uid=snap.val().uid;
+	const exchangePoints=snap.val().exchange.points;
+	//Use admin to exec specific function at admin into firebase
+	return admin.database().ref(`user/${uid}`).once('value').then((userSnapshot)=>{
+		//Get points data
+		const userPointsTotal=userSnapshot.val().points.total;
+		admin.database().ref(`user/${uid}/points/total`).set(userPointsTotal - exchangePoints);
+	});
+})

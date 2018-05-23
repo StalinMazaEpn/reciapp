@@ -84,4 +84,10 @@ export class ReciappService{
 		await this.afdatabase.list('/deliveries').push(deliveryData);
 	}
 
+	/*Function to exchange */
+	public async exchangePoints(data){
+		//console.log(deliveryData);
+		await this.afdatabase.list('/exchange').push(data);
+	}
+
 }
