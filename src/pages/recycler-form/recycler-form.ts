@@ -70,6 +70,7 @@ export class RecyclerFormPage {
   daysValidator: AbstractControl;
   hourStart: AbstractControl;
   hourEnd: AbstractControl;
+  materialValidator: AbstractControl;
   gender: AbstractControl;
   birth: AbstractControl;
 
@@ -189,6 +190,7 @@ export class RecyclerFormPage {
       name: ['', Validators.required],
       lastName: ['', Validators.required],
       daysValidator: ['', Validators.required],
+      materialValidator: ['', Validators.required],
       hourStart: ['', Validators.compose([Validators.required, (control: FormControl) => {
         if (this.newRecycler.date.startTime > this.newRecycler.date.endTime) {
           return {
@@ -212,6 +214,7 @@ export class RecyclerFormPage {
     this.name = this.formGroup.controls['name'];
     this.lastName = this.formGroup.controls['lastName'];
     this.daysValidator = this.formGroup.controls['daysValidator'];
+    this.materialValidator = this.formGroup.controls['materialValidator'];
     this.hourStart = this.formGroup.controls['hourStart'];
     this.hourEnd = this.formGroup.controls['hourEnd'];
     this.gender = this.formGroup.controls['gender'];
@@ -224,7 +227,9 @@ export class RecyclerFormPage {
       this.lat_ === undefined ||
       this.lng_ === undefined ||
       this.newRecycler.name === undefined || this.newRecycler.name.length === 0 ||
+      this.newRecycler.lastName === undefined || this.newRecycler.lastName.length === 0 ||
       this.newRecycler.date.days === undefined ||
+      this.newRecycler.material === undefined ||    
       this.newRecycler.date.startTime === undefined ||
       this.newRecycler.date.endTime === undefined ||
       this.newRecycler.date.startTime > this.newRecycler.date.endTime ||
