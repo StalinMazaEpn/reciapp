@@ -21,8 +21,8 @@ page-dashboard {
     }
 
     ion-slides {
-      height: 50%;
-      padding: 0%;
+      height: 170px;
+      //padding: 0%;
     }
 
     .swiper-pagination-bullet-active{
@@ -30,8 +30,8 @@ page-dashboard {
     }
 
     .image{
-      //max-width: 100px;
-      //max-height: 100px;
+      //max-width: 250px !important;
+     // max-height: 250px !important;
       border-radius:50%;
     }
 
@@ -49,6 +49,58 @@ page-dashboard {
       background: #2C3E50;
     }
 
+
+    .textTips{
+      font-size: 13px;
+    }
+
+    /*.textContent{
+      color: white;
+    }*/
+
+    .card-md p {
+      color: #fff7f7;
+   }
+
+   .card-ios p {
+    color: #fff7f7;
+  }
+
+  .card-md h2 {
+    color: #fff;
+  }
+
+  .card-ios h2 {
+    color: #fff;
+  }
+
+  .card-title-md {
+  color: #fff;
+  }
+
+  .card-title-ios {
+    color: #fff;
+    }
+
+  .item-md {
+    color: #f3f3f3;
+  }
+
+  .item-ios {
+    color: #f3f3f3;
+  }
+
+  .list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block {
+     border-bottom: 0px ;
+}
+
+.list-ios > .item-block:first-child {
+  border-top: 0px;
+}
+
+  .textBold{
+    font-weight: bold;
+  }
 
 
 }
