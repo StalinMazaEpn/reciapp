@@ -36,4 +36,18 @@
           </ion-col>
         </ion-row>
 
+    
+    <ion-list>
+      <!--Exchange List-->
+      <ion-item >
+        <h2>¡Canjea beneficios cerca de ti!</h2>
+      </ion-item>
+      <ion-item *ngFor='let partner of partnerList'>
+      <h3>{{partner.name}}</h3>
+      <ion-avatar item-end>
+        <img src="{{partner.logo}}">
+      </ion-avatar>
+      </ion-item>
+    </ion-list>
+
 </ion-content>

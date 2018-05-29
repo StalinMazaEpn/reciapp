@@ -35,6 +35,10 @@ export class ReciappService{
 		return this.afdatabase.object('/user/'+uid).valueChanges();
 	}
 
+	public getPartner(){
+		return this.afdatabase.list('/partner').valueChanges();
+	}
+
 	public getExchangeList(){
 		return this.afdatabase.list('/partner').valueChanges();
 	}

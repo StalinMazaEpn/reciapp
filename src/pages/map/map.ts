@@ -11,6 +11,7 @@ import { LoginPage } from '../login/login';
 import {AuthenticationService} from "../../services/authenticationService";
 import { AngularFireAuth } from 'angularfire2/auth';
 import { CallNumber } from '@ionic-native/call-number';
+import {ModalPage} from '../modal/modal';
 
 @IonicPage()
 @Component({
@@ -38,16 +39,25 @@ export class MapPage {
   user:any;
   recyclerm:string;
 
+  partnerList:any;
+
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation,public recyclerSrv: ReciappService,
    public modalCtrl: ModalController, public authService:AuthenticationService,public toastCtrl:ToastController, private afAuth:AngularFireAuth, private locationAccuracy: LocationAccuracy, public callNumber: CallNumber,
-   private diagnostic: Diagnostic, private platform: Platform,
+   private diagnostic: Diagnostic, private platform: Platform, public partnerSrv: ReciappService,
    private alertCtrl: AlertController) {
     this.isAuthenticated=this.authService.isAuthenticated();
     this.getMyLocation();
     this.getRecyclers();
     this.valuesByDefault();
+    this.partnerSrv.getPartner().subscribe((data)=>{
+      this.partnerList=data;
+      console.log(this.partnerList);
+    });
+
     if(this.isAuthenticated) {
       this.user = this.recyclerSrv.getUser(this.authService.getCurrentUser().uid);
+      
     }
     if (this.platform.is('ios')) {
       this.locationAccuracy.canRequest().then(
@@ -239,5 +249,25 @@ doCallNumber(phoneNumber: string) {
   alert.present();
 }
 
+showAlert() {
+  let alert = this.alertCtrl.create({
+    title: 'New Friend!',
+    subTitle: 'Your friend, Obi wan Kenobi, just accepted your friend request!',
+    buttons: ['OK']
+  });
+  alert.present();
+}
 
+  partnerModal(objExchange){
+     //console.log('BEFORE',objExchange);
+     
+  // let modal = this.modalCtrl.create(ModalPage,{objectExchange:objExchange, userData:this.userData});
+   //modal.present();
+ } 
+
+ /*exchangeModal(objExchange){
++    //console.log('BEFORE',objExchange);
++    let modal = this.modalCtrl.create(ModalPage,{objectExchange:objExchange, userData:this.userData});
++    modal.present();
++  } */
 }
