@@ -1,21 +1,38 @@
-import { Component } from '@angular/core';
-import { Platform, App, AlertController } from 'ionic-angular';
+import { Component, ViewChild  } from '@angular/core';
+import { Nav, Platform, App, AlertController,LoadingController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NativeStorage } from '@ionic-native/native-storage';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { TourPage } from '../pages/tour/tour';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
+  @ViewChild(Nav) nav: Nav;
   rootPage:any;
 
   platform: Platform;
+  isAuthenticated:boolean;
+  optionsMenu:any;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public nativeStorage: NativeStorage, public app: App, private alertCtrl: AlertController) {
+  optionWithSession:any=[
+    {title:'Perfil',component:null},
+    {title:'Tour',component:TourPage},
+    {title:'Cerrar Sesión',component:'cerrar'},
+  ];
+
+  optionWithOutSession:any=[
+    {title:'Perfil',component:null},
+    {title:'Tour',component:TourPage},
+  ];
+
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public nativeStorage: NativeStorage, public app: App,
+   private alertCtrl: AlertController, public afAuth:AngularFireAuth,public loadingCtrl:LoadingController) {
     platform.ready().then(() => {
 
       this.platform = platform;
@@ -31,7 +48,6 @@ export class MyApp {
         splashScreen.hide();
       }
 
-
       platform.registerBackButtonAction(() => {
         let nav = this.app.getActiveNav();
         if (nav.canGoBack()){ //Can we go back?
@@ -40,8 +56,16 @@ export class MyApp {
           this.exitApp(); //Exit from app with confirmation
         }
       });
+    });
 
-
+    this.afAuth.authState.subscribe(data=>{
+      if(data && data.uid){
+        this.optionsMenu=this.optionWithSession;
+        //console.log('SESSION OPTION MENU');
+      }else{
+        //console.log('WITHOUT SESSION OPTION MENU');
+        this.optionsMenu=this.optionWithOutSession;
+      }
     });
   }
 
@@ -88,6 +112,31 @@ export class MyApp {
     );
   }
   */
+
+  logout(){
+    firebase.auth().signOut();
+    localStorage.removeItem('userData');
+    //Toast loading while logout user session
+    this.redirectLogin();
+    this.nav.setRoot(TabsPage);
+  }
+
+  redirectLogin() {
+    let loader = this.loadingCtrl.create({
+      content: "Cerrando Sesión...",
+      dismissOnPageChange:true
+    });
+    loader.present();
+  }
+
+  //Funtion to go an option page
+  optionPageMenu(option){
+    if (option==="cerrar") {
+      this.logout();
+    }else{
+      this.nav.push(option);  
+    }
+  }
 
 }
 
