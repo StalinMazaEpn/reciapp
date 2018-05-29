@@ -115,9 +115,9 @@
         <ion-label stacked>
           <span>*</span>
           Material que recibe:
-          <!--span *ngIf="daysValidator.hasError('required') && daysValidator.touched" class="validations"> (Debes seleccionar uno o varios días)</span-->
+          <span *ngIf="materialValidator.hasError('required') && materialValidator.touched" class="validations"> (Debes seleccionar uno o varios materiales)</span>
         </ion-label>
-        <ion-select [(ngModel)]="newRecycler.material" formControlName="daysValidator" multiple="true"
+        <ion-select [(ngModel)]="newRecycler.material" formControlName="materialValidator" multiple="true"
                     cancelText="cancel" okText="Ok">
           <ion-option value="Papel">Papel</ion-option>
           <ion-option value="Carton">Carton</ion-option>
