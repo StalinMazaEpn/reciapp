@@ -15,7 +15,7 @@ import { Camera, CameraOptions } from "@ionic-native/camera";
   templateUrl: 'delivery.html',
 })
 export class DeliveryPage {
-  isAuthenticated:boolean=false;
+  isAuthenticated:boolean;
   uid:any;
   recyclers:any;
   tmpPhoto:any=null;
@@ -67,13 +67,7 @@ export class DeliveryPage {
     private camera: Camera, public userSrv:ReciappService,public toastCtrl:ToastController) {
     this.disabledBtnDelivery=true;
     this.error=false;
-    this.tmpPhoto="assets/imgs/suggestion.png";
-    if (this.isAuthenticated==null || this.isAuthenticated==undefined || this.isAuthenticated==false) {
-      this.isAuthenticated=this.authenticationService.isAuthenticated();
-      console.log('SESSION ',this.isAuthenticated);  
-    }else{
-      console.log('SESSION',this.isAuthenticated);  
-    }
+    this.tmpPhoto="assets/imgs/suggestion.png";    
     
     if(this.authenticationService.getCurrentUser()!=null){
       this.isAuthenticated=this.authenticationService.isAuthenticated();
@@ -91,6 +85,21 @@ export class DeliveryPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DeliveryPage');
+    this.isAuthenticated=this.authenticationService.isAuthenticated();
+  }
+  
+  ionViewWillEnter(){
+    this.isAuthenticated=this.authenticationService.isAuthenticated();
+
+    if(this.authenticationService.getCurrentUser()!=null){
+      this.uid=this.authenticationService.getCurrentUser().uid;
+      this.recyclers = this.userSrv.getFavoritiesRecycler(this.uid)
+          .map((recyclerId)=>{
+            return recyclerId.map(recyclerObj => {
+              return this.userSrv.getRecyclerById(recyclerObj.payload.key);
+            })
+          })
+    }
   }
 
   takePhoto(){
