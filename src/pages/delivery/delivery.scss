@@ -1,8 +1,8 @@
 page-delivery {
 	img{
 		width: 40%;
-		height: 110px;
-		border: 1px solid;
+		height: 150px;
+		border: 0;
 		border-radius: 5px;
 	}
 
@@ -35,7 +35,7 @@ page-delivery {
 	.title-small1{
 		font-size: 6px;
 		font-weight: bold;
-		margin-left:1%;
+		margin-left:2%;
 		color: gray;
 		position: relative;
 	}
@@ -68,7 +68,9 @@ page-delivery {
 	}*/
 
 	.roundBtn{
-		border-radius: 100%;
+		border-radius: 150px,150px,150px,150px;
+		-moz-border-radius: 150px 150px 150px 150px;
+		-webkit-border-radius: 150px 150px 150px 150px;
 	}
 	.validations{
     	font-size: 10px;
@@ -105,4 +107,44 @@ page-delivery {
     	color:white;
     }
 
+    .btn-mini{
+    	max-height: 25px !important;
+    	max-width: 25px !important;
+    }
+
+    .btn-position{
+    	top: 60%;
+    }
+
+    .bg-photo{
+    	background: linear-gradient(to right,#afba35, #ede937);
+    }
+
+    .camera-btn{
+    	top: 8% !important;
+    	bottom: 10% !important;
+    	left: 43% !important;
+    	border: none;
+    }
+    
+    .message-Photo{
+    	position: absolute;
+    	top: 20% !important;
+    	left: 12% !important;
+    	right: 12% !important;
+    	z-index: 50;
+    	font-size: 1.2em;
+    }
+
+    p.recyclersNames{
+    	height: auto !important;
+    	overfloat: auto; 
+    	font-size:10px;
+    	margin-top: 5px !important;
+    	margin-bottom: 5px !important;
+    }
+    .noData{
+    	border: 2px solid;
+    	border-radius: 100%;
+    }
 }
