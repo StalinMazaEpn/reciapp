@@ -120,11 +120,11 @@
         <ion-select [(ngModel)]="newRecycler.material" formControlName="materialValidator" multiple="true"
                     cancelText="cancel" okText="Ok">
           <ion-option value="Papel">Papel</ion-option>
-          <ion-option value="Carton">Carton</ion-option>
-          <ion-option value="Plastico">Plastico</ion-option>
+          <ion-option value="Carton">Cartón</ion-option>
+          <ion-option value="Plastico">Plástico</ion-option>
           <ion-option value="Metal">Metal</ion-option>
           <ion-option value="Vidrio">Vidrio</ion-option>
-          <ion-option value="Tetrapack">Tetrapack</ion-option>
+          <ion-option value="Tetrapack">Tetrapak</ion-option>
         </ion-select>
       </ion-item>
   
@@ -146,8 +146,8 @@
   </ion-item>
 
   <ion-item>
-	  <ion-label>Recicla por: </ion-label>
-			<ion-input type="number" [(ngModel)]="newRecycler.recyclingFor" maxlength="4"></ion-input>
+	  <ion-label>Años reciclando: </ion-label>
+			<ion-input type="number" [(ngModel)]="recyclingFor" maxlength="2"></ion-input>
   </ion-item>
   
 

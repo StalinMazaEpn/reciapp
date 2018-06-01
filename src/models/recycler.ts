@@ -6,7 +6,8 @@ export interface Recycler{
 	phone:string;
 	image:any;
 	gender:any;
-	yearBirth:any;
+	yearBirth:number;
+	yearStartRecycling:number;
 	date:any;
 	material:any;
 	recyclingFor:any;

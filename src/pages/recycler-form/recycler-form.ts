@@ -32,6 +32,8 @@ export class RecyclerFormPage {
   material: string;
   //Recycler age
   age: any;
+  // Recycling for
+  recyclingFor: any;
   //get to actually date
   year: any = new Date();
   //User object
@@ -99,7 +101,10 @@ export class RecyclerFormPage {
     this.newRecycler.id = this.userSrv.getReciclerKey();
 
     this.newRecycler.yearBirth = this.year.getFullYear() - this.age;
+    if (this.recyclingFor)
+      this.newRecycler.yearStartRecycling = this.year.getFullYear() - this.recyclingFor;
     this.newRecycler.createdAt = database.ServerValue.TIMESTAMP;
+    
 
     if (this.tmp_image !== undefined) {
       //Storage on firebase

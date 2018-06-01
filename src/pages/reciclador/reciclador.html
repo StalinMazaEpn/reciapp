@@ -1,7 +1,7 @@
 
 <ion-header>
   <ion-navbar>
-    <ion-title > {{recycler.name}} </ion-title>
+    <ion-title > {{recycler.name}} {{recycler.lastName}}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -10,8 +10,7 @@
       <ion-col center text-center>
         <img src="{{recycler.image}}" center 
 				style="border-radius: 100px; height: 200px; width: 200px;"><!--../../assets/imgs/recycler_women.png-->
-				<p><i>"{{recycler.dream}}"</i></p>
-					
+				<p *ngIf="recycler.dream"><i>"{{recycler.dream}}"</i></p>
 			</ion-col>
 		</ion-row>
 
@@ -29,30 +28,6 @@
 		</ng-template>
 	  </ion-fab>
 
-		<!--ion-card>
-			<ion-card-content>
-				<p *ngIf="(recyclers)?.phone; elseComent" (click)="doCallNumber(recycler.phone)">
-					<!--ion-icon ios="ios-call" md="md-call" color="vibrant" item-start large></ion-icon-->
-					<!--h2>{{recycler.phone}}</h2>
-				</p>
-		
-					<ng-template #elseComent>
-						<p>Aún no tienes entregas</p>
-					</ng-template>
-			</ion-card-content>
-		</ion-card-->
-
-		<!--ion-item>
-				<ion-icon ios="ios-call" md="md-call" color="vibrant" item-start large></ion-icon>
-				<p *ngIf="(recycler)?.phone; else elseMessage">	
-						{{(recycler)?.phone}}
-					</p>
-	
-					<ng-template #elseMessage>
-						<p>No tiene telefono</p>
-					</ng-template>  
-		</ion-item-->
-
 		<button ion-button round icon-end *ngIf="(recycler)?.phone; else elseMessage" (click)="doCallNumber(recycler.phone)">
 				Llamar
 				<ion-icon ios="ios-call" md="md-call"></ion-icon>
@@ -60,40 +35,34 @@
 		<ng-template #elseMessage>
 			<ion-item>
 				<ion-icon ios="ios-call" md="md-call"  item-start large></ion-icon>
-				<p>No tiene telefono</p>
+				<p>No tiene teléfono</p>
 			</ion-item>
 		</ng-template>
 
-		 
-		<!--ion-item>
-			<ion-icon ios="ios-star" md="md-star" color="yellow" item-start large></ion-icon>
-	    <h2>"{{recycler.dream}}"</h2>
-		</ion-item-->
-
 	  <ion-item>
 	    <ion-icon ios="ios-calendar" md="md-calendar" item-left large ></ion-icon>
-	    <p>{{recycler.date.days}}<br>{{recycler.date.startTime}} - {{recycler.date.endTime}}</p>
+	    <p>{{recycler.date.days.join(', ')}}<br>{{recycler.date.startTime}} - {{recycler.date.endTime}}</p>
 		</ion-item>
 
-		<ion-item>
+		<ion-item *ngIf="recycler.recyclingFor">
 			
 			<ion-icon ios="ios-ribbon" md="md-ribbon" item-left large></ion-icon>
-	    <h2>{{recycler.recyclingFor}} años reciclando</h2>
+	    <p>{{recycler.recyclingFor}} años reciclando</p>
 		</ion-item>
 
 		<ion-item>
 			<ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle" item-left large></ion-icon>
-	    <h2>{{recycler.totalReceives}} entregas</h2>
+	    <p>{{recycler.totalReceives}} recepciones</p>
 		</ion-item>
 		
 		<ion-item>
 			<ion-icon ios="ios-body" md="md-body" item-left large></ion-icon>
-			<p>{{recycler.yearBirth}}</p>
+			<p>{{recycler.age}} años</p>
 		</ion-item>
 
 		<ion-item>
 			<ion-icon ios="ios-leaf" md="md-leaf" item-left large></ion-icon>
-			<p>{{recycler.material}}</p>
+			<p>{{recycler.material.join(', ')}}</p>
 		</ion-item>
 
 		<!--ion-card no-margin>
