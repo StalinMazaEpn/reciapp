@@ -16,6 +16,8 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
   rootPage:any;
 
+  alertShown = false;
+
   platform: Platform;
   isAuthenticated:boolean;
   optionsMenu:any;
@@ -33,6 +35,7 @@ export class MyApp {
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public nativeStorage: NativeStorage, public app: App,
    private alertCtrl: AlertController, public afAuth:AngularFireAuth,public loadingCtrl:LoadingController) {
+    
     platform.ready().then(() => {
 
       this.platform = platform;
@@ -40,6 +43,7 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
+
       if(this.isTourDone()){
         this.rootPage = TabsPage;
         splashScreen.hide();
@@ -50,12 +54,15 @@ export class MyApp {
 
       platform.registerBackButtonAction(() => {
         let nav = this.app.getActiveNav();
+        
         if (nav.canGoBack()){ //Can we go back?
           nav.pop();
         }else{
-          this.exitApp(); //Exit from app with confirmation
+          if (!this.alertShown) {
+            this.exitApp();
+          }
         }
-      });
+      },0);
     });
 
     this.afAuth.authState.subscribe(data=>{
@@ -87,6 +94,7 @@ export class MyApp {
           role: 'cancel',
           handler: () => {
             console.log('Cancel clicked');
+            this.alertShown = false;
           }
         },
         {
@@ -97,7 +105,9 @@ export class MyApp {
         }
       ]
     });
-    alert.present();
+    alert.present().then(() => {
+      this.alertShown = true;
+    });
   }
 
   /*
