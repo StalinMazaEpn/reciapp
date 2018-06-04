@@ -15,7 +15,7 @@ import { Camera, CameraOptions } from "@ionic-native/camera";
   templateUrl: 'delivery.html',
 })
 export class DeliveryPage {
-  isAuthenticated:boolean=false;
+  isAuthenticated:boolean;
   uid:any;
   recyclers:any;
   tmpPhoto:any=null;
@@ -36,6 +36,7 @@ export class DeliveryPage {
   selRecycler:any;
   tmp_selRecycler:any;
   error:boolean;
+  errorForm:boolean;
 
   userDelivery:any={
     fundaCtrl:undefined,
@@ -55,34 +56,50 @@ export class DeliveryPage {
   totalMaterialRecyclable:number=0;
   errTotalMaterialRecyclable:boolean;
   errorSize:boolean;
+  errorRecycler:boolean;
+  disabledBtnDelivery:boolean;
+
+  auxPhoto:boolean= false;
+  auxSelRecycler :boolean= false; 
+  auxMaterial:boolean= false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public authenticationService:AuthenticationService,
-  	private camera: Camera, public userSrv:ReciappService,public toastCtrl:ToastController) {
+    private camera: Camera, public userSrv:ReciappService,public toastCtrl:ToastController) {
+    this.disabledBtnDelivery=true;
     this.error=false;
-  	this.tmpPhoto="assets/imgs/suggestion.png";
-    if (this.isAuthenticated==null || this.isAuthenticated==undefined || this.isAuthenticated==false) {
-      this.isAuthenticated=this.authenticationService.isAuthenticated();
-      console.log('SESSION ',this.isAuthenticated);  
-    }else{
-      console.log('SESSION',this.isAuthenticated);  
-    }
+    this.tmpPhoto="assets/imgs/transparent.png";    
     
-  	if(this.authenticationService.getCurrentUser()!=null){
-  		this.isAuthenticated=this.authenticationService.isAuthenticated();
-  		this.uid=this.authenticationService.getCurrentUser().uid;
-  		this.recyclers = this.userSrv.getFavoritiesRecycler(this.uid)
+    if(this.authenticationService.getCurrentUser()!=null){
+      this.isAuthenticated=this.authenticationService.isAuthenticated();
+      this.uid=this.authenticationService.getCurrentUser().uid;
+      this.recyclers = this.userSrv.getFavoritiesRecycler(this.uid)
           .map((recyclerId)=>{
             return recyclerId.map(recyclerObj => {
               return this.userSrv.getRecyclerById(recyclerObj.payload.key);
             })
           })
-  	}
+    }
     this.tmpDate =new Date();
     this.date=this.tmpDate.getFullYear()+""+this.tmpDate.getMonth()+""+this.tmpDate.getDay()+""+this.tmpDate.getHours()+""+this.tmpDate.getMinutes()+""+this.tmpDate.getSeconds()+""+this.tmpDate.getMilliseconds();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DeliveryPage');
+    this.isAuthenticated=this.authenticationService.isAuthenticated();
+  }
+  
+  ionViewWillEnter(){
+    this.isAuthenticated=this.authenticationService.isAuthenticated();
+
+    if(this.authenticationService.getCurrentUser()!=null){
+      this.uid=this.authenticationService.getCurrentUser().uid;
+      this.recyclers = this.userSrv.getFavoritiesRecycler(this.uid)
+          .map((recyclerId)=>{
+            return recyclerId.map(recyclerObj => {
+              return this.userSrv.getRecyclerById(recyclerObj.payload.key);
+            })
+          })
+    }
   }
 
   takePhoto(){
@@ -100,6 +117,7 @@ export class DeliveryPage {
           .then((resp)=>{
             this.tmpPhoto='data:image/jpeg;base64,' + resp;
             //console.log(this.tmpPhoto);
+            this.auxPhoto = true;
           })
           .catch((e)=>{
             console.log(e);
@@ -118,108 +136,114 @@ export class DeliveryPage {
 
     if (this.fundaCtrl!=null && this.fundaCtrl!=undefined && this.fundaCtrl!=0) {
       this.errorSize=false;
-      //Validate data 
-      if (this.recyclerId!=null && (this.plasticoCtrl!=null && this.plasticoCtrl!=undefined && this.plasticoCtrl!=0 ||
-       this.papelCtrl!=null && this.papelCtrl!=undefined && this.papelCtrl!=0 || 
-       this.vidrioCtrl!=null && this.vidrioCtrl!=undefined && this.vidrioCtrl!=0 ||
-       this.compuestoCtrl!=null && this.compuestoCtrl!=undefined && this.compuestoCtrl!=0 || 
-       this.chatarraCtrl!=null && this.chatarraCtrl!=undefined && this.chatarraCtrl!=0 || 
-       this.cartonCtrl!=null && this.cartonCtrl!=undefined && this.cartonCtrl!=0)) {
-        
-        if (this._totalMaterialRecyclable>0 && this._totalMaterialRecyclable<=100) {
-          //When user select a recycler
-          this.userDelivery.idUser=this.uid;
-          this.userDelivery.idRecycler=this.recyclerId;
-          //Tomamos la hora del servidor (Arreglo)
-          //this.userDelivery.date= database['ServerValue']['TIMESTAMP'];
-          //Tomamos la hora del servidor (Métodos)
-          this.userDelivery.date=database.ServerValue.TIMESTAMP;
-          this.rangeData();      
-          //console.log(this.tmpPhoto);
-          //Storage photo
-          if (this.tmpPhoto !== undefined && this.tmpPhoto != "assets/imgs/suggestion.png") {
-            //Storage on firebase
-            const pictures =storage().ref('deliveries/' + this.userDelivery.idUser +'/'+ this.date + '.jpeg');
-            pictures.putString(this.tmpPhoto, 'data_url')
-              .then((snapshot) => {
-                // Upload completed successfully, now we can get the download URL
-                this.userDelivery.image = snapshot.downloadURL;
-                console.log('Entrega',this.userDelivery.idRecycler);
-                //function to save on firebase
-                this.userSrv.addNewDelivery(this.userDelivery)
-                .then(()=>{
-                  console.log('ok');
-                  //document.getElementById(this.recyclerId).style.border="0";
-                  this.cleanForm();
-                  this.addDeliveryPoints();
-                })
-                .catch((e)=>{
-                  console.log('Hubo un error',e);
-                });
-              })
-              .catch((error) => {
-                //this.buttonDisabled = false;
-                console.log("NOT UPLOADED", error);
-                this.error=true;
-              });
-          } else {
-            console.log("REGISTER NO PHOTO");
-            this.error=true;
-          }
-        }else{
-          this.errTotalMaterialRecyclable=true;
-        }
-
-      }else if(this.recyclerId==null && this.tmp_selRecycler==="Anónimo" && (this.plasticoCtrl!=null && this.plasticoCtrl!=undefined && this.plasticoCtrl!=0 ||
-       this.papelCtrl!=null && this.papelCtrl!=undefined && this.papelCtrl!=0 || 
-       this.vidrioCtrl!=null && this.vidrioCtrl!=undefined && this.vidrioCtrl!=0 ||
-       this.compuestoCtrl!=null && this.compuestoCtrl!=undefined && this.compuestoCtrl!=0 || 
-       this.chatarraCtrl!=null && this.chatarraCtrl!=undefined && this.chatarraCtrl!=0 || 
-       this.cartonCtrl!=null && this.cartonCtrl!=undefined && this.cartonCtrl!=0)){
-        
-        if (this._totalMaterialRecyclable>0 && this._totalMaterialRecyclable<=100) {
-          //When user not select a recycler
-          this.userDelivery.idUser=this.uid;
-          this.userDelivery.idRecycler=null;
-          //this.userDelivery.date= database['ServerValue']['TIMESTAMP'];
-          this.userDelivery.date=database.ServerValue.TIMESTAMP;
-          this.rangeData();
-          //Storage photo
-          if (this.tmpPhoto !== undefined && this.tmpPhoto != "assets/imgs/suggestion.png") {
-            //Storage on firebase
-            const pictures =storage().ref('deliveries/' + this.userDelivery.idUser +'/'+ this.date + '.jpeg');
-            pictures.putString(this.tmpPhoto, 'data_url')
-              .then((snapshot) => {
-                // Upload completed successfully, now we can get the download URL
-                this.userDelivery.image = snapshot.downloadURL;
-                //function to save on firebase
-                this.userSrv.addNewDelivery(this.userDelivery)
-                .then(()=>{
-                  console.log('ok Anónimo',this.userDelivery);
-                  //document.getElementById('anonymousRecycler').style.border="0";
-                  this.cleanForm();
-                  this.addDeliveryPoints();
-                })
-                .catch((e)=>{
-                  console.log('Hubo un error Anónimo',e);
-                });
-              })
-              .catch((error) => {
-                //this.buttonDisabled = false;
-                console.log("NOT UPLOADED", error);
-              });
-
-          } else {
-            console.log("REGISTER NO PHOTO");
-            this.error=true;
-          }
-        }else{
-          this.errTotalMaterialRecyclable=true;
-        }
-
+      if ((this.tmp_selRecycler==undefined && this.recyclerId==undefined ) && (this.tmp_selRecycler==undefined || this.recyclerId==undefined)) {
+        //console.log('error al seleccionar un reciclador o anonimo');
+        this.errorRecycler=true;    
       }else{
-        console.log('falta llenar campos');
-        this.error=true;
+        this.errorRecycler=false;
+        //Validate data 
+          if (this.recyclerId!=null && (this.plasticoCtrl!=null && this.plasticoCtrl!=undefined && this.plasticoCtrl!=0 ||
+           this.papelCtrl!=null && this.papelCtrl!=undefined && this.papelCtrl!=0 || 
+           this.vidrioCtrl!=null && this.vidrioCtrl!=undefined && this.vidrioCtrl!=0 ||
+           this.compuestoCtrl!=null && this.compuestoCtrl!=undefined && this.compuestoCtrl!=0 || 
+           this.chatarraCtrl!=null && this.chatarraCtrl!=undefined && this.chatarraCtrl!=0 || 
+           this.cartonCtrl!=null && this.cartonCtrl!=undefined && this.cartonCtrl!=0)) {
+            this.errorForm=false;
+            if (this._totalMaterialRecyclable>0 && this._totalMaterialRecyclable<=100) {
+              //When user select a recycler
+              this.userDelivery.idUser=this.uid;
+              this.userDelivery.idRecycler=this.recyclerId;
+              //Tomamos la hora del servidor (Arreglo)
+              //this.userDelivery.date= database['ServerValue']['TIMESTAMP'];
+              //Tomamos la hora del servidor (Métodos)
+              this.userDelivery.date=database.ServerValue.TIMESTAMP;
+              this.rangeData();      
+              //console.log(this.tmpPhoto);
+              //Storage photo
+              if (this.tmpPhoto !== undefined && this.tmpPhoto != "assets/imgs/transparent.png") {
+                //Storage on firebase
+                const pictures =storage().ref('deliveries/' + this.userDelivery.idUser +'/'+ this.date + '.jpeg');
+                pictures.putString(this.tmpPhoto, 'data_url')
+                  .then((snapshot) => {
+                    // Upload completed successfully, now we can get the download URL
+                    this.userDelivery.image = snapshot.downloadURL;
+                    console.log('Entrega',this.userDelivery.idRecycler);
+                    //function to save on firebase
+                    this.userSrv.addNewDelivery(this.userDelivery)
+                    .then(()=>{
+                      console.log('ok');
+                      //document.getElementById(this.recyclerId).style.border="0";
+                      this.cleanForm();
+                      this.addDeliveryPoints();
+                    })
+                    .catch((e)=>{
+                      console.log('Hubo un error',e);
+                    });
+                  })
+                  .catch((error) => {
+                    //this.buttonDisabled = false;
+                    console.log("NOT UPLOADED", error);
+                    this.error=true;
+                  });
+              } else {
+                console.log("REGISTER NO PHOTO");
+                this.error=true;
+              }
+            }else{
+              this.errTotalMaterialRecyclable=true;
+            }
+
+          }else if(this.recyclerId==null && this.tmp_selRecycler==="Anónimo" && (this.plasticoCtrl!=null && this.plasticoCtrl!=undefined && this.plasticoCtrl!=0 ||
+           this.papelCtrl!=null && this.papelCtrl!=undefined && this.papelCtrl!=0 || 
+           this.vidrioCtrl!=null && this.vidrioCtrl!=undefined && this.vidrioCtrl!=0 ||
+           this.compuestoCtrl!=null && this.compuestoCtrl!=undefined && this.compuestoCtrl!=0 || 
+           this.chatarraCtrl!=null && this.chatarraCtrl!=undefined && this.chatarraCtrl!=0 || 
+           this.cartonCtrl!=null && this.cartonCtrl!=undefined && this.cartonCtrl!=0)){
+            this.errorForm=false;
+            if (this._totalMaterialRecyclable>0 && this._totalMaterialRecyclable<=100) {
+              //When user not select a recycler
+              this.userDelivery.idUser=this.uid;
+              this.userDelivery.idRecycler=null;
+              //this.userDelivery.date= database['ServerValue']['TIMESTAMP'];
+              this.userDelivery.date=database.ServerValue.TIMESTAMP;
+              this.rangeData();
+              //Storage photo
+              if (this.tmpPhoto !== undefined && this.tmpPhoto != "assets/imgs/transparent.png") {
+                //Storage on firebase
+                const pictures =storage().ref('deliveries/' + this.userDelivery.idUser +'/'+ this.date + '.jpeg');
+                pictures.putString(this.tmpPhoto, 'data_url')
+                  .then((snapshot) => {
+                    // Upload completed successfully, now we can get the download URL
+                    this.userDelivery.image = snapshot.downloadURL;
+                    //function to save on firebase
+                    this.userSrv.addNewDelivery(this.userDelivery)
+                    .then(()=>{
+                      console.log('ok Anónimo',this.userDelivery);
+                      //document.getElementById('anonymousRecycler').style.border="0";
+                      this.cleanForm();
+                      this.addDeliveryPoints();
+                    })
+                    .catch((e)=>{
+                      console.log('Hubo un error Anónimo',e);
+                    });
+                  })
+                  .catch((error) => {
+                    //this.buttonDisabled = false;
+                    console.log("NOT UPLOADED", error);
+                  });
+
+              } else {
+                console.log("REGISTER NO PHOTO");
+                this.error=true;
+              }
+            }else{
+              this.errTotalMaterialRecyclable=true;
+            }
+
+          }else{
+            console.log('falta llenar campos');
+            this.errorForm=true;
+          }
       }
     }else{
       this.errorSize=true;
@@ -244,7 +268,7 @@ export class DeliveryPage {
     this.error=false;
     this.errorSize=false;
     this.errTotalMaterialRecyclable=false;
-    this.tmpPhoto="assets/imgs/suggestion.png";
+    this.tmpPhoto="assets/imgs/transparent.png";
     this.recyclablePhoto=null;
     console.log(this.date);
   }
@@ -297,32 +321,34 @@ export class DeliveryPage {
   }
 
   goToLogin(){
-  	this.navCtrl.push(LoginPage);
+    this.navCtrl.push(LoginPage);
   }
 
   addRecycler(){
-  	this.navCtrl.push(RecyclerFormPage);
+    this.navCtrl.push(RecyclerFormPage);
   }
 
   selectRecycler(recyclerId){
     //hide section
     this.hideFavorites=true;
 
-  	if (this.recyclerId!=null) {
-  		document.getElementById(this.recyclerId).style.border="0";
-  	}
-  	
-  	if (recyclerId==="Anónimo") {
+    if (this.recyclerId!=null) {
+      document.getElementById(this.recyclerId).style.border="0";
+    }
+    
+    if (recyclerId==="Anónimo") {
       this.tmp_selRecycler="Anónimo";
-  		//console.log("Anónimo",recyclerId);
-  		this.selRecycler="1px solid green";
-  		//console.log(this.selRecycler);
-  		document.getElementById('anonymousRecycler').style.border=this.selRecycler;
-  		if (this.recyclerId!=null) {
-	  		document.getElementById(this.recyclerId).style.border="0";
-	  		this.recyclerId=null;
-	  	}
-  	}else{
+      //console.log("Anónimo",recyclerId);
+      this.selRecycler="1px solid green";
+      //console.log(this.selRecycler);
+      document.getElementById('anonymousRecycler').style.border=this.selRecycler;
+      if (this.recyclerId!=null) {
+        document.getElementById(this.recyclerId).style.border="0";
+        this.recyclerId=null;
+      }
+      this.tmpRecyclerImage='assets/imgs/recycler_women.png';
+      this.auxSelRecycler = true;
+    }else{
       //margin 
       this.tmp_selRecycler=null;
       document.getElementById('anonymousRecycler').style.border="0";
@@ -330,16 +356,17 @@ export class DeliveryPage {
       this.selRecycler="1px solid green";
       //console.log(this.selRecycler);
       document.getElementById(recyclerId).style.border=this.selRecycler;
-  	}
-    
-    //show only recycler
-      //this.tmpRecycler=this.userSrv.getRecyclerById(recyclerId);
-      
       this.userSrv.getRecyclerById(recyclerId).subscribe(data=>{
         this.tmpRecyclerImage=data['image'];
         this.tmpRecyclerName=data['name'];
         this.tmpRecyclerFirstLetterName=this.tmpRecyclerName.charAt(0).toUpperCase();
       });
+      this.auxSelRecycler = true;
+    }
+    
+    //show only recycler
+      //this.tmpRecycler=this.userSrv.getRecyclerById(recyclerId);
+      
   }
 
   addDeliveryPoints() {
@@ -401,11 +428,25 @@ export class DeliveryPage {
     }else if ((this.aux1+this.aux2+this.aux3+this.aux4+this.aux5+this.aux6)>0 && (this.aux1+this.aux2+this.aux3+this.aux4+this.aux5+this.aux6)<=100) {
       this._totalMaterialRecyclable=this.aux1+this.aux2+this.aux3+this.aux4+this.aux5+this.aux6;
       this.totalMaterialRecyclable=this.aux1+this.aux2+this.aux3+this.aux4+this.aux5+this.aux6;
+      this.auxMaterial=true;
       //this.btnDisabled=false;
     }
   }
 
   showFavorites(){
     this.hideFavorites=false;
+    this.tmp_selRecycler=undefined;
+    this.recyclerId=undefined
+    this.auxSelRecycler = false;
   }
+
+  disabledBottomDelivery(){
+    this.disabledBtnDelivery=true;
+    if (this.auxPhoto == true && this.auxSelRecycler == true && (this.fundaCtrl!=undefined || this.fundaCtrl!=0 || this.fundaCtrl !=null) && this.auxMaterial==true) {
+      this.disabledBtnDelivery=false;  
+    }else{
+      this.disabledBtnDelivery=true;
+    }
+  }
+
 }

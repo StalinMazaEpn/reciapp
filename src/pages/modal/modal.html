@@ -23,16 +23,17 @@
       <button ion-fab mini color="danger" outline clear (click)="closeModal()"><ion-icon name="close" ></ion-icon></button>
     </ion-fab>
     <div class="modalContent">
-      <ion-item>
+      <ion-item style="background: #00a0dc">
         <br>
-        <h1><span><ion-icon ios="ios-heart-outline" md="md-heart-outline"></ion-icon></span> {{objExchange.points}} pts.</h1>
-        <h2 text-wrap>¡{{objExchange.promoTitle}}!</h2>
-        <p text-wrap>{{objExchange.promoDetail}}</p>
+        <h1 style="color:white"><span><ion-icon ios="ios-heart-outline" md="md-heart-outline"></ion-icon></span> {{objExchange.points}} pts.</h1>
+        <h2 style="color:white" text-wrap>¡{{objExchange.promoTitle}}!</h2>
+        <p style="color:white" text-wrap>{{objExchange.promoDetail}}</p>
         <ion-avatar item-end>
           <img src="{{objExchange.logo}}" width="150" height="150">
         </ion-avatar>
         <br>
       </ion-item>
+      <!--Boton/Message-->
       <div text-center *ngIf="usrPoints>=objExchange.points; else insufficientPoints">
         <br>
         <button ion-button color="secondary" round (tap)="exchangeGift(objExchange)">Canjear</button>  
@@ -46,8 +47,8 @@
     </div>    
 
     
-    <ion-list>
-      <!--Exchange List-->
+    <!--ion-list>
+      <Exchange List>
       <ion-item >
         <h2>¡Canjea beneficios cerca de ti!</h2>
       </ion-item>
@@ -57,6 +58,6 @@
         <img src="{{partner.logo}}">
       </ion-avatar>
       </ion-item>
-    </ion-list>
+    </ion-list-->
 
 </ion-content>
