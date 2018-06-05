@@ -62,8 +62,8 @@ export class RegisterPage {
 	  		}
 	  	}
 	  	catch(e){
+        this.errorToast(e.code);
 	  		console.error('Err: ',e);
-	  		this.errorToast(e.code);
 	  	}
   }
 
@@ -92,6 +92,10 @@ export class RegisterPage {
 
       case "auth/weak-password":
         message="La contraseña debe tener 6 caracteres.";
+        break;
+
+      case "auth/argument-error":
+        message="Los campos no deben estar vacíos.";
         break;
     }
     let toast = this.toastCtrl.create({

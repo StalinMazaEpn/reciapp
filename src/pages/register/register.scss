@@ -21,7 +21,7 @@ page-register {
 	.triangle{  
 		z-index: -1;
 		left: 0%;
-	  	top: 70%;
+	  	bottom:0%;
       	position: absolute;
 		width: 0;
      	height: 0;
@@ -31,6 +31,9 @@ page-register {
      	border-top: 65px solid transparent;
      	border-left: 190px solid #005c80;
      	border-bottom: 65px solid #005c80;
+     	-webkit-box-shadow: 5px 5px 5px 0px #004361;
+		-moz-box-shadow: 5px 5px 5px 0px #004361;
+		box-shadow: 5px 5px 5px 0px #004361;
     }
 
 }
