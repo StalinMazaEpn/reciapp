@@ -67,7 +67,8 @@ export class DeliveryPage {
     private camera: Camera, public userSrv:ReciappService,public toastCtrl:ToastController) {
     this.disabledBtnDelivery=true;
     this.error=false;
-    this.tmpPhoto="assets/imgs/suggestion.png";    
+
+    this.tmpPhoto="assets/imgs/transparent.png";    
     
     if(this.authenticationService.getCurrentUser()!=null){
       this.isAuthenticated=this.authenticationService.isAuthenticated();
@@ -160,7 +161,8 @@ export class DeliveryPage {
               this.rangeData();      
               //console.log(this.tmpPhoto);
               //Storage photo
-              if (this.tmpPhoto !== undefined && this.tmpPhoto != "assets/imgs/suggestion.png") {
+
+              if (this.tmpPhoto !== undefined && this.tmpPhoto != "assets/imgs/transparent.png") {
                 //Storage on firebase
                 const pictures =storage().ref('deliveries/' + this.userDelivery.idUser +'/'+ this.date + '.jpeg');
                 pictures.putString(this.tmpPhoto, 'data_url')
@@ -208,7 +210,8 @@ export class DeliveryPage {
               this.userDelivery.date=database.ServerValue.TIMESTAMP;
               this.rangeData();
               //Storage photo
-              if (this.tmpPhoto !== undefined && this.tmpPhoto != "assets/imgs/suggestion.png") {
+
+              if (this.tmpPhoto !== undefined && this.tmpPhoto != "assets/imgs/transparent.png") {
                 //Storage on firebase
                 const pictures =storage().ref('deliveries/' + this.userDelivery.idUser +'/'+ this.date + '.jpeg');
                 pictures.putString(this.tmpPhoto, 'data_url')
@@ -268,7 +271,7 @@ export class DeliveryPage {
     this.error=false;
     this.errorSize=false;
     this.errTotalMaterialRecyclable=false;
-    this.tmpPhoto="assets/imgs/suggestion.png";
+    this.tmpPhoto="assets/imgs/transparent.png";
     this.recyclablePhoto=null;
     console.log(this.date);
   }
