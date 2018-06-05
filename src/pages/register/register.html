@@ -1,9 +1,3 @@
-<!--
-  Generated template for the RegisterPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar color="primary">
@@ -12,41 +6,30 @@
 
 </ion-header>
 
+  <ion-content padding class="bg-page">
 
-<ion-content padding>
+    <div class="textbox" style="margin-top: 15%;">
+      <ion-input text-center type="text" [(ngModel)]="user.name" placeholder="Nombre"></ion-input>
+    </div>
 
-  <ion-item>
-    <ion-label stacked>Nombres</ion-label>
-    <ion-input type="text" [(ngModel)]="user.name"></ion-input>
-  </ion-item>
+    <div class="textbox" style="margin-top: 10%;">
+      <ion-input text-center type="text" [(ngModel)]="user.lastname" placeholder="Apellidos"></ion-input>
+    </div>
 
-  <ion-item>
-    <ion-label stacked>Apellidos</ion-label>
-    <ion-input type="text" [(ngModel)]="user.lastname"></ion-input>
-  </ion-item>
+    <div class="textbox" style="margin-top: 10%;">
+      <ion-input text-center type="text" [(ngModel)]="userData.email" placeholder="Correo"></ion-input>
+    </div>
 
-  <ion-item>
-    <ion-label stacked>Correo</ion-label>
-    <ion-input type="text" [(ngModel)]="userData.email"></ion-input>
-  </ion-item>
+    <div class="textbox" style="margin-top: 10%;">
+      <ion-input text-center type="password" [(ngModel)]="userData.pass" placeholder="Contraseña"></ion-input>
+    </div>
 
-  <ion-item>
-    <ion-label stacked>Contraseña</ion-label>
-    <ion-input type="password" [(ngModel)]="userData.pass"></ion-input>
-  </ion-item>
-	  
-</ion-content>
+    <div class="triangle"></div>
 
-<ion-row text-center>
-  <ion-col>
-    <button ion-button icon-left clear large (click)="register_fb()">
-  	  <ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon>
-    </button>
-  </ion-col>
-</ion-row>
+  </ion-content>
 
 <ion-footer>
 	<div text-center>
-	  	<button ion-button full (click)="register()">Registrarse</button>	
+	  <button class="bg-boton" ion-button full (click)="register()">Registrarse</button>	
 	</div>
 </ion-footer>
