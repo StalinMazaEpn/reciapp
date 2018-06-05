@@ -57,14 +57,14 @@ page-delivery {
 		margin-right: 20% !important;
 	}
 	span.label1{
-		margin-left: 10% !important;	
+		margin-left: 10% !important;
 	}
 	/*
 	span.label{
 		margin-right: 15% !important;
 	}
 	span.label1{
-		margin-left: 35% !important;	
+		margin-left: 35% !important;
 	}*/
 
 	.roundBtn{
@@ -74,7 +74,7 @@ page-delivery {
 	}
 	.validations{
     	font-size: 10px;
-    	color: red;	
+    	color: red;
     }
 
     ul{
@@ -118,6 +118,7 @@ page-delivery {
 
     .bg-photo{
     	background: linear-gradient(to right,#afba35, #ede937);
+      min-height: 30%;
     }
 
     .camera-btn{
@@ -126,7 +127,7 @@ page-delivery {
     	left: 43% !important;
     	border: none;
     }
-    
+
     .message-Photo{
     	position: absolute;
     	top: 20% !important;
@@ -138,7 +139,7 @@ page-delivery {
 
     p.recyclersNames{
     	height: auto !important;
-    	overfloat: auto; 
+    	overfloat: auto;
     	font-size:10px;
     	margin-top: 5px !important;
     	margin-bottom: 5px !important;

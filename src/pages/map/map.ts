@@ -3,15 +3,15 @@ import { IonicPage, NavController, NavParams, ModalController, ToastController, 
 
 import { Geolocation } from '@ionic-native/geolocation';
 import { ReciappService } from './../../services/reciapp.service';
-import {RecicladorPage} from "../reciclador/reciclador";
+import { RecicladorPage } from "../reciclador/reciclador";
 import { RecyclerFormPage } from "../recycler-form/recycler-form";
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { LocationAccuracy } from '@ionic-native/location-accuracy';
 import { LoginPage } from '../login/login';
-import {AuthenticationService} from "../../services/authenticationService";
+import { AuthenticationService } from "../../services/authenticationService";
 import { AngularFireAuth } from 'angularfire2/auth';
 import { CallNumber } from '@ionic-native/call-number';
-import {ModalPage} from '../modal/modal';
+import { ModalPage } from '../modal/modal';
 
 @IonicPage()
 @Component({

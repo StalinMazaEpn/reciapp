@@ -67,6 +67,7 @@ export class DeliveryPage {
     private camera: Camera, public userSrv:ReciappService,public toastCtrl:ToastController) {
     this.disabledBtnDelivery=true;
     this.error=false;
+
     this.tmpPhoto="assets/imgs/transparent.png";    
     
     if(this.authenticationService.getCurrentUser()!=null){
@@ -160,6 +161,7 @@ export class DeliveryPage {
               this.rangeData();      
               //console.log(this.tmpPhoto);
               //Storage photo
+
               if (this.tmpPhoto !== undefined && this.tmpPhoto != "assets/imgs/transparent.png") {
                 //Storage on firebase
                 const pictures =storage().ref('deliveries/' + this.userDelivery.idUser +'/'+ this.date + '.jpeg');
@@ -208,6 +210,7 @@ export class DeliveryPage {
               this.userDelivery.date=database.ServerValue.TIMESTAMP;
               this.rangeData();
               //Storage photo
+
               if (this.tmpPhoto !== undefined && this.tmpPhoto != "assets/imgs/transparent.png") {
                 //Storage on firebase
                 const pictures =storage().ref('deliveries/' + this.userDelivery.idUser +'/'+ this.date + '.jpeg');
