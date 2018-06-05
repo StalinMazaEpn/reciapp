@@ -13,47 +13,30 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class="bg-login">
   <ion-scroll scrollY="false">
-</ion-scroll>
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '809111969272969',
-      cookie     : true,
-      xfbml      : true,
-      version    : '16'
-    });
-      
-    FB.AppEvents.logPageView();   
-      
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
-    <div text-center>
-      <img src="assets/imgs/logo.png" width="150px" height="150px" />
+  </ion-scroll>
+    <div text-center class="logo-position">
+      <img src="assets/imgs/logo-header.png" />
     </div>
   
-  <ion-item>
-    <ion-label stacked>Correo</ion-label>
-    <ion-input type="text" [(ngModel)]="user.mail"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label stacked>Contraseña</ion-label>
-    <ion-input type="password" [(ngModel)]="user.password"></ion-input>
-  </ion-item>
-
-  <div text-center padding>
-  	<button ion-button round (click)="validate()" >Entrar</button>
+  <div class="textbox">
+      <!--ion-label stacked>Correo</ion-label-->
+      <ion-input text-center type="text" [(ngModel)]="user.mail" placeholder="Usuario"></ion-input>
   </div>
 
-  <p text-center>Aún no tienes cuenta, <br><a (click)="register()">Registrate</a></p>
+  <div class="textbox">
+    <!--ion-label stacked>Contraseña</ion-label-->
+    <ion-input text-center type="password" [(ngModel)]="user.password" placeholder="Contraseña"></ion-input>
+  </div>
+
+  <div text-center padding style="z-index: 50">
+  	<button class="bg-boton" ion-button round (click)="validate()" style="z-index: 100" >Ingresar</button>
+  </div>
+  <div text-center style="z-index: 100; position: absolute; left: 20% !important; right: 20% !important;">
+    <p >Aún no tienes cuenta, <br><a style="color: white" (click)="register()">Registrate</a></p>  
+  </div>
+
+  <span class="rotar"></span>
+  
 </ion-content>
