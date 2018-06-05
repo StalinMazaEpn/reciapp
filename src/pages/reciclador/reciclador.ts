@@ -66,7 +66,7 @@ export class RecicladorPage {
                 this.getMyLocation();
               },
               error => {
-                this.valuesByDefault();
+                //this.valuesByDefault();
               }
             );
           }
