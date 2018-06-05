@@ -5,7 +5,7 @@
         <agm-map [latitude]="latView" [longitude]="lngView" [zoom]="zoom" [fullscreenControlOptions]="false" [zoomControl]="false" [streetViewControl]="false" [usePanning]="true" (zoomChange)="zoomChange($event)">
             <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
             <agm-marker [iconUrl]="'assets/imgs/recyclers1.png'" *ngFor="let recycler of recyclers" (markerClick)="goToRecycler(recycler)" [latitude]="recycler.latitude" [longitude]="recycler.longitude"></agm-marker>
-            <agm-marker [iconUrl]="'../../assets/imgs/papel.png'" *ngFor="let partner of partnerList" [latitude]="partner.latitude" [longitude]="partner.longitude"></agm-marker>
+            <!--agm-marker [iconUrl]="'../../assets/imgs/papel.png'" *ngFor="let partner of partnerList" [latitude]="partner.latitude" [longitude]="partner.longitude"></agm-marker-->
           </agm-map>
           <ion-fab left middle >
             <button ion-fab icon-only (tap)="getViewLocation()" style="background-color: transparent;">

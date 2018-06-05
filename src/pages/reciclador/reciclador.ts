@@ -1,15 +1,18 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform, DateTime } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { ReciappService } from '../../services/reciapp.service';
 import { AuthenticationService } from '../../services/authenticationService';
 import { CallNumber } from '@ionic-native/call-number';
 import { AlertController } from 'ionic-angular';
+import { LocationAccuracy } from '@ionic-native/location-accuracy';
+import { Diagnostic } from '@ionic-native/diagnostic';
+import { Geolocation } from '@ionic-native/geolocation';
 
 @IonicPage()
 @Component({
   selector: 'page-reciclador',
-  templateUrl: 'reciclador.html',
+  templateUrl: 'reciclador.html'
 })
 
 
@@ -29,13 +32,14 @@ export class RecicladorPage {
 
   zoom: any;
 
-  // values by default 
-  latViewDef: any = -0.184713; 
+  // values by default
+  latViewDef: any = -0.184713;
   lngViewDef: any = -78.484771;
   zoomDef: any = 10;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public RecicladorSrv: ReciappService, public callNumber: CallNumber, private alertCtrl: AlertController, public authService:AuthenticationService) {
-    
+  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public RecicladorSrv: ReciappService, public callNumber: CallNumber, private alertCtrl: AlertController, public authService:AuthenticationService, private geolocation: Geolocation, private platform: Platform, private locationAccuracy: LocationAccuracy,
+              private diagnostic: Diagnostic) {
+
     const thisYear = (new Date()).getFullYear();
 
     this.recycler = navParams.get('recycler');
@@ -49,6 +53,32 @@ export class RecicladorPage {
       this.siguiendo = user.hasOwnProperty(this.iduser);
     }else{
       console.log('sin sesion');
+    }
+
+    if (this.platform.is('ios')) {
+      this.locationAccuracy.canRequest().then(
+        (canRequest: boolean) => {
+          if(canRequest) {
+            this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+              () => {
+                this.verifyGps();
+                this.getMyLocation();
+              },
+              error => {
+                //this.valuesByDefault();
+              }
+            );
+          }
+      });
+    } else if (this.platform.is('android')) {
+      this.diagnostic.isGpsLocationEnabled()
+      .then((enabled)=>{
+        if(enabled){
+          this.getMyLocation();
+        }else{
+          this.presentConfirm('Encender su GPS por favor');
+        }
+      });
     }
   }
 
@@ -96,9 +126,9 @@ export class RecicladorPage {
     } catch (error) {
       console.log(error);
     }
-    
+
   }
-  
+
   async dejarReciclador(id) {
     let toast = this.toastCtrl.create({
       message: 'Dejaste de seguir a '+this.recycler.name+'.',
@@ -115,22 +145,38 @@ export class RecicladorPage {
     }
   }
 
-
-  centerChange(LatLongChange){
-    this.latView = LatLongChange.lat;
-    this.lngView = LatLongChange.lng;
+  getMyLocation(){
+    this.geolocation.getCurrentPosition().then((resp) => {
+      this.lat = resp.coords.latitude;
+      this.lng = resp.coords.longitude;
+      this.latView = resp.coords.latitude;
+      this.lngView = resp.coords.longitude;
+      this.zoom =  16;
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
   }
 
-  zoomChange(ZoomChange){
-    this.zoom = ZoomChange;
+  verifyGps(){
+    this.diagnostic.isLocationAuthorized()
+    .then((appAutorized)=>{
+      if(appAutorized){
+        this.diagnostic.isLocationEnabled()
+        .then((enabled)=>{
+          if(enabled){
+            this.getMyLocation();
+          }else{
+            this.presentConfirm('Encender su GPS por favor');
+          }
+        });
+      }else{
+        this.diagnostic.requestLocationAuthorization('always')
+        .then(()=>{
+          this.getMyLocation();
+        });
+      }
+    });
   }
-
-  valuesByDefault(){
-    this.latView = this.latViewDef;
-    this.lngView = this.lngViewDef;
-    this.zoom =  this.zoomDef;
-  }
-
 
   presentConfirm(message) {
     let alert = this.alertCtrl.create({
@@ -181,6 +227,11 @@ export class RecicladorPage {
       ]
     });
     alert.present();
+  }
+
+  getAgefromYear(year : any) :any{
+    let yearNow: number = (new Date()).getFullYear();
+    return (yearNow - year);
   }
 
 }
