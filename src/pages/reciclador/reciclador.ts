@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform, DateTime } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { ReciappService } from '../../services/reciapp.service';
 import { AuthenticationService } from '../../services/authenticationService';
@@ -158,30 +158,6 @@ export class RecicladorPage {
      });
   }
 
-  centerChange(LatLongChange){
-    this.latView = LatLongChange.lat;
-    this.lngView = LatLongChange.lng;
-  }
-
-  zoomChange(ZoomChange){
-    this.zoom = ZoomChange;
-  }
-
-  getViewLocation(){
-    if(this.lat ==  null && this.lng == null){
-      this.getMyLocation();
-    }else{
-      this.latView = this.lat;
-      this.lngView = this.lng;
-    }
-  }
-
-  valuesByDefault(){
-    this.latView = this.latViewDef;
-    this.lngView = this.lngViewDef;
-    this.zoom =  this.zoomDef;
-  }
-
   verifyGps(){
     this.diagnostic.isLocationAuthorized()
     .then((appAutorized)=>{
@@ -252,6 +228,11 @@ export class RecicladorPage {
       ]
     });
     alert.present();
+  }
+
+  getAgefromYear(year : any) :any{
+    let yearNow: number = (new Date()).getFullYear();
+    return (yearNow - year)
   }
 
 }
