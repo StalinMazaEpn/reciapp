@@ -26,6 +26,11 @@
 .content {
   background-color: $darkBlue;
   color: $fontColor;
+
+  ion-input,
+  ion-textarea {
+    color: #000000;
+  }
 }
 
 .toolbar {
