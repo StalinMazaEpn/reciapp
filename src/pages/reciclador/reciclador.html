@@ -1,7 +1,7 @@
 
 <ion-header>
   <ion-navbar>
-    <ion-title > {{recycler.name}} </ion-title>
+    <ion-title > {{recycler.name}} {{recycler.lastName}}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -250,7 +250,6 @@
         <img src="{{recycler.image}}" center 
 				style="border-radius: 100px; height: 70px; width: 70px;">
 				<p><i>"{{recycler.dream}}"</i></p>
-					
 			</ion-col>
 		</ion-row-->
 
@@ -334,7 +333,7 @@
 		<ng-template #elseMessage>
 			<ion-item>
 				<ion-icon ios="ios-call" md="md-call"  item-start large></ion-icon>
-				<p>No tiene telefono</p>
+				<p>No tiene teléfono</p>
 			</ion-item>
 		</ng-template-->
 
@@ -346,23 +345,23 @@
 
 	  <!--ion-item>
 	    <ion-icon ios="ios-calendar" md="md-calendar" item-left large ></ion-icon>
-	    <p>{{recycler.date.days}}<br>{{recycler.date.startTime}} - {{recycler.date.endTime}}</p>
+	    <p>{{recycler.date.days.join(', ')}}<br>{{recycler.date.startTime}} - {{recycler.date.endTime}}</p>
 		</ion-item>
 
-		<ion-item>
+		<ion-item *ngIf="recycler.recyclingFor">
 			
 			<ion-icon ios="ios-ribbon" md="md-ribbon" item-left large></ion-icon>
-	    <h2>{{recycler.recyclingFor}} años reciclando</h2>
+	    <p>{{recycler.recyclingFor}} años reciclando</p>
 		</ion-item>
 
 		<ion-item>
 			<ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle" item-left large></ion-icon>
-	    <h2>{{recycler.totalReceives}} entregas</h2>
+	    <p>{{recycler.totalReceives}} recepciones</p>
 		</ion-item>
 		
 		<ion-item>
 			<ion-icon ios="ios-body" md="md-body" item-left large></ion-icon>
-			<p>{{recycler.yearBirth}}</p>
+			<p>{{recycler.age}} años</p>
 		</ion-item>
 
 		<ion-item>
