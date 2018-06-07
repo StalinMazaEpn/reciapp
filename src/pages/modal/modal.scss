@@ -3,14 +3,20 @@ page-modal {
         background: rgba(0,0,0,0.5);
     }
 
-    .modalContent-1{
-    	margin-top: 40%;
-    	background: linear-gradient(to top,#00a0dc,#167b9b);
+    .modalContent1{
+        top: 40%;
+        border: 2px solid #d6dbde;
+        border-image: linear-gradient (to bottom,#d6dbde, transparent);
+    	background: linear-gradient(to bottom,#00a0dc,#167b9b);
     }
 
     .modalContent{
     	margin-top: 40%;
-    	background: #00a0dc;
+    	background: #d6dbde;
+    }
+
+    .text-white{
+        color:white;
     }
 
     
