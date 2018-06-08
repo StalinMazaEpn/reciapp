@@ -1,5 +1,5 @@
-import { Component, ViewChild  } from '@angular/core';
-import { Nav, Platform, App, AlertController,LoadingController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Nav, Platform, App, AlertController,LoadingController, ViewController, IonicApp } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NativeStorage } from '@ionic-native/native-storage';
@@ -34,7 +34,7 @@ export class MyApp {
   ];
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public nativeStorage: NativeStorage, public app: App,
-   private alertCtrl: AlertController, public afAuth:AngularFireAuth,public loadingCtrl:LoadingController) {
+   private alertCtrl: AlertController, public afAuth:AngularFireAuth,public loadingCtrl:LoadingController, private ionicApp: IonicApp) {
     
     platform.ready().then(() => {
 
@@ -53,11 +53,22 @@ export class MyApp {
       }
 
       platform.registerBackButtonAction(() => {
+
+        let activePortal = this.ionicApp._loadingPortal.getActive() ||
+        this.ionicApp._modalPortal.getActive() ||
+        this.ionicApp._toastPortal.getActive() ||
+        this.ionicApp._overlayPortal.getActive();
+
+        if (activePortal) {
+          this.alertShown = false;
+          return activePortal.dismiss();
+        }
+
         let nav = this.app.getActiveNav();
         
         if (nav.canGoBack()){ //Can we go back?
           nav.pop();
-        }else{
+        } else {
           if (!this.alertShown) {
             this.exitApp();
           }
