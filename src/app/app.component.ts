@@ -1,5 +1,5 @@
 import { Component, ViewChild  } from '@angular/core';
-import { Nav, Platform, App, AlertController,LoadingController } from 'ionic-angular';
+import { Nav, Platform, App, AlertController,LoadingController,MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NativeStorage } from '@ionic-native/native-storage';
@@ -32,7 +32,7 @@ export class MyApp {
   ];
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public nativeStorage: NativeStorage, public app: App,
-   private alertCtrl: AlertController, public afAuth:AngularFireAuth,public loadingCtrl:LoadingController) {
+   private alertCtrl: AlertController, public afAuth:AngularFireAuth,public loadingCtrl:LoadingController, public menuCtrl: MenuController) {
     platform.ready().then(() => {
 
       this.platform = platform;
@@ -134,7 +134,8 @@ export class MyApp {
     if (option==="cerrar") {
       this.logout();
     }else{
-      this.nav.push(option);  
+      this.menuCtrl.close();
+      this.nav.push(option);
     }
   }
 
