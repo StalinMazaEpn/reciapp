@@ -13,6 +13,8 @@ page-exchange {
 
 	.exchange-list{
 		color: white;
+		padding-top: 5px;
+		padding-left: 15px;
 	}
 
 	ion-avatar img  {
@@ -21,4 +23,9 @@ page-exchange {
 		max-width: 60px !important; 
 		max-height: 60px !important; 
 	}
+
+	ion-item{
+		padding-left: 0px !important;
+	}
+
 }
