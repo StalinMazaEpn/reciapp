@@ -18,7 +18,7 @@ export class ReciappService{
 	public getCategoryById(id){
 		return this.afdatabase.object('/category/'+id).valueChanges();
 	}
-	
+
 	public getRecycler(){
 		return this.afdatabase.list('/recycler').valueChanges();
 	}
@@ -39,9 +39,13 @@ export class ReciappService{
 		return this.afdatabase.list('/partner').valueChanges();
 	}
 
-	public getExchangeList(){
-		return this.afdatabase.list('/partner').valueChanges();
-	}
+  public getExchangeList(){
+    return this.afdatabase.list('/partner').snapshotChanges();
+  }
+
+  public getActiveCouponsByUser(uid){
+    return this.afdatabase.list('/exchange', ref => ref.orderByChild('uid').equalTo(uid)).valueChanges();
+  }
 
 	public async createUser(uid,user) {
 	    return await this.afdatabase.object('/user/'+uid).set(user);
@@ -56,7 +60,7 @@ export class ReciappService{
 		this.afdatabase.object('/user/'+iduser+'/favoritiesReciclers/'+id).set(true);
 		return this.afdatabase.object('/recycler/'+id+'/favoriteUsers/'+iduser).set(true);
 	}
-	
+
 	public removeLoveRecicler(id,iduser){
 		this.favorities = [];
 		this.afdatabase.object('/user/'+iduser+'/favoritiesReciclers/'+id).remove();
