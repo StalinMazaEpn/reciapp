@@ -1,7 +1,8 @@
 page-delivery {
-	img{
-		width: 40%;
-		height: 150px;
+	
+    img.photoMaterial{
+		width: 100%;
+		height: 170px;
 		border: 0;
 		border-radius: 5px;
 	}
@@ -11,7 +12,6 @@ page-delivery {
 		height: 40px;
 		border-radius: 100%;
 		border:0;
-
 	}
 
 	ion-label.material{
@@ -23,12 +23,11 @@ page-delivery {
 	}
 
 	ion-label.title{
-		font-weight: bold;
+		text-align: center;
 	}
 	p.title-small2{
-		font-size: 15px;
-		font-weight: bold;
-		margin-top:12px;
+		font-size: 14px;
+		margin-top:20px;
 		margin-bottom:0;
 	}
 
@@ -118,23 +117,28 @@ page-delivery {
 
     .bg-photo{
     	background: linear-gradient(to right,#afba35, #ede937);
-      min-height: 30%;
+        min-height: 30%;
+    }
+
+    .bg-boton{
+        background: linear-gradient(to right,#8dc63f, #39b54a);
     }
 
     .camera-btn{
-    	top: 8% !important;
-    	bottom: 10% !important;
-    	left: 43% !important;
+    	top: 5%;
+        left: 35%;
+        right: 35%;
     	border: none;
+        position: absolute;
     }
 
     .message-Photo{
     	position: absolute;
     	top: 20% !important;
-    	left: 12% !important;
-    	right: 12% !important;
+    	left: 20% !important;
+    	right: 20% !important;
     	z-index: 50;
-    	font-size: 1.2em;
+    	font-size: 1em;
     }
 
     p.recyclersNames{
@@ -147,5 +151,14 @@ page-delivery {
     .noData{
     	border: 2px solid;
     	border-radius: 100%;
+    }
+
+    .camera-img{
+        width:100px;
+        height:70px;
+    }
+
+    div.range-knob{
+        background-color: #ede937;
     }
 }

@@ -19,7 +19,7 @@ export class DeliveryPage {
   uid:any;
   recyclers:any;
   tmpPhoto:any=null;
-  tmpRecyclerImage="assets/imgs/recycler_women.png";
+  tmpRecyclerImage="assets/imgs/menos.png";
   tmpRecyclerName=null;
   tmpRecyclerFirstLetterName:any;  
 
@@ -90,6 +90,9 @@ export class DeliveryPage {
   }
   
   ionViewWillEnter(){
+    this.cleanForm();
+    this.showFavorites();
+    this.disabledBottomDelivery();
     this.isAuthenticated=this.authenticationService.isAuthenticated();
 
     if(this.authenticationService.getCurrentUser()!=null){
@@ -119,10 +122,12 @@ export class DeliveryPage {
             this.tmpPhoto='data:image/jpeg;base64,' + resp;
             //console.log(this.tmpPhoto);
             this.auxPhoto = true;
+            this.disabledBottomDelivery();
           })
           .catch((e)=>{
             console.log(e);
             this.recyclablePhoto=null;
+            this.disabledBtnDelivery=true;
           });
     }
     catch(e){
@@ -132,6 +137,7 @@ export class DeliveryPage {
   }
 
   delivery(){
+    this.disabledBottomDelivery();
     this.tmpDate=new Date()
     this.date=this.tmpDate.getFullYear()+""+this.tmpDate.getMonth()+""+this.tmpDate.getDay()+""+this.tmpDate.getHours()+""+this.tmpDate.getMinutes()+""+this.tmpDate.getSeconds()+""+this.tmpDate.getMilliseconds();
 
@@ -349,8 +355,9 @@ export class DeliveryPage {
         document.getElementById(this.recyclerId).style.border="0";
         this.recyclerId=null;
       }
-      this.tmpRecyclerImage='assets/imgs/recycler_women.png';
+      this.tmpRecyclerImage='assets/imgs/menos.png';
       this.auxSelRecycler = true;
+      this.disabledBottomDelivery();
     }else{
       //margin 
       this.tmp_selRecycler=null;
@@ -365,6 +372,7 @@ export class DeliveryPage {
         this.tmpRecyclerFirstLetterName=this.tmpRecyclerName.charAt(0).toUpperCase();
       });
       this.auxSelRecycler = true;
+      this.disabledBottomDelivery();
     }
     
     //show only recycler
@@ -388,7 +396,7 @@ export class DeliveryPage {
   aux5=0;
   aux6=0;
   _totalMaterialRecyclable:number=0;
-  //btnDisabled:boolean=false;
+  btnDisabled:boolean=false;
 
   totalMaterial(number,name){
     
@@ -427,12 +435,10 @@ export class DeliveryPage {
       this._totalMaterialRecyclable=this.aux1+this.aux2+this.aux3+this.aux4+this.aux5+this.aux6;
       this.totalMaterialRecyclable=100;
       console.log('La funda ya esta llena');
-      //this.btnDisabled=true;
     }else if ((this.aux1+this.aux2+this.aux3+this.aux4+this.aux5+this.aux6)>0 && (this.aux1+this.aux2+this.aux3+this.aux4+this.aux5+this.aux6)<=100) {
       this._totalMaterialRecyclable=this.aux1+this.aux2+this.aux3+this.aux4+this.aux5+this.aux6;
       this.totalMaterialRecyclable=this.aux1+this.aux2+this.aux3+this.aux4+this.aux5+this.aux6;
       this.auxMaterial=true;
-      //this.btnDisabled=false;
     }
   }
 
@@ -444,6 +450,7 @@ export class DeliveryPage {
   }
 
   disabledBottomDelivery(){
+    console.log('HABILITANDO');
     this.disabledBtnDelivery=true;
     if (this.auxPhoto == true && this.auxSelRecycler == true && (this.fundaCtrl!=undefined || this.fundaCtrl!=0 || this.fundaCtrl !=null) && this.auxMaterial==true) {
       this.disabledBtnDelivery=false;  
