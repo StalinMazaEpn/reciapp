@@ -1,94 +1,93 @@
-<!--
-<ion-header>
-
-  <ion-navbar hide-tabs>
-    <ion-title>Entrega</ion-title>
-    <ion-buttons end>
-      <button ion-button mini icon-only (tap)="delivery()">
-        <ion-icon ios="ios-attach" md="md-attach"></ion-icon>
-        <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon>
-        <ion-icon ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline" color="secondary"></ion-icon>
-      </button>
-    </ion-buttons>
-
-  </ion-navbar>
-
-</ion-header>
--->
 <ion-content padding>
-	<div text-center class="bg-photo">
-		<div>
-			<img [hidden]="tmpPhoto == 'assets/imgs/transparent.png'" src="{{tmpPhoto}}">
-		</div>
+  <div class="bg-photo">
+    <button ngClass="delivery-back-button" ion-button icon-only icon-start clear (click)="cancelDelivery()">
+      <ion-icon name="arrow-back"></ion-icon>
+    </button>
 
-		<ion-fab class="camera-btn" >
-	        <button ion-fab style="background-color: transparent !important;" (click)="takePhoto()">
-				<ion-icon ios="ios-camera" md="md-camera"></ion-icon>
-			</button>
-	    </ion-fab>
-	    <span class="message-Photo">Toma una foto de tu bolsa junto con el reciclador</span>
-	    <div text-center>
-			<span *ngIf="error" class="validations"> *Toma una foto para validar la información.</span>
-		</div>
-	</div>
-	<div *ngIf="isAuthenticated; else needLoggin" style="padding-top: 2%;">
-		<div *ngIf="!hideFavorites; else selectFavorite">
-			<ion-scroll scrollX="true" style="width: 100%; height: 58px; white-space: nowrap;" [hidden]="hideFavorites">
-				<ul>
-					<!--Agregar-->
-					<li text-center (tap)="addRecycler()">
-						<ion-avatar >
-		                	<img class="recyclers" src="assets/imgs/add-user.png" >
-			            </ion-avatar>
+    <div *ngIf="tmpPhoto=='assets/imgs/transparent.png'; else photo">
+      <div>
+        <img class="photoMaterial" [hidden]="tmpPhoto == 'assets/imgs/transparent.png'" src="{{tmpPhoto}}">
+      </div>
+      <div class="camera-btn">
+        <button style="background-color: transparent !important; box-shadow: none" (click)="takePhoto()">
+          <img src="assets/imgs/camera.png" class="camera-img">
+        </button>
+      </div>
 
-			            <p text-center class="recyclersNames">Agregar</p>
+      <span class="message-Photo">Toma una foto de tu bolsa junto con el reciclador</span>
+    </div>
+    <ng-template #photo>
+      <div>
+        <img class="photoMaterial" [hidden]="tmpPhoto == 'assets/imgs/transparent.png'" src="{{tmpPhoto}}">
+      </div>
+      <div class="camera-btn">
+        <button style="background-color: transparent !important; box-shadow: none" (click)="takePhoto()">
+          <img src="assets/imgs/camera.png" class="camera-img">
+        </button>
+      </div>
+    </ng-template>
 
-					</li>
-					<!--Anonimo-->
-					<li text-center (tap)="selectRecycler('Anónimo')">
-            <ion-avatar>
-                <img class="recyclers" src="assets/imgs/recycler_women.png" id="anonymousRecycler">
-            </ion-avatar>
-            <p text-center class="recyclersNames">Anónimo</p>
-
-          </li>	
-
-			        <!--Favoritos-->
-					<li *ngFor="let recycler$ of recyclers | async;" >
+    <!--Validations-->
+    <div text-center>
+      <span *ngIf="error" class="validations"> *Toma una foto para validar la información.</span>
+    </div>
+  </div>
+  <div *ngIf="isAuthenticated; else needLoggin" style="padding-top: 2%;">
+    <!--Infinity Scroll Favorite-->
+    <div *ngIf="!hideFavorites; else selectFavorite">
+      <ion-scroll scrollX="true"
+                  style="width: 100%; height: 58px; white-space: nowrap; margin-left: 5%; margin-right: 5%"
+                  [hidden]="hideFavorites">
+        <ul>
+          <!--Agregar-->
+          <!--li text-center (tap)="addRecycler()">
+                        <ion-avatar >
+                            <img class="recyclers" src="assets/imgs/add-user.png" >
+                        </ion-avatar>
+                        <p text-center class="recyclersNames">Agregar</p>
+                    </li-->
+          <!--Recycler favorites-->
+          <li *ngFor="let recycler$ of recyclers | async;" style="margin-right: 5%;">
 						<span *ngIf="recycler$ | async as recycler;" (tap)="selectRecycler(recycler.id)">
 							<span *ngIf="recycler.image!=undefined; else firstLetter">
 								<ion-avatar>
-                    <img class="recyclers" src="{{recycler.image}}" id="{{recycler.id}}" >
-                </ion-avatar>
-
+                    				<img class="recyclers" src="{{recycler.image}}" id="{{recycler.id}}">
+                				</ion-avatar>
 							</span>
 							<ng-template #firstLetter>
 								<ion-avatar>
 									<span text-center>
-										<p class="firstLetter" >{{recycler.name.charAt(0).toUpperCase()}}</p>
-										<img class="recyclers imgfirstLetter" style="background-color: #32db64" id="{{recycler.id}}">
+										<p class="firstLetter">{{recycler.name.charAt(0).toUpperCase()}}</p>
+										<img class="recyclers imgfirstLetter" style="background-color: #afba35" id="{{recycler.id}}">
 									</span>
-                </ion-avatar>
+                				</ion-avatar>
 							</ng-template>
-
-              <p block text-wrap class="recyclersNames">{{recycler.name}}</p>
-            </span>
-
-					</li>
-					<!--Cercanos-->
-					<!--EndCercanos-->
-				</ul>
-			</ion-scroll>
-		</div>
-		<ng-template #selectFavorite>
-			<ion-item (tap)="showFavorites()">
-				<span *ngIf="tmp_selRecycler!=null; else selectFavoriteRecycler">
+			              <p block text-wrap class="recyclersNames">{{recycler.name}}</p>
+			            </span>
+          </li>
+          <!--Recycler near-->
+          <!--Anonymous recycler-->
+          <li text-center (tap)="selectRecycler('Anónimo')">
+            <ion-avatar>
+              <img class="recyclers" src="assets/imgs/menos.png" id="anonymousRecycler"
+                   style="background-color: #005c80">
+            </ion-avatar>
+            <p text-center class="recyclersNames">Anónimo</p>
+          </li>
+        </ul>
+      </ion-scroll>
+    </div>
+    <!--Show recycler selected-->
+    <ng-template #selectFavorite>
+      <ion-item no-lines style="background: transparent;" (tap)="showFavorites()">
+        <!--Show Anonymous recycler selected-->
+        <span *ngIf="tmp_selRecycler!=null; else selectFavoriteRecycler">
 					<ion-row>
 						<ion-col col-2>
-							<img class="recyclers" src="{{tmpRecyclerImage}}" >
+							<img class="recyclers" style="background: #005c80" src="{{tmpRecyclerImage}}">
 						</ion-col>
 						<ion-col>
-							<h2 style="margin-top: 4.5% !important;">Anónimo</h2>
+							<h2 style="margin-top: 4.5% !important; color: white">Anónimo</h2>
 						</ion-col>
 					</ion-row>
 					<ion-fab middle right class="btn-position">
@@ -97,170 +96,219 @@
 						</button>
 				    </ion-fab>
 				</span>
-				<ng-template #selectFavoriteRecycler>
-					<ion-row>
-						<ion-col col-2>
-							<span *ngIf="tmpRecyclerImage != undefined; else firstLetterRecycler">
-								<img class="recyclers" src="{{tmpRecyclerImage}}" >
+        <!--Show a recycler selected-->
+        <ng-template #selectFavoriteRecycler>
+          <ion-row>
+            <ion-col col-2>
+              <!--Photo recycler-->
+              <span *ngIf="tmpRecyclerImage != undefined; else firstLetterRecycler">
+								<img class="recyclers" src="{{tmpRecyclerImage}}">
 							</span>
-							<ng-template #firstLetterRecycler>
+              <!--First name char-->
+              <ng-template #firstLetterRecycler>
 								<span text-center>
-									<p class="firstLetter1" >{{tmpRecyclerFirstLetterName}}</p>
-									<img class="recyclers" style="background-color: #32db64">
+									<p class="firstLetter1">{{tmpRecyclerFirstLetterName}}</p>
+									<img class="recyclers" style="background-color: #afba35">
 								</span>
-							</ng-template>
-						</ion-col>
-						<ion-col>
-							<h2 style="margin-top: 4.5% !important;">{{tmpRecyclerName}}</h2>
-						</ion-col>
-					</ion-row>
-					<ion-fab middle right class="btn-position">
-				        <button ion-fab mini color="danger" class="btn-mini">
-							<ion-icon ios="ios-close" md="md-close"></ion-icon>
-						</button>
-				    </ion-fab>
-				</ng-template>
-            </ion-item>
-		</ng-template>
-	</div>
-	<div text-center>
-		<span *ngIf="errorRecycler" class="validations"> *Selecciona a tu <b>Reciclador favorito, Cercano o Anónimo</b> que deseas entregar.</span>
-	</div>
-
-	<ng-template #needLoggin>
-		<p text-center style="color: red;" class="title">Necesitas <b> <!--(tap)="goToLogin()"-->Iniciar Sesión</b> para ver tus recicladores favoritos.</p>
-	</ng-template>
-	<div>
-	  <ion-row>
-	  	<ion-col col-4 text-center><p class="title-small2">Cantidad estimada</p></ion-col>
-	  	<ion-col col-7>
-	  		<ion-row>
-	  			<ion-col>
-	  				<ion-label class="labels">
-	  					<span style="margin-left: 35%; margin-top: 0;" class="title-small1">P</span>
-	  					<span style="margin-left: 25%; margin-top: 0;" class="title-small1">M</span>
-	  					<span style="margin-left: 22%; margin-top: 0;" class="title-small1">G</span>
-	  				</ion-label>
-	  			</ion-col>
-	  		</ion-row>
-	  		<ion-row>
-	  		  <ion-col>
-	  		  	<ion-range pin="false" snaps="true" min="0" max="3" step="1" color="secondary" [(ngModel)]="fundaCtrl" #ctrl="ngModel" >
-	  			</ion-range>
-	  		  </ion-col>
-	  		</ion-row>
-	  	</ion-col>
-	  </ion-row>
-	  <div text-center>
-		<span *ngIf="errorSize" class="validations"> *Selecciona un tamaño de Funda.</span>
-	  </div>
-	  <ion-row>
-	  	<ion-col>
-	  		<ion-label class="labels">
-	  			<span class="title-small1" style="margin-left: 32%; margin-top: 0;margin-bottom: -5px;">0</span>
-
-	  			<span *ngIf="totalMaterialRecyclable>0 && totalMaterialRecyclable==10; else sectionTotalMaterial10" class="title-small1 validations">10%</span>
-	  			<ng-template #sectionTotalMaterial10>
-					<span class="title-small1">10</span>
-				</ng-template>
-
-				<span *ngIf="totalMaterialRecyclable>0 && totalMaterialRecyclable==20; else sectionTotalMaterial20" class="title-small1 validations">20%</span>
-	  			<ng-template #sectionTotalMaterial20>
-					<span class="title-small1">20</span>
-				</ng-template>
-
-	  			<span *ngIf="totalMaterialRecyclable>0 && totalMaterialRecyclable==30; else sectionTotalMaterial30" class="title-small1 validations">30%</span>
-	  			<ng-template #sectionTotalMaterial30>
-					<span class="title-small1">30</span>
-				</ng-template>
-
-				<span *ngIf="totalMaterialRecyclable>0 && totalMaterialRecyclable==40; else sectionTotalMaterial40" class="title-small1 validations">40%</span>
-	  			<ng-template #sectionTotalMaterial40>
-					<span class="title-small1">40</span>
-				</ng-template>
-
-				<span *ngIf="totalMaterialRecyclable>0 && totalMaterialRecyclable==50; else sectionTotalMaterial50" class="title-small1 validations">50%</span>
-	  			<ng-template #sectionTotalMaterial50>
-					<span class="title-small1">50</span>
-				</ng-template>
-
-				<span *ngIf="totalMaterialRecyclable>0 && totalMaterialRecyclable==60; else sectionTotalMaterial60" class="title-small1 validations">60%</span>
-	  			<ng-template #sectionTotalMaterial60>
-					<span class="title-small1">60</span>
-				</ng-template>
-
-				<span *ngIf="totalMaterialRecyclable>0 && totalMaterialRecyclable==70; else sectionTotalMaterial70" class="title-small1 validations">70%</span>
-	  			<ng-template #sectionTotalMaterial70>
-					<span class="title-small1">70</span>
-				</ng-template>
-
-				<span *ngIf="totalMaterialRecyclable>0 && totalMaterialRecyclable==80; else sectionTotalMaterial80" class="title-small1 validations">80%</span>
-	  			<ng-template #sectionTotalMaterial80>
-					<span class="title-small1">80</span>
-				</ng-template>
-
-				<span *ngIf="totalMaterialRecyclable>0 && totalMaterialRecyclable==90; else sectionTotalMaterial90" class="title-small1 validations">90%</span>
-	  			<ng-template #sectionTotalMaterial90>
-					<span class="title-small1">90</span>
-				</ng-template>
-
-				<span *ngIf="totalMaterialRecyclable>0 && totalMaterialRecyclable==100; else sectionTotalMaterial100" class="title-small1 validations">100%</span>
-	  			<ng-template #sectionTotalMaterial100>
-					<span class="title-small1">100</span>
-				</ng-template>
-	  		</ion-label>
-	  	</ion-col>
-	  </ion-row>
-	  <div text-center>
-		<span *ngIf="(totalMaterialRecyclable)==100" class="title-small" style="color: green" >La funda ya esta llena</span>
-		<span *ngIf="(_totalMaterialRecyclable)>100" class="title-small validations" >(No puedes entregar más de su capacidad.)</span>
-		<span *ngIf="(_totalMaterialRecyclable)>100 && errTotalMaterialRecyclable" class="title-small1 validations">Reduce los porcentajes en el formulario y verifica que no sobrepase el 100% de la funda.</span>
-		<span *ngIf="errorForm" class="validations"> *Identifica la cantidad de cada material que vas a entregar.</span>
-	  </div>
-	  <ion-row>
-		<ion-col col-4>
-		  <ion-label class="title">Plástico <span *ngIf="plasticoCtrl!=0 && plasticoCtrl!=undefined" class="title-small1 validations">({{plasticoCtrl}}%)</span></ion-label>
-		  <ion-label class="title material">Papel <span *ngIf="papelCtrl!=0 && papelCtrl!=undefined" class="title-small1 validations">({{papelCtrl}}%)</span></ion-label>
-		  <ion-label class="title material">Cartón <span *ngIf="cartonCtrl!=0 && cartonCtrl!=undefined" class="title-small1 validations">({{cartonCtrl}}%)</span></ion-label>
-		  <ion-label class="title material">Metal <span *ngIf="chatarraCtrl!=0 && chatarraCtrl!=undefined" class="title-small1 validations">({{chatarraCtrl}}%)</span></ion-label>
-		  <ion-label class="title material">Vidrio <span *ngIf="vidrioCtrl!=0 && vidrioCtrl!=undefined" class="title-small1 validations">({{vidrioCtrl}}%)</span></ion-label>
-		  <ion-label class="title material">Tetrapak <span *ngIf="compuestoCtrl!=0 && compuestoCtrl!=undefined" class="title-small1 validations">({{compuestoCtrl}}%)</span></ion-label>
-		</ion-col>
-		<ion-col col-7>
-		  <ion-range upper="false" pin="true" snaps="true" min="0" max="100" step="10" color="secondary" [(ngModel)]="plasticoCtrl" #ctrl="ngModel" (ionChange)="totalMaterial(plasticoCtrl,'plastico')">
-		  </ion-range>
-		  <ion-range  pin="true" snaps="true" min="0" max="100" step="10" color="secondary" [(ngModel)]="papelCtrl" #ctrl="ngModel" (ionChange)="totalMaterial(papelCtrl,'papel')">
-		  </ion-range>
-		  <ion-range  pin="true" snaps="true" min="0" max="100" step="10" color="secondary" [(ngModel)]="cartonCtrl" #ctrl="ngModel" (ionChange)="totalMaterial(cartonCtrl,'carton')">
-		  </ion-range>
-		  <ion-range  pin="true" snaps="true" min="0" max="100" step="10" color="secondary" [(ngModel)]="chatarraCtrl" #ctrl="ngModel" (ionChange)="totalMaterial(chatarraCtrl,'chatarra')">
-		  </ion-range>
-		  <ion-range  pin="true" snaps="true" min="0" max="100" step="10" color="secondary" [(ngModel)]="vidrioCtrl" #ctrl="ngModel" (ionChange)="totalMaterial(vidrioCtrl,'vidrio')">
-		  </ion-range>
-		  <ion-range  pin="true" snaps="true" min="0" max="100" step="10" color="secondary" [(ngModel)]="compuestoCtrl" #ctrl="ngModel" (ionChange)="totalMaterial(compuestoCtrl,'compuesto')">
-		  </ion-range>
-		</ion-col>
-	  </ion-row>
-	</div>
-	<div text-center (click)="delivery()">
-		<!--div *ngIf="!disabledBtnDelivery; else disabledBtn" (click)="delivery()">
-		  <button ion-button large outline class="roundBtn" style="background-color: #39b54a;color: white " >
-		  	Enviar
-
-        <span style="width: 25px; height: 25px; margin-left: 5% !important;" class="noData">
-          <p></p>
-        </span>
-      </button>
-		</div>
-		<ng-template #disabledBtn>
-			<button ion-button large outline class="roundBtn">
-	  	  	Enviar <ion-icon ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline" color="secondary"></ion-icon>
-	  	  </button>
-		</ng-template-->
-		<button ion-button large outline class="roundBtn" style="background-color: #39b54a;color: white ">
-      Enviar  <span style="width: 25px; height: 25px; margin-left: 5% !important;"><ion-icon ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline" color="ligth"></ion-icon></span>
-    </button>
-
+              </ng-template>
+            </ion-col>
+            <!--Name recycler-->
+            <ion-col>
+              <h2 style="margin-top: 4.5% !important; color: white">{{tmpRecyclerName}}</h2>
+            </ion-col>
+          </ion-row>
+          <!--Close bottom-->
+          <ion-fab middle right class="btn-position">
+            <button ion-fab mini color="danger" class="btn-mini">
+              <ion-icon ios="ios-close" md="md-close"></ion-icon>
+            </button>
+          </ion-fab>
+        </ng-template>
+      </ion-item>
+    </ng-template>
+  </div>
+  <!--Validations-->
+  <div text-center>
+    <span *ngIf="errorRecycler" class="validations"> *Selecciona a tu <b>Reciclador favorito, Cercano o Anónimo</b> que deseas entregar.</span>
+  </div>
+  <!--Validations auth user-->
+  <ng-template #needLoggin>
+    <p text-center style="color: red;" class="title">Necesitas <b> <!--(tap)="goToLogin()"-->Iniciar Sesión</b> para ver
+      tus recicladores favoritos.</p>
+  </ng-template>
+  <!--Delivery form-->
+  <div>
+    <ion-row>
+      <ion-col col-4 text-center><p class="title-small2">Cantidad estimada</p></ion-col>
+      <ion-col col-7>
+        <ion-row>
+          <ion-col>
+            <ion-label class="labels">
+              <span style="margin-left: 28%; margin-top: 0;"><img src="assets/imgs/funda_p.png" width="18" height="20"
+                                                                  title="pequeña"/></span>
+              <span style="margin-left: 23%; margin-top: 0;"><img src="assets/imgs/funda_m.png" width="18" height="20"
+                                                                  title="media"/></span>
+              <span style="margin-left: 20%; margin-top: 0;"><img src="assets/imgs/funda_g.png" width="18" height="20"
+                                                                  title="grande"/></span>
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-range pin="false" snaps="true" min="0" max="3" step="1" color="secondary" [(ngModel)]="fundaCtrl"
+                       #ctrl="ngModel" (ionChange)="disabledBottomDelivery()">
+            </ion-range>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <div text-center>
+      <span *ngIf="errorSize" class="validations"> *Selecciona un tamaño de Funda.</span>
     </div>
-    <ion-tabs style="display: none"></ion-tabs>
+    <ion-row>
+      <ion-col>
+        <ion-label class="labels">
+          <span style="margin-left: 32%; margin-top: 0;margin-bottom: -5px;"><img style="top: 15px;"
+                                                                                  src="assets/imgs/circle_0.png"
+                                                                                  width="8" height="8"/></span>
+
+          <span *ngIf="totalMaterialRecyclable>0 && totalMaterialRecyclable==10; else sectionTotalMaterial10"
+                class="title-small1 validations">10%</span>
+          <ng-template #sectionTotalMaterial10>
+            <span class="title-small1">10</span>
+          </ng-template>
+
+          <span *ngIf="totalMaterialRecyclable>0 && totalMaterialRecyclable==20; else sectionTotalMaterial20"
+                class="title-small1 validations">20%</span>
+          <ng-template #sectionTotalMaterial20>
+            <span class="title-small1">20</span>
+          </ng-template>
+
+          <span *ngIf="totalMaterialRecyclable>0 && totalMaterialRecyclable==30; else sectionTotalMaterial30"
+                class="title-small1 validations">30%</span>
+          <ng-template #sectionTotalMaterial30>
+            <span class="title-small1">30</span>
+          </ng-template>
+
+          <span *ngIf="totalMaterialRecyclable>0 && totalMaterialRecyclable==40; else sectionTotalMaterial40"
+                class="title-small1 validations">40%</span>
+          <ng-template #sectionTotalMaterial40>
+            <span class="title-small1">40</span>
+          </ng-template>
+
+          <span *ngIf="totalMaterialRecyclable>0 && totalMaterialRecyclable==50; else sectionTotalMaterial50"
+                class="title-small1 validations"><img style="margin-top: 5px;" src="assets/imgs/circle_50.png" width="8"
+                                                      height="8"/></span>
+          <ng-template #sectionTotalMaterial50>
+            <span class="title-small1"><img style="margin-top: 5px;" src="assets/imgs/circle_0.png" width="8"
+                                            height="8"/></span>
+          </ng-template>
+          <!--span class="title-small1 validations"><img style="margin-top: 5px;" src="assets/imgs/circle_50.png" width="8" height="8"/></span-->
+
+          <span *ngIf="totalMaterialRecyclable>0 && totalMaterialRecyclable==60; else sectionTotalMaterial60"
+                class="title-small1 validations">60%</span>
+          <ng-template #sectionTotalMaterial60>
+            <span class="title-small1">60</span>
+          </ng-template>
+
+          <span *ngIf="totalMaterialRecyclable>0 && totalMaterialRecyclable==70; else sectionTotalMaterial70"
+                class="title-small1 validations">70%</span>
+          <ng-template #sectionTotalMaterial70>
+            <span class="title-small1">70</span>
+          </ng-template>
+
+          <span *ngIf="totalMaterialRecyclable>0 && totalMaterialRecyclable==80; else sectionTotalMaterial80"
+                class="title-small1 validations">80%</span>
+          <ng-template #sectionTotalMaterial80>
+            <span class="title-small1">80</span>
+          </ng-template>
+
+          <span *ngIf="totalMaterialRecyclable>0 && totalMaterialRecyclable==90; else sectionTotalMaterial90"
+                class="title-small1 validations">90%</span>
+          <ng-template #sectionTotalMaterial90>
+            <span class="title-small1">90</span>
+          </ng-template>
+
+          <span *ngIf="totalMaterialRecyclable>0 && totalMaterialRecyclable==100; else sectionTotalMaterial100"
+                class="title-small1 validations"><img style="margin-top: 5px;" src="assets/imgs/circle_100.png"
+                                                      width="8" height="8"/></span>
+          <ng-template #sectionTotalMaterial100>
+            <span class="title-small1"><img style="margin-top: 5px;" src="assets/imgs/circle_0.png" width="8"
+                                            height="8"/></span>
+          </ng-template>
+          <!--span class="title-small1 validations"><img style="margin-top: 5px;" src="assets/imgs/circle_100.png" width="8" height="8"/></span-->
+        </ion-label>
+      </ion-col>
+    </ion-row>
+    <!--Validations delivery material-->
+    <div text-center>
+      <span *ngIf="(totalMaterialRecyclable)==100" class="title-small"
+            style="color: green">La funda ya esta llena</span>
+      <span *ngIf="(_totalMaterialRecyclable)>100" class="title-small validations">(No puedes entregar más de su capacidad.)</span>
+      <span *ngIf="(_totalMaterialRecyclable)>100 && errTotalMaterialRecyclable" class="title-small1 validations">Reduce los porcentajes en el formulario y verifica que no sobrepase el 100% de la funda.</span>
+      <span *ngIf="errorForm" class="validations"> *Identifica la cantidad de cada material que vas a entregar.</span>
+    </div>
+    <!--Delivery items-->
+    <ion-row>
+      <ion-col col-4>
+        <ion-label class="title">Plástico <span *ngIf="plasticoCtrl!=0 && plasticoCtrl!=undefined"
+                                                class="title-small1 validations">({{plasticoCtrl}}%)</span></ion-label>
+        <ion-label class="title material">Papel <span *ngIf="papelCtrl!=0 && papelCtrl!=undefined"
+                                                      class="title-small1 validations">({{papelCtrl}}%)</span>
+        </ion-label>
+        <ion-label class="title material">Cartón <span *ngIf="cartonCtrl!=0 && cartonCtrl!=undefined"
+                                                       class="title-small1 validations">({{cartonCtrl}}%)</span>
+        </ion-label>
+        <ion-label class="title material">Metal <span *ngIf="chatarraCtrl!=0 && chatarraCtrl!=undefined"
+                                                      class="title-small1 validations">({{chatarraCtrl}}%)</span>
+        </ion-label>
+        <ion-label class="title material">Vidrio <span *ngIf="vidrioCtrl!=0 && vidrioCtrl!=undefined"
+                                                       class="title-small1 validations">({{vidrioCtrl}}%)</span>
+        </ion-label>
+        <ion-label class="title material">Tetrapak <span *ngIf="compuestoCtrl!=0 && compuestoCtrl!=undefined"
+                                                         class="title-small1 validations">({{compuestoCtrl}}%)</span>
+        </ion-label>
+      </ion-col>
+      <!--Range material-->
+      <ion-col col-7>
+        <ion-range pin="true" snaps="true" min="0" max="100" step="10" color="yellow" [(ngModel)]="plasticoCtrl"
+                   #ctrl="ngModel" (ionChange)="totalMaterial(plasticoCtrl,'plastico'); disabledBottomDelivery()">
+        </ion-range>
+        <ion-range pin="true" snaps="true" min="0" max="100" step="10" color="orange" [(ngModel)]="papelCtrl"
+                   #ctrl="ngModel" (ionChange)="totalMaterial(papelCtrl,'papel'); disabledBottomDelivery()">
+        </ion-range>
+        <ion-range pin="true" snaps="true" min="0" max="100" step="10" color="green" [(ngModel)]="cartonCtrl"
+                   #ctrl="ngModel" (ionChange)="totalMaterial(cartonCtrl,'carton'); disabledBottomDelivery()">
+        </ion-range>
+        <ion-range pin="true" snaps="true" min="0" max="100" step="10" color="darkBlue1" [(ngModel)]="chatarraCtrl"
+                   #ctrl="ngModel" (ionChange)="totalMaterial(chatarraCtrl,'chatarra'); disabledBottomDelivery()">
+        </ion-range>
+        <ion-range pin="true" snaps="true" min="0" max="100" step="10" color="lightBlue" [(ngModel)]="vidrioCtrl"
+                   #ctrl="ngModel" (ionChange)="totalMaterial(vidrioCtrl,'vidrio'); disabledBottomDelivery()">
+        </ion-range>
+        <ion-range pin="true" snaps="true" min="0" max="100" step="10" color="purple" [(ngModel)]="compuestoCtrl"
+                   #ctrl="ngModel" (ionChange)="totalMaterial(compuestoCtrl,'compuesto'); disabledBottomDelivery()">
+        </ion-range>
+      </ion-col>
+    </ion-row>
+  </div>
+  <!--Buttom delivery-->
+  <div text-center>
+    <div *ngIf="disabledBtnDelivery; else enabledBtn">
+      <button ion-button large outline class="roundBtn" style="background-color:#39b54a;color: white "> Enviar <span
+        style="width: 25px; height: 25px; margin-left: 5% !important;"><!--ion-icon ios="ios-checkmark-circle-outline" md="md-checkmark-circle" color="ligth"></ion-icon--></span>
+      </button>
+    </div>
+    <ng-template #enabledBtn>
+      <button (click)="delivery()" ion-button large outline class="roundBtn bg-boton" style="color: white "> Enviar
+        <span style="width: 25px; height: 25px; margin-left: 5% !important;"><ion-icon
+          ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline" color="ligth"></ion-icon></span>
+      </button>
+    </ng-template>
+    <!--button ion-button large outline class="roundBtn" style="background-color: #39b54a;color: white ">
+      Enviar  <span style="width: 25px; height: 25px; margin-left: 5% !important;"><ion-icon ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline" color="ligth"></ion-icon></span>
+    </button-->
+
+  </div>
+  <ion-tabs style="display: none"></ion-tabs>
 </ion-content>
