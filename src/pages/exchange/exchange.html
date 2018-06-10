@@ -34,7 +34,7 @@
     </ion-col>
   </ion-row>
 
-  <ion-list>
+  <ion-list *ngIf="exchangeList !== undefined; else loading">
     <!--Exchange List-->
 
     <ion-item *ngFor='let exchange of exchangeList' (tap)="!exchange.isActive ? exchangeModal(exchange) : null"
@@ -83,4 +83,9 @@
       </ion-item-->
   </ion-list>
 
+
+  <ng-template #loading>
+    <ion-spinner name="circles"></ion-spinner>
+    Cargando...
+  </ng-template>
 </ion-content>

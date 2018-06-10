@@ -4,6 +4,7 @@ import { ReciappService } from '../../services/reciapp.service';
 import { AuthenticationService } from '../../services/authenticationService';
 import { ModalPage } from '../modal/modal';
 import moment from 'moment';
+import { Coupon } from '../../models/coupon';
 
 /**
  * Generated class for the ExchangePage page.
@@ -40,12 +41,14 @@ export class ExchangePage {
 
     this.userSrv.getActiveCouponsByUser( uid )
       .subscribe( ( coupons ) => {
-        console.log( 'COUPONS', coupons );
-        coupons.forEach( ( coupon ) => {
+        // console.log( 'COUPONS', coupons );
+        coupons.forEach( ( coupon : Coupon ) => {
           if( moment( coupon.date ).add( 24, 'hours' ).isAfter( moment() ) ) {
-            this.activeCoupons.push( {id: coupon.exchange.id, date: coupon.date} );
+            this.activeCoupons.push( { id: coupon.exchange.id, date: coupon.date } );
           }
-          console.log( 'ACTIVE COUPONS', this.activeCoupons );
+          // console.log( 'ACTIVE COUPONS', this.activeCoupons );
+          // console.log( coupon.date );
+
         } );
 
         this.userSrv.getExchangeList().subscribe( ( list ) => {
@@ -55,11 +58,11 @@ export class ExchangePage {
               ...data.payload.val(),
               id: data.key
             };
-            console.log( 'EXCHANGE', exchange );
+            // console.log( 'EXCHANGE', exchange );
 
             exchange.isActive = this.activeCoupons.some( ( coupon ) => {
-              if(coupon.id === data.key) {
-                exchange.expireDate = moment( coupon.date ).add( 24, 'hours' ).format( 'DD [de] MMMM YYYY HH:mm' )
+              if( coupon.id === data.key ) {
+                exchange.expireDate = moment( coupon.date ).add( 24, 'hours' ).format( 'DD [de] MMMM YYYY HH:mm' );
               }
               return coupon.id === data.key;
             } );
