@@ -48,7 +48,7 @@
 
     <div *ngIf="user !== undefined; else loading">
       <ion-list style="margin: 0%;" >
-        <ion-item (tap)="exchange()" style="background-color: #770042; padding-left: 0%;">
+        <ion-item (tap)="exchange()" style="background: linear-gradient(#790042, #c81c71, #790042); padding-left: 0%; height: 72px;">
           <ion-grid>
             <ion-row>
                 <!--ion-title text-center showWhen="ios">
@@ -69,44 +69,51 @@
         </ion-item>
       </ion-list>
 
-      <ion-card style="background-color: #005c7e">
-        <ion-card-content style="padding-top:0%; padding-bottom: 0%; margin-right: 0%">
+      <ion-item *ngIf="(user)?.lastDelivery==0" style="background-color: #005c7e;" (click)="deliveryPage()">
           <ion-grid>
-            <ion-row>
-              <ion-col col-6 text-center>
-                <h2>Última entrega:</h2>
-              </ion-col>
-              <ion-col col-6 text-left>
-                <p *ngIf="(user)?.lastDelivery; else elseMessage">
-                  hace {{(user)?.lastDelivery | amLocale:'es' | amTimeAgo:true}}
-                </p>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-          <ng-template #elseMessage>
-            <p>Aún no tienes entregas</p>
-          </ng-template>
-        </ion-card-content>
-      </ion-card>
+              <ion-row >
+                  <ion-col text-center>
+                    <h2>Haz tu primera entrega!</h2>
+                  </ion-col>
+                </ion-row>
+            </ion-grid>      
+      </ion-item>
+
+      <ion-item *ngIf="(user)?.lastDelivery;" style="background-color: #005c7e;">
+        <ion-row >
+          <ion-col col-7 text-center>
+            <h2>Última entrega:</h2>
+          </ion-col>
+          <ion-col col-5 text-left>
+            <p style="padding-top: 5px;">
+              hace {{(user)?.lastDelivery | amLocale:'es' | amTimeAgo:true}}
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-item> 
+      
+      <ion-item *ngIf="(user)?.totalDeliveries ==0" text-center style=" background-color:transparent">
+              <ion-item text-center text-wrap style="background-color:transparent">Aún no haz realizado entregas, toca <i> aquí </i>para hacer tu primera entrega</ion-item>
+              <ion-row text-center>
+                <ion-col col-12>
+                  <div text-center padding style="z-index: 50">
+                      <button class="botonE" ion-button round (click)="deliveryPage()" style="z-index: 100" >Aquí</button>
+                    </div>
+                </ion-col>
+              </ion-row>
+      </ion-item>
 
 
-      <ion-card style="background-color: #005c7e">
-        <ion-card-content>
-          <ion-card-title>
-            Mis entregas
-          </ion-card-title>
+      <ion-item *ngIf="(user)?.lastDelivery; " style="background-color: #004361; padding-left: 11%;  margin-top: 20px;">
+          <h1>Mis entregas</h1>
           <p>
-            Has registrado {{(user)?.totalDeliveries}} entrega{{(user)?.totalDeliveries > 1 ? 's' : ''}}
+            <ion-icon ios="ios-star" md="md-star" style="color: yellow"></ion-icon>    Has registrado {{(user)?.totalDeliveries}} entrega{{(user)?.totalDeliveries > 1 ? 's' : ''}}
           </p>
-        </ion-card-content>
-      </ion-card>
-
-      <br/>
-      <br/>
-
-      <ion-slides spaceBetween="10" autoplay="2000" loop="true" speed="3000" style="padding: 0% !important; margin-top: 24% !important">
-        <ion-slide style="background-color:#005c7e; padding-top: 5%; padding-right: 5%; padding-bottom: 7%">
-          <ion-grid>
+        </ion-item>
+  
+      <ion-slides spaceBetween="10" autoplay="2000" loop="true" speed="3000">
+        <ion-slide style="background-color:#005c7e;">
+          <!--ion-grid>
             <ion-row>
               <ion-col col-7 left text-left item-start style="padding-top: 5%;">
                 <img class="imagen" src="assets/imgs/desechosT.png">
@@ -117,11 +124,12 @@
                     Limpia tus residuos antes de guardar. Evita malos olores y tienen mejor precio comercial para el reciclador de base.</p>
                 </ion-col>
             </ion-row>
-          </ion-grid>
+          </ion-grid-->
+          <img src="assets/imgs/tips1.png"/>
         </ion-slide>
 
-        <ion-slide style="background-color: #005c7e; padding-top: 5%; padding-left: 5%; padding-bottom: 5% ">
-          <ion-grid>
+        <ion-slide style="background-color: #1b6c8d; ">
+          <!--ion-grid>
             <ion-row>
               <ion-col col-6 center text-center>
                 <h2 text-left>Tip del día</h2>
@@ -132,13 +140,14 @@
                 <img class="imagen" src="assets/imgs/reduceT.png">
               </ion-col>
             </ion-row>
-          </ion-grid>
+          </ion-grid-->
+          <img src="assets/imgs/tips2.png" >
         </ion-slide>
 
-        <ion-slide style="background-color:#005c7e" >
-          <ion-grid>
+        <ion-slide style="background-color:#1b6c8d"  >
+          <!--ion-grid>
             <ion-row>
-              <ion-col col-6 center text-center> <!--style="width:250px; height:172px"-->
+              <ion-col col-6 center text-center>
                 <img class="imagen" src="assets/imgs/familiaT.png" >
               </ion-col>
               <ion-col col-6 center text-center style="padding-top: 5%; padding-right: 5%">
@@ -148,7 +157,8 @@
                     <p class="textBold" text-right>Gracias!</p>
                 </ion-col>
             </ion-row>
-          </ion-grid>
+          </ion-grid-->
+          <img src="assets/imgs/tips3.png" />
         </ion-slide>
 
       </ion-slides>

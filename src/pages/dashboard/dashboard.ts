@@ -14,6 +14,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app'
 
 import { MapPage } from '../map/map';
+import { DeliveryPage } from '../delivery/delivery';
 
 import {AuthenticationService} from "../../services/authenticationService";
 import {CategoriaPage} from "../categoria/categoria";
@@ -98,8 +99,13 @@ export class DashboardPage {
 
   }
 
+
   openMap(){
     this.navCtrl.push(MapPage);
+  }
+
+  deliveryPage(){
+    this.navCtrl.push(DeliveryPage);
   }
 
   openTips(){
