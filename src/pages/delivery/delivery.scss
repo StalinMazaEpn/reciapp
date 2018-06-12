@@ -1,8 +1,9 @@
 page-delivery {
-	img{
-		width: 40%;
-		height: 110px;
-		border: 1px solid;
+
+    img.photoMaterial{
+		width: 100%;
+		height: 170px;
+		border: 0;
 		border-radius: 5px;
 	}
 
@@ -11,7 +12,6 @@ page-delivery {
 		height: 40px;
 		border-radius: 100%;
 		border:0;
-
 	}
 
 	ion-label.material{
@@ -23,19 +23,18 @@ page-delivery {
 	}
 
 	ion-label.title{
-		font-weight: bold;
+		text-align: center;
 	}
 	p.title-small2{
-		font-size: 15px;
-		font-weight: bold;
-		margin-top:12px;
+		font-size: 14px;
+		margin-top:20px;
 		margin-bottom:0;
 	}
 
 	.title-small1{
 		font-size: 6px;
 		font-weight: bold;
-		margin-left:1%;
+		margin-left:2%;
 		color: gray;
 		position: relative;
 	}
@@ -57,22 +56,24 @@ page-delivery {
 		margin-right: 20% !important;
 	}
 	span.label1{
-		margin-left: 10% !important;	
+		margin-left: 10% !important;
 	}
 	/*
 	span.label{
 		margin-right: 15% !important;
 	}
 	span.label1{
-		margin-left: 35% !important;	
+		margin-left: 35% !important;
 	}*/
 
 	.roundBtn{
-		border-radius: 100%;
+		border-radius: 150px,150px,150px,150px;
+		-moz-border-radius: 150px 150px 150px 150px;
+		-webkit-border-radius: 150px 150px 150px 150px;
 	}
 	.validations{
     	font-size: 10px;
-    	color: red;	
+    	color: red;
     }
 
     ul{
@@ -105,4 +106,63 @@ page-delivery {
     	color:white;
     }
 
+    .btn-mini{
+    	max-height: 25px !important;
+    	max-width: 25px !important;
+    }
+
+    .btn-position{
+    	top: 60%;
+    }
+
+    .bg-photo{
+    	background: linear-gradient(to right,#afba35, #ede937);
+        min-height: 30%;
+
+      .delivery-back-button {
+        color: #ffffff;
+      }
+    }
+
+    .bg-boton{
+        background: linear-gradient(to right,#8dc63f, #39b54a);
+    }
+
+    .camera-btn{
+    	top: 5%;
+        left: 35%;
+        right: 35%;
+    	border: none;
+        position: absolute;
+    }
+
+    .message-Photo{
+    	position: absolute;
+    	top: 20% !important;
+    	left: 20% !important;
+    	right: 20% !important;
+    	z-index: 50;
+    	font-size: 1em;
+    }
+
+    p.recyclersNames{
+    	height: auto !important;
+    	overfloat: auto;
+    	font-size:10px;
+    	margin-top: 5px !important;
+    	margin-bottom: 5px !important;
+    }
+    .noData{
+    	border: 2px solid;
+    	border-radius: 100%;
+    }
+
+    .camera-img{
+        width:100px;
+        height:70px;
+    }
+
+    div.range-knob{
+        background-color: #ede937;
+    }
 }

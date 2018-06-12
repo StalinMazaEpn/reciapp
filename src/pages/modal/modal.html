@@ -19,35 +19,64 @@
   <!--ion-buttons end>
       <button ion-button (click)="closeModal()">Cerrar</button>
     </ion-buttons-->
-    <ion-fab right style="top:20%">
-      <button ion-fab mini color="danger" outline clear (click)="closeModal()"><ion-icon name="close" ></ion-icon></button>
+    <ion-fab right style="top:24.5%;right: -1.5% ! important;">
+      <button ion-fab mini style="background-color: transparent !important; box-shadow: none;" color="danger" clear (click)="closeModal()"><ion-icon name="close" ></ion-icon></button>
     </ion-fab>
     <div class="modalContent">
-      <ion-item>
-        <br>
-        <h1><span><ion-icon ios="ios-heart-outline" md="md-heart-outline"></ion-icon></span> {{objExchange.points}} pts.</h1>
-        <h2 text-wrap>¡{{objExchange.promoTitle}}!</h2>
-        <p text-wrap>{{objExchange.promoDetail}}</p>
-        <ion-avatar item-end>
-          <img src="{{objExchange.logo}}" width="150" height="150">
-        </ion-avatar>
-        <br>
-      </ion-item>
-      <div text-center *ngIf="usrPoints>=objExchange.points; else insufficientPoints">
-        <br>
-        <button ion-button color="secondary" round (tap)="exchangeGift(objExchange)">Canjear</button>  
-        <br><br>
+      <div class="modalContent1">
+        
+        <ion-row>
+          <ion-col col-1></ion-col>
+          <ion-col col-7>
+            <ion-row>
+              <ion-col col-2>
+                <img style="margin-top: 25px;" src="assets/imgs/heart-reciveci-on.png" class="logo-header" width="26" height="20" />
+              </ion-col>  
+              <ion-col col>
+                <h1 style="margin-bottom: 0px !important" class="text-white">{{objExchange.points}} pts.</h1>
+              </ion-col>  
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <h5 class="text-white" style="font-weight: bold; margin: 0px !important" text-wrap>¡{{objExchange.promoTitle}}!</h5>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col col>
+              <img style="border-radius: 100%; margin-top: 20px; " src="{{objExchange.logo}}" width="80" height="80">
+          </ion-col>  
+          <ion-col col-1></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-1></ion-col>
+          <ion-col>
+            <p class="text-white" style="margin-bottom: 0px !important;" text-wrap>{{objExchange.promoDetail}}</p>    
+          </ion-col>
+          <ion-col col-1></ion-col>
+        </ion-row>
+        <!--Boton/Message-->
+        <ion-row>
+          <ion-col col-1></ion-col>
+          <ion-col col>
+            <div text-center *ngIf="usrPoints>=objExchange.points; else insufficientPoints">
+              <br>
+              <button ion-button color="secondary" round (tap)="exchangeGift(objExchange)">Canjear</button>  
+              <br><br>
+            </div>
+            <ng-template #insufficientPoints>
+              <br>
+              <h4 class="text-white" style="margin: 0px !important;" text-wrap text-center>¡Necesitas {{objExchange.points - usrPoints}} Recipuntos más, para canjear este premio!</h4>
+              <br>
+            </ng-template>
+          </ion-col>
+          <ion-col col-1></ion-col>
+        </ion-row>
       </div>
-      <ng-template #insufficientPoints>
-        <br>
-        <h4 text-center>¡Necesitas {{objExchange.points - usrPoints}} Recipuntos más, para canjear este premio!</h4>
-        <br>
-      </ng-template>
     </div>    
 
     
-    <ion-list>
-      <!--Exchange List-->
+    <!--ion-list>
+      <Exchange List>
       <ion-item >
         <h2>¡Canjea beneficios cerca de ti!</h2>
       </ion-item>
@@ -57,6 +86,6 @@
         <img src="{{partner.logo}}">
       </ion-avatar>
       </ion-item>
-    </ion-list>
+    </ion-list-->
 
 </ion-content>

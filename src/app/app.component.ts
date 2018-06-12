@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, App, AlertController,LoadingController, ViewController, IonicApp } from 'ionic-angular';
+import { Component, ViewChild  } from '@angular/core';
+import { Nav, Platform, App, AlertController,LoadingController,IonicApp,MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NativeStorage } from '@ionic-native/native-storage';
@@ -8,6 +8,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { TourPage } from '../pages/tour/tour';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+import moment from 'moment';
 
 @Component({
   templateUrl: 'app.html'
@@ -34,16 +35,15 @@ export class MyApp {
   ];
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public nativeStorage: NativeStorage, public app: App,
-   private alertCtrl: AlertController, public afAuth:AngularFireAuth,public loadingCtrl:LoadingController, private ionicApp: IonicApp) {
-    
+   private alertCtrl: AlertController, public afAuth:AngularFireAuth,public loadingCtrl:LoadingController, private ionicApp: IonicApp, public menuCtrl: MenuController) {
     platform.ready().then(() => {
 
       this.platform = platform;
+      moment.locale('es');
 
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
-
       if(this.isTourDone()){
         this.rootPage = TabsPage;
         splashScreen.hide();
@@ -66,14 +66,14 @@ export class MyApp {
 
         let nav = this.app.getActiveNav();
         
-        if (nav.canGoBack()){ //Can we go back?
+        if (nav && nav.canGoBack && nav.canGoBack()){ //Can we go back?
           nav.pop();
         } else {
           if (!this.alertShown) {
             this.exitApp();
           }
         }
-      },0);
+      });
     });
 
     this.afAuth.authState.subscribe(data=>{
@@ -155,7 +155,8 @@ export class MyApp {
     if (option==="cerrar") {
       this.logout();
     }else{
-      this.nav.push(option);  
+      this.menuCtrl.close();
+      this.nav.push(option);
     }
   }
 

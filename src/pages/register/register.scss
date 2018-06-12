@@ -1,3 +1,39 @@
 page-register {
+	.textbox{
+		background-color: white;
+		border-radius: 150px,150px,150px,150px;
+		-moz-border-radius: 150px 150px 150px 150px;
+		-webkit-border-radius: 150px 150px 150px 150px;
+		margin-bottom: 7% !important;
+		color: black;
+		z-index: 100;
+	}
+
+	.bg-boton{
+		background:linear-gradient(to right,#afba35, #ede937);
+		color:black;
+	}
+
+	.bg-page{
+		background: linear-gradient(to right,#167b9b, #00a0dc);
+	}
+
+	.triangle{  
+		z-index: -1;
+		left: 0%;
+	  	bottom:0%;
+      	position: absolute;
+		width: 0;
+     	height: 0;
+
+    	border-image:linear(to left top, #004361, #005c80); 
+      	border-right: 190px solid transparent;
+     	border-top: 65px solid transparent;
+     	border-left: 190px solid #005c80;
+     	border-bottom: 65px solid #005c80;
+     	-webkit-box-shadow: 5px 5px 5px 0px #004361;
+		-moz-box-shadow: 5px 5px 5px 0px #004361;
+		box-shadow: 5px 5px 5px 0px #004361;
+    }
 
 }

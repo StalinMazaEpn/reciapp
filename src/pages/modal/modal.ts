@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavParams, ViewController,ToastController } from 'ionic-angular';
+import { IonicPage,NavController, NavParams, ViewController,ToastController } from 'ionic-angular';
 import { ReciappService } from "../../services/reciapp.service";
 import { AuthenticationService } from "../../services/authenticationService";
 import { database } from "firebase";
@@ -22,7 +22,7 @@ export class ModalPage {
   usrPoints:any;
   exchangeData:any={};
 
-  constructor( private navParams: NavParams, private view: ViewController,public userSrv:ReciappService, public authSrv:AuthenticationService,
+  constructor( public navCtrl: NavController,private navParams: NavParams, private view: ViewController,public userSrv:ReciappService, public authSrv:AuthenticationService,
     public toastCtrl:ToastController) {
     this.userData=this.navParams.get('userData');
     this.objExchange=this.navParams.get('objectExchange');
@@ -44,18 +44,22 @@ export class ModalPage {
       name:'jose',
       occupation:'Milkman'
     };
-  
+
     this.view.dismiss(data);
   }
 
   exchangeGift(obj){
     this.exchangeData.date=database.ServerValue.TIMESTAMP;
     this.exchangeData.uid=this.authSrv.getCurrentUser().uid;
-    this.exchangeData.exchange=obj;
+    this.exchangeData.exchange={
+      id: obj.id,
+      points: obj.points
+    };
     this.userSrv.exchangePoints(this.exchangeData)
     .then((resp)=>{
       this.usrPoints-=this.exchangeData.exchange.points;
       this.okExchange();
+      this.dismiss();
     })
     .catch(e=>console.log(e));
     //console.log(this.exchangeData);
@@ -63,11 +67,16 @@ export class ModalPage {
 
   okExchange(){
     let toast = this.toastCtrl.create({
-      message: 'Tu canje a sido correcto.' ,
-      duration: 3000,
-      position:'middle'
+      message: 'Tu canje se ha realizado correctamente. Tienes 24 horas para acercarte al local y obtener tu premio.' ,
+      duration: 5000,
+      position:'middle',
+      cssClass:'text-center'
     });
     toast.present();
+  }
+
+  dismiss() {
+    this.navCtrl.pop();
   }
 }
 

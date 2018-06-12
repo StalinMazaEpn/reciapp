@@ -41,29 +41,36 @@ $colors: (
   dark:       #222,
   segment:    #61d800,
   content:    #145575,
+  tourOne:    #bd7b17,
+  tourTwo:    #4d9e1d,
+  tourThree:  #5a208a,
+  tourFour:   #c42c34,
 
-  tourOne: #bd7b17,
-  tourTwo: #4d9e1d,
-  tourThree: #5a208a,
-  tourFour: #c42c34,
+  twitter:    #00b6f1,
+  instagram:  #c40a70,
 
-  twitter: #00b6f1,
-  instagram: #c40a70,
-
-
-
-
-
+  yellow:     #ede937,
+  green:      #8dc63f,
+  darkBlue:   #004361,
+  darkBluePri: #005c80,
+  lightBlue:  #167b9b,
+  lightBluePri: #00a0dc,
+  purple:     #c81c71,
+  orange:     #ff8000,
 
 );
 
 // background colors
-$darkBlue: #00435f;
-$lightBlue: #005c7e;
+$darkBlue: #004361;
+$darkBluePri: #005c80;
+$lightBlue: #167b9b;
+$lightBluePri: #00a0dc;
 $skyBlue: #17a1d9;
-$yellow: #d6dd3b;
+$yellow1: #ede937;
+$yellow2: #afba35;
 $green: #3fb34f;
-$purple: #770042;
+$purple1: #790042;
+$purple2: #c81c71;
 $fontColor: #ffffff;
 
   // material colors
@@ -74,8 +81,8 @@ $metal: #31aade;
 $tetrapak: #c52271;
 
 
-$alert-md-background-color: $lightBlue;
-$alert-ios-background: $lightBlue;
+/*$alert-md-background-color: $lightBlue;
+$alert-ios-background: $lightBlue;*/
 
 // App iOS Variables
 // --------------------------------------------------

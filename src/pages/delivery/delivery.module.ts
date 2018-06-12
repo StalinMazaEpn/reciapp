@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { IonicPageModule } from 'ionic-angular';
+import { IonicPageModule, IonicModule } from 'ionic-angular';
 import { DeliveryPage } from './delivery';
 
 @NgModule({
@@ -8,6 +8,9 @@ import { DeliveryPage } from './delivery';
   ],
   imports: [
     IonicPageModule.forChild(DeliveryPage),
+    IonicModule.forRoot(DeliveryPage,{
+    	tabsHideOnSubPages: true,
+    }),
   ],
 })
 export class DeliveryPageModule {}
