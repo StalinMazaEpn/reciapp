@@ -8,6 +8,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { TourPage } from '../pages/tour/tour';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+import moment from 'moment';
 
 @Component({
   templateUrl: 'app.html'
@@ -36,6 +37,7 @@ export class MyApp {
     platform.ready().then(() => {
 
       this.platform = platform;
+      moment.locale('es');
 
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -103,7 +105,7 @@ export class MyApp {
   /*
   This method will be used in future test with mobiles
   Don`t Erase please
-  
+
   isTourDone(): boolean{
     this.nativeStorage.getItem('tourDone')
     .then(
@@ -134,7 +136,7 @@ export class MyApp {
     if (option==="cerrar") {
       this.logout();
     }else{
-      this.nav.push(option);  
+      this.nav.push(option);
     }
   }
 

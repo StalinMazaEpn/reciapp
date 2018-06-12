@@ -44,14 +44,17 @@ export class ModalPage {
       name:'jose',
       occupation:'Milkman'
     };
-  
+
     this.view.dismiss(data);
   }
 
   exchangeGift(obj){
     this.exchangeData.date=database.ServerValue.TIMESTAMP;
     this.exchangeData.uid=this.authSrv.getCurrentUser().uid;
-    this.exchangeData.exchange=obj;
+    this.exchangeData.exchange={
+      id: obj.id,
+      points: obj.points
+    };
     this.userSrv.exchangePoints(this.exchangeData)
     .then((resp)=>{
       this.usrPoints-=this.exchangeData.exchange.points;
