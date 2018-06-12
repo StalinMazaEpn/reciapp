@@ -1,5 +1,5 @@
 import { Component, ViewChild  } from '@angular/core';
-import { Nav, Platform, App, AlertController,LoadingController,MenuController } from 'ionic-angular';
+import { Nav, Platform, App, AlertController,LoadingController,IonicApp,MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NativeStorage } from '@ionic-native/native-storage';
@@ -17,6 +17,8 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
   rootPage:any;
 
+  alertShown = false;
+
   platform: Platform;
   isAuthenticated:boolean;
   optionsMenu:any;
@@ -33,7 +35,7 @@ export class MyApp {
   ];
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public nativeStorage: NativeStorage, public app: App,
-   private alertCtrl: AlertController, public afAuth:AngularFireAuth,public loadingCtrl:LoadingController, public menuCtrl: MenuController) {
+   private alertCtrl: AlertController, public afAuth:AngularFireAuth,public loadingCtrl:LoadingController, private ionicApp: IonicApp, public menuCtrl: MenuController) {
     platform.ready().then(() => {
 
       this.platform = platform;
@@ -51,11 +53,25 @@ export class MyApp {
       }
 
       platform.registerBackButtonAction(() => {
+
+        let activePortal = this.ionicApp._loadingPortal.getActive() ||
+        this.ionicApp._modalPortal.getActive() ||
+        this.ionicApp._toastPortal.getActive() ||
+        this.ionicApp._overlayPortal.getActive();
+
+        if (activePortal) {
+          this.alertShown = false;
+          return activePortal.dismiss();
+        }
+
         let nav = this.app.getActiveNav();
-        if (nav.canGoBack()){ //Can we go back?
+        
+        if (nav && nav.canGoBack && nav.canGoBack()){ //Can we go back?
           nav.pop();
-        }else{
-          this.exitApp(); //Exit from app with confirmation
+        } else {
+          if (!this.alertShown) {
+            this.exitApp();
+          }
         }
       });
     });
@@ -89,6 +105,7 @@ export class MyApp {
           role: 'cancel',
           handler: () => {
             console.log('Cancel clicked');
+            this.alertShown = false;
           }
         },
         {
@@ -99,13 +116,15 @@ export class MyApp {
         }
       ]
     });
-    alert.present();
+    alert.present().then(() => {
+      this.alertShown = true;
+    });
   }
 
   /*
   This method will be used in future test with mobiles
   Don`t Erase please
-
+  
   isTourDone(): boolean{
     this.nativeStorage.getItem('tourDone')
     .then(
