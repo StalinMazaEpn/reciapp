@@ -40,6 +40,7 @@ import { CallNumber } from '@ionic-native/call-number';
 import { Camera } from '@ionic-native/camera';
 import { LocationAccuracy } from '@ionic-native/location-accuracy';
 import { Diagnostic } from '@ionic-native/diagnostic';
+ import { CouponModalPageModule } from '../pages/couponModal/couponModal.module';
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -83,7 +84,8 @@ const firebaseConfig = {
     RecyclerFormPageModule,
     DeliveryPageModule,
     ExchangePageModule,
-    ModalPageModule
+    ModalPageModule,
+    CouponModalPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

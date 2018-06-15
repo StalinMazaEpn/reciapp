@@ -37,17 +37,18 @@
   <ion-list *ngIf="exchangeList !== undefined; else loading">
     <!--Exchange List-->
 
-    <ion-item *ngFor='let exchange of exchangeList' (tap)="!exchange.isActive ? exchangeModal(exchange) : null"
+    <ion-item *ngFor='let exchange of exchangeList' (tap)="!exchange.isActive ? exchangeModal(exchange) : couponModal(exchange)"
               [ngClass]="(exchange.isActive ? 'bg-yellow exchange-list' : 'bg-darkblue exchange-list')">
       <ion-avatar item-end>
         <img src="{{exchange.logo}}">
       </ion-avatar>
-      <h1 class="exchange-list"><span><img src="assets/imgs/heart-reciveci-on.png" class="logo-header" width="24"
+      <h1 class="exchange-points" *ngIf="!exchange.isActive"><span><img src="assets/imgs/heart-reciveci-on.png" class="logo-header" width="24"
                                            height="18"/></span> {{exchange.points}} pts.</h1>
-      <h3 style="padding-left: 15px;">{{exchange.promoTitle}}</h3>
-      <p style="color: white;padding-left: 15px;">{{exchange.promoDetail}}</p>
+      <h1 class="exchange-points" *ngIf="exchange.isActive">Cupón activo</h1>
+      <h3 class="exchange-title">{{exchange.promoTitle}}</h3>
+      <p class="exchange-detail">{{exchange.promoDetail}}</p>
 
-      <p *ngIf="exchange.isActive">Expira: {{exchange.expireDate}}</p>
+      <p class="exchange-expiration" *ngIf="exchange.isActive">Expira: {{exchange.expireDate}}</p>
     </ion-item>
   </ion-list>
 
