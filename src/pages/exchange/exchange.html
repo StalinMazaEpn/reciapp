@@ -16,62 +16,72 @@
 
   <ion-row class="bg-purple" (tap)="dismiss()">
     <ion-col col-3 text-right>
-      <img src="assets/imgs/heart-reciveci-on.png" style="margin-top: 14px;" />
+      <img src="assets/imgs/heart-reciveci-on.png" style="margin-top: 14px;"/>
     </ion-col>
     <ion-col col-3 text-left>
-      <h1 style="margin-top: 14px;" > {{userPts}} </h1>	
+      <h1 style="margin-top: 14px;"> {{userPts}} </h1>
     </ion-col>
     <ion-col col-6 text-center>
-      <h2 style="margin-top: 15px;" >{{userName}} </h2>	
+      <h2 style="margin-top: 15px;">{{userName}} </h2>
     </ion-col>
-  </ion-row>	
-	
+  </ion-row>
 
-	<!--Section exchange-->
-	<ion-row text-center style="background: #167b9b;">
-		<ion-col>
-			<h5 style="font-weight: bold;">¡Canjea beneficios cerca de ti!</h5>	
-		</ion-col>
-	</ion-row>
 
-	<ion-list *ngIf="exchangeList !== undefined; else loading">
-	  <!--Exchange List-->
-	  
-	  <ion-item *ngFor='let exchange of exchangeList' (tap)="exchangeModal(exchange)" class="bg-darkblue exchange-list" >
-	  	<ion-avatar item-end>
-		  <img src="{{exchange.logo}}">
-		</ion-avatar>
-		<h1 class="exchange-list"><span><img src="assets/imgs/heart-reciveci-on.png" class="logo-header" width="24" height="18" /></span> {{exchange.points}} pts.</h1>
-		<h3 style="padding-left: 15px;">{{exchange.promoTitle}}</h3>
-		<p style="color: white;padding-left: 15px;">{{exchange.promoDetail}}</p>
-		
-	  </ion-item>
-	</ion-list>
+  <!--Section exchange-->
+  <ion-row text-center style="background: #167b9b;">
+    <ion-col>
+      <h5 style="font-weight: bold;">¡Canjea beneficios cerca de ti!</h5>
+    </ion-col>
+  </ion-row>
 
-	<ion-row text-center class="bg-purple1">
-		<ion-col>
-			<h2>¡Gana más puntos!</h2>
-		</ion-col>
-	</ion-row>
+  <ion-list *ngIf="exchangeList !== undefined; else loading">
+    <!--Exchange List-->
 
-	<ion-list>
-	  <!--More Points-->
-	  <ion-item class="bg-darkblue exchange-list">
-	    <h2 text-wrap class="exchange-list"><span><img src="assets/imgs/heart-reciveci-on.png" class="logo-header" width="24" height="18" /></span> 20 Sé parte de ReciVeci.</h2>
-	  </ion-item>
-	  <ion-item class="bg-darkblue exchange-list">
-	    <h2 text-wrap class="exchange-list"><span><img src="assets/imgs/heart-reciveci-on.png" class="logo-header" width="24" height="18" /></span> 100 Registra un nuevo Reciclador.</h2>
-	  </ion-item>
-	  <ion-item class="bg-darkblue exchange-list">
-	    <h2 text-wrap class="exchange-list"><span><img src="assets/imgs/heart-reciveci-on.png" class="logo-header" width="24" height="18" /></span> 50 Agrega tu primer reciclador favorito.</h2>
-	  </ion-item>
-	  <ion-item class="bg-darkblue exchange-list">
-	    <h2 text-wrap class="exchange-list"><span><img src="assets/imgs/heart-reciveci-on.png" class="logo-header" width="24" height="18" /></span> 60 Entrega periódicamente y correctamente separado.</h2>
-	  </ion-item>
-	  <!--ion-item>
-	    <h3><span><ion-icon ios="ios-heart-outline" md="md-heart-outline"></ion-icon></span> 2 Invita a una persona que podría interesarle la app ReciVeci.</h3>
-	  </ion-item-->
-	</ion-list>
+    <ion-item *ngFor='let exchange of exchangeList' (tap)="!exchange.isActive ? exchangeModal(exchange) : null"
+              [ngClass]="(exchange.isActive ? 'bg-yellow exchange-list' : 'bg-darkblue exchange-list')">
+      <ion-avatar item-end>
+        <img src="{{exchange.logo}}">
+      </ion-avatar>
+      <h1 class="exchange-list"><span><img src="assets/imgs/heart-reciveci-on.png" class="logo-header" width="24"
+                                           height="18"/></span> {{exchange.points}} pts.</h1>
+      <h3 style="padding-left: 15px;">{{exchange.promoTitle}}</h3>
+      <p style="color: white;padding-left: 15px;">{{exchange.promoDetail}}</p>
+
+      <p *ngIf="exchange.isActive">Expira: {{exchange.expireDate}}</p>
+    </ion-item>
+  </ion-list>
+
+  <ion-row text-center class="bg-purple1">
+    <ion-col>
+      <h2>¡Gana más puntos!</h2>
+    </ion-col>
+  </ion-row>
+
+  <ion-list>
+    <!--More Points-->
+    <ion-item class="bg-darkblue exchange-list">
+      <h2 text-wrap class="exchange-list"><span><img src="assets/imgs/heart-reciveci-on.png" class="logo-header"
+                                                     width="24" height="18"/></span> 20 Sé parte de ReciVeci.</h2>
+    </ion-item>
+    <ion-item class="bg-darkblue exchange-list">
+      <h2 text-wrap class="exchange-list"><span><img src="assets/imgs/heart-reciveci-on.png" class="logo-header"
+                                                     width="24" height="18"/></span> 100 Registra un nuevo Reciclador.
+      </h2>
+    </ion-item>
+    <ion-item class="bg-darkblue exchange-list">
+      <h2 text-wrap class="exchange-list"><span><img src="assets/imgs/heart-reciveci-on.png" class="logo-header"
+                                                     width="24" height="18"/></span> 50 Agrega tu primer reciclador
+        favorito.</h2>
+    </ion-item>
+    <ion-item class="bg-darkblue exchange-list">
+      <h2 text-wrap class="exchange-list"><span><img src="assets/imgs/heart-reciveci-on.png" class="logo-header"
+                                                     width="24" height="18"/></span> 60 Entrega periódicamente y
+        correctamente separado.</h2>
+    </ion-item>
+    <!--ion-item>
+        <h3><span><ion-icon ios="ios-heart-outline" md="md-heart-outline"></ion-icon></span> 2 Invita a una persona que podría interesarle la app ReciVeci.</h3>
+      </ion-item-->
+  </ion-list>
 
   <ng-template #loading>
     <ion-spinner name="circles"></ion-spinner>
