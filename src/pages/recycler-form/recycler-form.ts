@@ -9,6 +9,7 @@ import {User} from '../../models/user';
 import {ReciappService} from '../../services/reciapp.service'
 import {Recycler} from '../../models/recycler';
 import {LoginPage} from '../login/login';
+import {RecicladorPage} from '../reciclador/reciclador';
 
 import {FormBuilder, FormGroup, Validators, AbstractControl, FormControl} from '@angular/forms';
 import {AuthenticationService} from "../../services/authenticationService";
@@ -27,6 +28,8 @@ export class RecyclerFormPage {
   uid: any;
   //array to get select days
   days: string;
+
+ // selectCheck:any;
 
   //array to get select material recycleble
   material: string;
@@ -86,6 +89,8 @@ export class RecyclerFormPage {
     this.newRecycler.idUser = this.authenticationService.getCurrentUser().uid;
     this.getMyLocation();
     this.formValidation();
+    this.newRecycler.material = new Array();
+    this.newRecycler.date.days = new Array();
   }
 
   ionViewDidLoad() {
@@ -114,6 +119,7 @@ export class RecyclerFormPage {
           // Upload completed successfully, now we can get the download URL
           this.newRecycler.image = snapshot.downloadURL;
           console.log("IMAGE", this.newRecycler.image);
+          console.log(this.newRecycler);
           //Call function to create new recycler
           this.userSrv.addNewRecycler(this.newRecycler.id, this.newRecycler).then(() => {
             //Toast Ok
@@ -148,6 +154,8 @@ export class RecyclerFormPage {
         });
     }
 
+    this.navCtrl.push(RecicladorPage);
+
   }
 
   registerOk() {
@@ -159,14 +167,41 @@ export class RecyclerFormPage {
     toast.present();
   }
 
-  // updatePoints() {
-  //   let toast = this.toastCtrl.create({
-  //     message: 'Has ganado 100 puntos.',
-  //     duration: 2000,
-  //     position: 'top'
-  //   });
-  //   toast.present();
-  // }
+  addMaterial(checked: boolean, value:string){
+    console.log(checked);
+    console.log(value);
+    if(checked){
+      this.newRecycler.material.push(value);
+    }
+    else{
+      let index = this.newRecycler.material.findIndex(x => x.value == value);
+      console.log(index); 
+      this.newRecycler.material.splice(index, 1);
+    }
+    console.log(this.newRecycler.material);    
+  }
+
+  addDays(checked: boolean, value:string){
+    console.log(checked);
+    console.log(value);
+    if(checked){
+      this.newRecycler.date.days.push(value);
+    }
+    else{
+      let index = this.newRecycler.date.days.findIndex(x => x.value == value);
+      this.newRecycler.date.days.splice(index, 1);
+    }
+    console.log(this.newRecycler.date.days);    
+  }
+
+   updatePoints() {
+      let toast = this.toastCtrl.create({
+      message: 'Has ganado 100 puntos.',
+      duration: 2000,
+      position: 'top'
+    });
+      toast.present();
+  }
 
   getMyLocation() {
     this.geolocation.getCurrentPosition().then((resp) => {
@@ -194,8 +229,76 @@ export class RecyclerFormPage {
     this.formGroup = this.formBuilder.group({
       name: ['', Validators.required],
       lastName: ['', Validators.required],
-      daysValidator: ['', Validators.required],
-      materialValidator: ['', Validators.required],
+      // daysValidator: ['', Validators.required],
+      //materialValidator: ['', Validators.required],
+      // materialValidator:this.formBuilder.group({
+      //   Papel: [false, Validators.required],
+      //   Carton: [false, Validators.required],
+      //   Plastico: [false, Validators.required],
+      //   Vidrio: [false, Validators.required],
+      //   Metal: [false, Validators.required],
+      //   Tetrapack: [false, Validators.required]
+      // },
+      // (formGroup: FormGroup)=>{
+      //   for (let key in formGroup.controls) {
+      //     if (formGroup.controls.hasOwnProperty(key)) {
+      //       let control: FormControl = <FormControl>formGroup.controls[key];
+      //       if (control.value) {
+      //         return null;
+      //       }
+      //     }
+      //     else{
+      //       return false;
+      //     }
+      //   }
+      //   return false
+      // }),
+      daysValidator: this.formBuilder.group({
+        Lunes: [false, Validators.required],
+        Martes: [false, Validators.required],
+        Miercoles: [false, Validators.required],
+        Jueves: [false, Validators.required],
+        Viernes: [false, Validators.required],
+        Sabado: [false, Validators.required],
+        Domingo: [false, Validators.required]
+      },
+      (formGroup: FormGroup)=>{
+        for (let key in formGroup.controls) {
+          if (formGroup.controls.hasOwnProperty(key)) {
+            let control: FormControl = <FormControl>formGroup.controls[key];
+            if (control.value) {
+              return null;
+            }
+          }
+          else{
+            return false;
+          }
+        }
+        return false
+      }),
+
+      materialValidator:this.formBuilder.group({
+        Papel: [false, Validators.required],
+        Carton: [false, Validators.required],
+        Plastico: [false, Validators.required],
+        Vidrio: [false, Validators.required],
+        Metal: [false, Validators.required],
+        Tetrapack: [false, Validators.required]
+      },
+      (formGroup: FormGroup)=>{
+        for (let key in formGroup.controls) {
+          if (formGroup.controls.hasOwnProperty(key)) {
+            let control: FormControl = <FormControl>formGroup.controls[key];
+            if (control.value) {
+              return null;
+            }
+          }
+          else{
+            return false;
+          }
+        }
+        return false
+      }),
       hourStart: ['', Validators.compose([Validators.required, (control: FormControl) => {
         if (this.newRecycler.date.startTime > this.newRecycler.date.endTime) {
           return {

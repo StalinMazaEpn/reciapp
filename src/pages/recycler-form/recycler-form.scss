@@ -1,3 +1,12 @@
+.wp {
+    .custom-alert-danger {
+      > div {
+        background: red; // if you don't use .md, .ios, .mp initially, you'd have to use !important here.
+        color: #fff;
+        margin-bottom: 10px;
+      }
+    }
+}
 page-recycler-form {
 	agm-map {
         height: 300px;
@@ -7,11 +16,247 @@ page-recycler-form {
 
     .formItems{
     	font-size: 10px;
-    	color: gray;
+    	color: white;
     }
 
     .validations{
     	font-size: 10px;
-    	color: red;	
+    	color: #6edb14;	
     }
+
+    .item-md {
+        background-color: #00435f; 
+        color: white;
+    }
+
+    .item-ios {
+        background-color: #00435f; 
+        color: white;
+    }
+
+    ion-label {
+        font-size: 13px;
+    }
+
+    .bg-boton{
+		background: linear-gradient(to right,#afba35, #ede937);
+		color: black;
+		font-size:16px;
+	}
+
+    .item-input .label-md, .item-select .label-md, .item-datetime .label-md {
+        color: white;
+    }
+
+    .item-input .label-ios, .item-select .label-ios, .item-datetime .label-ios {
+        color: #f4f4f4;
+    }
+
+    .list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block {
+        border-bottom: 0px;
+   }
+
+   .list-ios > .item-block:first-child {  /*aqui para ver las lineas de los label bordes de arriba y de abajo*/
+       border-top: 0px;
+   }
+
+   .list-md > .item-block:last-child, .list-md > .item-wrapper:last-child .item-block {
+       border-bottom: 0px;
+  }
+
+  .list-md > .item-block:first-child {  /*aqui para ver las lineas de los label bordes de arriba y de abajo*/
+      border-top: 0px;
+  }
+
+  .datetime-ios {
+     padding: 0px 0px 0px 0px; 
+    /* padding-right: 12px;
+     padding-left: 7px;*/
+}
+.datetime-md {
+    padding: 13px 2px 13px 0px;
+}
+
+.item-ios.item-block .item-inner {
+    border-bottom: 0px ;
+}
+
+.item-md.item-block .item-inner {
+    border-bottom: 0px ;
+}
+
+.datetime-md .datetime-placeholder {
+    color: #f4f4f4;
+}
+
+.datetime-ios .datetime-placeholder {
+    color: #f4f4f4;
+}
+
+.content ion-input, .content ion-textarea {
+    color: white;
+}
+
+.text-input::-moz-placeholder {
+    color: rgb(125, 145, 172);
+    font-size: 13px;
+  }
+  
+  .text-input:-ms-input-placeholder {
+    color: rgb(125, 145, 172);
+    font-size: 13px;
+  }
+  
+  .text-input::-webkit-input-placeholder {
+    text-indent: 0;
+    color: rgb(125, 145, 172);
+    font-size: 13px;
+  }
+
+  .checkbox-md .checkbox-icon {
+    border-radius: 50%;
+    border: 1px solid white;
+    background-color: transparent;
+}
+
+.checkbox-ios .checkbox-icon {
+    border-radius: 50%;
+    border: 1px solid white;
+    background-color: transparent;
+}
+
+    .papel .checkbox-icon {
+    border: 1px solid rgb(251, 255, 0);
+    
+    }
+
+    .papel .checkbox-icon.checkbox-checked{
+        background-color: rgb(251, 255, 0) !important;
+    }
+
+    .carton .checkbox-icon {
+        border: 1px solid rgb(255, 174, 0);    
+    }
+
+    .carton .checkbox-icon.checkbox-checked{
+        background-color: rgb(255, 174, 0);
+    }
+    
+    .plastico .checkbox-icon {
+        border: 1px solid rgb(179, 255, 0); 
+     }
+
+    .plastico .checkbox-icon.checkbox-checked{
+        background-color: #28b712;
+    }
+
+    .vidrio .checkbox-icon {
+        border: 1px solid rgb(3, 112, 116);
+     }
+
+    .vidrio .checkbox-icon.checkbox-checked{
+        background-color: rgb(3, 112, 116);
+    }
+
+    .metal .checkbox-icon {
+        border: 1px solid rgb(5, 170, 247);
+     }
+
+    .metal .checkbox-icon.checkbox-checked{
+        background-color: rgb(5, 170, 247);
+    }
+
+    .tetrapack .checkbox-icon {
+        border: 1px solid rgb(247, 5, 187);
+     }
+
+    .tetrapack .checkbox-icon.checkbox-checked{
+        background-color: rgb(247, 5, 187);
+    }
+
+
+    .checkbox-md .checkbox-checked {
+    background-color: #167b9b;
+    border: 0px;
+
+    }
+
+    .checkbox-md .checkbox-checked .checkbox-inner {
+        left: 38%;
+        top: 2px;
+        border-color: transparent;
+    }
+
+    .item.item-md .checkbox-md {
+        margin-right: 8%;
+    }
+
+    .checkbox-ios .checkbox-checked {
+        background-color: #167b9b;
+        border: 0px;
+    
+        }
+    
+        .checkbox-ios .checkbox-checked .checkbox-inner {
+            left: 38%;
+            top: 2px;
+            border-color: transparent;
+        }
+    
+        .item.item-ios .checkbox-ios {
+            margin-right: 8%;
+        }
+
+    .materialN{
+        display: inline-flex;
+        flex-wrap: wrap;
+        margin-bottom: 0px;
+    }
+
+    .materialN ion-item{
+        flex: 0 0 33.33%;
+        margin-bottom: 0px;
+    }
+
+    .label-md {
+        margin: 0px 0px 0px 0;
+    }
+
+    .checkbox-md + .item-inner ion-label {
+        margin-left: 0;
+        font-size: 9px;
+    }
+
+    .label-ios {
+        margin: 0px 0px 0px 0;
+    }
+
+    .checkbox-ios + .item-inner ion-label {
+        margin-left: 0;
+        font-size: 9px;
+    }
+
+    .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+        border-bottom-color: #32db64;
+         -webkit-box-shadow: inset 0 -1px 0 0 transparent; 
+        box-shadow: inset 0 -1px 0 0 transparent; 
+    }
+
+    ion-alert .alert-md .alert-wrapper {
+        background-color: #fff;
+    }
+
+    .alert-ios .alert-wrapper {
+        background-color: white !important;
+    }
+
+    .alert-md .alert-head {
+        background-color: white;  
+    }
+
+    .alert-input-placeholder-color{
+        background-color: white;  
+    }
+
+    
 }
