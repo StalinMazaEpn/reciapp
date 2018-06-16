@@ -20,6 +20,7 @@ import { RecyclerFormPageModule } from './../pages/recycler-form/recycler-form.m
 import { DeliveryPageModule } from '../pages/delivery/delivery.module';
 import { ExchangePageModule } from '../pages/exchange/exchange.module';
 import { ModalPageModule } from '../pages/modal/modal.module';
+import { PointsPageModule } from '../pages/points/points.module';
 
 import { HttpModule } from '@angular/http';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -85,6 +86,7 @@ const firebaseConfig = {
     DeliveryPageModule,
     ExchangePageModule,
     ModalPageModule,
+    PointsPageModule,
     CouponModalPageModule
   ],
   bootstrap: [IonicApp],
