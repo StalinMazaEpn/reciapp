@@ -35,7 +35,7 @@
 
 .toolbar {
   .toolbar-background {
-    background-color: $skyBlue;
+    background-color: $skyBlue1;
   }
 
   .toolbar-title {
@@ -67,7 +67,7 @@
 /* TABS */
 .tabs {
   .tabbar {
-    background-color: $skyBlue;
+    background: linear-gradient(to right, $skyBlue2, $skyBlue1);
 
     .tab-button {
       padding: 0;
@@ -99,18 +99,21 @@
 .tabs-ios {
   a[aria-selected=false]{
     .tab-button-icon[ng-reflect-name="left-hand"], .tab-button-icon[aria-label="left-hand"] {
-      background-image: url(../assets/imgs/left-hand-off.png);
+      background-image: url(../assets/imgs/left-hand-on.png);
       background-size: 70px 30px;
       background-position: left;
+      opacity: .5;
     }
     .tab-button-icon[ng-reflect-name="heart-reciveci"], .tab-button-icon[aria-label="heart-reciveci"] {
-      background-image: url(../assets/imgs/heart-reciveci-off.png);
+      background-image: url(../assets/imgs/heart-reciveci-on.png);
       background-size: 37px 30px;
+      opacity: .5;
     }
     .tab-button-icon[ng-reflect-name="right-hand"], .tab-button-icon[aria-label="right-hand"] {
-      background-image: url(../assets/imgs/right-hand-off.png);
+      background-image: url(../assets/imgs/right-hand-on.png);
       background-size: 70px 30px;
       background-position: right;
+      opacity: .5;
     }
   }
   a[aria-selected=true] {
@@ -138,18 +141,21 @@
 .tabs-md {
   a[aria-selected=false]{
     .tab-button-icon[ng-reflect-name="left-hand"], .tab-button-icon[aria-label="left-hand"] {
-      background-image: url(../assets/imgs/left-hand-off.png);
+      background-image: url(../assets/imgs/left-hand-on.png);
       background-size: 70px 30px;
       background-position: left;
+      opacity: .5;
     }
     .tab-button-icon[ng-reflect-name="heart-reciveci"], .tab-button-icon[aria-label="heart-reciveci"] {
-      background-image: url(../assets/imgs/heart-reciveci-off.png);
+      background-image: url(../assets/imgs/heart-reciveci-on.png);
       background-size: 37px 30px;
+      opacity: .5;
     }
     .tab-button-icon[ng-reflect-name="right-hand"], .tab-button-icon[aria-label="right-hand"] {
-      background-image: url(../assets/imgs/right-hand-off.png);
+      background-image: url(../assets/imgs/right-hand-on.png);
       background-size: 70px 30px;
       background-position: right;
+      opacity: .5;
     }
   }
 
@@ -178,18 +184,21 @@
 .tabs-wp {
   a[aria-selected=false]{
     .tab-button-icon[ng-reflect-name="left-hand"], .tab-button-icon[aria-label="left-hand"] {
-      background-image: url(../assets/imgs/left-hand-off.png);
+      background-image: url(../assets/imgs/left-hand-on.png);
       background-size: 70px 30px;
       background-position: left;
+      opacity: .5;
     }
     .tab-button-icon[ng-reflect-name="heart-reciveci"], .tab-button-icon[aria-label="heart-reciveci"] {
-      background-image: url(../assets/imgs/heart-reciveci-off.png);
+      background-image: url(../assets/imgs/heart-reciveci-on.png);
       background-size: 37px 30px;
+      opacity: .5;
     }
     .tab-button-icon[ng-reflect-name="right-hand"], .tab-button-icon[aria-label="right-hand"] {
-      background-image: url(../assets/imgs/right-hand-off.png);
+      background-image: url(../assets/imgs/right-hand-on.png);
       background-size: 70px 30px;
       background-position: right;
+      opacity: .5;
     }
   }
 

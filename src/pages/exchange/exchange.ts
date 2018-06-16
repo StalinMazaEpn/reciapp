@@ -5,6 +5,7 @@ import { AuthenticationService } from '../../services/authenticationService';
 import { ModalPage } from '../modal/modal';
 import moment from 'moment';
 import { Coupon } from '../../models/coupon';
+import { CouponModalPage } from '../couponModal/couponModal';
 
 /**
  * Generated class for the ExchangePage page.
@@ -84,6 +85,12 @@ export class ExchangePage {
   exchangeModal( objExchange ) {
     //console.log('BEFORE',objExchange);
     let modal = this.modalCtrl.create( ModalPage, { objectExchange: objExchange, userData: this.userData } );
+    modal.present();
+  }
+
+  couponModal( objExchange ) {
+    //console.log('BEFORE',objExchange);
+    let modal = this.modalCtrl.create( CouponModalPage, { objectExchange: objExchange, userData: this.userData } );
     modal.present();
   }
 }
