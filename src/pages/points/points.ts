@@ -9,17 +9,21 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  */
 
 @IonicPage()
-@Component({
+@Component( {
   selector: 'page-points',
-  templateUrl: 'points.html',
-})
+  templateUrl: 'points.html'
+} )
 export class PointsPage {
+  points : number;
+  message : string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor( public navCtrl : NavController, public navParams : NavParams ) {
+    this.points = this.navParams.get('points');
+    this.message = this.navParams.get('message');
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PointsPage');
+    console.log( 'ionViewDidLoad PointsPage' );
   }
 
 }

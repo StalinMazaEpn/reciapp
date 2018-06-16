@@ -214,7 +214,7 @@ export class DeliveryPage {
                       //document.getElementById(this.recyclerId).style.border="0";
                       this.cleanForm();
                       //this.addDeliveryPoints();
-                      this.navCtrl.push(PointsPage);
+                      this.navCtrl.push(PointsPage, {points : 60, message: "Esta información será validada en los próximos días."});
                     } )
                     .catch( ( e ) => {
                       console.log( 'Hubo un error', e );
