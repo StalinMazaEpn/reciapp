@@ -55,11 +55,24 @@ export class ReciappService{
 		return this.afAuth.auth.signInWithEmailAndPassword(userData.mail,userData.password);
 	}
 
-	public putLoveRecicler(id,iduser){
-		this.favorities = [];
-		this.afdatabase.object('/user/'+iduser+'/favoritiesReciclers/'+id).set(true);
-		return this.afdatabase.object('/recycler/'+id+'/favoriteUsers/'+iduser).set(true);
-	}
+  public putLoveRecicler( id, iduser ) {
+    this.favorities = [];
+
+    return this.afdatabase.object( '/recycler/' + id + '/favoriteUsers/' + iduser ).set( true )
+      .then( () => {
+
+        return this.afdatabase.object( '/user/' + iduser + '/favoritiesReciclers/' + id ).set( true );
+
+      } );
+  }
+
+  public checkPointsFirstFavorite(iduser) {
+    return this.afdatabase.object( `/user/${iduser}/points/pointsFavorite` ).valueChanges()
+  }
+
+  public assignPointsFirstFavorite (iduser) {
+    return this.afdatabase.object( `/user/${iduser}/points/pointsFavorite` ).set( 50 );
+  }
 
 	public removeLoveRecicler(id,iduser){
 		this.favorities = [];

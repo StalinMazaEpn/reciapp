@@ -85,7 +85,23 @@ exports.onAddRecycler = functions.database.ref('recycler/{recyclerId}').onCreate
 		admin.database().ref(`user/${uid}/points/pointsRecycler`).set(userPoints+100);
 		admin.database().ref(`user/${uid}/points/total`).set(userPointsTotal+100);
 	});
-})
+});
+
+exports.onFirstFavorite = functions.database.ref( 'user/{userid}/points/pointsFavorite' )
+  .onUpdate( ( change, context ) => {
+    const uid = context.params.userid;
+    const previousPointsFavorite = change.before.val();
+
+
+    if( previousPointsFavorite === 0 ) {
+      return admin.database().ref( `user/${uid}/points/total` ).once( 'value' ).then( ( userPointsSnapshot ) => {
+        const userPointsTotal = userPointsSnapshot.val();
+
+        return admin.database().ref( `user/${uid}/points/total` ).set( userPointsTotal + 50 );
+      } );
+    }
+  } );
+
 
 
 //Function to update points when user delivery material
