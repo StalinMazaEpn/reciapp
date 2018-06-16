@@ -1,0 +1,110 @@
+page-category {
+  .category-name {
+    font-size: 2.4rem;
+    font-weight: bold;
+    text-transform: lowercase;
+  }
+
+  .category-item {
+    height: 150px;
+    padding: 15px;
+    border-style: solid;
+    border-width: 30px 0 0;
+  }
+
+  .category-carton {
+    background: linear-gradient(to right, $orange1, $orange2);
+    color: #ffffff;
+
+    border-image: linear-gradient(to right, lighten($orange1, 3%), lighten($orange2, 3%)) 30 0 0 repeat;
+
+    img {
+      height: 70px;
+    }
+  }
+
+  .category-papel {
+    background: linear-gradient(to right, $yellow1, $yellow2);
+    color: #ffffff;
+
+    border-image: linear-gradient(to right, lighten($yellow1,3%), lighten($yellow2,3%)) 30 0 0 repeat;
+
+    img {
+      height: 70px;
+    }
+  }
+
+  .category-plastico {
+    background: linear-gradient(to right, $green1, $green2);
+    color: #ffffff;
+
+    border-image: linear-gradient(to right, lighten($green1,3%), lighten($green2,3%)) 30 0 0 repeat;
+
+  }
+
+  .category-vidrio {
+    background: linear-gradient(to right, $olive2, $olive1);
+    color: #ffffff;
+
+    border-image: linear-gradient(to right, lighten($olive2,3%), lighten($olive1,3%)) 30 0 0 repeat;
+
+  }
+
+  .category-metal {
+    background: linear-gradient(to right, $skyBlue2, $skyBlue1);
+    color: #ffffff;
+
+    border-image: linear-gradient(to right, lighten($skyBlue2,3%), lighten($skyBlue1,3%)) 30 0 0 repeat;
+
+  }
+
+  .category-tetrapak {
+    background: linear-gradient(to right, $purple2, $purple1);
+    color: #ffffff;
+
+    border-image: linear-gradient(to right, lighten($purple2,3%), lighten($purple1,3%)) 30 0 0 repeat;
+
+  }
+
+  .category-otros {
+    background: linear-gradient(to right, $darkBlue, $darkBluePri);
+    color: #ffffff;
+
+    border-image: linear-gradient(to right, lighten($darkBlue,3%), lighten($darkBluePri,3%)) 30 0 0 repeat;
+
+  }
+
+
+  //.tr{
+  //  width:100%;
+  //  padding-bottom:79.92%; /* = width / 1.41 */
+  //  position:relative;
+  //  overflow:hidden;
+  //}
+  //.tr:before{
+  //  content:'';
+  //  position:absolute;
+  //  top:0; left:0;
+  //  width:100%; height:100%;
+  //  background : #0079C6;
+  //
+  //  -webkit-transform-origin:0 100%;
+  //  -ms-transform-origin:0 100%;
+  //  transform-origin:0 100%;
+  //
+  //  -webkit-transform: rotate(45deg);
+  //  -ms-transform: rotate(45deg);
+  //  transform: rotate(45deg);
+  //}
+  //
+  //.high{
+  //  width: 100%;
+  //  padding-bottom: 86.43%; /*  = width / 1.157 for skewX(30deg) */
+  //}
+  //.high:before{
+  //  -webkit-transform:  rotate(60deg) skewX(30deg);
+  //  -ms-transform: rotate(60deg) skewX(30deg);
+  //  transform: rotate(60deg) skewX(30deg);
+  //}
+
+}

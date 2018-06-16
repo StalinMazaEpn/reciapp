@@ -10,8 +10,7 @@ import { MyApp } from './app.component';
 import { DashboardPageModule } from '../pages/dashboard/dashboard.module';
 import { MapPageModule } from '../pages/map/map.module';
 import { RecicladorPageModule } from '../pages/reciclador/reciclador.module';
-import { CategoriaPageModule } from '../pages/categoria/categoria.module';
-import { DetallePageModule } from '../pages/detalle/detalle.module';
+import { CategoryPageModule } from '../pages/category/category.module';
 import { TabsPageModule } from '../pages/tabs/tabs.module';
 import { TourPageModule } from './../pages/tour/tour.module';
 import { LoginPageModule } from './../pages/login/login.module';
@@ -40,6 +39,8 @@ import { CallNumber } from '@ionic-native/call-number';
 import { Camera } from '@ionic-native/camera';
 import { LocationAccuracy } from '@ionic-native/location-accuracy';
 import { Diagnostic } from '@ionic-native/diagnostic';
+ import { CouponModalPageModule } from '../pages/couponModal/couponModal.module';
+ import { SubcategoryPageModule } from '../pages/subcategory/subcategory.module';
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -69,12 +70,12 @@ const firebaseConfig = {
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {backButtonText: '', tabsHideOnSubPages: true }),
     DashboardPageModule,
     MapPageModule,
     RecicladorPageModule,
-    CategoriaPageModule,
-    DetallePageModule,
+    CategoryPageModule,
+    SubcategoryPageModule,
     TabsPageModule,
     TourPageModule,
     LoginPageModule,
@@ -83,7 +84,8 @@ const firebaseConfig = {
     RecyclerFormPageModule,
     DeliveryPageModule,
     ExchangePageModule,
-    ModalPageModule
+    ModalPageModule,
+    CouponModalPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
