@@ -1,0 +1,38 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title text-center>
+      <img src="assets/imgs/logo-header.png" class="logo-header"/>
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+  <ion-row *ngFor="let category of categories; let even=even;"
+           [ngClass]="'category-item tr text border high ' + (even ? 'right' : 'left') + ' category-'+category.class"
+           (click)="goSubcategory(category.name, category.subcategories, category.class)">
+
+    <ion-col text-right align-self-center col-4 *ngIf="even;">
+      <img *ngIf="category.image"
+           src="{{category.image}}"
+           alt="{{category.name}}">
+    </ion-col>
+    <ion-col align-self-center text-center col-4 *ngIf="even;" class="category-name">
+      <span>{{category.name}}</span>
+    </ion-col>
+
+
+    <ion-col align-self-center text-center offset-4 col-4 *ngIf="!even;" class="category-name">
+      <span>{{category.name}}</span>
+    </ion-col>
+    <ion-col text-left align-self-center col-4 *ngIf="!even;">
+      <img *ngIf="category.image"
+           src="{{category.image}}"
+           alt="{{category.name}}">
+    </ion-col>
+
+  </ion-row>
+
+</ion-content>

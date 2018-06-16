@@ -17,7 +17,7 @@ import { MapPage } from '../map/map';
 import { DeliveryPage } from '../delivery/delivery';
 
 import {AuthenticationService} from "../../services/authenticationService";
-import {CategoriaPage} from "../categoria/categoria";
+import {CategoryPage} from "../category/category";
 //import { Slides } from 'ionic-angular';
 
 
@@ -109,7 +109,7 @@ export class DashboardPage {
   }
 
   openTips(){
-    this.navCtrl.push(CategoriaPage);
+    this.navCtrl.push(CategoryPage);
   }
 
 
