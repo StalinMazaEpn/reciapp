@@ -114,5 +114,12 @@ page-dashboard {
 		  font-size:16px;
     }
 
+  ul > :first-child{
+    list-style: none;
+  }
+
+  ul li{
+    list-style: none;
+  }
 
 }
