@@ -111,4 +111,10 @@ export class ReciappService{
 		await this.afdatabase.list('/exchange').push(data);
 	}
 
+	/**/
+	public async porcentMaterial(){
+		//console.log(deliveryData);
+		return await this.afdatabase.list('/deliveries').valueChanges();
+	}
+
 }

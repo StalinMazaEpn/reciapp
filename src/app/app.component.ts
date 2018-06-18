@@ -38,6 +38,8 @@ export class MyApp {
    private alertCtrl: AlertController, public afAuth:AngularFireAuth,public loadingCtrl:LoadingController, private ionicApp: IonicApp, public menuCtrl: MenuController) {
     platform.ready().then(() => {
 
+      this.DailyTip();
+
       this.platform = platform;
       moment.locale('es');
 
@@ -92,6 +94,26 @@ export class MyApp {
       return true
     }else{
       return false;
+    }
+  }
+
+  DailyTip(){
+    if(localStorage.getItem('dailyTip') == null){
+      localStorage.setItem('dailyTip','1');
+    }
+
+    switch (localStorage.getItem('dailyTip')) {
+      case "1":
+        localStorage.setItem('dailyTip','2');
+        break;
+      
+      case "2":
+        localStorage.setItem('dailyTip','3');
+        break;
+
+      case "3":
+        localStorage.setItem('dailyTip','1');
+        break;
     }
   }
 

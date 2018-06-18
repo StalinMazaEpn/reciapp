@@ -17,12 +17,13 @@
               <img src="assets/imgs/logo-header.png" class="logo-header"/>
             </ion-title>
           </ion-col>
-          <ion-col col-2>
-            <ion-buttons item-end>
-              <button ion-button icon-only (click)="openTips()">
+          <ion-col col text-center (click)="openTips()">
+            <img src="assets/imgs/libro.png" width="40" height="40" style="position: absolute; left: 10px !important; top: 0px !important">
+            <!--ion-buttons item-end>
+              <button ion-button icon-only >
                 <ion-icon ios="ios-bulb" md="md-bulb"></ion-icon>
               </button>
-            </ion-buttons>
+            </ion-buttons-->
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -48,7 +49,7 @@
 
     <div *ngIf="user !== undefined; else loading">
       <ion-list style="margin: 0%;" >
-        <ion-item (tap)="exchange()" style="background: linear-gradient(#790042, #c81c71, #790042); padding-left: 0%; height: 72px;">
+        <ion-item (tap)="exchange()" style="background: linear-gradient(to bottom, #c81c71, #790042); padding-left: 0%; height: 72px;">
           <ion-grid>
             <ion-row>
                 <!--ion-title text-center showWhen="ios">
@@ -58,10 +59,10 @@
                 <img src="assets/imgs/heart-reciveci-on.png" class="logo-header"/>
               </ion-col>
               <ion-col col-2 text-left>
-                <h1>{{ (user)?.points.total }}</h1>
+                <h1 ><b>{{ (user)?.points.total }}</b></h1>
               </ion-col>
               <ion-col col-7 text-center>
-                <h1>{{(user)?.name}}</h1>
+                <h1><b>{{(user)?.name}}</b></h1>
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -70,29 +71,31 @@
       </ion-list>
 
       <ion-item *ngIf="(user)?.lastDelivery==0" style="background-color: #005c7e;" (click)="deliveryPage()">
-          <ion-grid>
-              <ion-row >
-                  <ion-col text-center>
-                    <h2>Haz tu primera entrega!</h2>
-                  </ion-col>
-                </ion-row>
-            </ion-grid>      
+        <ion-grid>
+          <ion-row >
+            <ion-col text-center>
+              <h2><b>¡Haz tu primera entrega!</b></h2>
+            </ion-col>
+          </ion-row>
+        </ion-grid>      
       </ion-item>
 
       <ion-item *ngIf="(user)?.lastDelivery;" style="background-color: #005c7e;">
-        <ion-row >
-          <ion-col col-7 text-center>
-            <h2>Última entrega:</h2>
-          </ion-col>
-          <ion-col col-5 text-left>
-            <p style="padding-top: 5px;">
-              hace {{(user)?.lastDelivery | amLocale:'es' | amTimeAgo:true}}
-            </p>
-          </ion-col>
-        </ion-row>
+        <ion-grid>
+          <ion-row >
+            <ion-col col-7 text-center>
+              <h2>Última entrega:</h2>
+            </ion-col>
+            <ion-col col-5 text-left>
+              <p style="padding-top: 4px;">
+                hace {{(user)?.lastDelivery | amLocale:'es' | amTimeAgo:true}}
+              </p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-item> 
       
-      <ion-item *ngIf="(user)?.totalDeliveries ==0" text-center style=" background-color:transparent">
+      <!--ion-item *ngIf="(user)?.totalDeliveries ==0" text-center style=" background-color:transparent">
               <ion-item text-center text-wrap style="background-color:transparent">Aún no haz realizado entregas, toca <i> aquí </i>para hacer tu primera entrega</ion-item>
               <ion-row text-center>
                 <ion-col col-12>
@@ -109,11 +112,76 @@
           <p>
             <ion-icon ios="ios-star" md="md-star" style="color: yellow"></ion-icon>    Has registrado {{(user)?.totalDeliveries}} entrega{{(user)?.totalDeliveries > 1 ? 's' : ''}}
           </p>
-        </ion-item>
+        </ion-item-->
+
+      <ion-row text-center>
+        <ion-col col>
+          <!--1-->
+          <ion-row>
+            <ion-col col>
+              <p style="font-size: 16px; padding: 0px; margin:0px;">Mis entregas</p>
+            </ion-col>
+            <ion-col col>
+              <p style="font-weight: bold; font-size: 16px; padding: 0px; margin:0px;">{{(user)?.totalDeliveries}}</p>
+            </ion-col>
+          </ion-row>
+          <!--2-->
+          <ion-row style="max-height: 40px;">
+            <ion-col col>
+                <p style="background: linear-gradient(to right,#afba35,#ede937); border-radius: 100%; height: 30px; width: 30px; margin:0px; padding: 0px;"></p>
+                <img style="position: absolute;top: 5px; left:40px;" src="assets/imgs/papelT1.png" height="35" width="60">
+                <span *ngIf="porcentMaterialPapel != null">
+                  <p style="position:absolute; top:3px; left: 110px;">{{porcentMaterialPapel}} %</p>  
+                </span>
+            </ion-col>
+            <ion-col col>
+                <p style="background: linear-gradient(to right,#ede937,#ff8000); border-radius: 100%; height: 30px; width: 30px; margin:0px; padding: 0px;"></p>
+                <img style="position: absolute;top: 5px; left:40px;" src="assets/imgs/cartonT.png" height="35" width="60">
+                <span *ngIf="porcentMaterialCarton != null">
+                  <p style="position:absolute; top:3px; left: 110px;">{{porcentMaterialCarton}} %</p>
+                </span>
+            </ion-col>
+          </ion-row>
+          <!--3-->
+          <ion-row style="max-height: 40px;">
+            <ion-col col>
+                <p style="background: linear-gradient(to right,#39b54a,#8dc63f); border-radius: 100%; height: 30px; width: 30px; margin:0px; padding: 0px;"></p>
+                <img style="position: absolute;top: 5px; left:40px;" src="assets/imgs/plasticoT.png" height="35" width="60">
+                <span *ngIf="porcentMaterialPlastico != null">
+                  <p style="position:absolute; top:3px; left: 110px;">{{porcentMaterialPlastico}} %</p>
+                </span>
+            </ion-col>
+            <ion-col col>
+                <p style="background: linear-gradient(to right,#00a0dc,#005c80); border-radius: 100%; height: 30px; width: 30px; margin:0px; padding: 0px;"></p>
+                <img style="position: absolute;top: 5px; left:40px;" src="assets/imgs/vidrioT.png" height="35" width="60">
+                <span *ngIf="porcentMaterialVidrio != null">
+                  <p style="position:absolute; top:3px; left: 110px;">{{porcentMaterialVidrio}} %</p>
+                </span>
+            </ion-col>
+          </ion-row>
+          <!--4-->
+          <ion-row style="max-height: 40px;">
+            <ion-col col>
+                <p style="background: linear-gradient(to right,#167b9b,#00a0dc); border-radius: 100%; height: 30px; width: 30px; margin:0px; padding: 0px;"></p>
+                <img style="position: absolute;top: 5px; left:40px;" src="assets/imgs/metalT.png" height="35" width="60">
+                <span *ngIf="porcentMaterialChatarra != null">
+                  <p style="position:absolute; top:3px; left: 110px;">{{porcentMaterialChatarra}} %</p>
+                </span>
+            </ion-col>
+            <ion-col col>
+                <p style="background: linear-gradient(to right,#c81c71,#790042); border-radius: 100%; height: 30px; width: 30px; margin:0px; padding: 0px;"></p>
+                <img style="position: absolute;top: 5px; left:40px;" src="assets/imgs/tetrapackT.png" height="35" width="60">
+                <span *ngIf="porcentMaterialTetrapack != null">
+                  <p style="position:absolute; top:3px; left: 110px;">{{porcentMaterialTetrapack}} %</p>
+                </span>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
   
-      <ion-slides spaceBetween="10" autoplay="2000" loop="true" speed="3000">
+      <!--ion-slides spaceBetween="10" autoplay="2000" loop="true" speed="3000">
         <ion-slide style="background-color:#005c7e;">
-          <!--ion-grid>
+          <ion-grid>
             <ion-row>
               <ion-col col-7 left text-left item-start style="padding-top: 5%;">
                 <img class="imagen" src="assets/imgs/desechosT.png">
@@ -124,12 +192,12 @@
                     Limpia tus residuos antes de guardar. Evita malos olores y tienen mejor precio comercial para el reciclador de base.</p>
                 </ion-col>
             </ion-row>
-          </ion-grid-->
+          </ion-grid>
           <img src="assets/imgs/tips1.png"/>
         </ion-slide>
 
         <ion-slide style="background-color: #1b6c8d; ">
-          <!--ion-grid>
+          <ion-grid>
             <ion-row>
               <ion-col col-6 center text-center>
                 <h2 text-left>Tip del día</h2>
@@ -140,12 +208,12 @@
                 <img class="imagen" src="assets/imgs/reduceT.png">
               </ion-col>
             </ion-row>
-          </ion-grid-->
+          </ion-grid>
           <img src="assets/imgs/tips2.png" >
         </ion-slide>
 
         <ion-slide style="background-color:#1b6c8d"  >
-          <!--ion-grid>
+          <ion-grid>
             <ion-row>
               <ion-col col-6 center text-center>
                 <img class="imagen" src="assets/imgs/familiaT.png" >
@@ -157,12 +225,16 @@
                     <p class="textBold" text-right>Gracias!</p>
                 </ion-col>
             </ion-row>
-          </ion-grid-->
+          </ion-grid>
           <img src="assets/imgs/tips3.png" />
         </ion-slide>
 
-      </ion-slides>
-
+      </ion-slides-->
+      <ion-row style="height: 152px !important;">
+        <ion-col col style="padding: 0px !important; max-height: 152px !important">
+          <img src="{{imgDailyTip}}" width="100%" height="100%">
+        </ion-col>
+      </ion-row>
     </div>
   </div>
 
