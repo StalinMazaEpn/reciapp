@@ -39,10 +39,10 @@ export class ModalPage {
     console.log(data);
   }*/
 
-  closeModal(){
+ closeModal(){
     const data = {
-      name:'jose',
-      occupation:'Milkman'
+      name:'',
+      occupation:''
     };
   
     this.view.dismiss(data);

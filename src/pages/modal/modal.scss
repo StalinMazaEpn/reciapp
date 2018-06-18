@@ -5,7 +5,7 @@ page-modal {
 
     .modalContent1{
         top: 40%;
-        border: 2px solid #d6dbde;
+        border: 0px;
         border-image: linear-gradient (to bottom,#d6dbde, transparent);
     	background: linear-gradient(to bottom,#00a0dc,#167b9b);
     }
@@ -19,5 +19,13 @@ page-modal {
         color:white;
     }
 
-    
+    .fab-md {
+    box-shadow: 0 0px 0px 0 transparent, 0 0px 0px transparent;
+    }
+
+    .bg-boton{
+		background: linear-gradient(to right,#afba35, #ede937);
+		color: black;
+		font-size:16px;
+	}
 }

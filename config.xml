@@ -114,5 +114,4 @@
     <plugin name="cordova.plugins.diagnostic" spec="^4.0.7" />
     <plugin name="mx.ferreyra.callnumber" spec="0.0.2" />
     <engine name="ios" spec="^4.4.0" />
-    <engine name="android" spec="7.0.0" />
 </widget>

@@ -41,7 +41,6 @@
         "angular2-moment": "^1.9.0",
         "angularfire2": "5.0.0-rc.6",
         "call-number": "^1.0.1",
-        "cordova-android": "7.0.0",
         "cordova-ios": "^4.4.0",
         "cordova-plugin-appavailability": "^0.4.2",
         "cordova-plugin-browsertab": "^0.2.0",
@@ -105,8 +104,7 @@
             "cordova.plugins.diagnostic": {}
         },
         "platforms": [
-            "ios",
-            "android"
+            "ios"
         ]
     }
 }
