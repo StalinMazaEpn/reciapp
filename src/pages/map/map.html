@@ -2,10 +2,16 @@
 
 
     <ion-card no-margin>
-        <agm-map [latitude]="latView" [longitude]="lngView" [zoom]="zoom" [fullscreenControlOptions]="false" [zoomControl]="false" [streetViewControl]="false" [usePanning]="true" (zoomChange)="zoomChange($event)">
+        <agm-map [latitude]="latView" [longitude]="lngView" [zoom]="zoom" [fullscreenControlOptions]="false" [zoomControl]="false" [streetViewControl]="false" [usePanning]="true" (zoomChange)="zoomChange($event)" (boundsChange)="centerChange($event)">
             <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-            <agm-marker [iconUrl]="'assets/imgs/recyclers1.png'" *ngFor="let recycler of recyclers" (markerClick)="goToRecycler(recycler)" [latitude]="recycler.latitude" [longitude]="recycler.longitude"></agm-marker>
-            <!--agm-marker [iconUrl]="'../../assets/imgs/papel.png'" *ngFor="let partner of partnerList" [latitude]="partner.latitude" [longitude]="partner.longitude"></agm-marker-->
+            <span *ngIf="recyclersView==true; else partnerView">
+              <agm-marker [iconUrl]="'assets/imgs/recicladorT.png'" *ngFor="let recycler of recyclers"  (markerClick)="goToRecycler(recycler)" [latitude]="recycler.latitude" [longitude]="recycler.longitude"></agm-marker>
+            </span>
+            <ng-template #partnerView>
+              <agm-marker [iconUrl]="'../../assets/imgs/negocioPTF.png'" *ngFor="let partner of partnerList" [latitude]="partner.location.latitude" [longitude]="partner.location.longitude"></agm-marker>
+            </ng-template>
+            <!--div *ngIf="showMarkers"><agm-marker [iconUrl]="'assets/imgs/recyclers1.png'" *ngFor="let recycler of recyclers"  (markerClick)="goToRecycler(recycler)" [latitude]="recycler.latitude" [longitude]="recycler.longitude"></agm-marker></div>
+            <div *ngIf="!showMarkers"><agm-marker [iconUrl]="'../../assets/imgs/negocioPTF.png'" *ngFor="let partner of partnerList" [latitude]="partner.location.latitude" [longitude]="partner.location.longitude"></agm-marker></div-->  <!--partner.location[0]-->
           </agm-map>
           <ion-fab left middle >
             <button ion-fab icon-only (tap)="getViewLocation()" style="background-color: transparent;">
@@ -27,7 +33,7 @@
             <div >Para registrar tus recicladores favoritos</div>
             <ion-row text-center>
               <ion-col col-12>
-                <button ion-button round (click)="login()" >Iniciar Sesión</button>
+                <button ion-button round (click)="login()" >Iniciar sesión</button>
               </ion-col>
             </ion-row>
           </ion-card-content>
@@ -38,10 +44,10 @@
 
           <ion-toolbar >
                 <ion-segment color="segment" style="background-color: #145575" [(ngModel)]="recyclerm">
-                  <ion-segment-button style="background-color: #145575"  value="favorite" > <!--*ngIf="isAuthenticated"-->
+                  <ion-segment-button style="background-color: #145575" value="favorite" (tap)="changePins(true)"  > <!--*ngIf="isAuthenticated" (click)="showHideMarkers()"-->
                     Reci Favoritos
                   </ion-segment-button>
-                  <ion-segment-button style="background-color: #145575"  value="near" >
+                  <ion-segment-button style="background-color: #145575" value="near" (tap)="changePins(false)"> <!--(click)="showHideMarkers()"-->
                     Veci Negocios
                   </ion-segment-button>
                 </ion-segment>
@@ -148,9 +154,9 @@
   
               <div *ngSwitchCase="'near'" style="height: 140px;" >
                 <ion-slides pager="true" slidesPerView="4">
-                  <ion-slide *ngFor='let partner of partnerList' style="background-color: #145575">
+                  <ion-slide *ngFor='let partner of partnerList' style="background-color: #145575; padding-left: 5px; padding-top: 30px;">
                    <!-- <ion-item style="float: left; background-color: #145575 "> -->
-                      <ion-avatar style="background-color: #145575" (click)="openModal()" >
+                      <ion-avatar style="background-color: #145575" (tap)="exchangeModal(partner)" >
                         <img src="{{partner.logo}}">
                       </ion-avatar>
                    <!--  </ion-item>     -->              

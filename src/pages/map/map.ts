@@ -12,6 +12,7 @@ import { AuthenticationService } from "../../services/authenticationService";
 import { AngularFireAuth } from 'angularfire2/auth';
 import { CallNumber } from '@ionic-native/call-number';
 import { ModalPage } from '../modal/modal';
+import { ExchangePage } from '../exchange/exchange';
 
 @IonicPage()
 @Component({
@@ -27,6 +28,8 @@ export class MapPage {
 
   zoom: any;
 
+  showMarkers: boolean;
+
   // values by default
   latViewDef: any = -0.184713;
   lngViewDef: any = -78.484771;
@@ -41,18 +44,35 @@ export class MapPage {
 
   partnerList:any;
 
+  //exchanges
+  exchangeList;
+  userPts;
+  userName;
+  userData;
+  //objExchange:any;
+
+  recyclersView: boolean=true;
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation,public recyclerSrv: ReciappService,
    public modalCtrl: ModalController, public authService:AuthenticationService,public toastCtrl:ToastController, private afAuth:AngularFireAuth, private locationAccuracy: LocationAccuracy, public callNumber: CallNumber,
-   private diagnostic: Diagnostic, private platform: Platform, public partnerSrv: ReciappService,
+   private diagnostic: Diagnostic, private platform: Platform, public partnerSrv: ReciappService, public userSrv: ReciappService,
    private alertCtrl: AlertController) {
     this.isAuthenticated=this.authService.isAuthenticated();
     this.getMyLocation();
     this.getRecyclers();
     this.valuesByDefault();
-    this.partnerSrv.getPartner().subscribe((data)=>{
-      this.partnerList=data;
-      console.log(this.partnerList);
+    this.getPartners();
+    this.showMarkers= true;
+
+    this.userSrv.getExchangeList().subscribe((data)=>{
+  		this.exchangeList=data;
+  	});
+    
+    this.userSrv.getUser(this.authService.getCurrentUser().uid).subscribe((data)=>{
+      this.userData=data;
+      this.userPts=data['points']['total'];
+      this.userName=data['name'];
     });
 
     if(this.isAuthenticated) {
@@ -89,7 +109,10 @@ export class MapPage {
   ionViewDidLoad() {
     this.recyclerm = "favorite";
     this.isAuthenticated=this.authService.isAuthenticated();
+    console.log('ionViewDidLoad ExchangePage');
   }
+
+
 
   ionViewWillEnter(){
     this.recyclerm = "favorite";
@@ -128,6 +151,8 @@ export class MapPage {
     });
 
   }
+
+
   getMyLocation(){
     this.geolocation.getCurrentPosition().then((resp) => {
       this.lat = resp.coords.latitude;
@@ -141,8 +166,8 @@ export class MapPage {
   }
 
   centerChange(LatLongChange){
-    this.latView = LatLongChange.lat;
-    this.lngView = LatLongChange.lng;
+    this.latView = null;
+    this.lngView = null;
   }
 
   zoomChange(ZoomChange){
@@ -206,7 +231,7 @@ export class MapPage {
     alert.present();
 }
 
-openModal() {
+/*openModal() {
 
   const myModalOptions : ModalOptions = {
     enableBackdropDismiss: false
@@ -222,6 +247,22 @@ openModal() {
     console.log( data );
 
   } );
+}*/
+
+dismiss() {
+  this.navCtrl.pop();
+}
+
+changePins(values){
+  console.log(values);
+  this.recyclersView=values;
+}
+
+exchangeModal(objExchange){
+  //console.log('BEFORE',objExchange);
+  let modal = this.modalCtrl.create(ModalPage,{objectExchange:objExchange, userData:this.userData});
+  modal.present();
+  console.log(objExchange);
 }
 
 doCallNumber(phoneNumber: string) {
@@ -258,12 +299,19 @@ showAlert() {
   alert.present();
 }
 
-  partnerModal(objExchange){
-     //console.log('BEFORE',objExchange);
-     
-  // let modal = this.modalCtrl.create(ModalPage,{objectExchange:objExchange, userData:this.userData});
-   //modal.present();
- } 
+getPartners(){
+  this.partnerSrv.getPartner().subscribe((data)=>{
+    this.partnerList=data;
+  });
+}
+
+showHideMarkers(){
+  if(this.showMarkers){
+    this.showMarkers=false
+  }else{
+    this.showMarkers=true
+  }
+}
 
  /*exchangeModal(objExchange){
 +    //console.log('BEFORE',objExchange);
