@@ -14,9 +14,10 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app'
 
 import { MapPage } from '../map/map';
+import { DeliveryPage } from '../delivery/delivery';
 
 import {AuthenticationService} from "../../services/authenticationService";
-import {CategoriaPage} from "../categoria/categoria";
+import {CategoryPage} from "../category/category";
 //import { Slides } from 'ionic-angular';
 
 
@@ -32,17 +33,44 @@ export class DashboardPage {
   user:any;
   recyclers:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public userSrv: ReciappService,public recyclerSrv: ReciappService, private afAuth:AngularFireAuth,public loadingCtrl: LoadingController, public toastCtrl:ToastController, public authenticationService:AuthenticationService,public modalCtrl: ModalController) {
+  porcentMaterialPapel:number=0;
+  porcentMaterialPlastico:number=0;
+  porcentMaterialCarton:number=0;
+  porcentMaterialVidrio:number=0
+  porcentMaterialChatarra:number=0;
+  porcentMaterialTetrapack:number=0;
 
+  tmpMaterial:any;
+  lenghtArray:any;
+  
+  auxPapel:any=0;
+  auxPlastico:any=0;
+  auxCarton:any=0;
+  auxVidrio:any=0;
+  auxChatarra:any=0;
+  auxTetrapack:any=0;
+
+  imgDailyTip:any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public userSrv: ReciappService,public recyclerSrv: ReciappService, private afAuth:AngularFireAuth,public loadingCtrl: LoadingController, public toastCtrl:ToastController, public authenticationService:AuthenticationService,public modalCtrl: ModalController) {
     this.isLog = this.authenticationService.isAuthenticated();
+
     if(this.isLog) {
       //console.log("UID", this.authenticationService.getCurrentUser().uid);
       //this.user = this.userSrv.getUser(this.authenticationService.getCurrentUser().uid);
       this.userSrv.getUser(this.authenticationService.getCurrentUser().uid).subscribe(
         (data)=>{
           this.user =data;
-          console.log(this.user.lastDelivery);
+          //console.log(this.user.lastDelivery);
+      });
+
+      this.userSrv.porcentMaterial().then((resp)=>{
+        resp.subscribe((respData)=>{
+          this.tmpMaterial=respData;
         });
+      }).catch(e=>console.log(e));
+
+      this.changeDailyTip();
     }
   }
 
@@ -56,9 +84,10 @@ export class DashboardPage {
   //       this.uid=data.uid;
   //     });
   // }
-
+  
   ionViewWillEnter(){
-    console.log("Entrara");
+    
+    //console.log("Entrara");
     this.afAuth.authState.subscribe(
       data => {
         if(data && data.uid){
@@ -70,8 +99,81 @@ export class DashboardPage {
             })
           })
           console.log("RECICLADORES", this.recyclers);
+
+
+          this.userSrv.porcentMaterial().then((resp)=>{
+            
+            let cont=0;
+              resp.subscribe((respData)=>{
+                this.tmpMaterial=respData;
+                this.lenghtArray=respData.length;
+                for (var i = 0 ; i <= this.lenghtArray-1; i++) {
+                  if (this.tmpMaterial[i]['idUser']==data.uid) {
+                    cont++;
+                    //papel
+                    if (this.tmpMaterial[i]['delivery']['papel']) {
+                      this.auxPapel += this.tmpMaterial[i]['delivery']['papel'];
+                    }
+                    //carton
+                    if (this.tmpMaterial[i]['delivery']['carton']) {
+                      this.auxCarton += this.tmpMaterial[i]['delivery']['carton'];
+                    }
+                    //plastico
+                    if (this.tmpMaterial[i]['delivery']['plastico']) {
+                      this.auxPlastico += this.tmpMaterial[i]['delivery']['plastico'];
+                    }
+                    //vidrio
+                    if (this.tmpMaterial[i]['delivery']['vidrio']) {
+                      this.auxVidrio += this.tmpMaterial[i]['delivery']['vidrio'];
+                    }
+                    //chatarra
+                    if (this.tmpMaterial[i]['delivery']['chatarra']) {
+                      this.auxChatarra += this.tmpMaterial[i]['delivery']['chatarra'];
+                    }
+                    //tetrapack
+                    if (this.tmpMaterial[i]['delivery']['compuesto']) {
+                      this.auxTetrapack += this.tmpMaterial[i]['delivery']['compuesto'];
+                    }
+                  }
+                }
+                this.porcentMaterialPapel=parseInt((this.auxPapel/cont).toFixed(2));
+                this.porcentMaterialPlastico=parseInt((this.auxPlastico/cont).toFixed(2));
+                this.porcentMaterialCarton=parseInt((this.auxCarton/cont).toFixed(2));
+                this.porcentMaterialVidrio=parseInt((this.auxVidrio/cont).toFixed(2));
+                this.porcentMaterialChatarra=parseInt((this.auxChatarra/cont).toFixed(2));
+                this.porcentMaterialTetrapack=parseInt((this.auxTetrapack/cont).toFixed(2));
+
+                if (isNaN(this.porcentMaterialPapel)) {
+                  this.porcentMaterialPapel=null;
+                }
+
+                if (isNaN(this.porcentMaterialPlastico)) {
+                  this.porcentMaterialPlastico=null;
+                }
+
+                if (isNaN(this.porcentMaterialCarton)) {
+                  this.porcentMaterialCarton=null;
+                }
+
+                if (isNaN(this.porcentMaterialVidrio)) {
+                  this.porcentMaterialVidrio=null;
+                }
+
+                if (isNaN(this.porcentMaterialChatarra)) {
+                  this.porcentMaterialChatarra=null;
+                }
+
+                if (isNaN(this.porcentMaterialTetrapack)) {
+                  this.porcentMaterialTetrapack=null;
+                }
+              });
+          })
+          .catch(e=>console.log(e));
+
+          this.changeDailyTip();
         }
       });
+
     /*this.recyclers = null;
     if(this.uid != null){
       console.log(this.uid);
@@ -98,12 +200,17 @@ export class DashboardPage {
 
   }
 
+
   openMap(){
     this.navCtrl.push(MapPage);
   }
 
+  deliveryPage(){
+    this.navCtrl.push(DeliveryPage);
+  }
+
   openTips(){
-    this.navCtrl.push(CategoriaPage);
+    this.navCtrl.push(CategoryPage);
   }
 
 
@@ -186,4 +293,22 @@ export class DashboardPage {
     this.slides.slideTo(2, 500);
   }*/
 
+  changeDailyTip(){
+    localStorage.getItem('dailyTip');
+    console.log('ALMACENAMIENTO TIP', localStorage.getItem('dailyTip'));   
+
+    switch (localStorage.getItem('dailyTip')) {
+      case "1":
+        this.imgDailyTip='assets/imgs/tips1.png';
+        break;
+       
+      case "2":
+        this.imgDailyTip='assets/imgs/tips2.png';
+        break;
+
+      case "3":
+        this.imgDailyTip='assets/imgs/tips3.png';
+        break;
+     } 
+  }
 }
