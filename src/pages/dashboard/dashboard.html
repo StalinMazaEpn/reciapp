@@ -72,9 +72,9 @@
 
       <ion-item *ngIf="(user)?.lastDelivery==0" style="background-color: #005c7e;" (click)="deliveryPage()">
         <ion-grid>
-          <ion-row >
+          <ion-row (tap)="goDelivery()">
             <ion-col text-center>
-              <h2><b>¡Haz tu primera entrega!</b></h2>
+              <h2><b>¡Realiza tu primera entrega!</b></h2>
             </ion-col>
           </ion-row>
         </ion-grid>      
