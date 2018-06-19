@@ -1,14 +1,22 @@
 page-reciclador {
 
     agm-map {
-        height: 50%;
+        height: 90%;
         width: 110%;
-        /*position:absolute;*/  
-        position: relative;
+       /* position:absolute;*/
+       position: relative;
         overflow: hidden;
     /* padding-bottom: 0%; */
-    margin-top: 50%;
-    left: -5%;
+    margin-top: -35%;
+    left: 0%;
+    z-index: -1;
+    }
+    .mapstyle{
+        height: 57%;
+        margin-left: -6%;
+        position: relative;
+        z-index: -1;
+        margin-top: -49%;
     }
 
    /* .fab-md-light {
@@ -25,14 +33,15 @@ page-reciclador {
         text-align: center;
     }*/
     .icon_callStyle{
-        width: 42px;
-        height: 42px;
+        width: 39px;
+        height: 39px;
         /* background-color: #145575; */
         border: 3px solid white;
         border-radius: 100%;
         padding-left: 0%;
-        padding-top: 36%;
-        margin-left: 82%;
+        padding-top: 31%;
+        margin-left: 87%;
+        margin-top: 10%;
     }
 /*
     div{
@@ -46,14 +55,15 @@ page-reciclador {
 
     .oneD{
                /* position: relative; */
-    /* float: left; */
+    float: left;
     background-color: #8dc63f;
-    width: 175%;
-    height: 124%;
+    width: 160%;
+    height: 120%;
     margin-left: -16%;
-    margin-top: -16%;
+    margin-top: -40%;
     -webkit-transform: rotate(350deg);
     transform: rotate(343deg);
+    z-index: 4;
     /* z-index: 39; */
     /* -webkit-transform: skewY(-19deg); */
     /* transform: skewY(-19deg); */
@@ -61,39 +71,58 @@ page-reciclador {
 
     }
 
-    .dream{
-        height: 20%;
-        margin: 15% -25px;
-        margin-bottom: 30%;
+    .treeD {
+        position: absolute;
+        background-color: #004361;
+        width: 160%;
+        height: 10%;
+        margin-left: -50%;
+        margin-top: 1%;
+        -webkit-transform: rotate(350deg);
+        transform: rotate(343deg);
+        z-index: 0;
     }
     .twoD{
-                /* float: left; */
-    background-color: #167b9b;
-    width: 186%;
-    height: 47%;
-    margin-left: -64%;
-    transform: rotate(20deg);
-    -webkit-transform: rotate(20deg);
-    margin-top: -4%;
-    -ms-transform: rotate(20deg);
-    /* -webkit-transform: skewY(15deg); */
-    /* transform: skewY(15deg); */
-    /* margin-top: 0%; */
-
+        z-index: 3;
+        float: left;
+        background-color: #167b9b;
+        width: 170%;
+        height: 40%;
+        transform: rotate(10deg);
+        -webkit-transform: rotate(10deg);
+        -ms-transform: rotate(10deg);
+        margin-top: -4%;
+        margin-left: -16%;
+        margin-top: -25%;
+        /* -webkit-transform: skewY(15deg); */
+        /* transform: skewY(15deg); */
+        /* margin-top: 0%; */
     }
-    .dream p{
+
+    .dream{
+        height: 20%;
+        margin-top: 40%
+    }
+   
+    .oneD p{
         position: absolute;
-        z-index: 40;
-        
+        margin-top: 8%;
+        margin-left: 15%;
+        margin-right: 15%;
+        transform: rotate(17deg);
+        text-align: center;
+        width: 50%;
+        font-size: 17px;
     }
 
     .materialN{
         display: inline-flex;
         flex-wrap: wrap;
+        margin-bottom: 0px;
     }
 
     .materialN ion-item{
-        flex: 0 0 33.33%;
+        flex: 1 0 33.33%;
     }
 
 
@@ -237,4 +266,37 @@ page-reciclador {
         padding-top: 26%;
         margin-left: 82%;
     }*/
+
+    .fab-md {
+        /* -webkit-box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.14), 0 4px 5px rgba(0, 0, 0, 0.1); */
+        box-shadow: 0 0px 0px 0 transparent, 0 0px 0px transparent;
+    }
+
+    .wordS{
+        word-wrap: normal;
+    }
+
+    .button-round-ios {
+        padding: 0 26px;
+        padding-top: 2px;
+    }
+
+    .button-ios {
+        font-size: 101%;
+    }
+
+
+    .header-md::after, .tabs-md[tabsPlacement="top"] > .tabbar::after, .footer-md::before, .tabs-md[tabsPlacement="bottom"] > .tabbar::before {
+         height: 0px;
+    }
+
+    .toolbar .toolbar-background {
+        background-color: #004361;
+    }
+    .toolbar-background-md {
+        border-color: #004361;
+        background: #004361;
+    }   
+
+    
 }

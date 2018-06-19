@@ -35,7 +35,7 @@ export class RecicladorPage {
   // values by default
   latViewDef: any = -0.184713;
   lngViewDef: any = -78.484771;
-  zoomDef: any = 10;
+  zoomDef: any = 16;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public RecicladorSrv: ReciappService, public callNumber: CallNumber, private alertCtrl: AlertController, public authService:AuthenticationService, private geolocation: Geolocation, private platform: Platform, private locationAccuracy: LocationAccuracy,
               private diagnostic: Diagnostic) {
@@ -44,7 +44,10 @@ export class RecicladorPage {
 
     this.recycler = navParams.get('recycler');
     this.recycler.age = thisYear - this.recycler.yearBirth;
-    this.recycler.recyclingFor = thisYear - this.recycler.yearStartRecycling;
+    this.recycler.recyclingFor = thisYear - this.recycler.yearStartRecycling
+;
+    //console.log(this.recycler.recyclingFor);
+                
 
     let user = new Object (this.recycler.favoriteUsers);
 
@@ -232,6 +235,19 @@ export class RecicladorPage {
   getAgefromYear(year : any) :any{
     let yearNow: number = (new Date()).getFullYear();
     return (yearNow - year);
+  }
+
+  createrSpace(days: any) :any{
+    let data:any = days.join(', ') 
+    return data
+  }
+
+  getYears(year : number) :any{
+    if (year > 1){
+      return year.toString() + " años"
+    }else{
+      return year.toString() + " año"
+    }
   }
 
 }
