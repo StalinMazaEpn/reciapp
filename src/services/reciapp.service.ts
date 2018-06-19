@@ -18,7 +18,7 @@ export class ReciappService{
 	public getCategoryById(id){
 		return this.afdatabase.object('/category/'+id).valueChanges();
 	}
-	
+
 	public getRecycler(){
 		return this.afdatabase.list('/recycler').valueChanges();
 	}
@@ -39,9 +39,13 @@ export class ReciappService{
 		return this.afdatabase.list('/partner').valueChanges();
 	}
 
-	public getExchangeList(){
-		return this.afdatabase.list('/partner').valueChanges();
-	}
+  public getExchangeList(){
+    return this.afdatabase.list('/partner').snapshotChanges();
+  }
+
+  public getActiveCouponsByUser(uid){
+    return this.afdatabase.list('/exchange', ref => ref.orderByChild('uid').equalTo(uid)).valueChanges();
+  }
 
 	public async createUser(uid,user) {
 	    return await this.afdatabase.object('/user/'+uid).set(user);
@@ -51,12 +55,25 @@ export class ReciappService{
 		return this.afAuth.auth.signInWithEmailAndPassword(userData.mail,userData.password);
 	}
 
-	public putLoveRecicler(id,iduser){
-		this.favorities = [];
-		this.afdatabase.object('/user/'+iduser+'/favoritiesReciclers/'+id).set(true);
-		return this.afdatabase.object('/recycler/'+id+'/favoriteUsers/'+iduser).set(true);
-	}
-	
+  public putLoveRecicler( id, iduser ) {
+    this.favorities = [];
+
+    return this.afdatabase.object( '/recycler/' + id + '/favoriteUsers/' + iduser ).set( true )
+      .then( () => {
+
+        return this.afdatabase.object( '/user/' + iduser + '/favoritiesReciclers/' + id ).set( true );
+
+      } );
+  }
+
+  public checkPointsFirstFavorite(iduser) {
+    return this.afdatabase.object( `/user/${iduser}/points/pointsFavorite` ).valueChanges()
+  }
+
+  public assignPointsFirstFavorite (iduser) {
+    return this.afdatabase.object( `/user/${iduser}/points/pointsFavorite` ).set( 50 );
+  }
+
 	public removeLoveRecicler(id,iduser){
 		this.favorities = [];
 		this.afdatabase.object('/user/'+iduser+'/favoritiesReciclers/'+id).remove();
@@ -92,6 +109,12 @@ export class ReciappService{
 	public async exchangePoints(data){
 		//console.log(deliveryData);
 		await this.afdatabase.list('/exchange').push(data);
+	}
+
+	/**/
+	public async porcentMaterial(){
+		//console.log(deliveryData);
+		return await this.afdatabase.list('/deliveries').valueChanges();
 	}
 
 }

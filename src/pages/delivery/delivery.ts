@@ -8,7 +8,7 @@ import { AuthenticationService } from '../../services/authenticationService';
 import { storage, database } from 'firebase';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { DashboardPage } from '../dashboard/dashboard';
-
+import { PointsPage } from '../points/points';
 
 @IonicPage()
 @Component( {
@@ -22,6 +22,7 @@ export class DeliveryPage {
   tmpPhoto : any = null;
   tmpRecyclerImage = 'assets/imgs/menos.png';
   tmpRecyclerName = null;
+  tmpRecyclerLastName=null;
   tmpRecyclerFirstLetterName : any;
 
   recyclablePhoto : any = null;
@@ -172,7 +173,7 @@ export class DeliveryPage {
     this.date = this.tmpDate.getFullYear() + '' + this.tmpDate.getMonth() + '' + this.tmpDate.getDay() + '' + this.tmpDate.getHours() + '' + this.tmpDate.getMinutes() + '' + this.tmpDate.getSeconds() + '' + this.tmpDate.getMilliseconds();
 
     if( this.fundaCtrl != null && this.fundaCtrl != undefined && this.fundaCtrl != 0 ) {
-      this.errorSize = false;
+      //this.errorSize = false;
       if( ( this.tmp_selRecycler == undefined && this.recyclerId == undefined ) && ( this.tmp_selRecycler == undefined || this.recyclerId == undefined ) ) {
         //console.log('error al seleccionar un reciclador o anonimo');
         this.errorRecycler = true;
@@ -212,7 +213,8 @@ export class DeliveryPage {
                       console.log( 'ok' );
                       //document.getElementById(this.recyclerId).style.border="0";
                       this.cleanForm();
-                      this.addDeliveryPoints();
+                      //this.addDeliveryPoints();
+                      this.navCtrl.push(PointsPage, {points : 60, message: "Esta información será validada en los próximos días."});
                     } )
                     .catch( ( e ) => {
                       console.log( 'Hubo un error', e );
@@ -310,6 +312,13 @@ export class DeliveryPage {
     this.tmpPhoto = 'assets/imgs/transparent.png';
     this.recyclablePhoto = null;
     console.log( this.date );
+    //SHOW Favorites
+    this.hideFavorites = false;
+    this.tmp_selRecycler = undefined;
+    this.recyclerId = undefined;
+    this.auxSelRecycler = false;
+    //disabled butom
+    this.disabledBtnDelivery = true;
   }
 
   //Function to assign
@@ -399,6 +408,7 @@ export class DeliveryPage {
       this.userSrv.getRecyclerById( recyclerId ).subscribe( data => {
         this.tmpRecyclerImage = data[ 'image' ];
         this.tmpRecyclerName = data[ 'name' ];
+        this.tmpRecyclerLastName = data[ 'lastName' ];
         this.tmpRecyclerFirstLetterName = this.tmpRecyclerName.charAt( 0 ).toUpperCase();
       } );
       this.auxSelRecycler = true;

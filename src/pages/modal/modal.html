@@ -15,42 +15,42 @@
 </ion-header-->
 
 
-<ion-content class="modal-page" (tap)="closeModal()">
+<ion-content class="modal-page">
   <!--ion-buttons end>
       <button ion-button (click)="closeModal()">Cerrar</button>
     </ion-buttons-->
-    <ion-fab right style="top:24.5%;right: -1.5% ! important;">
+    <ion-fab right style="top:22%;right: -1.5% ! important;">
       <button ion-fab mini style="background-color: transparent !important;" color="danger" clear (click)="closeModal()"><ion-icon name="close" ></ion-icon></button>
     </ion-fab>
     <div class="modalContent">
       <div class="modalContent1">
-        
+
         <ion-row>
           <ion-col col-1></ion-col>
-          <ion-col col-7>
+          <ion-col col-6>
             <ion-row>
-              <ion-col col-2>
+              <ion-col col-3 style="padding-bottom: 0%;">
                 <img style="margin-top: 25px;" src="assets/imgs/heart-reciveci-on.png" class="logo-header" width="26" height="20" />
-              </ion-col>  
-              <ion-col col>
-                <h1 style="margin-bottom: 0px !important" class="text-white">{{objExchange.points}} pts.</h1>
-              </ion-col>  
+              </ion-col>
+              <ion-col col style="padding-left: 0%; padding-bottom: 0%;">
+                <h1 style="margin-bottom: 0px !important; font-weight: bold; padding-left: 0%;" class="text-white">{{objExchange.points}}</h1>
+              </ion-col>
             </ion-row>
             <ion-row>
-              <ion-col>
-                <h5 class="text-white" style="font-weight: bold; margin: 0px !important" text-wrap>¡{{objExchange.promoTitle}}!</h5>
+              <ion-col style="padding-top: 0%;">
+                <h5 class="text-white" style="font-size: 130%; margin: 0px !important" text-wrap>¡{{objExchange.promoTitle}}!</h5>
               </ion-col>
             </ion-row>
           </ion-col>
           <ion-col col>
-              <img style="border-radius: 100%; margin-top: 20px; " src="{{objExchange.logo}}" width="80" height="80">
-          </ion-col>  
-          <ion-col col-1></ion-col>
+              <img style="border-radius: 100%; margin-top: 20px; margin-left: 5%;" src="{{objExchange.logo}}" width="80" height="80">
+          </ion-col>
+
         </ion-row>
         <ion-row>
           <ion-col col-1></ion-col>
           <ion-col>
-            <p class="text-white" style="margin-bottom: 0px !important;" text-wrap>{{objExchange.promoDetail}}</p>    
+            <p class="text-white" style="margin-bottom: 0px !important;" text-wrap>{{objExchange.promoDetail}}</p>
           </ion-col>
           <ion-col col-1></ion-col>
         </ion-row>
@@ -60,7 +60,7 @@
           <ion-col col>
             <div text-center *ngIf="usrPoints>=objExchange.points; else insufficientPoints">
               <br>
-              <button ion-button color="secondary" round (tap)="exchangeGift(objExchange)">Canjear</button>  
+              <button ion-button class="bg-boton" round (tap)="exchangeGift(objExchange)">Canjear</button>
               <br><br>
             </div>
             <ng-template #insufficientPoints>
@@ -72,9 +72,9 @@
           <ion-col col-1></ion-col>
         </ion-row>
       </div>
-    </div>    
+    </div>
 
-    
+
     <!--ion-list>
       <Exchange List>
       <ion-item >

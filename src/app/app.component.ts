@@ -1,5 +1,5 @@
 import { Component, ViewChild  } from '@angular/core';
-import { Nav, Platform, App, AlertController,LoadingController } from 'ionic-angular';
+import { Nav, Platform, App, AlertController,LoadingController,IonicApp,MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NativeStorage } from '@ionic-native/native-storage';
@@ -8,6 +8,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { TourPage } from '../pages/tour/tour';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+import moment from 'moment';
 
 @Component({
   templateUrl: 'app.html'
@@ -15,6 +16,8 @@ import * as firebase from 'firebase/app';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   rootPage:any;
+
+  alertShown = false;
 
   platform: Platform;
   isAuthenticated:boolean;
@@ -32,10 +35,13 @@ export class MyApp {
   ];
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public nativeStorage: NativeStorage, public app: App,
-   private alertCtrl: AlertController, public afAuth:AngularFireAuth,public loadingCtrl:LoadingController) {
+   private alertCtrl: AlertController, public afAuth:AngularFireAuth,public loadingCtrl:LoadingController, private ionicApp: IonicApp, public menuCtrl: MenuController) {
     platform.ready().then(() => {
 
+      this.DailyTip();
+
       this.platform = platform;
+      moment.locale('es');
 
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -49,11 +55,25 @@ export class MyApp {
       }
 
       platform.registerBackButtonAction(() => {
+
+        let activePortal = this.ionicApp._loadingPortal.getActive() ||
+        this.ionicApp._modalPortal.getActive() ||
+        this.ionicApp._toastPortal.getActive() ||
+        this.ionicApp._overlayPortal.getActive();
+
+        if (activePortal) {
+          this.alertShown = false;
+          return activePortal.dismiss();
+        }
+
         let nav = this.app.getActiveNav();
-        if (nav.canGoBack()){ //Can we go back?
+        
+        if (nav && nav.canGoBack && nav.canGoBack()){ //Can we go back?
           nav.pop();
-        }else{
-          this.exitApp(); //Exit from app with confirmation
+        } else {
+          if (!this.alertShown) {
+            this.exitApp();
+          }
         }
       });
     });
@@ -77,6 +97,26 @@ export class MyApp {
     }
   }
 
+  DailyTip(){
+    if(localStorage.getItem('dailyTip') == null){
+      localStorage.setItem('dailyTip','1');
+    }
+
+    switch (localStorage.getItem('dailyTip')) {
+      case "1":
+        localStorage.setItem('dailyTip','2');
+        break;
+      
+      case "2":
+        localStorage.setItem('dailyTip','3');
+        break;
+
+      case "3":
+        localStorage.setItem('dailyTip','1');
+        break;
+    }
+  }
+
   exitApp() {
     let alert = this.alertCtrl.create({
       title: 'Salir',
@@ -87,6 +127,7 @@ export class MyApp {
           role: 'cancel',
           handler: () => {
             console.log('Cancel clicked');
+            this.alertShown = false;
           }
         },
         {
@@ -97,7 +138,9 @@ export class MyApp {
         }
       ]
     });
-    alert.present();
+    alert.present().then(() => {
+      this.alertShown = true;
+    });
   }
 
   /*
@@ -134,7 +177,8 @@ export class MyApp {
     if (option==="cerrar") {
       this.logout();
     }else{
-      this.nav.push(option);  
+      this.menuCtrl.close();
+      this.nav.push(option);
     }
   }
 
