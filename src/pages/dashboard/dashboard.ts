@@ -107,6 +107,14 @@ export class DashboardPage {
               resp.subscribe((respData)=>{
                 this.tmpMaterial=respData;
                 this.lenghtArray=respData.length;
+
+                this.auxPapel=0;
+                this.auxCarton=0;
+                this.auxPlastico=0;
+                this.auxVidrio=0;
+                this.auxChatarra=0;
+                this.auxTetrapack=0;
+
                 for (var i = 0 ; i <= this.lenghtArray-1; i++) {
                   if (this.tmpMaterial[i]['idUser']==data.uid) {
                     cont++;
@@ -310,5 +318,9 @@ export class DashboardPage {
         this.imgDailyTip='assets/imgs/tips3.png';
         break;
      } 
+  }
+
+  goDelivery(){
+    this.navCtrl.push(DeliveryPage);
   }
 }
