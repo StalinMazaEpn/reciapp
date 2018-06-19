@@ -131,7 +131,7 @@ page-recycler-form {
     }
 
     .papel .checkbox-icon.checkbox-checked{
-        background-color: rgb(251, 255, 0) !important;
+        background: linear-gradient(to right,#afba35,#ede937) !important;
     }
 
     .carton .checkbox-icon {
@@ -139,7 +139,7 @@ page-recycler-form {
     }
 
     .carton .checkbox-icon.checkbox-checked{
-        background-color: rgb(255, 174, 0);
+        background: linear-gradient(to right,#ede937,#ff8000);
     }
     
     .plastico .checkbox-icon {
@@ -147,7 +147,7 @@ page-recycler-form {
      }
 
     .plastico .checkbox-icon.checkbox-checked{
-        background-color: #28b712;
+        background: linear-gradient(to right,#39b54a,#8dc63f);
     }
 
     .vidrio .checkbox-icon {
@@ -155,7 +155,7 @@ page-recycler-form {
      }
 
     .vidrio .checkbox-icon.checkbox-checked{
-        background-color: rgb(3, 112, 116);
+        background: linear-gradient(to right,#00a0dc,#005c80);
     }
 
     .metal .checkbox-icon {
@@ -163,7 +163,7 @@ page-recycler-form {
      }
 
     .metal .checkbox-icon.checkbox-checked{
-        background-color: rgb(5, 170, 247);
+        background: linear-gradient(to right,#167b9b,#00a0dc);
     }
 
     .tetrapack .checkbox-icon {
@@ -171,12 +171,12 @@ page-recycler-form {
      }
 
     .tetrapack .checkbox-icon.checkbox-checked{
-        background-color: rgb(247, 5, 187);
+        background: linear-gradient(to right,#c81c71,#790042);
     }
 
 
     .checkbox-md .checkbox-checked {
-    background-color: #167b9b;
+    background-color: white;
     border: 0px;
 
     }
@@ -192,7 +192,7 @@ page-recycler-form {
     }
 
     .checkbox-ios .checkbox-checked {
-        background-color: #167b9b;
+        background-color: white;
         border: 0px;
     
         }

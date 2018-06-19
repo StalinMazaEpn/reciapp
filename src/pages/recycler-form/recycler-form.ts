@@ -76,7 +76,7 @@ export class RecyclerFormPage {
   hourStart: AbstractControl;
   hourEnd: AbstractControl;
   materialValidator: AbstractControl;
-  gender: AbstractControl;
+  genderValidator: AbstractControl;
   birth: AbstractControl;
 
   // isAuthenticated: boolean;
@@ -91,6 +91,7 @@ export class RecyclerFormPage {
     this.formValidation();
     this.newRecycler.material = new Array();
     this.newRecycler.date.days = new Array();
+    this.newRecycler.gender = new Array();
   }
 
   ionViewDidLoad() {
@@ -192,6 +193,20 @@ export class RecyclerFormPage {
       this.newRecycler.date.days.splice(index, 1);
     }
     console.log(this.newRecycler.date.days);    
+  }
+
+  addGender(checked: boolean, value:string){
+    console.log(checked);
+    console.log(value);
+    if(checked){
+      this.newRecycler.gender.push(value);
+    }
+    else{
+      let index = this.newRecycler.gender.findIndex(x => x.value == value);
+      console.log(index); 
+      this.newRecycler.gender.splice(index, 1);
+    }
+    console.log(this.newRecycler.gender);    
   }
 
    updatePoints() {
@@ -315,7 +330,28 @@ export class RecyclerFormPage {
         }
         return null;
       }])],
-      gender: ['', Validators.required],
+      /*gender: ['', Validators.required],*/
+
+      genderValidator:this.formBuilder.group({
+        Hombre: [false, Validators.required],
+        Mujer: [false, Validators.required],
+        Otro: [false, Validators.required],
+      },
+      (formGroup: FormGroup)=>{
+        for (let key in formGroup.controls) {
+          if (formGroup.controls.hasOwnProperty(key)) {
+            let control: FormControl = <FormControl>formGroup.controls[key];
+            if (control.value) {
+              return null;
+            }
+          }
+          else{
+            return false;
+          }
+        }
+        return false
+      }),
+
       birth: ['', Validators.required]
     });
     //controls
@@ -325,7 +361,7 @@ export class RecyclerFormPage {
     this.materialValidator = this.formGroup.controls['materialValidator'];
     this.hourStart = this.formGroup.controls['hourStart'];
     this.hourEnd = this.formGroup.controls['hourEnd'];
-    this.gender = this.formGroup.controls['gender'];
+    this.gender = this.formGroup.controls['genderValidator'];
     this.birth = this.formGroup.controls['birth'];
   }
 
