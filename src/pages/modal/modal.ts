@@ -1,15 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage,NavController, NavParams, ViewController,ToastController } from 'ionic-angular';
+import { IonicPage,NavController, NavParams, ViewController,ToastController, ModalController } from 'ionic-angular';
 import { ReciappService } from "../../services/reciapp.service";
 import { AuthenticationService } from "../../services/authenticationService";
 import { database } from "firebase";
-
-/**
- * Generated class for the ModalPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { CouponModalPage } from "../couponModal/couponModal";
 
 @IonicPage()
 @Component({
@@ -23,7 +17,7 @@ export class ModalPage {
   exchangeData:any={};
 
   constructor( public navCtrl: NavController,private navParams: NavParams, private view: ViewController,public userSrv:ReciappService, public authSrv:AuthenticationService,
-    public toastCtrl:ToastController) {
+    public toastCtrl:ToastController, public modalCtrl:ModalController) {
     this.userData=this.navParams.get('userData');
     this.objExchange=this.navParams.get('objectExchange');
     console.log(this.userData);
@@ -58,8 +52,9 @@ export class ModalPage {
     this.userSrv.exchangePoints(this.exchangeData)
     .then((resp)=>{
       this.usrPoints-=this.exchangeData.exchange.points;
-      this.okExchange();
+      //this.okExchange();
       this.dismiss();
+      this.goCouponModal(obj);
     })
     .catch(e=>console.log(e));
     //console.log(this.exchangeData);
@@ -67,7 +62,7 @@ export class ModalPage {
 
   okExchange(){
     let toast = this.toastCtrl.create({
-      message: 'Tu canje se ha realizado correctamente. Tienes 24 horas para acercarte al local y obtener tu premio.' ,
+      message: 'Tu canje ha sido exitoso, tienes 24 horas para acercarte al local a reclamar tu premio.' ,
       duration: 5000,
       position:'middle',
       cssClass:'text-center'
@@ -77,6 +72,11 @@ export class ModalPage {
 
   dismiss() {
     this.navCtrl.pop();
+  }
+
+  goCouponModal(objExchange){
+    const modal=this.modalCtrl.create(CouponModalPage,{ objectExchange: objExchange, userData: this.userData });
+    modal.present();
   }
 }
 
