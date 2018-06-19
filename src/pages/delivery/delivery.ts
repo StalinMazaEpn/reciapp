@@ -65,6 +65,7 @@ export class DeliveryPage {
   auxSelRecycler : boolean = false;
   auxMaterial : boolean = false;
 
+  disabledBtn:boolean;
   constructor( public navCtrl : NavController, public navParams : NavParams, public authenticationService : AuthenticationService,
                private camera : Camera, public userSrv : ReciappService, public toastCtrl : ToastController ) {
     this.disabledBtnDelivery = true;
@@ -138,15 +139,17 @@ export class DeliveryPage {
   }
 
   takePhoto() {
+    this.error=false;
     try {
       const options : CameraOptions = {
         quality: 100,
         targetHeight: 600,
         targetWidth: 600,
+        cameraDirection:this.camera.Direction.BACK,
         destinationType: this.camera.DestinationType.DATA_URL,
         encodingType: this.camera.EncodingType.JPEG,
         mediaType: this.camera.MediaType.PICTURE,
-        correctOrientation: true
+        correctOrientation: true,
       };
       this.recyclablePhoto = this.camera.getPicture( options )
         .then( ( resp ) => {
@@ -154,6 +157,7 @@ export class DeliveryPage {
           //console.log(this.tmpPhoto);
           this.auxPhoto = true;
           this.disabledBottomDelivery();
+          this.validation();
         } )
         .catch( ( e ) => {
           console.log( e );
@@ -167,8 +171,54 @@ export class DeliveryPage {
     }
   }
 
-  delivery() {
+  validation(){
+
+    //VALIDATE PHOTO
+    if (this.tmpPhoto !== undefined && this.tmpPhoto != 'assets/imgs/transparent.png') {
+      //ok
+      this.error=true;
+    }else{
+      this.error=false;
+    }
+
+    //VALIDATE SELECT RECYCLER
+    if (( this.tmp_selRecycler == undefined && this.recyclerId == undefined ) && ( this.tmp_selRecycler == undefined || this.recyclerId == undefined )) {
+      this.errorRecycler=false;
+    }else{
+      //ok
+      this.errorRecycler=true;
+    }
+
+    //VALIDATE PLASTIC SLEEVE
+    if (this.fundaCtrl != null && this.fundaCtrl != undefined && this.fundaCtrl != 0) {
+      //ok
+      this.errorSize=true;
+    }else{
+      this.errorSize=false;
+    }
+
+    //VALIDATE MATERIAL RANGE
+    if (this.totalMaterialRecyclable==100 && this._totalMaterialRecyclable==100) {
+      //ok
+      this.errorForm=true;
+    }else{
+      this.errorForm=false;
+    }
     this.disabledBottomDelivery();
+  }
+
+  disabledBottomDelivery() {
+    console.log( 'HABILITANDO' );
+    this.disabledBtnDelivery = true;
+    if( this.error && this.errorRecycler && this.errorSize && this.errorForm) {
+      this.disabledBtnDelivery = false;
+    } else {
+      this.disabledBtnDelivery = true;
+    }
+  }
+
+  delivery() {
+    this.disabledBtn=true;
     this.tmpDate = new Date();
     this.date = this.tmpDate.getFullYear() + '' + this.tmpDate.getMonth() + '' + this.tmpDate.getDay() + '' + this.tmpDate.getHours() + '' + this.tmpDate.getMinutes() + '' + this.tmpDate.getSeconds() + '' + this.tmpDate.getMilliseconds();
 
@@ -210,6 +260,7 @@ export class DeliveryPage {
                   //function to save on firebase
                   this.userSrv.addNewDelivery( this.userDelivery )
                     .then( () => {
+                      this.disabledBtn=false;
                       console.log( 'ok' );
                       //document.getElementById(this.recyclerId).style.border="0";
                       this.cleanForm();
@@ -397,6 +448,7 @@ export class DeliveryPage {
       this.tmpRecyclerImage = 'assets/imgs/menos.png';
       this.auxSelRecycler = true;
       this.disabledBottomDelivery();
+      this.validation();
     } else {
       //margin
       this.tmp_selRecycler = null;
@@ -413,6 +465,7 @@ export class DeliveryPage {
       } );
       this.auxSelRecycler = true;
       this.disabledBottomDelivery();
+      this.validation();
     }
 
     //show only recycler
@@ -478,6 +531,7 @@ export class DeliveryPage {
     } else if( ( this.aux1 + this.aux2 + this.aux3 + this.aux4 + this.aux5 + this.aux6 ) > 0 && ( this.aux1 + this.aux2 + this.aux3 + this.aux4 + this.aux5 + this.aux6 ) <= 100 ) {
       this._totalMaterialRecyclable = this.aux1 + this.aux2 + this.aux3 + this.aux4 + this.aux5 + this.aux6;
       this.totalMaterialRecyclable = this.aux1 + this.aux2 + this.aux3 + this.aux4 + this.aux5 + this.aux6;
+      this.validation();
       this.auxMaterial = true;
     }
   }
@@ -487,18 +541,8 @@ export class DeliveryPage {
     this.tmp_selRecycler = undefined;
     this.recyclerId = undefined;
     this.auxSelRecycler = false;
+    this.validation();
   }
-
-  disabledBottomDelivery() {
-    console.log( 'HABILITANDO' );
-    this.disabledBtnDelivery = true;
-    if( this.auxPhoto == true && this.auxSelRecycler == true && ( this.fundaCtrl != undefined || this.fundaCtrl != 0 || this.fundaCtrl != null ) && this.auxMaterial == true ) {
-      this.disabledBtnDelivery = false;
-    } else {
-      this.disabledBtnDelivery = true;
-    }
-  }
-
 
   cancelDelivery() {
     this.navCtrl.parent.select(0);

@@ -2,7 +2,7 @@
   <!--SECTION PHOTO-->
   <div class="bg-photo">
     <!--Back button-->
-    <button ngClass="delivery-back-button" ion-button icon-only icon-start clear (click)="cancelDelivery()">
+    <button style="z-index: 10" ngClass="delivery-back-button" ion-button icon-only icon-start clear (click)="cancelDelivery()">
       <ion-icon name="arrow-back"></ion-icon>
     </button>
     <!--Photo-->
@@ -27,11 +27,11 @@
         <img class="photoMaterial" [hidden]="tmpPhoto == 'assets/imgs/transparent.png'" src="{{tmpPhoto}}">
       </div>
       <!--Camera button-->
-      <div class="camera-btn">
+      <!--div class="camera-btn">
         <button style="background-color: transparent !important; box-shadow: none" (click)="takePhoto()">
           <img src="assets/imgs/camera.png" class="camera-img">
         </button>
-      </div>
+      </div-->
     </ng-template>
   </div>
   <!--FAVORITES RECYCLER SECTION-->
@@ -162,7 +162,7 @@
         <ion-row>
           <!--RANGE SLEEVE PLASTIC-->
           <ion-col col>
-            <ion-range pin="false" snaps="true" min="0" max="3" step="1" color="secondary" [(ngModel)]="fundaCtrl" #ctrl="ngModel" (ionChange)="disabledBottomDelivery()">
+            <ion-range pin="false" snaps="true" min="0" max="3" step="1" color="secondary" [(ngModel)]="fundaCtrl" #ctrl="ngModel" (ionChange)="validation()">
             </ion-range>
           </ion-col>
         </ion-row>
@@ -264,22 +264,22 @@
       <!--Range material-->
       <ion-col col-7>
         <ion-range pin="true" snaps="true" min="0" max="100" step="10" color="yellow" [(ngModel)]="plasticoCtrl"
-                   #ctrl="ngModel" (ionChange)="totalMaterial(plasticoCtrl,'plastico'); disabledBottomDelivery()">
+                   #ctrl="ngModel" (ionChange)="totalMaterial(plasticoCtrl,'plastico'); validation()">
         </ion-range>
         <ion-range pin="true" snaps="true" min="0" max="100" step="10" color="orange" [(ngModel)]="papelCtrl"
-                   #ctrl="ngModel" (ionChange)="totalMaterial(papelCtrl,'papel'); disabledBottomDelivery()">
+                   #ctrl="ngModel" (ionChange)="totalMaterial(papelCtrl,'papel'); validation()">
         </ion-range>
         <ion-range pin="true" snaps="true" min="0" max="100" step="10" color="green" [(ngModel)]="cartonCtrl"
-                   #ctrl="ngModel" (ionChange)="totalMaterial(cartonCtrl,'carton'); disabledBottomDelivery()">
+                   #ctrl="ngModel" (ionChange)="totalMaterial(cartonCtrl,'carton'); validation()">
         </ion-range>
         <ion-range pin="true" snaps="true" min="0" max="100" step="10" color="darkBlue1" [(ngModel)]="chatarraCtrl"
-                   #ctrl="ngModel" (ionChange)="totalMaterial(chatarraCtrl,'chatarra'); disabledBottomDelivery()">
+                   #ctrl="ngModel" (ionChange)="totalMaterial(chatarraCtrl,'chatarra'); validation()">
         </ion-range>
         <ion-range pin="true" snaps="true" min="0" max="100" step="10" color="lightBlue" [(ngModel)]="vidrioCtrl"
-                   #ctrl="ngModel" (ionChange)="totalMaterial(vidrioCtrl,'vidrio'); disabledBottomDelivery()">
+                   #ctrl="ngModel" (ionChange)="totalMaterial(vidrioCtrl,'vidrio'); validation()">
         </ion-range>
         <ion-range pin="true" snaps="true" min="0" max="100" step="10" color="purple" [(ngModel)]="compuestoCtrl"
-                   #ctrl="ngModel" (ionChange)="totalMaterial(compuestoCtrl,'compuesto'); disabledBottomDelivery()">
+                   #ctrl="ngModel" (ionChange)="totalMaterial(compuestoCtrl,'compuesto'); validation()">
         </ion-range>
       </ion-col>
     </ion-row>
@@ -293,15 +293,15 @@
       <!--VALIDATIONS-->
       <!--PHOTO Validations-->
       <div text-center>
-        <span *ngIf="error" class="validations"> *Toma una foto para validar la información.</span>
+        <span *ngIf="!error" class="validations"> *Toma una foto para validar la información.</span>
       </div>
       <!--RECYCLER Validations-->
       <div text-center>
-        <span *ngIf="errorRecycler" class="validations"> *Selecciona a tu <b>Reciclador favorito, Cercano o Anónimo</b> que deseas entregar.</span>
+        <span *ngIf="!errorRecycler" class="validations"> *Selecciona a tu <b>Reciclador favorito, Cercano o Anónimo</b> que deseas entregar.</span>
       </div>
       <!--SLEEVE PLASTIC Validations-->
       <div text-center>
-        <span *ngIf="errorSize" class="validations"> *Selecciona un tamaño de Funda.</span>
+        <span *ngIf="!errorSize" class="validations"> *Selecciona un tamaño de Funda.</span>
       </div>
       <!--MATERIAL RANGE Validations-->
       <div text-center>
@@ -309,11 +309,11 @@
               style="color: green">La funda ya esta llena</span>
         <span *ngIf="(_totalMaterialRecyclable)>100" class="title-small validations">(No puedes entregar más de su capacidad.)</span>
         <span *ngIf="(_totalMaterialRecyclable)>100 && errTotalMaterialRecyclable" class="title-small1 validations">Reduce los porcentajes en el formulario y verifica que no sobrepase el 100% de la funda.</span>
-        <span *ngIf="errorForm" class="validations"> *Identifica la cantidad de cada material que vas a entregar.</span>
+        <span *ngIf="!errorForm" class="validations"> *Identifica la cantidad de cada material que vas a entregar.</span>
       </div>
     </div>
     <ng-template #enabledBtn>
-      <button (click)="delivery()" ion-button large outline class="roundBtn bg-boton" style="color: white "> Enviar
+      <button [disabled]="disabledBtn" (click)="delivery()" ion-button large outline class="roundBtn bg-boton" style="color: white "> Enviar
         <span style="width: 25px; height: 25px; margin-left: 5% !important; margin-top: -20px"><ion-icon
           ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline" color="ligth"></ion-icon></span>
       </button>
