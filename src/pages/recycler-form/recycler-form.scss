@@ -218,6 +218,120 @@ page-recycler-form {
         margin-bottom: 0px;
     }
 
+    .daysN{
+        display: inline-flex;
+        flex-wrap: wrap;
+        margin-bottom: 0px;
+    }
+
+    .daysN ion-item{
+        flex: 0 0 33.33%;
+        margin-bottom: 0px;
+    }
+    .daysN .checkbox-md .checkbox-checked {
+        background-color: white;
+        border: 0px;
+    }
+
+    .genderN{
+        display: inline-flex;
+        flex-wrap: wrap;
+        margin-bottom: 0px;
+    }
+
+    .genderN ion-item{
+        flex: 0 0 25%;
+        margin-bottom: 0px;
+    }
+
+    .genderN .input-wrapper{
+        width: 360px;
+    }
+
+    .genderN .radio-md .radio-checked {
+        border-color: white;
+    }
+
+    .genderN .radio-ios .radio-checked {
+        border-color: white;
+    }
+    .genderN .radio-md .radio-icon {
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        border-width: 2px;
+        border-style: solid;
+        border-color: white;
+    
+    }
+
+    .genderN .radio-ios .radio-icon {
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        border-width: 2px;
+        border-style: solid;
+        border-color: white;
+    
+    }
+    .genderN .radio-md .radio-inner {
+        left: -2px;
+        top: -2px;
+        border-radius: 50%;
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        background-color: white;
+    }
+
+    .genderN .radio-ios .radio-inner {
+        left: -2px;
+        top: -2px;
+        border-radius: 50%;
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        background-color: white;
+    }
+
+    .genderN .item-md .radio-md[item-left], .item-md .radio-md[item-start] {
+        margin: 11px 6px 10px 4px;
+    }
+
+    .genderN .item-ios .radio-ios[item-left], .item-ios .radio-ios[item-start] {
+        margin: 11px 6px 10px 4px;
+    }
+
+    .genderN .item-radio-checked.item-md ion-label {
+        color: white;
+    }
+
+    .genderN .item-radio-checked.item-ios ion-label {
+        color: white;
+    
+    }
+
+    .genderN .radio-ios .radio-checked .radio-inner {
+        border-width: 0px; 
+         border-top-width: 0; 
+         border-left-width: 0; 
+        /* border-style: solid; */
+        /* border-color: #488aff; */
+        background-color: white;
+    }
+
+    .genderN .radio-ios .radio-inner {
+        background-color: transparent; 
+    }
+
+
+
+
+    .styleErrorGener{
+        text-align: end;
+        margin-right: 30px !important;
+    }
+
     .label-md {
         margin: 0px 0px 0px 0;
     }

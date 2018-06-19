@@ -128,7 +128,7 @@
               <img src="assets/imgs/diasRT.png" style="margin-left: 18%; width:45px; height:45px">
           </ion-col>
           <ion-col col-10>
-              <ion-list radio-group class="materialN" >
+              <ion-list radio-group class="daysN" >
                   <ion-item style=" padding-left: 0px;">
                     <ion-label>Lunes</ion-label>
                     <ion-checkbox value="Lunes" (ionChange)="addDays($event.checked, 'Lunes')" ></ion-checkbox>
@@ -262,12 +262,12 @@
               </ion-row>
       </ion-grid> 
       
-      <ion-row>
+      <!--ion-row>
         <ion-col col-2>
             <img src="assets/imgs/generoT.png" style="margin-left: 30%; width:45px; height:45px">
         </ion-col>
           <ion-col col-10 style="padding-left: 10px;">
-              <ion-list radio-group class="materialN" >
+              <ion-list class="genderN" radio-group class="materialN" >
                   <ion-item style=" padding-left: 0px;">
                     <ion-label style="
                     padding-right: 60px; font-size: 81%">Hombre</ion-label>
@@ -285,7 +285,35 @@
                   </ion-item>
                 </ion-list>
           </ion-col>
+      </ion-row-->
+    <form [formGroup]="formGroup">
+      <ion-row>
+        <ion-col col-2>
+            <img src="assets/imgs/edadT.png" style="height:45px; margin-left: 30%;">
+        </ion-col>
+        <ion-col col-10>
+          <ion-list class="genderN" radio-group [(ngModel)]="newRecycler.gender" formControlName="gender">
+              <ion-item>
+                <ion-radio item-left value="Hombre"></ion-radio>
+                <ion-label>Hombre</ion-label>
+              </ion-item>
+              <ion-item>
+                  <ion-radio item-left value="Mujer"></ion-radio>
+                  <ion-label>Mujer</ion-label>
+                </ion-item>
+              <ion-item style="margin-left: -20px;">
+                <ion-radio item-left value="Otro"></ion-radio>
+                <ion-label>Otro</ion-label>
+              </ion-item>
+            </ion-list>
+        </ion-col>
       </ion-row>
+  
+      <!--ion-label class="styleErrorGener" >
+        <span *ngIf="gender.hasError('required') && gender.touched"
+              class="validations"> * El género es requerido</span>
+      </ion-label-->
+    </form>
 
   <ion-item >
     <ion-label style="border-top: 1px solid green; padding-top: 8%; padding-bottom: 5%;" >
@@ -300,7 +328,7 @@
 
   <ion-item style="margin-top: 85%;">
   <div text-center>
-    <button ion-button round class="bg-boton" [disabled]="!formGroup.valid || this.lat_ === undefined || this.lng_ === undefined || this.saving || newRecycler.date.days.length == 0 || newRecycler.material.length == 0 || newRecycler.gender.length == 0"
+    <button ion-button round class="bg-boton" [disabled]="!formGroup.valid || this.lat_ === undefined || this.lng_ === undefined || this.saving || newRecycler.date.days.length == 0 || newRecycler.material.length == 0 "
             (click)="recyclerRegister()" style="padding-top: 5%; padding-bottom: 5%; font-size: 95%; padding-left: 10%; padding-right: 10%;" >
       <ion-spinner [hidden]="!this.saving"></ion-spinner>
       {{this.saving ? 'Guardando' : 'Guardar'}}

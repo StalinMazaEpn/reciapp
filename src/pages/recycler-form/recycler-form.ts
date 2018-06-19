@@ -76,7 +76,7 @@ export class RecyclerFormPage {
   hourStart: AbstractControl;
   hourEnd: AbstractControl;
   materialValidator: AbstractControl;
-  genderValidator: AbstractControl;
+  gender: AbstractControl;
   birth: AbstractControl;
 
   // isAuthenticated: boolean;
@@ -91,7 +91,7 @@ export class RecyclerFormPage {
     this.formValidation();
     this.newRecycler.material = new Array();
     this.newRecycler.date.days = new Array();
-    this.newRecycler.gender = new Array();
+    //this.newRecycler.gender = new Array();
   }
 
   ionViewDidLoad() {
@@ -106,7 +106,7 @@ export class RecyclerFormPage {
     //Get a new id and assign to image recycler
     this.newRecycler.id = this.userSrv.getReciclerKey();
 
-    this.newRecycler.yearBirth = this.year.getFullYear() - this.age;
+    this.newRecycler.yearBirth = this.year.getFullYear() - this.age; //problemas e yearbirth
     if (this.recyclingFor)
       this.newRecycler.yearStartRecycling = this.year.getFullYear() - this.recyclingFor;
     this.newRecycler.createdAt = database.ServerValue.TIMESTAMP;
@@ -124,7 +124,7 @@ export class RecyclerFormPage {
           //Call function to create new recycler
           this.userSrv.addNewRecycler(this.newRecycler.id, this.newRecycler).then(() => {
             //Toast Ok
-            this.registerOk();
+            this.registerOk();// para verficar si el registro sta correcto
             // this.updatePoints(); // TODO
             console.log("REGISTERED RECYCLER", this.newRecycler);
             //Function to close modal - Form Recycler
@@ -155,7 +155,7 @@ export class RecyclerFormPage {
         });
     }
 
-    this.navCtrl.push(RecicladorPage);
+    this.navCtrl.push(RecicladorPage), {recyclers: this.newRecycler };
 
   }
 
@@ -195,7 +195,7 @@ export class RecyclerFormPage {
     console.log(this.newRecycler.date.days);    
   }
 
-  addGender(checked: boolean, value:string){
+  /*addGender(checked: boolean, value:string){
     console.log(checked);
     console.log(value);
     if(checked){
@@ -207,7 +207,7 @@ export class RecyclerFormPage {
       this.newRecycler.gender.splice(index, 1);
     }
     console.log(this.newRecycler.gender);    
-  }
+  }*/
 
    updatePoints() {
       let toast = this.toastCtrl.create({
@@ -330,7 +330,7 @@ export class RecyclerFormPage {
         }
         return null;
       }])],
-      /*gender: ['', Validators.required],*/
+      /*gender: ['', Validators.required],
 
       genderValidator:this.formBuilder.group({
         Hombre: [false, Validators.required],
@@ -350,8 +350,8 @@ export class RecyclerFormPage {
           }
         }
         return false
-      }),
-
+      }),*/
+      gender: ['', Validators.required],
       birth: ['', Validators.required]
     });
     //controls
@@ -361,7 +361,7 @@ export class RecyclerFormPage {
     this.materialValidator = this.formGroup.controls['materialValidator'];
     this.hourStart = this.formGroup.controls['hourStart'];
     this.hourEnd = this.formGroup.controls['hourEnd'];
-    this.gender = this.formGroup.controls['genderValidator'];
+    this.gender = this.formGroup.controls['gender'];
     this.birth = this.formGroup.controls['birth'];
   }
 
