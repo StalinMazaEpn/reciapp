@@ -13,6 +13,9 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { CallNumber } from '@ionic-native/call-number';
 import { ModalPage } from '../modal/modal';
 import { ExchangePage } from '../exchange/exchange';
+
+import moment from 'moment';
+import { Coupon } from '../../models/coupon';
 import { CouponModalPage } from '../couponModal/couponModal';
 
 @IonicPage()
@@ -43,17 +46,15 @@ export class MapPage {
   user:any;
   recyclerm:string;
 
-  partnerList:any;
-
   //exchanges
-  exchangeList;
+  partnerList:any;
+  activeCoupons = [];
   userPts;
   userName;
   userData;
   //objExchange:any;
 
   recyclersView: boolean=true;
-
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation,public recyclerSrv: ReciappService,
    public modalCtrl: ModalController, public authService:AuthenticationService,public toastCtrl:ToastController, private afAuth:AngularFireAuth, private locationAccuracy: LocationAccuracy, public callNumber: CallNumber,
@@ -66,10 +67,6 @@ export class MapPage {
     this.getPartners();
     this.showMarkers= true;
 
-    this.userSrv.getExchangeList().subscribe((data)=>{
-  		this.exchangeList=data;
-  	});
-    
     this.userSrv.getUser(this.authService.getCurrentUser().uid).subscribe((data)=>{
       this.userData=data;
       this.userPts=data['points']['total'];
@@ -78,7 +75,7 @@ export class MapPage {
 
     if(this.isAuthenticated) {
       this.user = this.recyclerSrv.getUser(this.authService.getCurrentUser().uid);
-      
+
     }
     if (this.platform.is('ios')) {
       this.locationAccuracy.canRequest().then(
@@ -263,7 +260,12 @@ exchangeModal(objExchange){
   //console.log('BEFORE',objExchange);
   let modal = this.modalCtrl.create(ModalPage,{objectExchange:objExchange, userData:this.userData});
   modal.present();
-  console.log(objExchange);
+}
+
+couponModal( objExchange ) {
+  //console.log('BEFORE',objExchange);
+  let modal = this.modalCtrl.create( CouponModalPage, { objectExchange: objExchange, userData: this.userData } );
+  modal.present();
 }
 
 doCallNumber(phoneNumber: string) {
@@ -301,9 +303,37 @@ showAlert() {
 }
 
 getPartners(){
-  this.partnerSrv.getPartner().subscribe((data)=>{
-    this.partnerList=data;
-  });
+  const uid = this.authService.getCurrentUser().uid;
+  this.userSrv.getActiveCouponsByUser( uid ).subscribe( ( coupons ) => {
+    // console.log( 'COUPONS', coupons );
+    coupons.forEach( ( coupon : Coupon ) => {
+      if( moment( coupon.date ).add( 24, 'hours' ).isAfter( moment() ) ) {
+        this.activeCoupons.push( { id: coupon.exchange.id, date: coupon.date } );
+       }
+    // console.log( 'ACTIVE COUPONS', this.activeCoupons );
+    // console.log( coupon.date );
+    } );
+
+    this.userSrv.getExchangeList().subscribe( ( list ) => {
+      this.partnerList = [];
+      list.forEach( ( data ) => {
+        const exchange = {
+          ...data.payload.val(),
+          id: data.key
+        };
+
+        // console.log( 'EXCHANGE', exchange );
+         exchange.isActive = this.activeCoupons.some( ( coupon ) => {
+          if( coupon.id === data.key ) {
+            exchange.expireDate = moment( coupon.date ).add( 24, 'hours' ).format( 'DD [de] MMMM YYYY HH:mm' );
+          }
+          return coupon.id === data.key;
+        } );
+        this.partnerList.push( exchange );
+      } );
+    } );
+  } );
+
 }
 
 showHideMarkers(){

@@ -20,7 +20,7 @@ export class ModalPage {
     public toastCtrl:ToastController, public modalCtrl:ModalController) {
     this.userData=this.navParams.get('userData');
     this.objExchange=this.navParams.get('objectExchange');
-    console.log(this.userData);
+    //console.log(this.userData);
     this.usrPoints=this.userData.points.total;
   }
 
@@ -29,8 +29,9 @@ export class ModalPage {
   }
 
   /*ionViewWillLoad(){
-    const data = this.navParams.get('data');
-    console.log(data);
+    this.userData=this.navParams.get('userData');
+    this.objExchange=this.navParams.get('objectExchange');
+    this.usrPoints=this.userData.points.total;
   }*/
 
  closeModal(){
