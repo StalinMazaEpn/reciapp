@@ -209,4 +209,40 @@ page-delivery {
     ion-icon{
         font-size: 2.3em;
     }
+
+    ion-range[color="yellow"]{
+        div.range-knob{
+            background-color: #ede937 !important;
+        }
+    }
+
+    ion-range[color="orange"]{
+        div.range-knob{
+            background-color: #ffca34 !important;
+        }
+    }
+
+    ion-range[color="green"]{
+        div.range-knob{
+            background-color: #8dc63f !important;
+        }
+    }
+
+    ion-range[color="lightBlue"]{
+        div.range-knob{
+            background-color: #167b9b !important;
+        }
+    }
+
+    ion-range[color="lightBluePri"]{
+        div.range-knob{
+            background-color: #00a0dc !important;
+        }
+    }
+
+    ion-range[color="purple"]{
+        div.range-knob{
+            background-color: #c81c71 !important;
+        }
+    }
 }

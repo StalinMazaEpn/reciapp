@@ -272,10 +272,10 @@
         <ion-range pin="true" snaps="true" min="0" max="100" step="10" color="green" [(ngModel)]="cartonCtrl"
                    #ctrl="ngModel" (ionChange)="totalMaterial(cartonCtrl,'carton'); validation()">
         </ion-range>
-        <ion-range pin="true" snaps="true" min="0" max="100" step="10" color="darkBlue1" [(ngModel)]="chatarraCtrl"
+        <ion-range pin="true" snaps="true" min="0" max="100" step="10" color="lightBlue" [(ngModel)]="chatarraCtrl"
                    #ctrl="ngModel" (ionChange)="totalMaterial(chatarraCtrl,'chatarra'); validation()">
         </ion-range>
-        <ion-range pin="true" snaps="true" min="0" max="100" step="10" color="lightBlue" [(ngModel)]="vidrioCtrl"
+        <ion-range pin="true" snaps="true" min="0" max="100" step="10" color="lightBluePri" [(ngModel)]="vidrioCtrl"
                    #ctrl="ngModel" (ionChange)="totalMaterial(vidrioCtrl,'vidrio'); validation()">
         </ion-range>
         <ion-range pin="true" snaps="true" min="0" max="100" step="10" color="purple" [(ngModel)]="compuestoCtrl"
@@ -297,19 +297,18 @@
       </div>
       <!--RECYCLER Validations-->
       <div text-center>
-        <span *ngIf="!errorRecycler" class="validations"> *Selecciona a tu <b>Reciclador favorito, Cercano o Anónimo</b> que deseas entregar.</span>
+        <span *ngIf="!errorRecycler && error" class="validations"> *Selecciona a tu <b>Reciclador favorito, Cercano o Anónimo</b> que deseas entregar.</span>
       </div>
       <!--SLEEVE PLASTIC Validations-->
       <div text-center>
-        <span *ngIf="!errorSize" class="validations"> *Selecciona un tamaño de Funda.</span>
+        <span *ngIf="!errorSize && error && errorRecycler" class="validations"> *Selecciona un tamaño de Funda.</span>
       </div>
       <!--MATERIAL RANGE Validations-->
       <div text-center>
-        <span *ngIf="(totalMaterialRecyclable)==100" class="title-small"
-              style="color: green">La funda ya esta llena</span>
+        <span *ngIf="(totalMaterialRecyclable)==100" class="title-small" style="color: green">La funda ya esta llena</span>
         <span *ngIf="(_totalMaterialRecyclable)>100" class="title-small validations">(No puedes entregar más de su capacidad.)</span>
         <span *ngIf="(_totalMaterialRecyclable)>100 && errTotalMaterialRecyclable" class="title-small1 validations">Reduce los porcentajes en el formulario y verifica que no sobrepase el 100% de la funda.</span>
-        <span *ngIf="!errorForm" class="validations"> *Identifica la cantidad de cada material que vas a entregar.</span>
+        <span *ngIf="!errorForm && error && errorRecycler && errorSize" class="validations"> *Identifica la cantidad de cada material que vas a entregar.</span>
       </div>
     </div>
     <ng-template #enabledBtn>
