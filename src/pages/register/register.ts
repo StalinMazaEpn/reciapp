@@ -54,6 +54,7 @@ export class RegisterPage {
 	  		const result = await this.afAuth.auth.createUserWithEmailAndPassword(this.userData.email, this.userData.pass);
 	  		if (result) {
           console.log(result.uid);
+          console.log( this.user );
           const result_ = this.userSrv.createUser(result.uid,this.user);
           if (result_) {
             this.userOk();

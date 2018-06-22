@@ -18,15 +18,15 @@ page-register {
 		background: linear-gradient(to right,#167b9b, #00a0dc);
 	}
 
-	.triangle{  
-		z-index: -1;
-		left: 0%;
-	  	bottom:0%;
+	.triangle{
+
+		left: 0;
+	  	bottom:0;
       	position: absolute;
 		width: 0;
      	height: 0;
 
-    	border-image:linear(to left top, #004361, #005c80); 
+    	border-image:linear(to left top, #004361, #005c80);
       	border-right: 190px solid transparent;
      	border-top: 65px solid transparent;
      	border-left: 190px solid #005c80;
@@ -34,6 +34,10 @@ page-register {
      	-webkit-box-shadow: 5px 5px 5px 0px #004361;
 		-moz-box-shadow: 5px 5px 5px 0px #004361;
 		box-shadow: 5px 5px 5px 0px #004361;
+    }
+
+    .black-letter{
+    	color: black;
     }
 
 }
