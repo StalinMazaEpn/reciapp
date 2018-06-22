@@ -20,8 +20,17 @@ page-map {
         font-size: 45px;
     }
 
-    .segmentText{
-        margin-top: 100%;
+    .swiper-container {
+        height: 80%;
+    }
+
+    /*.item-block {       
+        max-height: 30%;
+    }*/
+
+    .content {
+        background-color: #145575;
+        //color: #ffffff;
     }
 
     ion-fab[middle] {
@@ -47,11 +56,22 @@ page-map {
     .firstLetter{
     	position: absolute;
     	font-size: 25px;
-    	margin-top: 12% !important;
+    	margin-top: 14% !important;
     	margin-bottom:0 !important;
-    	margin-left: 20% !important;
+    	margin-left: 14% !important;
         color:white;
         text-align: center;
+    }
+
+    .photoChar{
+        padding: 16px;
+        background: linear-gradient(to left,#39b54a,#8dc63f);
+        max-width: 60px;
+        max-height: 60px;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 25px;
+        color:white;
     }
 
     .item-md ion-avatar img {
@@ -181,11 +201,11 @@ page-map {
     }
 
     .label-md {
-        margin: 5% 8px 13px 0;
+        margin: 5% 8px 0% 0;
     }
 
     .label-ios {
-        margin: 7% 8px 13px 0;
+        margin: 6% 8px 0% 0;
     }
 
     .segmentText {

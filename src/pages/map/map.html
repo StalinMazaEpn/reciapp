@@ -1,12 +1,16 @@
-<ion-content >
+<ion-content>
 
 
-    <ion-card no-margin>
-        <agm-map [latitude]="latView" [longitude]="lngView" [zoom]="zoom" [fullscreenControlOptions]="false" [zoomControl]="false" [streetViewControl]="false" [usePanning]="true" (zoomChange)="zoomChange($event)" (boundsChange)="centerChange($event)">
-            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-            <span *ngIf="recyclersView==true; else partnerView">
-              <agm-marker [iconUrl]="'assets/imgs/recicladorT.png'" *ngFor="let recycler of recyclers"  (markerClick)="goToRecycler(recycler)" [latitude]="recycler.latitude" [longitude]="recycler.longitude"></agm-marker>
+  <ion-card no-margin>
+    <agm-map [latitude]="latView" [longitude]="lngView" [zoom]="zoom" [fullscreenControlOptions]="false"
+             [zoomControl]="false" [streetViewControl]="false" [usePanning]="true" (zoomChange)="zoomChange($event)"
+             (boundsChange)="centerChange($event)">
+      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+      <span *ngIf="recyclersView==true; else partnerView">
+              <agm-marker [iconUrl]="{url: 'assets/imgs/recyclerT.png', scaledSize: { width: 30, height: 41 } }" *ngFor="let recycler of recyclers" (markerClick)="goToRecycler(recycler)" [latitude]="recycler.latitude"
+                          [longitude]="recycler.longitude"></agm-marker>
             </span>
+
             <ng-template #partnerView>
               <agm-marker [iconUrl]="'../../assets/imgs/negocioPTF.png'" *ngFor="let partner of partnerList" [latitude]="partner.location.latitude" [longitude]="partner.location.longitude"></agm-marker>
             </ng-template>
@@ -91,10 +95,10 @@
 
                                         <ng-template #firstLetter item-star>
                                           <ion-avatar>
-                                            <span text-center>
-                                              <p class="firstLetter" >{{recycler.name.charAt(0).toUpperCase()}}</p>
-                                              <img class="recyclersPhoto" style="background-color: #32db64" id="{{recycler.id}}">
-                                            </span>
+                                              <!--p class="firstLetter" >{{recycler.name.charAt(0).toUpperCase()}}{{recycler.lastName.charAt(0).toUpperCase()}}</p>
+                                              <img class="recyclersPhoto" style="background: linear-gradient(to left,#39b54a,#8dc63f);" id="{{recycler.id}}"-->
+                                              <div class="photoChar">
+                                                {{recycler.name.charAt(0).toUpperCase()}}{{recycler.lastName.charAt(0).toUpperCase()}}</div>
                                           </ion-avatar>
                                         </ng-template>
                                       </span>
