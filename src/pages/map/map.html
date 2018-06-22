@@ -1,94 +1,102 @@
-<ion-content >
+<ion-content>
 
 
-    <ion-card no-margin>
-        <agm-map [latitude]="latView" [longitude]="lngView" [zoom]="zoom" [fullscreenControlOptions]="false" [zoomControl]="false" [streetViewControl]="false" [usePanning]="true" (zoomChange)="zoomChange($event)" (boundsChange)="centerChange($event)">
-            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-            <span *ngIf="recyclersView==true; else partnerView">
-              <agm-marker [iconUrl]="'assets/imgs/recyclerT.png'" *ngFor="let recycler of recyclers"  (markerClick)="goToRecycler(recycler)" [latitude]="recycler.latitude" [longitude]="recycler.longitude"></agm-marker>
+  <ion-card no-margin>
+    <agm-map [latitude]="latView" [longitude]="lngView" [zoom]="zoom" [fullscreenControlOptions]="false"
+             [zoomControl]="false" [streetViewControl]="false" [usePanning]="true" (zoomChange)="zoomChange($event)"
+             (boundsChange)="centerChange($event)">
+      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+      <span *ngIf="recyclersView==true; else partnerView">
+              <agm-marker [iconUrl]="{url: 'assets/imgs/recyclerT.png', scaledSize: { width: 30, height: 41 } }" *ngFor="let recycler of recyclers" (markerClick)="goToRecycler(recycler)" [latitude]="recycler.latitude"
+                          [longitude]="recycler.longitude"></agm-marker>
             </span>
-            <ng-template #partnerView>
-              <agm-marker [iconUrl]="'../../assets/imgs/partnerT.png'" *ngFor="let partner of partnerList" [latitude]="partner.location.latitude" [longitude]="partner.location.longitude"></agm-marker>
-            </ng-template>
-            <!--div *ngIf="showMarkers"><agm-marker [iconUrl]="'assets/imgs/recyclers1.png'" *ngFor="let recycler of recyclers"  (markerClick)="goToRecycler(recycler)" [latitude]="recycler.latitude" [longitude]="recycler.longitude"></agm-marker></div>
-            <div *ngIf="!showMarkers"><agm-marker [iconUrl]="'../../assets/imgs/negocioPTF.png'" *ngFor="let partner of partnerList" [latitude]="partner.location.latitude" [longitude]="partner.location.longitude"></agm-marker></div-->  <!--partner.location[0]-->
-          </agm-map>
-          <ion-fab left middle >
-            <button ion-fab icon-only (tap)="getViewLocation()" style="background-color: transparent;">
-              <ion-icon color="content" ios="ios-locate" md="md-locate"></ion-icon>
-            </button>
-          </ion-fab>
-          <ion-fab right middle >
-            <button ion-fab icon-only (click)="addRecycler()" style="background-color: transparent;">
-              <ion-icon color="content" ios="ios-add-circle" md="md-add-circle"></ion-icon>
-            </button>
-          </ion-fab>
+      <ng-template #partnerView>
+        <agm-marker [iconUrl]="{url: 'assets/imgs/partnerT.png', scaledSize: { width: 30, height: 41 } }" *ngFor="let partner of partnerList"
+                    [latitude]="partner.location.latitude" [longitude]="partner.location.longitude"></agm-marker>
+      </ng-template>
+      <!--div *ngIf="showMarkers"><agm-marker [iconUrl]="'assets/imgs/recyclers1.png'" *ngFor="let recycler of recyclers"  (markerClick)="goToRecycler(recycler)" [latitude]="recycler.latitude" [longitude]="recycler.longitude"></agm-marker></div>
+      <div *ngIf="!showMarkers"><agm-marker [iconUrl]="'../../assets/imgs/negocioPTF.png'" *ngFor="let partner of partnerList" [latitude]="partner.location.latitude" [longitude]="partner.location.longitude"></agm-marker></div-->
+      <!--partner.location[0]-->
+    </agm-map>
+    <ion-fab left middle>
+      <button ion-fab icon-only (tap)="getViewLocation()" style="background-color: transparent;">
+        <ion-icon color="content" ios="ios-locate" md="md-locate"></ion-icon>
+      </button>
+    </ion-fab>
+    <ion-fab right middle>
+      <button ion-fab icon-only (click)="addRecycler()" style="background-color: transparent;">
+        <ion-icon color="content" ios="ios-add-circle" md="md-add-circle"></ion-icon>
+      </button>
+    </ion-fab>
 
-      </ion-card>
+  </ion-card>
 
-      <ion-row *ngIf="!isAuthenticated" text-center style="margin-top: 15%;" style="background-color:#145575">
-        <ion-card text-center class="segmentText">       
-          <ion-card-content>
-            <ion-item text-center>Debes iniciar sesión</ion-item>
-            <div >Para registrar tus recicladores favoritos</div>
-            <ion-row text-center>
-              <ion-col col-12>
-                <button ion-button round (click)="login()" >Iniciar sesión</button>
-              </ion-col>
-            </ion-row>
-          </ion-card-content>
-        </ion-card>
-      </ion-row>
+  <ion-row *ngIf="!isAuthenticated" text-center style="margin-top: 15%;" style="background-color:#145575">
+    <ion-card text-center class="segmentText">
+      <ion-card-content>
+        <ion-item text-center>Debes iniciar sesión</ion-item>
+        <div>Para registrar tus recicladores favoritos</div>
+        <ion-row text-center>
+          <ion-col col-12>
+            <button ion-button round (click)="login()">Iniciar sesión</button>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </ion-row>
 
-        <ion-item *ngIf="isAuthenticated" class="segmentText" style="background-color:#145575; margin-top: 105%;">
+  <ion-item *ngIf="isAuthenticated" class="segmentText" style="background-color:#145575; margin-top: 105%;">
 
-          <ion-toolbar >
-                <ion-segment color="segment" style="background-color: #145575" [(ngModel)]="recyclerm">
-                  <ion-segment-button style="background-color: #145575" value="favorite" (tap)="changePins(true)"  > <!--*ngIf="isAuthenticated" (click)="showHideMarkers()"-->
-                    Reci Favoritos
-                  </ion-segment-button>
-                  <ion-segment-button style="background-color: #145575" value="near" (tap)="changePins(false)"> <!--(click)="showHideMarkers()"-->
-                    Veci Negocios
-                  </ion-segment-button>
-                </ion-segment>
-            </ion-toolbar>
-            <div [ngSwitch]="recyclerm">
-              <ion-list *ngSwitchCase="'favorite'">
-                <ion-row *ngIf="(recyclersFavorites | async)?.length==0" text-center>
-                  <ion-card text-center>
-                    <ion-card-content>
-                      <ion-item text-wrap text-center>No tienes recicladores favoritos</ion-item>
-                      <div text-wrap text-center>Encuentra tu reciclador más cercano en el mapa</div>
-                      <!--div text-center>
-                          <button ion-button outline item-end icon-left (click)="openMap()">
-                            <ion-icon name="add-circle"></ion-icon>
-                              Agregar Favorito
-                          </button>
-                      </div-->
-                    </ion-card-content>
-                  </ion-card>
-                </ion-row>
-  
-                <ion-row *ngFor='let recycler$ of recyclersFavorites | async'>
-                  <ion-col *ngIf="recycler$ | async as recycler;  else loading" >
-                      <ion-grid style= "margin-top: 0%; margin-bottom: 0%;">
-                          <ion-row >
-                            <ion-col col-4 style="padding-left: 10%;">
-                                <!--ion-item (tap)="goToRecycler(recycler)">
-                                    <ion-avatar item-start>
-                                      <img src="{{recycler.image}}">
-                                    </ion-avatar>
-                                    <h2>{{recycler.name}}</h2>
-                                  </ion-item-->
-                                  <span  (tap)="goToRecycler(recycler)" >
+    <ion-toolbar>
+      <ion-segment color="segment" style="background-color: #145575" [(ngModel)]="recyclerm">
+        <ion-segment-button style="background-color: #145575" value="favorite" (tap)="changePins(true)">
+          <!--*ngIf="isAuthenticated" (click)="showHideMarkers()"-->
+          Reci Favoritos
+        </ion-segment-button>
+        <ion-segment-button style="background-color: #145575" value="near" (tap)="changePins(false)">
+          <!--(click)="showHideMarkers()"-->
+          Veci Negocios
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+    <div [ngSwitch]="recyclerm">
+      <ion-list *ngSwitchCase="'favorite'">
+        <ion-row *ngIf="(recyclersFavorites | async)?.length==0" text-center>
+          <ion-card text-center>
+            <ion-card-content>
+              <ion-item text-wrap text-center>No tienes recicladores favoritos</ion-item>
+              <div text-wrap text-center>Encuentra tu reciclador más cercano en el mapa</div>
+              <!--div text-center>
+                  <button ion-button outline item-end icon-left (click)="openMap()">
+                    <ion-icon name="add-circle"></ion-icon>
+                      Agregar Favorito
+                  </button>
+              </div-->
+            </ion-card-content>
+          </ion-card>
+        </ion-row>
+
+        <ion-row *ngFor='let recycler$ of recyclersFavorites | async'>
+          <ion-col *ngIf="recycler$ | async as recycler;  else loading">
+            <ion-grid style="margin-top: 0%; margin-bottom: 0%;">
+              <ion-row>
+                <ion-col col-4 style="padding-left: 10%;">
+                  <!--ion-item (tap)="goToRecycler(recycler)">
+                      <ion-avatar item-start>
+                        <img src="{{recycler.image}}">
+                      </ion-avatar>
+                      <h2>{{recycler.name}}</h2>
+                    </ion-item-->
+                  <span (tap)="goToRecycler(recycler)">
                                       <ion-row *ngIf="recycler.image!=undefined; else firstLetter">
-                                              
-                                                <ion-avatar >
-                                                  <img class="recyclers" style="border: 3px solid green;" src="{{recycler.image}}" id="{{recycler.id}}">
+
+                                                <ion-avatar>
+                                                  <img class="recyclers" style="border: 3px solid green;"
+                                                       src="{{recycler.image}}" id="{{recycler.id}}">
                                                 </ion-avatar>
-                                              
+
                                       </ion-row>
-  
+
                                         <ng-template #firstLetter item-star>
                                           <ion-avatar>
                                               <!--p class="firstLetter" >{{recycler.name.charAt(0).toUpperCase()}}{{recycler.lastName.charAt(0).toUpperCase()}}</p>
@@ -98,85 +106,83 @@
                                           </ion-avatar>
                                         </ng-template>
                                       </span>
-  
-                            </ion-col>
-                            <ion-col col-5 text-center style="margin-top: 6%; color: white" (tap)="goToRecycler(recycler)">
-                                <h2>{{recycler.name}}</h2>
-                            </ion-col>
-                            <ion-col col-2 style="margin-top: 2%;">
-                                <ion-item *ngIf="(recycler)?.phone; else elseNotPhone" (click)="doCallNumber(recycler.phone)" class="icon_callStyle" icon-only >
-                                  <ion-icon style="padding-left: 26%; "  ios="ios-call" md="md-call" color="segment" item-start large></ion-icon>
-                                </ion-item>
-                              <ng-template #elseNotPhone>
-                                <ion-item class="notPhone">                      
-                                  <p style="padding-left: 26%; " color="segment"></p>
-                                </ion-item>
-                              </ng-template>
 
-
-
-                            </ion-col>
-                          </ion-row>
-                        </ion-grid>
-                  </ion-col>
-  
-                  <ng-template #loading>
-                    <ion-grid>
-                      <ion-row justify-content-center>
-                        <ion-col col-2>
-                          <ion-spinner name="circles"></ion-spinner>
-                        </ion-col>
-                        <ion-col col-6>
-                          Cargando favoritos...
-                        </ion-col>
-                      </ion-row>
-                    </ion-grid>
+                </ion-col>
+                <ion-col col-5 text-center style="margin-top: 6%; color: white" (tap)="goToRecycler(recycler)">
+                  <h2>{{recycler.name}}</h2>
+                </ion-col>
+                <ion-col col-2 style="margin-top: 2%;">
+                  <ion-item *ngIf="(recycler)?.phone; else elseNotPhone" (click)="doCallNumber(recycler.phone)"
+                            class="icon_callStyle" icon-only>
+                    <ion-icon style="padding-left: 26%; " ios="ios-call" md="md-call" color="segment" item-start
+                              large></ion-icon>
+                  </ion-item>
+                  <ng-template #elseNotPhone>
+                    <ion-item class="notPhone">
+                      <p style="padding-left: 26%; " color="segment"></p>
+                    </ion-item>
                   </ng-template>
-                </ion-row>
-  
-  
-  
-  
-  
-                  <!--ion-card text-center>
-                    <ion-card-content>
-                      <ion-item text-center>Debes iniciar sesión</ion-item>
-                      <div >Y registra tus registradores favoritos</div>
-                      <ion-row text-center>
-                        <ion-col col-12>
-                          <button ion-button round>Iniciar Sesión</button>
-                        </ion-col>
-                       </ion-row>
-                    </ion-card-content>
-                  </ion-card-->
-  
-              </ion-list>
-  
-              <div *ngSwitchCase="'near'" style="height: 140px;" >
-                <ion-slides pager="true" slidesPerView="4">
-                  <ion-slide *ngFor='let partner of partnerList' style="background-color: #145575; padding-left: 5px;">
-                   <!-- <ion-item style="float: left; background-color: #145575 "> -->
-                      <ion-avatar style="background-color: #145575" (tap)="exchangeModal(partner)" >
-                        <img src="{{partner.logo}}">
-                      </ion-avatar>
-                   <!--  </ion-item>     -->              
-                  </ion-slide>
-                </ion-slides>
-              </div>
-            </div>
-        </ion-item>
 
 
-        <!--<ion-card text-center>
-                  <ion-card-content>
-                    <ion-item text-center>Debes iniciar sesión</ion-item>
-                    <div >Para ver nuestros negocios asociados</div>
-                    <ion-row text-center>
-                      <ion-col col-12>
-                        <button ion-button round>Iniciar Sesión</button>
-                      </ion-col>
-                     </ion-row>
-                  </ion-card-content>
-                </ion-card>-->
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-col>
+
+          <ng-template #loading>
+            <ion-grid>
+              <ion-row justify-content-center>
+                <ion-col col-2>
+                  <ion-spinner name="circles"></ion-spinner>
+                </ion-col>
+                <ion-col col-6>
+                  Cargando favoritos...
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ng-template>
+        </ion-row>
+
+
+        <!--ion-card text-center>
+          <ion-card-content>
+            <ion-item text-center>Debes iniciar sesión</ion-item>
+            <div >Y registra tus registradores favoritos</div>
+            <ion-row text-center>
+              <ion-col col-12>
+                <button ion-button round>Iniciar Sesión</button>
+              </ion-col>
+             </ion-row>
+          </ion-card-content>
+        </ion-card-->
+
+      </ion-list>
+
+      <div *ngSwitchCase="'near'" style="height: 140px;">
+        <ion-slides pager="true" slidesPerView="4">
+          <ion-slide *ngFor='let partner of partnerList' style="background-color: #145575; padding-left: 5px;">
+            <!-- <ion-item style="float: left; background-color: #145575 "> -->
+            <ion-avatar style="background-color: #145575" (tap)="exchangeModal(partner)">
+              <img src="{{partner.logo}}">
+            </ion-avatar>
+            <!--  </ion-item>     -->
+          </ion-slide>
+        </ion-slides>
+      </div>
+    </div>
+  </ion-item>
+
+
+  <!--<ion-card text-center>
+            <ion-card-content>
+              <ion-item text-center>Debes iniciar sesión</ion-item>
+              <div >Para ver nuestros negocios asociados</div>
+              <ion-row text-center>
+                <ion-col col-12>
+                  <button ion-button round>Iniciar Sesión</button>
+                </ion-col>
+               </ion-row>
+            </ion-card-content>
+          </ion-card>-->
 
 </ion-content>
