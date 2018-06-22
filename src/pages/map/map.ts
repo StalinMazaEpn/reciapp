@@ -65,7 +65,7 @@ export class MapPage {
     this.valuesByDefault();
     this.getPartners();
     this.showMarkers= true;
-    
+
     this.userSrv.getUser(this.authService.getCurrentUser().uid).subscribe((data)=>{
       this.userData=data;
       this.userPts=data['points']['total'];
@@ -74,7 +74,7 @@ export class MapPage {
 
     if(this.isAuthenticated) {
       this.user = this.recyclerSrv.getUser(this.authService.getCurrentUser().uid);
-      
+
     }
     if (this.platform.is('ios')) {
       this.locationAccuracy.canRequest().then(
@@ -258,6 +258,12 @@ changePins(values){
 exchangeModal(objExchange){
   //console.log('BEFORE',objExchange);
   let modal = this.modalCtrl.create(ModalPage,{objectExchange:objExchange, userData:this.userData});
+  modal.present();
+}
+
+couponModal( objExchange ) {
+  //console.log('BEFORE',objExchange);
+  let modal = this.modalCtrl.create( CouponModalPage, { objectExchange: objExchange, userData: this.userData } );
   modal.present();
 }
 

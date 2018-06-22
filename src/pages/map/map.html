@@ -27,7 +27,7 @@
       </ion-card>
 
       <ion-row *ngIf="!isAuthenticated" text-center style="margin-top: 15%;" style="background-color:#145575">
-        <ion-card text-center class="segmentText">       
+        <ion-card text-center class="segmentText">
           <ion-card-content>
             <ion-item text-center>Debes iniciar sesión</ion-item>
             <div >Para registrar tus recicladores favoritos</div>
@@ -68,7 +68,7 @@
                     </ion-card-content>
                   </ion-card>
                 </ion-row>
-  
+
                 <ion-row *ngFor='let recycler$ of recyclersFavorites | async'>
                   <ion-col *ngIf="recycler$ | async as recycler;  else loading" >
                       <ion-grid style= "margin-top: 0%; margin-bottom: 0%;">
@@ -82,13 +82,13 @@
                                   </ion-item-->
                                   <span  (tap)="goToRecycler(recycler)" >
                                       <ion-row *ngIf="recycler.image!=undefined; else firstLetter">
-                                              
+
                                                 <ion-avatar >
                                                   <img class="recyclers" style="border: 3px solid green;" src="{{recycler.image}}" id="{{recycler.id}}">
                                                 </ion-avatar>
-                                              
+
                                       </ion-row>
-  
+
                                         <ng-template #firstLetter item-star>
                                           <ion-avatar>
                                             <span text-center>
@@ -98,7 +98,7 @@
                                           </ion-avatar>
                                         </ng-template>
                                       </span>
-  
+
                             </ion-col>
                             <ion-col col-5 text-center style="margin-top: 6%; color: white" (tap)="goToRecycler(recycler)">
                                 <h2>{{recycler.name}}</h2>
@@ -108,7 +108,7 @@
                                   <ion-icon style="padding-left: 26%; "  ios="ios-call" md="md-call" color="segment" item-start large></ion-icon>
                                 </ion-item>
                               <ng-template #elseNotPhone>
-                                <ion-item class="notPhone">                      
+                                <ion-item class="notPhone">
                                   <p style="padding-left: 26%; " color="segment"></p>
                                 </ion-item>
                               </ng-template>
@@ -119,7 +119,7 @@
                           </ion-row>
                         </ion-grid>
                   </ion-col>
-  
+
                   <ng-template #loading>
                     <ion-grid>
                       <ion-row justify-content-center>
@@ -133,11 +133,11 @@
                     </ion-grid>
                   </ng-template>
                 </ion-row>
-  
-  
-  
-  
-  
+
+
+
+
+
                   <!--ion-card text-center>
                     <ion-card-content>
                       <ion-item text-center>Debes iniciar sesión</ion-item>
@@ -149,17 +149,18 @@
                        </ion-row>
                     </ion-card-content>
                   </ion-card-->
-  
+
               </ion-list>
-  
+
               <div *ngSwitchCase="'near'" style="height: 140px;" >
                 <ion-slides pager="true" slidesPerView="4">
                   <ion-slide *ngFor='let partner of partnerList' style="background-color: #145575; padding-left: 5px; padding-top: 30px;">
                    <!-- <ion-item style="float: left; background-color: #145575 "> -->
-                      <ion-avatar style="background-color: #145575" (tap)="exchangeModal(partner)" >
+                      <ion-avatar style="background-color: #145575" (tap)="!partner.isActive ? exchangeModal(partner) : couponModal(partner)" >
+                        <div *ngIf="partner.isActive" class="coupon-overlay"></div>
                         <img src="{{partner.logo}}">
                       </ion-avatar>
-                   <!--  </ion-item>     -->              
+                   <!--  </ion-item>     -->
                   </ion-slide>
                 </ion-slides>
               </div>
