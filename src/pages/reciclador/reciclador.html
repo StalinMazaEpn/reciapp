@@ -1,8 +1,11 @@
 
-<ion-header>
-  <ion-navbar>
-  </ion-navbar>
-</ion-header>
+<ion-header class="firstT">
+	<!--ion-navbar>
+	</ion-navbar-->
+	<button ngClass="delivery-back-button" ion-button icon-only icon-start clear  (click)="dismiss()">
+	  <ion-icon name="arrow-back"></ion-icon>
+	</button>
+  </ion-header>
 
 <ion-content padding>
 		<ion-grid align-items-center >
@@ -44,11 +47,36 @@
 				<ion-col col-9 style="font-size: 24px; padding-left:6%;">{{recycler.name}}<br/>{{recycler.lastName}}</ion-col>
 				
 			</ion-row>
+			
+			<!--ion-row item-end>
+				<ion-col offset-6 style=" margin-left: 50%;	padding-left: 5%;">
+					<button ion-button round icon-end class="callPhone" *ngIf="(recycler)?.phone; else elseMessage" (click)="doCallNumber(recycler.phone)">
+						
+							Llamar<ion-icon ios="ios-call" md="md-call"></ion-icon>
+					</button>
+					<ng-template #elseMessage>
+						<ion-grid>
+							<ion-row style="margin-left: 5%; margin-right: 9%;">
+								<ion-col col-9 item-end style="margin-top: 5%;
+								text-align: right;">
+									<p>Sin teléfono</p>
+								</ion-col>
+								<ion-col col-3>             
+									<p class="notPhone" color="segment"></p>
+								</ion-col>
+							</ion-row>
+						</ion-grid>
+					</ng-template>
+				</ion-col>
+			</ion-row-->
 			<ion-row item-end>
 				<ion-col item-end>
 					<button ion-button round icon-end item-end style=" width: 46%; height: 53%; margin-left: 50%;" class="callPhone" *ngIf="(recycler)?.phone; else elseMessage" (click)="doCallNumber(recycler.phone)">
+
 						<!--		Llamar
+
 						<ion-icon ios="ios-call" md="md-call" class="icon_callStyle" item-end></ion-icon-->
+
 						<ion-grid>
 							<ion-row >
 								<ion-col col-6 style="font-size: 111%; padding-left: 0px">
@@ -86,61 +114,51 @@
 						<ion-row style="border-bottom: 1px solid #8dc63f; padding-bottom: 0%; padding-left: 0%;">
 							<ion-col>
 									<ion-list class="materialN">
-											<ion-item *ngFor='let material of recycler.material' style="background-color: #00435f;">
-												<ion-grid>
-													<ion-row align-items-center>
-														<ion-col col-4>
-															<div *ngIf="material == 'Papel'" style="width: 20px; height: 20px; border-radius: 100%;	background: linear-gradient(to right,#afba35,#ede937);"></div>
-															<div *ngIf="material == 'Carton' || material == 'Cartón'" style="width: 20px; height: 20px;	border-radius: 100%; background: linear-gradient(to right,#ede937,#ff8000);"></div>
-															<div *ngIf="material == 'Plastico' || material == 'Plástico'" style="width: 20px; height: 20px; border-radius: 100%; background: linear-gradient(to right,#39b54a,#8dc63f);"></div>
-															<div *ngIf="material == 'Vidrio'"  style="width: 20px; height: 20px; border-radius: 100%;background: linear-gradient(to right,#00a0dc,#005c80);"></div>
-															<div *ngIf="material == 'Metal'" style="width: 20px; height: 20px; border-radius: 100%;	background: linear-gradient(to right,#167b9b,#00a0dc);"></div>												
-															<div *ngIf="material == 'Tetrapack'" style="width: 20px; height: 20px; border-radius: 100%; background: linear-gradient(to right,#c81c71,#790042);"></div>
-														</ion-col>
-														<ion-col col-7>
-															<img *ngIf="material == 'Papel'" src="assets/imgs/papelT1.png" style="width:65px; height:63px">
-															<img *ngIf="material == 'Carton' || material == 'Cartón'" src="assets/imgs/cartonT.png" style="width: 60px; height: 54px;">
-															<img *ngIf="material == 'Plastico' || material == 'Plástico'" src="assets/imgs/plasticoT.png" style="width:74px; height:47px">
-															<img *ngIf="material == 'Vidrio'"  src="assets/imgs/vidrioT.png" style="width:83px; height:46px">
-															<img *ngIf="material == 'Metal'" src="assets/imgs/metalT.png" style="width:74px; height:49px">
-															<img *ngIf="material == 'Tetrapack'" src="assets/imgs/tetrapackT.png" style="width:74px; height:49px">
-														</ion-col>
-														<!--ion-row style="max-height: 40px;">
-															<ion-col col>
-																<p  *ngIf="material == 'Papel'" style="background: linear-gradient(to right,#afba35,#ede937); border-radius: 100%; height: 30px; width: 30px; margin:0px; padding: 0px;"></p>
-																<img *ngIf="material == 'Papel'" style="position: absolute;top: 5px; left:40px;" src="assets/imgs/papelT1.png" height="35" width="60">
-															</ion-col>
-															<ion-col col>
-																<p *ngIf="material == 'Carton' || material == 'Cartón'" style="background: linear-gradient(to right,#ede937,#ff8000); border-radius: 100%; height: 30px; width: 30px; margin:0px; padding: 0px;"></p>
-																<img *ngIf="material == 'Carton' || material == 'Cartón'" style="position: absolute;top: 5px; left:40px;" src="assets/imgs/cartonT.png" height="35" width="60">
-															</ion-col>
-														  </ion-row>
-														
-														  <ion-row style="max-height: 40px;">
-															<ion-col col>
-																<p *ngIf="material == 'Plastico' || material == 'Plástico'" style="background: linear-gradient(to right,#39b54a,#8dc63f); border-radius: 100%; height: 30px; width: 30px; margin:0px; padding: 0px;"></p>
-																<img *ngIf="material == 'Plastico' || material == 'Plástico'" style="position: absolute;top: 5px; left:40px;" src="assets/imgs/plasticoT.png" height="35" width="60">
-															</ion-col>
-															<ion-col col>
-																<p *ngIf="material == 'Vidrio'"  src="assets/imgs/vidrioT.png" style="background: linear-gradient(to right,#00a0dc,#005c80); border-radius: 100%; height: 30px; width: 30px; margin:0px; padding: 0px;"></p>
-																<img *ngIf="material == 'Vidrio'"  src="assets/imgs/vidrioT.png" style="position: absolute;top: 5px; left:40px;" src="assets/imgs/vidrioT.png" height="35" width="60">
-															</ion-col>
-														  </ion-row>
-														  
-														  <ion-row style="max-height: 40px;">
-															<ion-col col>
-																<p *ngIf="material == 'Metal'" src="assets/imgs/metalT.png" style="background: linear-gradient(to right,#167b9b,#00a0dc); border-radius: 100%; height: 30px; width: 30px; margin:0px; padding: 0px;"></p>
-																<img *ngIf="material == 'Metal'" src="assets/imgs/metalT.png" style="position: absolute;top: 5px; left:40px;" src="assets/imgs/metalT.png" height="35" width="60">
-															</ion-col>
-															<ion-col col>
-																<p *ngIf="material == 'Tetrapack'" src="assets/imgs/tetrapackT.png" style="background: linear-gradient(to right,#c81c71,#790042); border-radius: 100%; height: 30px; width: 30px; margin:0px; padding: 0px;"></p>
-																<img *ngIf="material == 'Tetrapack'" src="assets/imgs/tetrapackT.png" style="position: absolute;top: 5px; left:40px;" src="assets/imgs/tetrapackT.png" height="35" width="60">
-															</ion-col>
-														  </ion-row-->
-													</ion-row>
-												</ion-grid>					
-											</ion-item>						    
-										</ion-list>
+										<ion-item class="first" *ngFor='let material of recycler.material | slice: 0:3' style="background-color: #00435f;">
+											<ion-grid>
+												<ion-row align-items-center>
+													<ion-col col-4>
+														<div *ngIf="material == 'Papel'" style="width: 20px; height: 20px; border-radius: 100%;	background: linear-gradient(to right,#afba35,#ede937);"></div>
+														<div *ngIf="material == 'Carton' || material == 'Cartón'" style="width: 20px; height: 20px;	border-radius: 100%; background: linear-gradient(to right,#ede937,#ff8000);"></div>
+														<div *ngIf="material == 'Plastico' || material == 'Plástico'" style="width: 20px; height: 20px; border-radius: 100%; background: linear-gradient(to right,#39b54a,#8dc63f);"></div>
+														<div *ngIf="material == 'Vidrio'"  style="width: 20px; height: 20px; border-radius: 100%;background: linear-gradient(to right,#00a0dc,#005c80);"></div>
+														<div *ngIf="material == 'Metal'" style="width: 20px; height: 20px; border-radius: 100%;	background: linear-gradient(to right,#167b9b,#00a0dc);"></div>												
+														<div *ngIf="material == 'Tetrapack'" style="width: 20px; height: 20px; border-radius: 100%; background: linear-gradient(to right,#c81c71,#790042);"></div>
+													</ion-col>
+													<ion-col col-7>
+														<img *ngIf="material == 'Papel'" src="assets/imgs/papelT1.png" style="width:65px; height:63px">
+														<img *ngIf="material == 'Carton' || material == 'Cartón'" src="assets/imgs/cartonT.png" style="width: 60px; height: 54px;">
+														<img *ngIf="material == 'Plastico' || material == 'Plástico'" src="assets/imgs/plasticoT.png" style="width:74px; height:47px">
+														<img *ngIf="material == 'Vidrio'"  src="assets/imgs/vidrioT.png" style="width:83px; height:46px">
+														<img *ngIf="material == 'Metal'" src="assets/imgs/metalT.png" style="width:74px; height:49px">
+														<img *ngIf="material == 'Tetrapack'" src="assets/imgs/tetrapackT.png" style="width:74px; height:49px">
+													</ion-col>
+												</ion-row>
+											</ion-grid>					
+										</ion-item>
+										<ion-item class="second" *ngFor='let material of recycler.material | slice: 3:6' style="background-color: #00435f;">
+											<ion-grid>
+												<ion-row align-items-center>
+													<ion-col col-4>
+														<div *ngIf="material == 'Papel'" style="width: 20px; height: 20px; border-radius: 100%;	background: linear-gradient(to right,#afba35,#ede937);"></div>
+														<div *ngIf="material == 'Carton' || material == 'Cartón'" style="width: 20px; height: 20px;	border-radius: 100%; background: linear-gradient(to right,#ede937,#ff8000);"></div>
+														<div *ngIf="material == 'Plastico' || material == 'Plástico'" style="width: 20px; height: 20px; border-radius: 100%; background: linear-gradient(to right,#39b54a,#8dc63f);"></div>
+														<div *ngIf="material == 'Vidrio'"  style="width: 20px; height: 20px; border-radius: 100%;background: linear-gradient(to right,#00a0dc,#005c80);"></div>
+														<div *ngIf="material == 'Metal'" style="width: 20px; height: 20px; border-radius: 100%;	background: linear-gradient(to right,#167b9b,#00a0dc);"></div>												
+														<div *ngIf="material == 'Tetrapack'" style="width: 20px; height: 20px; border-radius: 100%; background: linear-gradient(to right,#c81c71,#790042);"></div>
+													</ion-col>
+													<ion-col col-7>
+														<img *ngIf="material == 'Papel'" src="assets/imgs/papelT1.png" style="width:65px; height:63px">
+														<img *ngIf="material == 'Carton' || material == 'Cartón'" src="assets/imgs/cartonT.png" style="width: 60px; height: 54px;">
+														<img *ngIf="material == 'Plastico' || material == 'Plástico'" src="assets/imgs/plasticoT.png" style="width:74px; height:47px">
+														<img *ngIf="material == 'Vidrio'"  src="assets/imgs/vidrioT.png" style="width:83px; height:46px">
+														<img *ngIf="material == 'Metal'" src="assets/imgs/metalT.png" style="width:74px; height:49px">
+														<img *ngIf="material == 'Tetrapack'" src="assets/imgs/tetrapackT.png" style="width:74px; height:49px">
+													</ion-col>
+												</ion-row>
+											</ion-grid>					
+										</ion-item>					    
+									</ion-list>
 							</ion-col>	
 						</ion-row>
 					</ion-grid>
@@ -211,7 +229,7 @@
 			
 		</div>
 		<div class="mapstyle" >
-			<agm-map [latitude]="recycler.latitude" [longitude]="recycler.longitude" [fullscreenControlOptions]="false" [zoomControl]="false" [streetViewControl]="false" [usePanning]="true" [maxZoom]="zoom" >
+			<agm-map [latitude]="recycler.latitude" [longitude]="recycler.longitude" [zoomControl]="false" [fullscreenControlOptions]="false" [streetViewControl]="false"	[usePanning]="true" [zoom]="zoomDef">
 				<agm-marker [latitude]="recycler.latitude" [longitude]="recycler.longitude"></agm-marker>
 			</agm-map>
 		</div>
