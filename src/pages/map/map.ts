@@ -13,6 +13,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { CallNumber } from '@ionic-native/call-number';
 import { ModalPage } from '../modal/modal';
 import { ExchangePage } from '../exchange/exchange';
+import { CouponModalPage } from '../couponModal/couponModal';
 
 @IonicPage()
 @Component({
@@ -313,9 +314,4 @@ showHideMarkers(){
   }
 }
 
- /*exchangeModal(objExchange){
-+    //console.log('BEFORE',objExchange);
-+    let modal = this.modalCtrl.create(ModalPage,{objectExchange:objExchange, userData:this.userData});
-+    modal.present();
-+  } */
 }
