@@ -24,7 +24,7 @@ export class LoginPage {
 
   user= {} as User;
   constructor(public navCtrl: NavController, public navParams: NavParams, public userSrv:ReciappService, public toastCtrl:ToastController,public loadingCtrl: LoadingController) {
-  	
+
   }
 
   ionViewDidLoad() {
@@ -38,7 +38,7 @@ export class LoginPage {
   		if (result) {
   			//console.log(result.uid);
         this.waiting();
-        this.navCtrl.pop();
+        // this.navCtrl.pop();
   			this.navCtrl.setRoot(TabsPage);
   		}else{
   			this.failValidate();
