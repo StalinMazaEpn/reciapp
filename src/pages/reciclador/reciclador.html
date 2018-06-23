@@ -21,7 +21,7 @@
 								" src="{{recycler.image}}" id="{{recycler.id}}">
 							</ion-avatar>
 						</ion-row>
-						
+
 						<ng-template #firstLetter item-star>
 							<ion-avatar>
 								<span text-center>
@@ -42,7 +42,7 @@
 					</span>
 				</ion-col>
 				<ion-col col-9 style="font-size: 24px; padding-left:6%;">{{recycler.name}}<br/>{{recycler.lastName}}</ion-col>
-				
+
 			</ion-row>
 			<ion-row item-end>
 				<ion-col item-end>
@@ -67,7 +67,7 @@
 								text-align: right;">
 									<p>Sin teléfono</p>
 								</ion-col>
-								<ion-col col-3>             
+								<ion-col col-3>
 									<p class="notPhone" color="segment"></p>
 								</ion-col>
 							</ion-row>
@@ -94,7 +94,7 @@
 															<div *ngIf="material == 'Carton' || material == 'Cartón'" style="width: 20px; height: 20px;	border-radius: 100%; background: linear-gradient(to right,#ede937,#ff8000);"></div>
 															<div *ngIf="material == 'Plastico' || material == 'Plástico'" style="width: 20px; height: 20px; border-radius: 100%; background: linear-gradient(to right,#39b54a,#8dc63f);"></div>
 															<div *ngIf="material == 'Vidrio'"  style="width: 20px; height: 20px; border-radius: 100%;background: linear-gradient(to right,#00a0dc,#005c80);"></div>
-															<div *ngIf="material == 'Metal'" style="width: 20px; height: 20px; border-radius: 100%;	background: linear-gradient(to right,#167b9b,#00a0dc);"></div>												
+															<div *ngIf="material == 'Metal'" style="width: 20px; height: 20px; border-radius: 100%;	background: linear-gradient(to right,#167b9b,#00a0dc);"></div>
 															<div *ngIf="material == 'Tetrapack'" style="width: 20px; height: 20px; border-radius: 100%; background: linear-gradient(to right,#c81c71,#790042);"></div>
 														</ion-col>
 														<ion-col col-7>
@@ -103,7 +103,7 @@
 															<img *ngIf="material == 'Plastico' || material == 'Plástico'" src="assets/imgs/plasticoT.png" style="width:74px; height:47px">
 															<img *ngIf="material == 'Vidrio'"  src="assets/imgs/vidrioT.png" style="width:83px; height:46px">
 															<img *ngIf="material == 'Metal'" src="assets/imgs/metalT.png" style="width:74px; height:49px">
-															<img *ngIf="material == 'Tetrapack'" src="assets/imgs/tetrapackT.png" style="width:74px; height:49px">
+															<img *ngIf="material == 'Tetrapack'" src="assets/imgs/tetrapakT.png" style="width:74px; height:49px">
 														</ion-col>
 														<!--ion-row style="max-height: 40px;">
 															<ion-col col>
@@ -115,7 +115,7 @@
 																<img *ngIf="material == 'Carton' || material == 'Cartón'" style="position: absolute;top: 5px; left:40px;" src="assets/imgs/cartonT.png" height="35" width="60">
 															</ion-col>
 														  </ion-row>
-														
+
 														  <ion-row style="max-height: 40px;">
 															<ion-col col>
 																<p *ngIf="material == 'Plastico' || material == 'Plástico'" style="background: linear-gradient(to right,#39b54a,#8dc63f); border-radius: 100%; height: 30px; width: 30px; margin:0px; padding: 0px;"></p>
@@ -126,7 +126,7 @@
 																<img *ngIf="material == 'Vidrio'"  src="assets/imgs/vidrioT.png" style="position: absolute;top: 5px; left:40px;" src="assets/imgs/vidrioT.png" height="35" width="60">
 															</ion-col>
 														  </ion-row>
-														  
+
 														  <ion-row style="max-height: 40px;">
 															<ion-col col>
 																<p *ngIf="material == 'Metal'" src="assets/imgs/metalT.png" style="background: linear-gradient(to right,#167b9b,#00a0dc); border-radius: 100%; height: 30px; width: 30px; margin:0px; padding: 0px;"></p>
@@ -138,10 +138,10 @@
 															</ion-col>
 														  </ion-row-->
 													</ion-row>
-												</ion-grid>					
-											</ion-item>						    
+												</ion-grid>
+											</ion-item>
 										</ion-list>
-							</ion-col>	
+							</ion-col>
 						</ion-row>
 					</ion-grid>
 				</ion-item>
@@ -195,7 +195,7 @@
 											<p *ngIf="!recycler.recyclingFor || !recycler.yearStartRecycling">No registra</p>
 										</ion-item>
 									</ion-col>
-								</ion-item>	
+								</ion-item>
 							</ion-col>
 						</ion-row>
 				</ion-grid>
@@ -208,7 +208,7 @@
 			<div class="oneD" >
 				<p text-wrap *ngIf="recycler.dream" >"{{recycler.dream}}"</p>
 			</div>
-			
+
 		</div>
 		<div class="mapstyle" >
 			<agm-map [latitude]="recycler.latitude" [longitude]="recycler.longitude" [fullscreenControlOptions]="false" [zoomControl]="false" [streetViewControl]="false" [usePanning]="true" [maxZoom]="zoom" >
@@ -222,7 +222,7 @@
 			<button (click)="seguir(recycler.id)" ion-fab color="#00435f" style="background-color: #00435f; color: yellow; ">
 				<!--ion-icon ios="ios-heart" md="md-heart"></ion-icon-->
 				<ion-icon ios="ios-star" md="md-star" style="font-size:46px"></ion-icon>
-			</button>    	
+			</button>
 	    </div>
 	    <ng-template #elseBlockFavorite>
 	    	<button (click)="seguir(recycler.id)" ion-fab color="light" style="color: #f4f4f4; background-color: transparent;">
