@@ -5,7 +5,7 @@
       <ion-grid class="grid-header">
         <ion-row>
           <ion-title text-center showWhen="ios">
-            <img src="assets/imgs/logo-header.png" class="logo-header"/>
+            <img src="assets/imgs/logo-header.png" height="30" class="logo-header"/>
           </ion-title>
           <ion-col col-2>
             <button ion-button icon-only menuToggle>
@@ -14,7 +14,7 @@
           </ion-col>
           <ion-col col-8 class="logo-header-wrapper">
             <ion-title text-center showWhen="android,windows">
-              <img src="assets/imgs/logo-header.png" class="logo-header"/>
+              <img src="assets/imgs/logo-header.png" height="30" class="logo-header"/>
             </ion-title>
           </ion-col>
           <ion-col col text-center (click)="openTips()">
@@ -49,20 +49,20 @@
 
     <div *ngIf="user !== undefined; else loading">
       <ion-list style="margin: 0%;" >
-        <ion-item (tap)="exchange()" style="background: linear-gradient(to bottom, #c81c71, #790042); padding-left: 0%; height: 72px;">
+        <ion-item (tap)="exchange()" style="background: linear-gradient(to bottom, #c81c71, #790042); padding-left: 0%; height: 62px;">
           <ion-grid>
             <ion-row>
                 <!--ion-title text-center showWhen="ios">
                     <img src="assets/imgs/heart-reciveci-on.png" class="logo-header"/>
                   </ion-title-->
-              <ion-col col-3 text-right showWhen="android,windows,ios">
-                <img src="assets/imgs/heart-reciveci-on.png" class="logo-header"/>
+              <ion-col col-3 text-right showWhen="android,windows,ios" align-self-center>
+                <img src="assets/imgs/heart-reciveci-on.png" height="30" class="logo-header"/>
               </ion-col>
-              <ion-col col-2 text-left>
-                <h1 ><b>{{ (user)?.points.total }}</b></h1>
+              <ion-col col-4 text-left class="dashboard-points" align-self-center>
+                {{ (user)?.points.total }}
               </ion-col>
-              <ion-col col-7 text-center>
-                <h1><b>{{(user)?.name}}</b></h1>
+              <ion-col col-5 text-right class="dashboard-name" align-self-center>
+                {{(user)?.name}}
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -72,9 +72,9 @@
 
       <ion-item *ngIf="(user)?.lastDelivery==0" style="background-color: #005c7e;" (click)="deliveryPage()">
         <ion-grid>
-          <ion-row (tap)="goDelivery()">
+          <ion-row (tap)="goDelivery()" class="first-delivery">
             <ion-col text-center>
-              <h2><b>¡Haz tu primera entrega!</b></h2>
+              ¡Haz tu primera entrega!
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -82,14 +82,12 @@
 
       <ion-item *ngIf="(user)?.lastDelivery;" style="background-color: #005c7e;">
         <ion-grid>
-          <ion-row >
+          <ion-row class="last-delivery">
             <ion-col col-7 text-center>
-              <h2>Última entrega:</h2>
+              Última entrega:
             </ion-col>
             <ion-col col-5 text-left>
-              <p style="padding-top: 4px;">
                 hace {{(user)?.lastDelivery | amLocale:'es' | amTimeAgo:true}}
-              </p>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -114,66 +112,66 @@
           </p>
         </ion-item-->
 
-      <ion-row text-center>
+      <ion-row text-center class="delivery-info">
         <ion-col col>
           <!--1-->
-          <ion-row>
+          <ion-row class="my-deliveries">
             <ion-col col>
-              <p style="font-size: 16px; padding: 0px; margin:0px;">Mis entregas</p>
+              <p style="font-size: 18px; padding: 0px; margin:0px; text-align: left;">Mis entregas</p>
             </ion-col>
-            <ion-col col>
-              <p style="font-weight: bold; font-size: 16px; padding: 0px; margin:0px;">{{(user)?.totalDeliveries}}</p>
+            <ion-col col text-right>
+              <p style="font-weight: bold; font-size: 22px; padding: 0px; margin:0px;">{{(user)?.totalDeliveries}}</p>
             </ion-col>
           </ion-row>
           <!--2-->
-          <ion-row style="max-height: 40px;">
+          <ion-row class="material-row" text-left>
             <ion-col col>
-                <p style="background: linear-gradient(to right,#afba35,#ede937); border-radius: 100%; height: 30px; width: 30px; margin:0px; padding: 0px;"></p>
-                <img style="position: absolute;top: 5px; left:40px;" src="assets/imgs/papelT1.png" height="35" width="60">
-                <span *ngIf="porcentMaterialPapel != null">
-                  <p style="position:absolute; top:3px; left: 110px;">{{porcentMaterialPapel}} %</p>
-                </span>
+              <div class="circle-material-wrapper"><div class="circle-material paper"></div></div>
+                <div class="material-img-wrapper"><img src="assets/imgs/papelT1.png" height="25"></div>
+                <div class="material-percentage" *ngIf="porcentMaterialPapel != null">
+                  <div>{{porcentMaterialPapel}}%</div>
+                </div>
             </ion-col>
             <ion-col col>
-                <p style="background: linear-gradient(to right,#ede937,#ff8000); border-radius: 100%; height: 30px; width: 30px; margin:0px; padding: 0px;"></p>
-                <img style="position: absolute;top: 5px; left:40px;" src="assets/imgs/cartonT.png" height="35" width="60">
-                <span *ngIf="porcentMaterialCarton != null">
-                  <p style="position:absolute; top:3px; left: 110px;">{{porcentMaterialCarton}} %</p>
-                </span>
+              <div class="circle-material-wrapper"><div class="circle-material cardboard"></div></div>
+              <div class="material-img-wrapper"><img src="assets/imgs/cartonT.png" height="27"></div>
+                <div class="material-percentage" *ngIf="porcentMaterialCarton != null">
+                  <div>{{porcentMaterialCarton}}%</div>
+                </div>
             </ion-col>
           </ion-row>
           <!--3-->
-          <ion-row style="max-height: 40px;">
+          <ion-row class="material-row" text-left>
             <ion-col col>
-                <p style="background: linear-gradient(to right,#39b54a,#8dc63f); border-radius: 100%; height: 30px; width: 30px; margin:0px; padding: 0px;"></p>
-                <img style="position: absolute;top: 5px; left:40px;" src="assets/imgs/plasticoT.png" height="35" width="60">
-                <span *ngIf="porcentMaterialPlastico != null">
-                  <p style="position:absolute; top:3px; left: 110px;">{{porcentMaterialPlastico}} %</p>
-                </span>
+              <div class="circle-material-wrapper"><div class="circle-material plastic"></div></div>
+              <div class="material-img-wrapper"><img src="assets/imgs/plasticoT.png" height="17"></div>
+                <div class="material-percentage" *ngIf="porcentMaterialPlastico != null">
+                  <div>{{porcentMaterialPlastico}}%</div>
+                </div>
             </ion-col>
             <ion-col col>
-                <p style="background: linear-gradient(to right,#00a0dc,#005c80); border-radius: 100%; height: 30px; width: 30px; margin:0px; padding: 0px;"></p>
-                <img style="position: absolute;top: 5px; left:40px;" src="assets/imgs/vidrioT.png" height="35" width="60">
-                <span *ngIf="porcentMaterialVidrio != null">
-                  <p style="position:absolute; top:3px; left: 110px;">{{porcentMaterialVidrio}} %</p>
-                </span>
+              <div class="circle-material-wrapper"><div class="circle-material glass"></div></div>
+              <div class="material-img-wrapper"><img src="assets/imgs/vidrioT.png" height="20"></div>
+                <div class="material-percentage" *ngIf="porcentMaterialVidrio != null">
+                  <div>{{porcentMaterialVidrio}}%</div>
+                </div>
             </ion-col>
           </ion-row>
           <!--4-->
-          <ion-row style="max-height: 40px;">
+          <ion-row class="material-row" text-left>
             <ion-col col>
-                <p style="background: linear-gradient(to right,#167b9b,#00a0dc); border-radius: 100%; height: 30px; width: 30px; margin:0px; padding: 0px;"></p>
-                <img style="position: absolute;top: 5px; left:40px;" src="assets/imgs/metalT.png" height="35" width="60">
-                <span *ngIf="porcentMaterialChatarra != null">
-                  <p style="position:absolute; top:3px; left: 110px;">{{porcentMaterialChatarra}} %</p>
-                </span>
+                <div class="circle-material-wrapper"><div class="circle-material metal"></div></div>
+              <div class="material-img-wrapper"><img src="assets/imgs/metalT.png" height="20"></div>
+                <div class="material-percentage" *ngIf="porcentMaterialChatarra != null">
+                  <div>{{porcentMaterialChatarra}}%</div>
+                </div>
             </ion-col>
             <ion-col col>
-                <p style="background: linear-gradient(to right,#c81c71,#790042); border-radius: 100%; height: 30px; width: 30px; margin:0px; padding: 0px;"></p>
-                <img style="position: absolute;top: 5px; left:40px;" src="assets/imgs/tetrapackT.png" height="35" width="60">
-                <span *ngIf="porcentMaterialTetrapack != null">
-                  <p style="position:absolute; top:3px; left: 110px;">{{porcentMaterialTetrapack}} %</p>
-                </span>
+              <div class="circle-material-wrapper"><div class="circle-material tetrapak"></div></div>
+              <div class="material-img-wrapper"><img src="assets/imgs/tetrapakT.png" height="20"></div>
+                <div class="material-percentage" *ngIf="porcentMaterialTetrapack != null">
+                  <div>{{porcentMaterialTetrapack}}%</div>
+                </div>
             </ion-col>
           </ion-row>
         </ion-col>

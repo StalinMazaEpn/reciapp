@@ -7,11 +7,11 @@ page-dashboard {
     .iconsize{
         font-size: 50px;
       }
-      
+
 
     .avatarsize{
-        width: 100% !important;  
-        height : 100% !important;  
+        width: 100% !important;
+        height : 100% !important;
         max-width: 75px !important;  //any size
         max-height: 75px !important; //any size
     }
@@ -28,7 +28,7 @@ page-dashboard {
       height: 170px;
       position: fixed;
       bottom: 49px;
-  
+
     }
 
     .swiper-pagination-bullet-active{
@@ -63,11 +63,11 @@ page-dashboard {
     /*.textContent{
       color: white;
     }*/
-    
+
     .item-md {
       color: #f3f3f3;
     }
-    
+
     .item-ios {
       color: #f3f3f3;
     }
@@ -79,7 +79,7 @@ page-dashboard {
     .list-ios > .item-block:first-child {
       border-top: 0px;
     }
-    
+
     .textBold{
       font-weight: bold;
     }
@@ -120,6 +120,91 @@ page-dashboard {
 
   ul li{
     list-style: none;
+  }
+
+  .dashboard-points {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+
+  .dashboard-name {
+    font-size: 2.3rem;
+    font-weight: bold;
+  }
+
+  .first-delivery {
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .last-delivery {
+    font-size: 16px;
+  }
+
+  .delivery-info {
+    padding: 10px 15px;
+  }
+
+  .my-deliveries {
+    border-bottom: 1px solid #ffffff;
+    padding: 0 5px;
+  }
+
+  .material-row {
+    height: 50px;
+    border-bottom: 1px solid #ffffff;
+    padding: 5px 5px 0;
+  }
+
+
+  .material-img-wrapper {
+    margin-left: 10px;
+    display: inline-block;
+    width: 40%;
+    height: 40px;
+    vertical-align: top;
+  }
+
+  .circle-material-wrapper {
+    display: inline-block;
+    height: 40px;
+  }
+  .circle-material {
+    border-radius: 100%;
+    height: 20px;
+    width: 20px;
+    margin:0;
+    padding: 0;
+
+    &.paper {
+      background: linear-gradient(to right,$yellow2,$yellow1);
+    }
+
+    &.cardboard {
+      background: linear-gradient(to right,$orange1,$orange2);
+    }
+
+    &.plastic {
+      background: linear-gradient(to right,$green1,$green2);
+    }
+
+    &.glass {
+      background: linear-gradient(to right,$olive1,$olive2);
+    }
+
+    &.metal {
+      background: linear-gradient(to right,$skyBlue2,$skyBlue1);
+    }
+
+    &.tetrapak {
+      background: linear-gradient(to right,$purple2,#790042);
+    }
+  }
+
+  .material-percentage {
+    display: inline-block;
+    height: 40px;
+    vertical-align: top;
   }
 
 }

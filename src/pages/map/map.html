@@ -12,7 +12,8 @@
             </span>
 
             <ng-template #partnerView>
-              <agm-marker [iconUrl]="{url: '../../assets/imgs/negocioPTF.png', scaledSize: { width: 30, height: 41 } }" *ngFor="let partner of partnerList" [latitude]="partner.location.latitude" [longitude]="partner.location.longitude"></agm-marker>
+              <agm-marker [iconUrl]="{url: '../../assets/imgs/negocioPTF.png', scaledSize: { width: 30, height: 41 } }" *ngFor="let partner of partnerList" [latitude]="partner.location.latitude"
+                          [longitude]="partner.location.longitude"></agm-marker>
             </ng-template>
             <!--div *ngIf="showMarkers"><agm-marker [iconUrl]="'assets/imgs/recyclers1.png'" *ngFor="let recycler of recyclers"  (markerClick)="goToRecycler(recycler)" [latitude]="recycler.latitude" [longitude]="recycler.longitude"></agm-marker></div>
             <div *ngIf="!showMarkers"><agm-marker [iconUrl]="'../../assets/imgs/negocioPTF.png'" *ngFor="let partner of partnerList" [latitude]="partner.location.latitude" [longitude]="partner.location.longitude"></agm-marker></div-->  <!--partner.location[0]-->

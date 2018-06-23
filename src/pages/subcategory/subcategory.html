@@ -22,7 +22,7 @@
 
     <ion-slide *ngFor="let subcategory of subcategories; let index=index">
 
-      <img src="{{subcategory.image}}" alt="{{categoryName}} {{index}}">
+      <img class="img-header" src="{{subcategory.image}}" alt="{{categoryName}} {{index}}">
 
       <ion-row class="item" *ngFor="let item of subcategory.detail">
         <ion-col>
