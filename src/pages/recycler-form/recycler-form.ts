@@ -99,14 +99,13 @@ export class RecyclerFormPage {
   }
 
   recyclerRegister() {
-
     this.buttonDisabled = true;
     this.saving = true;
 
     //Get a new id and assign to image recycler
     this.newRecycler.id = this.userSrv.getReciclerKey();
 
-    this.newRecycler.yearBirth = this.year.getFullYear() - this.age; //problemas e yearbirth
+    this.newRecycler.yearBirth = this.year.getFullYear() - this.age;
     if (this.recyclingFor)
       this.newRecycler.yearStartRecycling = this.year.getFullYear() - this.recyclingFor;
     this.newRecycler.createdAt = database.ServerValue.TIMESTAMP;
@@ -124,7 +123,10 @@ export class RecyclerFormPage {
           //Call function to create new recycler
           this.userSrv.addNewRecycler(this.newRecycler.id, this.newRecycler).then(() => {
             //Toast Ok
-            this.registerOk();// para verficar si el registro sta correcto
+            this.saving = false;
+           
+            this.registerOk();                                                                
+            this.navCtrl.push(RecicladorPage, {recycler: this.newRecycler });                   
             // this.updatePoints(); // TODO
             console.log("REGISTERED RECYCLER", this.newRecycler);
             //Function to close modal - Form Recycler
@@ -145,17 +147,21 @@ export class RecyclerFormPage {
       //Call function to create new recycler
       this.userSrv.addNewRecycler(this.newRecycler.id, this.newRecycler).then(() => {
         //Toast Ok
+        this.saving = false;
         this.registerOk();
         // this.updatePoints(); // TODO
         //Function to close modal - Form Recycler
         this.dismiss();
+        this.navCtrl.push(RecicladorPage, {recycler: this.newRecycler });
       })
         .catch((e) => {
           console.log("ERROR: ", e);
         });
     }
 
-    this.navCtrl.push(RecicladorPage), {recyclers: this.newRecycler };
+    
+
+    //this.navCtrl.push(RecicladorPage);
 
   }
 

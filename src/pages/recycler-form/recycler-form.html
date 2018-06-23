@@ -329,7 +329,7 @@
   <ion-item style="margin-top: 85%;">
   <div text-center>
     <button ion-button round class="bg-boton" [disabled]="!formGroup.valid || this.lat_ === undefined || this.lng_ === undefined || this.saving || newRecycler.date.days.length == 0 || newRecycler.material.length == 0 "
-            (click)="recyclerRegister()" style="padding-top: 5%; padding-bottom: 5%; font-size: 95%; padding-left: 10%; padding-right: 10%;" >
+            (click)="recyclerRegister();" style="padding-top: 5%; padding-bottom: 5%; font-size: 95%; padding-left: 10%; padding-right: 10%;" >
       <ion-spinner [hidden]="!this.saving"></ion-spinner>
       {{this.saving ? 'Guardando' : 'Guardar'}}
     </button>

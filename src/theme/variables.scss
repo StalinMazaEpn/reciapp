@@ -41,39 +41,47 @@ $colors: (
   dark:       #222,
   segment:    #61d800,
   content:    #145575,
+  tourOne:    #bd7b17,
+  tourTwo:    #4d9e1d,
+  tourThree:  #5a208a,
+  tourFour:   #c42c34,
 
-  tourOne: #bd7b17,
-  tourTwo: #4d9e1d,
-  tourThree: #5a208a,
-  tourFour: #c42c34,
+  twitter:    #00b6f1,
+  instagram:  #c40a70,
 
-  twitter: #00b6f1,
-  instagram: #c40a70,
-
+  yellow:     #ede937,
+  green:      #8dc63f,
+  darkBlue:   #004361,
+  darkBluePri: #005c80,
+  lightBlue:  #167b9b,
+  lightBluePri: #00a0dc,
+  purple:     #c81c71,
+  orange:     #ffca34,
 
 );
 
 // background colors
-$darkBlue: #004361;
 $darkBluePri: #005c80;
-$lightBlue: #167b9b;
+$darkBlue: #004361;
 $lightBluePri: #00a0dc;
-$skyBlue: #17a1d9;
-$yellow: #d6dd3b;
-$green: #3fb34f;
-$purple: #770042;
+$lightBlue: #167b9b;
+$skyBlue1: #17a1d9;
+$skyBlue2: #1e7b99;
+$yellow1: #ede937;
+$yellow2: #afba35;
+$orange1: #ffca34;
+$orange2: #f28130;
+$green1: #90c448;
+$green2: #3ab24f;
+$olive1: #00968b;
+$olive2: #007e7a;
+$purple1: #790042;
+$purple2: #c81c71;
 $fontColor: #ffffff;
 
-  // material colors
-$paper: #d6dd3b;
-$cardboard: #ef652f;
-$plastic: #079247;
-$metal: #31aade;
-$tetrapak: #c52271;
 
-
-$alert-md-background-color: $lightBlue;
-$alert-ios-background: $lightBlue;
+/*$alert-md-background-color: $lightBlue;
+$alert-ios-background: $lightBlue;*/
 
 // App iOS Variables
 // --------------------------------------------------

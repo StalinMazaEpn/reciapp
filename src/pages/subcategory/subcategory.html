@@ -1,0 +1,45 @@
+<ion-header text-center>
+
+  <ion-navbar>
+    <ion-title>
+      <span class="recyclable">
+        <ion-icon name="md-checkbox"></ion-icon> Reciclable
+      </span>
+      <span class="no-recyclable">
+        <ion-icon name="md-close"></ion-icon> No Reciclable
+      </span>
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content no-padding [ngClass]="categoryClass">
+
+
+  <h2>{{categoryName}}</h2>
+  <ion-slides pager [centeredSlides]="false">
+
+    <ion-slide *ngFor="let subcategory of subcategories; let index=index">
+
+      <img src="{{subcategory.image}}" alt="{{categoryName}} {{index}}">
+
+      <ion-row class="item" *ngFor="let item of subcategory.detail">
+        <ion-col>
+          <span [class]="item.recyclable ? 'recyclable' : 'no-recyclable'">
+            <ion-icon [name]="item.recyclable ? 'md-checkbox' : 'md-close'"></ion-icon> {{item.text}}
+          </span>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="subcategory.note" class="subcategory-note">
+        <ion-col>
+          <div><strong>{{subcategory.note.title}}</strong></div>
+          <div>{{subcategory.note.text}}</div>
+        </ion-col>
+      </ion-row>
+    </ion-slide>
+
+  </ion-slides>
+
+</ion-content>

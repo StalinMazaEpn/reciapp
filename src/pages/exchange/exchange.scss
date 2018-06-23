@@ -1,3 +1,64 @@
 page-exchange {
+  .bg-purple1 {
+    background: linear-gradient(to left, $purple1, $purple2);
+  }
+
+  .bg-purple {
+    background: linear-gradient(to top, $purple1, $purple2);
+  }
+
+  .bg-darkblue {
+    background: linear-gradient(to top, $darkBluePri, $darkBlue);
+  }
+
+  .exchange-list {
+    color: white;
+    padding-top: 5px;
+
+    .label {
+      padding-left: 15px !important;
+    }
+
+    .exchange-detail {
+      color: white;
+    }
+
+    &.bg-yellow {
+      background: linear-gradient(to top, $yellow1, $yellow2);
+      color: $darkBlue !important;
+
+      .exchange-points,
+      .label,
+      .exchange-detail,
+      .exchange-expiration {
+        color: $darkBlue;
+      }
+
+      .exchange-expiration {
+        font-weight: bold;
+      }
+    }
+  }
+
+  ion-avatar img {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 60px !important;
+    max-height: 60px !important;
+  }
+
+  ion-item {
+    padding-left: 0px !important;
+  }
+
+	h1.points{
+		display: inline-block;
+		margin-left: 5%;
+		margin-top: 8px !important;
+	}
+	
+	img.img-header{
+		margin-top: 8px !important;	
+	}
 
 }
