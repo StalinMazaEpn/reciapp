@@ -42,7 +42,7 @@
               </ion-label>
               <ion-item>
                 <ion-input type="text" [(ngModel)]="newRecycler.lastName" formControlName="lastName"  placeholder="* Apellido"></ion-input>
-              </ion-item> 
+              </ion-item>
               <ion-label style="margin-bottom: 0px; margin-top: 0px;">
                 <span *ngIf="lastName.hasError('required') && lastName.touched" class="validations"> * El apellido es requerido</span>
               </ion-label>
@@ -60,7 +60,7 @@
                   <ion-input type="number" [(ngModel)]="newRecycler.phone" placeholder="Teléfono"></ion-input>
               </ion-col>
             </ion-row>
-    </ion-grid> 
+    </ion-grid>
   <form [formGroup]="formGroup">
 
     <ion-grid>
@@ -72,8 +72,8 @@
                 </ion-label>
                 <ion-label>
 
-                  <span *ngIf="newRecycler.material.length == 0" class="validations" text-wrap> (Debes seleccionar uno o varios materiales)</span>
-                 
+                  <span *ngIf="newRecycler.material.length == 0" class="validations" text-wrap> (Selecciona uno o varios materiales)</span>
+
                 </ion-label>
               </ion-item>
             </ion-col>
@@ -82,28 +82,28 @@
           <ion-col >
               <ion-list radio-group class="materialN">
                   <ion-item>
-                    <ion-label style=" margin-right: 0px; "><img src="assets/imgs/papelT1.png" style="width:65px; height:63px"></ion-label>
+                    <ion-label style=" margin-right: 0px; "><img src="assets/imgs/papelT1.png" style="height:30px;"></ion-label>
                     <ion-checkbox (ionChange)="addMaterial($event.checked, 'Papel')" value="Papel"  class="papel"></ion-checkbox>
                   </ion-item>
                   <ion-item>
-                      <ion-label><img src="assets/imgs/cartonT.png" style="width: 60px; height: 54px;"></ion-label>
+                      <ion-label><img src="assets/imgs/cartonT.png" style="height: 30px;"></ion-label>
                       <ion-checkbox (ionChange)="addMaterial($event.checked, 'Cartón')"  value="Cartón" class="carton" ></ion-checkbox>
                   </ion-item>
                   <ion-item>
-                      <ion-label><img src="assets/imgs/plasticoT.png" style="width:74px; height:47px"></ion-label>
+                      <ion-label><img src="assets/imgs/plasticoT.png" style="height:15px"></ion-label>
                       <ion-checkbox (ionChange)="addMaterial($event.checked, 'Plástico')" value="Plástico" class="plastico"></ion-checkbox>
                     </ion-item>
                   <ion-item>
-                    <ion-label style=" margin-right: 0px;"><img src="assets/imgs/vidrioT.png" style="width:83px; height:46px" ></ion-label>
+                    <ion-label style=" margin-right: 0px;"><img src="assets/imgs/vidrioT.png" style="height:18px" ></ion-label>
                     <ion-checkbox (ionChange)="addMaterial($event.checked, 'Vidrio')" value="Vidrio"  class="vidrio"></ion-checkbox>
                   </ion-item>
-                  
+
                   <ion-item>
-                    <ion-label><img src="assets/imgs/metalT.png" style="width:74px; height:49px" ></ion-label>
+                    <ion-label><img src="assets/imgs/metalT.png" style="height:25px" ></ion-label>
                     <ion-checkbox (ionChange)="addMaterial($event.checked, 'Metal')" value="Metal" class="metal"></ion-checkbox>
                   </ion-item>
                   <ion-item>
-                    <ion-label><img src="assets/imgs/tetrapackT.png" style="width:74px; height:49px" ></ion-label>
+                    <ion-label><img src="assets/imgs/tetrapakT.png" style="height:20px" ></ion-label>
                     <ion-checkbox (ionChange)="addMaterial($event.checked, 'Tetrapack')" value="Tetrapack" class="tetrapack"></ion-checkbox>
                   </ion-item>
                 </ion-list>
@@ -118,7 +118,7 @@
                 <ion-label style="margin-top: 5px; margin-bottom: 0px;">
                   <span style="color: #6edb14;">* Días</span>
                   <span *ngIf="newRecycler.date.days.length == 0" class="validations"> (Debes seleccionar uno o varios días)</span>
-                 
+
                 </ion-label>
               </ion-item>
             </ion-col>
@@ -160,7 +160,7 @@
                 </ion-list>
           </ion-col>
         </ion-row>
-      </ion-grid>  
+      </ion-grid>
 
     <ion-row >
       <ion-col col-2 text-center>
@@ -196,13 +196,13 @@
                         <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="newRecycler.date.endTime"
                                       formControlName="hourEnd" placeholder="* Hora fin" style="font-size: 12px; color: white; background-color: #167b9b; padding-left: 0px;"></ion-datetime>
                       </ion-item>
-                      
+
                 </ion-col>
                 <ion-col col-2 style="padding-left: 0px;">
                     <ion-icon ios="ios-arrow-dropdown" md="md-arrow-dropdown" style=" margin-top: 50%;"></ion-icon>
                 </ion-col>
               </ion-row>
-          </ion-grid> 
+          </ion-grid>
           <ion-label *ngIf="hourEnd.hasError('required') && hourEnd.touched"><p class="validations">* Hora fin
               requerida</p></ion-label>
       </ion-col>
@@ -213,7 +213,7 @@
       <ion-item class="wp" >
         <ion-label >
           <span >* Género:</span>
-          
+
           <span *ngIf="gender.hasError('required') && gender.touched"
                 class="validations"> * El género es requerido</span>
         </ion-label>
@@ -237,7 +237,7 @@
               </ion-col>
             </ion-row>
 
-    
+
   </form>
 
   <ion-grid>
@@ -249,7 +249,7 @@
                   <ion-input type="number" [(ngModel)]="recyclingFor" maxlength="2" placeholder="Años reciclando"></ion-input>
               </ion-col>
             </ion-row>
-    </ion-grid>  
+    </ion-grid>
 
     <ion-grid>
         <ion-row>
@@ -260,8 +260,8 @@
                     <ion-input type="text" [(ngModel)]="newRecycler.dream" rows="3" maxlength="140" placeholder="¿Cuál es su sueño?                 140"></ion-input>
                 </ion-col>
               </ion-row>
-      </ion-grid> 
-      
+      </ion-grid>
+
       <!--ion-row>
         <ion-col col-2>
             <img src="assets/imgs/generoT.png" style="margin-left: 30%; width:45px; height:45px">
@@ -289,7 +289,7 @@
     <form [formGroup]="formGroup">
       <ion-row>
         <ion-col col-2>
-            <img src="assets/imgs/edadT.png" style="height:45px; margin-left: 30%;">
+            <img src="assets/imgs/generoT.png" style="height:45px; margin-left: 30%;">
         </ion-col>
         <ion-col col-10>
           <ion-list class="genderN" radio-group [(ngModel)]="newRecycler.gender" formControlName="gender">
@@ -308,7 +308,7 @@
             </ion-list>
         </ion-col>
       </ion-row>
-  
+
       <!--ion-label class="styleErrorGener" >
         <span *ngIf="gender.hasError('required') && gender.touched"
               class="validations"> * El género es requerido</span>
@@ -339,5 +339,5 @@
 </ion-content>
 
 
-  
+
 

@@ -2,11 +2,7 @@
   <!--SECTION PHOTO-->
   <div class="bg-photo">
     <!--Back button-->
-<<<<<<< HEAD
-    <button ngClass="delivery-back-button" ion-button icon-only icon-start clear (click)="cancelDelivery()">
-=======
     <button style="z-index: 10" ngClass="delivery-back-button" ion-button icon-only icon-start clear (click)="cancelDelivery()">
->>>>>>> dev
       <ion-icon name="arrow-back"></ion-icon>
     </button>
     <!--Photo-->
@@ -31,19 +27,11 @@
         <img class="photoMaterial" [hidden]="tmpPhoto == 'assets/imgs/transparent.png'" src="{{tmpPhoto}}">
       </div>
       <!--Camera button-->
-<<<<<<< HEAD
-      <div class="camera-btn">
-        <button style="background-color: transparent !important; box-shadow: none" (click)="takePhoto()">
-          <img src="assets/imgs/camera.png" class="camera-img">
-        </button>
-      </div>
-=======
       <!--div class="camera-btn">
         <button style="background-color: transparent !important; box-shadow: none" (click)="takePhoto()">
           <img src="assets/imgs/camera.png" class="camera-img">
         </button>
       </div-->
->>>>>>> dev
     </ng-template>
   </div>
   <!--FAVORITES RECYCLER SECTION-->
@@ -174,11 +162,7 @@
         <ion-row>
           <!--RANGE SLEEVE PLASTIC-->
           <ion-col col>
-<<<<<<< HEAD
-            <ion-range pin="false" snaps="true" min="0" max="3" step="1" color="secondary" [(ngModel)]="fundaCtrl" #ctrl="ngModel" (ionChange)="disabledBottomDelivery()">
-=======
             <ion-range pin="false" snaps="true" min="0" max="3" step="1" color="secondary" [(ngModel)]="fundaCtrl" #ctrl="ngModel" (ionChange)="validation()">
->>>>>>> dev
             </ion-range>
           </ion-col>
         </ion-row>
@@ -280,24 +264,7 @@
       <!--Range material-->
       <ion-col col-7>
         <ion-range pin="true" snaps="true" min="0" max="100" step="10" color="yellow" [(ngModel)]="plasticoCtrl"
-<<<<<<< HEAD
-                   #ctrl="ngModel" (ionChange)="totalMaterial(plasticoCtrl,'plastico'); disabledBottomDelivery()">
-        </ion-range>
-        <ion-range pin="true" snaps="true" min="0" max="100" step="10" color="orange" [(ngModel)]="papelCtrl"
-                   #ctrl="ngModel" (ionChange)="totalMaterial(papelCtrl,'papel'); disabledBottomDelivery()">
-        </ion-range>
-        <ion-range pin="true" snaps="true" min="0" max="100" step="10" color="green" [(ngModel)]="cartonCtrl"
-                   #ctrl="ngModel" (ionChange)="totalMaterial(cartonCtrl,'carton'); disabledBottomDelivery()">
-        </ion-range>
-        <ion-range pin="true" snaps="true" min="0" max="100" step="10" color="darkBlue1" [(ngModel)]="chatarraCtrl"
-                   #ctrl="ngModel" (ionChange)="totalMaterial(chatarraCtrl,'chatarra'); disabledBottomDelivery()">
-        </ion-range>
-        <ion-range pin="true" snaps="true" min="0" max="100" step="10" color="lightBlue" [(ngModel)]="vidrioCtrl"
-                   #ctrl="ngModel" (ionChange)="totalMaterial(vidrioCtrl,'vidrio'); disabledBottomDelivery()">
-        </ion-range>
-        <ion-range pin="true" snaps="true" min="0" max="100" step="10" color="purple" [(ngModel)]="compuestoCtrl"
-                   #ctrl="ngModel" (ionChange)="totalMaterial(compuestoCtrl,'compuesto'); disabledBottomDelivery()">
-=======
+
                    #ctrl="ngModel" (ionChange)="totalMaterial(plasticoCtrl,'plastico'); validation()">
         </ion-range>
         <ion-range pin="true" snaps="true" min="0" max="100" step="10" color="orange" [(ngModel)]="papelCtrl"
@@ -314,7 +281,6 @@
         </ion-range>
         <ion-range pin="true" snaps="true" min="0" max="100" step="10" color="purple" [(ngModel)]="compuestoCtrl"
                    #ctrl="ngModel" (ionChange)="totalMaterial(compuestoCtrl,'compuesto'); validation()">
->>>>>>> dev
         </ion-range>
       </ion-col>
     </ion-row>
