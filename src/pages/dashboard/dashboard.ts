@@ -42,7 +42,6 @@ export class DashboardPage {
 
   tmpMaterial:any;
   lenghtArray:any;
-
   auxPapel:any=0;
   auxPlastico:any=0;
   auxCarton:any=0;
@@ -86,7 +85,6 @@ export class DashboardPage {
   // }
 
   ionViewWillEnter(){
-
     //console.log("Entrara");
     this.afAuth.authState.subscribe(
       data => {
@@ -102,7 +100,6 @@ export class DashboardPage {
 
 
           this.userSrv.porcentMaterial().then((resp)=>{
-
             let cont=0;
               resp.subscribe((respData)=>{
                 this.tmpMaterial=respData;
@@ -309,7 +306,6 @@ export class DashboardPage {
       case "1":
         this.imgDailyTip='assets/imgs/tips1.png';
         break;
-
       case "2":
         this.imgDailyTip='assets/imgs/tips2.png';
         break;

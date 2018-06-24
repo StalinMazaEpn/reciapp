@@ -1,7 +1,9 @@
-
-<ion-header>
-  <ion-navbar>
-  </ion-navbar>
+<ion-header class="firstT">
+  <!--ion-navbar>
+  </ion-navbar-->
+  <button ngClass="delivery-back-button" ion-button icon-only icon-start clear  (click)="dismiss()">
+	<ion-icon name="arrow-back"></ion-icon>
+  </button>
 </ion-header>
 
 <ion-content padding>
@@ -103,7 +105,7 @@
 															<img *ngIf="material == 'Plastico' || material == 'Plástico'" src="assets/imgs/plasticoT.png" style="width:74px; height:47px">
 															<img *ngIf="material == 'Vidrio'"  src="assets/imgs/vidrioT.png" style="width:83px; height:46px">
 															<img *ngIf="material == 'Metal'" src="assets/imgs/metalT.png" style="width:74px; height:49px">
-															<img *ngIf="material == 'Tetrapack'" src="assets/imgs/tetrapakT.png" style="width:74px; height:49px">
+															<img *ngIf="material == 'Tetrapack'" src="assets/imgs/tetrapackT.png" style="width:74px; height:49px">
 														</ion-col>
 														<!--ion-row style="max-height: 40px;">
 															<ion-col col>
@@ -209,9 +211,10 @@
 				<p text-wrap *ngIf="recycler.dream" >"{{recycler.dream}}"</p>
 			</div>
 
+
 		</div>
 		<div class="mapstyle" >
-			<agm-map [latitude]="recycler.latitude" [longitude]="recycler.longitude" [fullscreenControlOptions]="false" [zoomControl]="false" [streetViewControl]="false" [usePanning]="true" [maxZoom]="zoom" >
+			<agm-map [latitude]="recycler.latitude" [longitude]="recycler.longitude" [zoomControl]="false" [fullscreenControlOptions]="false" [streetViewControl]="false"	[usePanning]="true" [zoom]="zoomDef">
 				<agm-marker [latitude]="recycler.latitude" [longitude]="recycler.longitude"></agm-marker>
 			</agm-map>
 		</div>
@@ -231,6 +234,5 @@
 			</button>
 		</ng-template>
 		</ion-fab>
-
 	</ion-card>
 </ion-content>

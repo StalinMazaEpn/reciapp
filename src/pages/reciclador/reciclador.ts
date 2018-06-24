@@ -262,5 +262,4 @@ export class RecicladorPage {
       return year.toString() + " año"
     }
   }
-
 }

@@ -80,7 +80,6 @@ export class MyApp {
         }
 
         let nav = this.app.getActiveNav();
-
         if (nav && nav.canGoBack && nav.canGoBack()){ //Can we go back?
           nav.pop();
         } else {
@@ -119,7 +118,6 @@ export class MyApp {
       case "1":
         localStorage.setItem('dailyTip','2');
         break;
-
       case "2":
         localStorage.setItem('dailyTip','3');
         break;
