@@ -83,13 +83,13 @@ export class ExchangePage {
   }
 
   exchangeModal( objExchange ) {
+
     //console.log('BEFORE',objExchange);
     let modal = this.modalCtrl.create( ModalPage, { objectExchange: objExchange, userData: this.userData } );
     modal.present();
   }
 
   couponModal( objExchange ) {
-    //console.log('BEFORE',objExchange);
     let modal = this.modalCtrl.create( CouponModalPage, { objectExchange: objExchange, userData: this.userData } );
     modal.present();
   }

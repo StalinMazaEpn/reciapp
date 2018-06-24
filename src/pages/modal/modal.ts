@@ -5,6 +5,8 @@ import { AuthenticationService } from "../../services/authenticationService";
 import { database } from "firebase";
 import { CouponModalPage } from "../couponModal/couponModal";
 
+import moment from 'moment';
+
 @IonicPage()
 @Component({
   selector: 'page-modal',
@@ -20,7 +22,7 @@ export class ModalPage {
     public toastCtrl:ToastController, public modalCtrl:ModalController) {
     this.userData=this.navParams.get('userData');
     this.objExchange=this.navParams.get('objectExchange');
-    console.log(this.userData);
+    //console.log(this.userData);
     this.usrPoints=this.userData.points.total;
   }
 
@@ -29,8 +31,9 @@ export class ModalPage {
   }
 
   /*ionViewWillLoad(){
-    const data = this.navParams.get('data');
-    console.log(data);
+    this.userData=this.navParams.get('userData');
+    this.objExchange=this.navParams.get('objectExchange');
+    this.usrPoints=this.userData.points.total;
   }*/
 
  closeModal(){
@@ -54,6 +57,10 @@ export class ModalPage {
       this.usrPoints-=this.exchangeData.exchange.points;
       //this.okExchange();
       this.dismiss();
+
+      //Add expired date when change a coupon
+      obj.expireDate=moment().add( 24, 'hours' ).format( 'DD [de] MMMM YYYY HH:mm' );
+
       this.goCouponModal(obj);
     })
     .catch(e=>console.log(e));

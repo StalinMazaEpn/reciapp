@@ -42,7 +42,7 @@ export class DashboardPage {
 
   tmpMaterial:any;
   lenghtArray:any;
-  
+
   auxPapel:any=0;
   auxPlastico:any=0;
   auxCarton:any=0;
@@ -84,9 +84,8 @@ export class DashboardPage {
   //       this.uid=data.uid;
   //     });
   // }
-  
+
   ionViewWillEnter(){
-    
     //console.log("Entrara");
     this.afAuth.authState.subscribe(
       data => {
@@ -102,7 +101,6 @@ export class DashboardPage {
 
 
           this.userSrv.porcentMaterial().then((resp)=>{
-            
             let cont=0;
               resp.subscribe((respData)=>{
                 this.tmpMaterial=respData;
@@ -303,13 +301,12 @@ export class DashboardPage {
 
   changeDailyTip(){
     localStorage.getItem('dailyTip');
-    console.log('ALMACENAMIENTO TIP', localStorage.getItem('dailyTip'));   
+    console.log('ALMACENAMIENTO TIP', localStorage.getItem('dailyTip'));
 
     switch (localStorage.getItem('dailyTip')) {
       case "1":
         this.imgDailyTip='assets/imgs/tips1.png';
         break;
-       
       case "2":
         this.imgDailyTip='assets/imgs/tips2.png';
         break;
@@ -317,7 +314,7 @@ export class DashboardPage {
       case "3":
         this.imgDailyTip='assets/imgs/tips3.png';
         break;
-     } 
+     }
   }
 
   goDelivery(){

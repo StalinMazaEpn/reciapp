@@ -9,6 +9,7 @@ import { TourPage } from '../pages/tour/tour';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import moment from 'moment';
+import { LoginPage } from '../pages/login/login';
 
 @Component({
   templateUrl: 'app.html'
@@ -24,7 +25,6 @@ export class MyApp {
   optionsMenu:any;
 
   optionWithSession:any=[
-    {title:'Perfil',component:null},
     {title:'Tour',component:TourPage},
     {title:'Cerrar Sesión',component:'cerrar'},
   ];
@@ -45,14 +45,27 @@ export class MyApp {
 
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+
+      this.afAuth.authState.subscribe(data=>{
+        if(data && data.uid){
+          this.optionsMenu=this.optionWithSession;
+          //console.log('SESSION OPTION MENU');
+          if(this.isTourDone()){
+            this.rootPage = TabsPage;
+            splashScreen.hide();
+          }else{
+            this.rootPage = TourPage;
+            splashScreen.hide();
+          }
+        }else{
+          //console.log('WITHOUT SESSION OPTION MENU');
+          this.optionsMenu=this.optionWithOutSession;
+          this.rootPage = LoginPage;
+        }
+      });
+
       statusBar.styleDefault();
-      if(this.isTourDone()){
-        this.rootPage = TabsPage;
-        splashScreen.hide();
-      }else{
-        this.rootPage = TourPage;
-        splashScreen.hide();
-      }
+
 
       platform.registerBackButtonAction(() => {
 
@@ -67,7 +80,7 @@ export class MyApp {
         }
 
         let nav = this.app.getActiveNav();
-        
+
         if (nav && nav.canGoBack && nav.canGoBack()){ //Can we go back?
           nav.pop();
         } else {
@@ -106,7 +119,6 @@ export class MyApp {
       case "1":
         localStorage.setItem('dailyTip','2');
         break;
-      
       case "2":
         localStorage.setItem('dailyTip','3');
         break;
@@ -146,7 +158,7 @@ export class MyApp {
   /*
   This method will be used in future test with mobiles
   Don`t Erase please
-  
+
   isTourDone(): boolean{
     this.nativeStorage.getItem('tourDone')
     .then(
@@ -161,7 +173,7 @@ export class MyApp {
     localStorage.removeItem('userData');
     //Toast loading while logout user session
     this.redirectLogin();
-    this.nav.setRoot(TabsPage);
+    this.nav.setRoot(LoginPage);
   }
 
   redirectLogin() {

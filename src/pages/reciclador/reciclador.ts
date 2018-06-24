@@ -263,9 +263,4 @@ export class RecicladorPage {
     }
   }
 
-
-  dismiss(){
-    this.navCtrl.pop();
-  }
-
 }
