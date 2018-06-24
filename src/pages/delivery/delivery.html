@@ -27,11 +27,11 @@
         <img class="photoMaterial" [hidden]="tmpPhoto == 'assets/imgs/transparent.png'" src="{{tmpPhoto}}">
       </div>
       <!--Camera button-->
-      <!--div class="camera-btn">
+      <div class="camera-btn1">
         <button style="background-color: transparent !important; box-shadow: none" (click)="takePhoto()">
-          <img src="assets/imgs/camera.png" class="camera-img">
+          <img src="assets/imgs/camera.png" class="camera-img1">
         </button>
-      </div-->
+      </div>
     </ng-template>
   </div>
   <!--FAVORITES RECYCLER SECTION-->
@@ -74,7 +74,7 @@
           </li>
           <!--RECYCLER AROUND BY-->
           <!--ANONYMOUS RECYCLER-->
-          <li text-center (tap)="selectRecycler('Anónimo')">
+          <li text-center (tap)="selectRecycler('Anónimo')" style="margin-right: 2%; margin-left: -2%;">
             <ion-avatar>
               <img class="recyclers" src="assets/imgs/menos.png" id="anonymousRecycler" style="background-color: #005c80">
             </ion-avatar>
@@ -294,12 +294,13 @@
       <!--VALIDATIONS-->
       <!--PHOTO Validations-->
       <div text-center>
-
         <span *ngIf="!error" class="validations"> *Toma una foto para validar la información.</span>
       </div>
       <!--RECYCLER Validations-->
       <div text-center>
-        <span *ngIf="!errorRecycler && error" class="validations"> *Selecciona a tu <b>Reciclador favorito, Cercano o Anónimo</b> que deseas entregar.</span>
+        <!--span *ngIf="!errorRecycler && error" class="validations"> *Selecciona a tu <b>Reciclador favorito, Cercano o Anónimo</b> que deseas entregar.</span-->
+        <span *ngIf="!errorRecycler && error" class="validations"> *Selecciona el reciclador al que deseas entregar</span>
+        
       </div>
       <!--SLEEVE PLASTIC Validations-->
       <div text-center>
@@ -310,14 +311,19 @@
         <span *ngIf="(totalMaterialRecyclable)==100" class="title-small" style="color: green">La funda ya esta llena</span>
         <span *ngIf="(_totalMaterialRecyclable)>100" class="title-small validations">(No puedes entregar más de su capacidad.)</span>
         <span *ngIf="(_totalMaterialRecyclable)>100 && errTotalMaterialRecyclable" class="title-small1 validations">Reduce los porcentajes en el formulario y verifica que no sobrepase el 100% de la funda.</span>
-        <span *ngIf="!errorForm && error && errorRecycler && errorSize" class="validations"> *Identifica la cantidad de cada material que vas a entregar.</span>
+        <span *ngIf="!errorForm && error && errorRecycler && errorSize" class="validations"> *Indica la cantidad de cada material.</span>
       </div>
+      <br>
     </div>
     <ng-template #enabledBtn>
-      <button [disabled]="disabledBtn" (click)="delivery()" ion-button large outline class="roundBtn bg-boton" style="color: white "> Enviar
+      <button *ngIf="!disabledBtn; else spinnerDelivery" [disabled]="disabledBtn" (click)="delivery()" ion-button large outline class="roundBtn bg-boton" style="color: white "> Enviar
         <span style="width: 25px; height: 25px; margin-left: 5% !important; margin-top: -20px"><ion-icon
           ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline" color="ligth"></ion-icon></span>
       </button>
+      <ng-template #spinnerDelivery>
+        <ion-spinner name="circles"></ion-spinner>
+        Guardando...
+      </ng-template>
     </ng-template>
     <!--button ion-button large outline class="roundBtn" style="background-color: #39b54a;color: white ">
       Enviar  <span style="width: 25px; height: 25px; margin-left: 5% !important;"><ion-icon ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline" color="ligth"></ion-icon></span>

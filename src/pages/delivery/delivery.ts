@@ -370,6 +370,7 @@ export class DeliveryPage {
     this.auxSelRecycler = false;
     //disabled butom
     this.disabledBtnDelivery = true;
+    this.disabledBtn = false;
   }
 
   //Function to assign
