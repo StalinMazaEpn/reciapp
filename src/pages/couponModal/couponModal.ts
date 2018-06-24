@@ -16,7 +16,7 @@ export class CouponModalPage {
   constructor( public navCtrl: NavController,private navParams: NavParams, private view: ViewController,public userSrv:ReciappService) {
     this.userData=this.navParams.get('userData');
     this.objExchange=this.navParams.get('objectExchange');
-    console.log(this.userData);
+    //console.log(this.userData);
     this.usrPoints=this.userData.points.total;
   }
 

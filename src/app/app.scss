@@ -16,7 +16,7 @@
 
 @font-face {
   font-family: "WorkSans";
-  src: url("../assets/fonts/WorkSans-Regular.ttf")
+  src: url('../assets/fonts/WorkSans-Regular.ttf')
 }
 
 *{
@@ -48,9 +48,15 @@
   }
 }
 
+.button-md {
+  text-transform: none;
+}
 
 
 /* HEADER */
+ion-header {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
 .grid-header {
   padding: 0;
 
@@ -99,18 +105,18 @@
 .tabs-ios {
   a[aria-selected=false]{
     .tab-button-icon[ng-reflect-name="left-hand"], .tab-button-icon[aria-label="left-hand"] {
-      background-image: url(../assets/imgs/left-hand-on.png);
+      background-image: url('../assets/imgs/left-hand-on.png');
       background-size: 70px 30px;
       background-position: left;
       opacity: .5;
     }
     .tab-button-icon[ng-reflect-name="heart-reciveci"], .tab-button-icon[aria-label="heart-reciveci"] {
-      background-image: url(../assets/imgs/heart-reciveci-on.png);
+      background-image: url('../assets/imgs/heart-reciveci-on.png');
       background-size: 37px 30px;
       opacity: .5;
     }
     .tab-button-icon[ng-reflect-name="right-hand"], .tab-button-icon[aria-label="right-hand"] {
-      background-image: url(../assets/imgs/right-hand-on.png);
+      background-image: url('../assets/imgs/right-hand-on.png');
       background-size: 70px 30px;
       background-position: right;
       opacity: .5;
@@ -122,16 +128,16 @@
     //color: #f00; //whatever colour you want to use for the text
     //}
     .tab-button-icon[ng-reflect-name="left-hand"], .tab-button-icon[aria-label="left-hand"] {
-      background-image: url(../assets/imgs/left-hand-on.png);
+      background-image: url('../assets/imgs/left-hand-on.png');
       background-size: 70px 30px;
       background-position: left;
     }
     .tab-button-icon[ng-reflect-name="heart-reciveci"], .tab-button-icon[aria-label="heart-reciveci"] {
-      background-image: url(../assets/imgs/heart-reciveci-on.png);
+      background-image: url('../assets/imgs/heart-reciveci-on.png');
       background-size: 37px 30px;
     }
     .tab-button-icon[ng-reflect-name="right-hand"], .tab-button-icon[aria-label="right-hand"] {
-      background-image: url(../assets/imgs/right-hand-on.png);
+      background-image: url('../assets/imgs/right-hand-on.png');
       background-size: 70px 30px;
       background-position: right;
     }
@@ -141,18 +147,18 @@
 .tabs-md {
   a[aria-selected=false]{
     .tab-button-icon[ng-reflect-name="left-hand"], .tab-button-icon[aria-label="left-hand"] {
-      background-image: url(../assets/imgs/left-hand-on.png);
+      background-image: url('../assets/imgs/left-hand-on.png');
       background-size: 70px 30px;
       background-position: left;
       opacity: .5;
     }
     .tab-button-icon[ng-reflect-name="heart-reciveci"], .tab-button-icon[aria-label="heart-reciveci"] {
-      background-image: url(../assets/imgs/heart-reciveci-on.png);
+      background-image: url('../assets/imgs/heart-reciveci-on.png');
       background-size: 37px 30px;
       opacity: .5;
     }
     .tab-button-icon[ng-reflect-name="right-hand"], .tab-button-icon[aria-label="right-hand"] {
-      background-image: url(../assets/imgs/right-hand-on.png);
+      background-image: url('../assets/imgs/right-hand-on.png');
       background-size: 70px 30px;
       background-position: right;
       opacity: .5;
@@ -165,16 +171,16 @@
     //color: #f00; //whatever colour you want to use for the text
     //}
     .tab-button-icon[ng-reflect-name="left-hand"], .tab-button-icon[aria-label="left-hand"] {
-      background-image: url(../assets/imgs/left-hand-on.png);
+      background-image: url('../assets/imgs/left-hand-on.png');
       background-size: 70px 30px;
       background-position: left;
     }
     .tab-button-icon[ng-reflect-name="heart-reciveci"], .tab-button-icon[aria-label="heart-reciveci"] {
-      background-image: url(../assets/imgs/heart-reciveci-on.png);
+      background-image: url('../assets/imgs/heart-reciveci-on.png');
       background-size: 37px 30px;
     }
     .tab-button-icon[ng-reflect-name="right-hand"], .tab-button-icon[aria-label="right-hand"] {
-      background-image: url(../assets/imgs/right-hand-on.png);
+      background-image: url('../assets/imgs/right-hand-on.png');
       background-size: 70px 30px;
       background-position: right;
     }
@@ -184,18 +190,18 @@
 .tabs-wp {
   a[aria-selected=false]{
     .tab-button-icon[ng-reflect-name="left-hand"], .tab-button-icon[aria-label="left-hand"] {
-      background-image: url(../assets/imgs/left-hand-on.png);
+      background-image: url('../assets/imgs/left-hand-on.png');
       background-size: 70px 30px;
       background-position: left;
       opacity: .5;
     }
     .tab-button-icon[ng-reflect-name="heart-reciveci"], .tab-button-icon[aria-label="heart-reciveci"] {
-      background-image: url(../assets/imgs/heart-reciveci-on.png);
+      background-image: url('../assets/imgs/heart-reciveci-on.png');
       background-size: 37px 30px;
       opacity: .5;
     }
     .tab-button-icon[ng-reflect-name="right-hand"], .tab-button-icon[aria-label="right-hand"] {
-      background-image: url(../assets/imgs/right-hand-on.png);
+      background-image: url('../assets/imgs/right-hand-on.png');
       background-size: 70px 30px;
       background-position: right;
       opacity: .5;
@@ -208,16 +214,16 @@
     //color: #f00; //whatever colour you want to use for the text
     //}
     .tab-button-icon[ng-reflect-name="left-hand"], .tab-button-icon[aria-label="left-hand"] {
-      background-image: url(../assets/imgs/left-hand-on.png);
+      background-image: url('../assets/imgs/left-hand-on.png');
       background-size: 70px 30px;
       background-position: left;
     }
     .tab-button-icon[ng-reflect-name="heart-reciveci"], .tab-button-icon[aria-label="heart-reciveci"] {
-      background-image: url(../assets/imgs/heart-reciveci-on.png);
+      background-image: url('../assets/imgs/heart-reciveci-on.png');
       background-size: 37px 30px;
     }
     .tab-button-icon[ng-reflect-name="right-hand"], .tab-button-icon[aria-label="right-hand"] {
-      background-image: url(../assets/imgs/right-hand-on.png);
+      background-image: url('../assets/imgs/right-hand-on.png');
       background-size: 70px 30px;
       background-position: right;
     }

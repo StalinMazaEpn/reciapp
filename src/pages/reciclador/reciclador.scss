@@ -18,6 +18,14 @@ page-reciclador {
         z-index: -1;
         margin-top: -49%;
     }
+    .delivery-back-button {
+        color: #ffffff;
+      }
+
+      .firstT{
+          padding: 4% 0 0 2%;
+      }
+
 
     .delivery-back-button {
         color: #ffffff;
@@ -40,6 +48,7 @@ page-reciclador {
         color:white;
         text-align: center;
     }*/
+
     .icon_callStyle{
         width: 39px;
         height: 39px;
@@ -75,7 +84,7 @@ page-reciclador {
     /* z-index: 39; */
     /* -webkit-transform: skewY(-19deg); */
     /* transform: skewY(-19deg); */
-      
+
 
     }
 
@@ -111,7 +120,7 @@ page-reciclador {
         height: 20%;
         margin-top: 40%
     }
-   
+
     .oneD p{
         position: absolute;
         margin-top: 8%;
@@ -168,17 +177,17 @@ page-reciclador {
     }
 
     .list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block {
-        border-bottom: 0px; 
+        border-bottom: 0px;
     }
 
     .list-ios > .item-block:first-child {
-        border-top: 0px; 
+        border-top: 0px;
     }
 
     .item-ios {
-        
+
         padding-left: 0px;
-        
+
     }
     .item-ios [item-left], .item-ios [item-start] {
         margin: 0px 0px 0px 0;
@@ -239,7 +248,7 @@ page-reciclador {
     .callPhone{
         background: linear-gradient(to left, #39b54a, #8dc63f);
         width: 46%;
-         height: 64%; 
+         height: 64%;
          margin-left: 50%;
     }
 
@@ -256,12 +265,13 @@ page-reciclador {
         width: 110%
     }*/
     
+
     .notPhone{
         width: 47px;
         height: 47px;
         border: 3px solid #005c80;
         border-radius: 100%;
-      
+
         //margin-left: 21%;
     }
 
@@ -322,7 +332,7 @@ page-reciclador {
     .toolbar-background-md {
         border-color: #004361;
         background: #004361;
-    }   
+    }
 
-    
+
 }
