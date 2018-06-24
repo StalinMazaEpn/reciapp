@@ -109,7 +109,7 @@ export class RecyclerFormPage {
     if (this.recyclingFor)
       this.newRecycler.yearStartRecycling = this.year.getFullYear() - this.recyclingFor;
     this.newRecycler.createdAt = database.ServerValue.TIMESTAMP;
-    
+
 
     if (this.tmp_image !== undefined) {
       //Storage on firebase
@@ -124,13 +124,13 @@ export class RecyclerFormPage {
           this.userSrv.addNewRecycler(this.newRecycler.id, this.newRecycler).then(() => {
             //Toast Ok
             this.saving = false;
-           
-            this.registerOk();                                                                
-            this.navCtrl.push(RecicladorPage, {recycler: this.newRecycler });                   
+
+            this.registerOk();
+            this.dismiss();
+            this.navCtrl.push(RecicladorPage, {recycler: this.newRecycler });
             // this.updatePoints(); // TODO
             console.log("REGISTERED RECYCLER", this.newRecycler);
             //Function to close modal - Form Recycler
-            this.dismiss();
           })
             .catch((e) => {
               this.buttonDisabled = false;
@@ -159,7 +159,7 @@ export class RecyclerFormPage {
         });
     }
 
-    
+
 
     //this.navCtrl.push(RecicladorPage);
 
@@ -182,10 +182,10 @@ export class RecyclerFormPage {
     }
     else{
       let index = this.newRecycler.material.findIndex(x => x.value == value);
-      console.log(index); 
+      console.log(index);
       this.newRecycler.material.splice(index, 1);
     }
-    console.log(this.newRecycler.material);    
+    console.log(this.newRecycler.material);
   }
 
   addDays(checked: boolean, value:string){
@@ -198,7 +198,7 @@ export class RecyclerFormPage {
       let index = this.newRecycler.date.days.findIndex(x => x.value == value);
       this.newRecycler.date.days.splice(index, 1);
     }
-    console.log(this.newRecycler.date.days);    
+    console.log(this.newRecycler.date.days);
   }
 
   /*addGender(checked: boolean, value:string){
@@ -209,10 +209,10 @@ export class RecyclerFormPage {
     }
     else{
       let index = this.newRecycler.gender.findIndex(x => x.value == value);
-      console.log(index); 
+      console.log(index);
       this.newRecycler.gender.splice(index, 1);
     }
-    console.log(this.newRecycler.gender);    
+    console.log(this.newRecycler.gender);
   }*/
 
    updatePoints() {
@@ -379,7 +379,7 @@ export class RecyclerFormPage {
       this.newRecycler.name === undefined || this.newRecycler.name.length === 0 ||
       this.newRecycler.lastName === undefined || this.newRecycler.lastName.length === 0 ||
       this.newRecycler.date.days === undefined ||
-      this.newRecycler.material === undefined ||    
+      this.newRecycler.material === undefined ||
       this.newRecycler.date.startTime === undefined ||
       this.newRecycler.date.endTime === undefined ||
       this.newRecycler.date.startTime > this.newRecycler.date.endTime ||
