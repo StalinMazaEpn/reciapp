@@ -89,7 +89,6 @@ export class ExchangePage {
   }
 
   couponModal( objExchange ) {
-    //console.log('BEFORE',objExchange);
     let modal = this.modalCtrl.create( CouponModalPage, { objectExchange: objExchange, userData: this.userData } );
     modal.present();
   }

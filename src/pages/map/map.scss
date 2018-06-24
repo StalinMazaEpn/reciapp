@@ -2,9 +2,9 @@ page-map {
     agm-map {
         height: 82%;
         width: 100%;
-        position:absolute; 
-        top:0; 
-        bottom:0; 
+        position:absolute;
+        top:0;
+        bottom:0;
     }
 
     .botonR{
@@ -20,8 +20,17 @@ page-map {
         font-size: 45px;
     }
 
-    .segmentText{
-        margin-top: 100%;
+    .swiper-container {
+        height: 80%;
+    }
+
+    /*.item-block {
+        max-height: 30%;
+    }*/
+
+    .content {
+        background-color: #145575;
+        //color: #ffffff;
     }
 
     ion-fab[middle] {
@@ -47,11 +56,22 @@ page-map {
     .firstLetter{
     	position: absolute;
     	font-size: 25px;
-    	margin-top: 12% !important;
+    	margin-top: 14% !important;
     	margin-bottom:0 !important;
-    	margin-left: 20% !important;
+    	margin-left: 14% !important;
         color:white;
         text-align: center;
+    }
+
+    .photoChar{
+        padding: 16px;
+        background: linear-gradient(to left,#39b54a,#8dc63f);
+        max-width: 60px;
+        max-height: 60px;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 25px;
+        color:white;
     }
 
     .item-md ion-avatar img {
@@ -59,20 +79,20 @@ page-map {
         overflow: hidden;
         width: 60px;
         height: 60px;
-        
+
     }
 
     .item-md ion-avatar {
         min-width: 60px;
         min-height: 60px;
-        
+
     }
 
     .item-ios ion-avatar {
         min-width: 60px;
         min-height: 60px;
     }
-    
+
     .toolbar-md {
         padding: 0px;
         min-height: 0px;
@@ -90,7 +110,7 @@ page-map {
         border: 3px solid green;
         border-radius: 100%;
         padding-left: 1%;
- 
+
     }
 
     .notPhone{
@@ -108,19 +128,19 @@ page-map {
 
 
     .item-ios.item-block .item-inner {
-        
+
         padding-right: 8px;
-        border-bottom: 0px; 
+        border-bottom: 0px;
     }
 
 
     .item-md.item-block .item-inner {
-        
+
         padding-right: 8px;
-        border-bottom: 0px; 
+        border-bottom: 0px;
     }
 
-    
+
     .segment-ios-segment .segment-button.segment-activated {
         color: #61d800;
         background-color: #61d800;
@@ -151,8 +171,8 @@ page-map {
     }
 
     .segment-ios .segment-button:last-of-type {
-        
-        border-bottom-right-radius: 0px; 
+
+        border-bottom-right-radius: 0px;
         border-right: 0px;
         border-top: 0px;
     }
@@ -166,9 +186,9 @@ page-map {
     /*page-map .segmentText {
         margin-top: 118%;
     }*/
-    
+
     .alert-md .alert-wrapper {
-        
+
         background-color: #005c7e;
     }
 
@@ -181,11 +201,11 @@ page-map {
     }
 
     .label-md {
-        margin: 5% 8px 13px 0;
+        margin: 5% 8px 0% 0;
     }
 
     .label-ios {
-        margin: 7% 8px 13px 0;
+        margin: 6% 8px 0% 0;
     }
 
     .segmentText {
@@ -195,5 +215,18 @@ page-map {
     .fab-md {
         box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0), 0 0px 0px rgba(0, 0, 0, 0);
     }
+  .coupon-overlay {
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: linear-gradient(to right,#afba35, #ede937);
+    position: absolute;
+    opacity: .8;
+    padding: 26px 0;
+    font-weight: bold;
+    font-size: 12px;
+    color: $darkBlue;
+  }
 
 }

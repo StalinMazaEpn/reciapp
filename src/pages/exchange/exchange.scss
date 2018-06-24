@@ -1,10 +1,18 @@
 page-exchange {
+  .scroll-content {
+    padding-top: 54px;
+  }
   .bg-purple1 {
     background: linear-gradient(to left, $purple1, $purple2);
   }
 
   .bg-purple {
     background: linear-gradient(to top, $purple1, $purple2);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9;
+    color: #ffffff;
   }
 
   .bg-darkblue {
@@ -51,14 +59,21 @@ page-exchange {
     padding-left: 0px !important;
   }
 
-	h1.points{
+	span.points{
 		display: inline-block;
 		margin-left: 5%;
 		margin-top: 8px !important;
+    font-size: 24px;
+    font-weight: bold;
 	}
-	
+
 	img.img-header{
-		margin-top: 8px !important;	
+		margin-top: 8px !important;
+    vertical-align: top;
 	}
+
+  .delivery-back-button {
+    color: white;
+  }
 
 }
