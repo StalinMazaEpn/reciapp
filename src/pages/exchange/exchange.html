@@ -10,23 +10,24 @@
   </ion-toolbar>
 </ion-header-->
 
+<ion-row class="bg-purple" >
+  <ion-col col-2 text-center (tap)="dismiss()">
+    <button ngClass="delivery-back-button" ion-button icon-only icon-start clear>
+      <ion-icon name="arrow-back"></ion-icon>
+    </button>
+  </ion-col>
+  <ion-col col-8 text-center>
+    <img class="img-header" height="30" src="assets/imgs/heart-reciveci-on.png" />
+
+    <span class="points"> {{userPts}} </span>
+    <!--h2 style="margin-top: 15px;" >{{userName}} </h2-->
+  </ion-col>
+</ion-row>
 
 <ion-content style="background-color: #00a0dc;">
   <!--Section user points-->
 
-	<ion-row class="bg-purple" >
-	    <ion-col col-2 text-center (tap)="dismiss()">
-	      <button ngClass="delivery-back-button" ion-button icon-only icon-start clear>
-	        <ion-icon name="arrow-back"></ion-icon>
-	      </button>
-	    </ion-col>
-	    <ion-col col-8 text-center>
-	    	<img class="img-header" height="30" src="assets/imgs/heart-reciveci-on.png" />
 
-	    	<span class="points"> {{userPts}} </span>
-	      <!--h2 style="margin-top: 15px;" >{{userName}} </h2-->
-	    </ion-col>
-	</ion-row>
 
   <!--Section exchange-->
   <ion-row text-center style="background: #167b9b;">
