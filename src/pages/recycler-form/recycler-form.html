@@ -321,6 +321,11 @@
     </ion-label>
   </ion-item>
 
+  <!--agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [zoomControl]="false" [streetViewControl]="false"
+           (mapClick)="getRecyclerLocation($event)">
+    <agm-marker [latitude]="lat_" [longitude]="lng_"></agm-marker>
+  </agm-map-->
+
   <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [zoomControl]="false" [streetViewControl]="false"
            (mapClick)="getRecyclerLocation($event)">
     <agm-marker [latitude]="lat_" [longitude]="lng_"></agm-marker>

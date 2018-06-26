@@ -1,18 +1,21 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ToastController, Platform, AlertController} from 'ionic-angular';
 
 import {AngularFireAuth} from 'angularfire2/auth';
 
 import {Geolocation} from '@ionic-native/geolocation';
+import { Diagnostic } from '@ionic-native/diagnostic';
 
 import {User} from '../../models/user';
 import {ReciappService} from '../../services/reciapp.service'
 import {Recycler} from '../../models/recycler';
 import {LoginPage} from '../login/login';
 import {RecicladorPage} from '../reciclador/reciclador';
+import {PointsPage} from '../points/points';
 
 import {FormBuilder, FormGroup, Validators, AbstractControl, FormControl} from '@angular/forms';
 import {AuthenticationService} from "../../services/authenticationService";
+import { LocationAccuracy } from '@ionic-native/location-accuracy';
 
 import firebase from "firebase";
 import {Camera, CameraOptions} from "@ionic-native/camera";
@@ -45,7 +48,16 @@ export class RecyclerFormPage {
   //user geolocation to maps and zoom
   lat: any;
   lng: any;
-  zoom: any = 16;
+  zoom: any = 10;
+
+  latView: any;
+  lngView: any;
+
+  // values by default
+  latViewDef: any = -0.184713;
+  lngViewDef: any = -78.484771;
+  zoomDef: any = 10;
+
   //recycler geolocation to maps and zoom
   lat_: any;
   lng_: any;
@@ -84,14 +96,43 @@ export class RecyclerFormPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController,
               public afAuth: AngularFireAuth, public userSrv: ReciappService, private geolocation: Geolocation,
-              public formBuilder: FormBuilder, public authenticationService: AuthenticationService, private camera: Camera) {
+              public formBuilder: FormBuilder, public authenticationService: AuthenticationService, 
+              private camera: Camera, private platform: Platform, private diagnostic: Diagnostic,
+               private locationAccuracy: LocationAccuracy,  private alertCtrl: AlertController) {
     this.userData = this.userSrv.getUser(this.authenticationService.getCurrentUser().uid);
     this.newRecycler.idUser = this.authenticationService.getCurrentUser().uid;
-    this.getMyLocation();
+    
     this.formValidation();
+    this.valuesByDefault();
     this.newRecycler.material = new Array();
     this.newRecycler.date.days = new Array();
     //this.newRecycler.gender = new Array();
+
+    if (this.platform.is('ios')) {
+      this.locationAccuracy.canRequest().then(
+        (canRequest: boolean) => {
+          if(canRequest) {
+            this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+              () => {
+                this.verifyGps();
+                this.getMyLocation();
+              },
+              error => {
+                this.valuesByDefault();
+              }
+            );
+          }
+      });
+    } else if (this.platform.is('android')) {
+      this.diagnostic.isGpsLocationEnabled()
+      .then((enabled)=>{
+        if(enabled){
+          this.getMyLocation();
+        }else{
+          this.presentConfirm("Encender su GPS por favor");
+        }
+      });
+  }
   }
 
   ionViewDidLoad() {
@@ -131,6 +172,7 @@ export class RecyclerFormPage {
             // this.updatePoints(); // TODO
             console.log("REGISTERED RECYCLER", this.newRecycler);
             //Function to close modal - Form Recycler
+            this.navCtrl.push(PointsPage, {points : 100, message: "Gracias, el reciclador se ha registrado correctamente, has ganado 100 puntos."});
           })
             .catch((e) => {
               this.buttonDisabled = false;
@@ -153,6 +195,7 @@ export class RecyclerFormPage {
         //Function to close modal - Form Recycler
         this.dismiss();
         this.navCtrl.push(RecicladorPage, {recycler: this.newRecycler });
+        this.navCtrl.push(PointsPage, {points : 100, message: "Gracias, el reciclador se ha registrado correctamente, has ganado 100 puntos."});
       })
         .catch((e) => {
           console.log("ERROR: ", e);
@@ -228,6 +271,8 @@ export class RecyclerFormPage {
     this.geolocation.getCurrentPosition().then((resp) => {
       this.lat = resp.coords.latitude;
       this.lng = resp.coords.longitude;
+      this.zoom=10;
+      console.log('UBICACION', this.zoom);
     }).catch((error) => {
       console.log('Error getting location', error);
     });
@@ -436,4 +481,41 @@ export class RecyclerFormPage {
       this.default_image = 'assets/imgs/recycler_men.png';
     }
   }
+
+  verifyGps(){
+    this.diagnostic.isLocationAuthorized()
+    .then((appAutorized)=>{
+      if(appAutorized){
+        this.diagnostic.isLocationEnabled()
+        .then((enabled)=>{
+          if(enabled){
+            this.getMyLocation();
+          }else{
+            this.presentConfirm("Encender su GPS por favor");
+          }
+        })
+      }else{
+        this.diagnostic.requestLocationAuthorization("always")
+        .then(()=>{
+          this.getMyLocation();
+        })
+      }
+    })
+  }
+
+  valuesByDefault(){
+    this.lat = this.latViewDef;
+    this.lng = this.lngViewDef;
+    this.zoom =  this.zoomDef;
+  }
+
+  presentConfirm(message) {
+    let alert = this.alertCtrl.create({
+      title: 'Ubicación',
+      message: message
+    });
+    alert.present();
+}
+
+
 }

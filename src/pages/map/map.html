@@ -12,7 +12,7 @@
             </span>
 
             <ng-template #partnerView>
-              <agm-marker [iconUrl]="{url: '../../assets/imgs/negocioPTF.png', scaledSize: { width: 30, height: 41 } }" *ngFor="let partner of partnerList" [latitude]="partner.location.latitude"
+              <agm-marker [iconUrl]="{url: 'assets/imgs/negocioPTF.png', scaledSize: { width: 30, height: 41 } }" *ngFor="let partner of partnerList" [latitude]="partner.location.latitude"
                           [longitude]="partner.location.longitude"></agm-marker>
 
             </ng-template>
