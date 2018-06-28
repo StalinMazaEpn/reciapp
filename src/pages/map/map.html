@@ -12,7 +12,7 @@
             </span>
 
             <ng-template #partnerView>
-              <agm-marker [iconUrl]="{url: '../../assets/imgs/negocioPTF.png', scaledSize: { width: 30, height: 41 } }" *ngFor="let partner of partnerList" [latitude]="partner.location.latitude"
+              <agm-marker [iconUrl]="{url: 'assets/imgs/negocioPTF.png', scaledSize: { width: 30, height: 41 } }" *ngFor="let partner of partnerList" [latitude]="partner.location.latitude"
                           [longitude]="partner.location.longitude"></agm-marker>
 
             </ng-template>
@@ -25,8 +25,9 @@
             </button>
           </ion-fab>
           <ion-fab right middle >
-            <button ion-fab icon-only (click)="addRecycler()" style="background-color: transparent;">
-              <ion-icon color="content" ios="ios-add-circle" md="md-add-circle"></ion-icon>
+            <button ion-button icon-start round (click)="addRecycler()" class="btn-add-recicler">
+              <ion-icon color="white" ios="ios-add-circle" md="md-add-circle"></ion-icon>
+              Añadir<br>reciclador
             </button>
           </ion-fab>
 

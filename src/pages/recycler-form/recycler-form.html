@@ -1,14 +1,14 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title text-center showWhen="android,windows">
-          <img src="assets/imgs/logo-header.png" class="logo-header"/>
+          <img src="assets/imgs/logo-header.png" height="25" class="logo-header"/>
     </ion-title>
     <ion-title text-center showWhen="ios">
-        <img src="assets/imgs/logo-header.png" class="logo-header"/>
+        <img src="assets/imgs/logo-header.png" height="25" class="logo-header"/>
       </ion-title>
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
-        <span ion-text showWhen="ios">Cancel</span>
+        <span ion-text showWhen="ios">Cancelar</span>
         <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
       </button>
     </ion-buttons>
@@ -320,6 +320,11 @@
       <span style="color: #6edb14;">Ubicación (El centro de su ruta habitual)</span>
     </ion-label>
   </ion-item>
+
+  <!--agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [zoomControl]="false" [streetViewControl]="false"
+           (mapClick)="getRecyclerLocation($event)">
+    <agm-marker [latitude]="lat_" [longitude]="lng_"></agm-marker>
+  </agm-map-->
 
   <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [zoomControl]="false" [streetViewControl]="false"
            (mapClick)="getRecyclerLocation($event)">

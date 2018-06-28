@@ -70,23 +70,10 @@
 				</ion-col>
 			</ion-row-->
 			<ion-row item-end>
-				<ion-col item-end>
-					<button ion-button round icon-end item-end style=" width: 46%; height: 53%; margin-left: 50%;" class="callPhone" *ngIf="(recycler)?.phone; else elseMessage" (click)="doCallNumber(recycler.phone)">
-
-						<!--		Llamar
-
-						<ion-icon ios="ios-call" md="md-call" class="icon_callStyle" item-end></ion-icon-->
-
-						<ion-grid>
-							<ion-row >
-								<ion-col col-6 style="font-size: 111%; padding-left: 0px">
-									<p style="padding-left: 0px; padding-right: 5%">Llamar</p>
-								</ion-col>
-								<ion-col col-6>
-									<ion-icon class="icon_callStyle" ios="ios-call" md="md-call"></ion-icon>
-								</ion-col>
-							</ion-row>
-						</ion-grid>
+				<ion-col text-right>
+					<button ion-button round icon-end class="callPhone" *ngIf="(recycler)?.phone; else elseMessage" (click)="doCallNumber(recycler.phone)">
+            Llamar
+              <ion-icon class="icon_callStyle" ios="ios-call" md="md-call"></ion-icon>
 					</button>
 					<ng-template #elseMessage>
 						<ion-grid>
@@ -132,7 +119,7 @@
 														<img *ngIf="material == 'Plastico' || material == 'Plástico'" src="assets/imgs/plasticoT.png" style="height:15px; margin-left: 3px;">
 														<img *ngIf="material == 'Vidrio'"  src="assets/imgs/vidrioT.png" style="height:18px; margin-left: 3px;">
 														<img *ngIf="material == 'Metal'" src="assets/imgs/metalT.png" style="height:25px; margin-left: 3px;">
-														<img *ngIf="material == 'Tetrapack'" src="assets/imgs/tetrapackT.png" style="height:20px; margin-left: 3px;">
+														<img *ngIf="material == 'Tetrapack'" src="assets/imgs/tetrapakT.png" style="height:20px; margin-left: 3px;">
 													</ion-col>
 												</ion-row>
 											</ion-grid>

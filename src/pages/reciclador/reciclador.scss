@@ -55,10 +55,18 @@ page-reciclador {
         /* background-color: #145575; */
         border: 3px solid white;
         border-radius: 100%;
-        padding-left: 0%;
-        padding-top: 31%;
-        margin-left: 87%;
-        margin-top: 10%;
+        margin-left: 5px;
+        font-size: 25px;
+        padding-top: 8px;
+        padding-left: 2px;
+        //padding-top: 31%;
+        //margin-left: 87%;
+        //margin-top: 10%;
+      &.icon-md{
+        width: 34px;
+        height: 34px;
+        padding-top: 5px
+      }
     }
 /*
     div{
@@ -240,16 +248,17 @@ page-reciclador {
 
 
     .button-md {
-        height: 64%;
+        //height: 64%;
     }
 
-    
+
 
     .callPhone{
         background: linear-gradient(to left, #39b54a, #8dc63f);
-        width: 46%;
-         height: 64%;
-         margin-left: 50%;
+      padding-right: 0;
+        //width: 46%;
+        // height: 64%;
+        // margin-left: 50%;
     }
 
    /* [icon-end] ion-icon {
@@ -264,7 +273,7 @@ page-reciclador {
     .button-inner{
         width: 110%
     }*/
-    
+
 
     .notPhone{
         width: 47px;
@@ -312,14 +321,14 @@ page-reciclador {
         word-wrap: normal;
     }
 
-    .button-round-ios {
-        padding: 0 26px;
-        padding-top: 2px;
-    }
-
-    .button-ios {
-        font-size: 101%;
-    }
+    //.button-round-ios {
+    //    padding: 0 26px;
+    //    padding-top: 2px;
+    //}
+    //
+    //.button-ios {
+    //    font-size: 101%;
+    //}
 
 
     .header-md::after, .tabs-md[tabsPlacement="top"] > .tabbar::after, .footer-md::before, .tabs-md[tabsPlacement="bottom"] > .tabbar::before {
@@ -332,6 +341,10 @@ page-reciclador {
     .toolbar-background-md {
         border-color: #004361;
         background: #004361;
+    }
+
+    ion-header {
+        box-shadow: 0 0px 0px rgba(0, 0, 0, 0.5);
     }
 
 

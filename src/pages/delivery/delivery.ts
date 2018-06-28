@@ -314,6 +314,7 @@ export class DeliveryPage {
                       //document.getElementById('anonymousRecycler').style.border="0";
                       this.cleanForm();
                       this.addDeliveryPoints();
+                      this.navCtrl.push(PointsPage, {points : 60, message: "Esta información será validada en los próximos días."});
                     } )
                     .catch( ( e ) => {
                       console.log( 'Hubo un error Anónimo', e );
@@ -547,4 +548,6 @@ export class DeliveryPage {
   cancelDelivery() {
     this.navCtrl.parent.select(0);
   }
+
+  
 }
