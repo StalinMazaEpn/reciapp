@@ -1,12 +1,12 @@
 <ion-menu type="overlay" [content]="content">
   <ion-header>
     <ion-toolbar>
-      <ion-title>Menu</ion-title>
+      <ion-title text-center>Menu</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content padding>
     <ion-list>
-      <button *ngFor='let option of optionsMenu' menuClose ion-item (tap)="optionPageMenu(option.component)">
+      <button color="darkBlue" *ngFor='let option of optionsMenu' menuClose ion-item (tap)="optionPageMenu(option.component)">
         {{option.title}}
       </button>
     </ion-list>
