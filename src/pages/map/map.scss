@@ -229,4 +229,22 @@ page-map {
     color: $darkBlue;
   }
 
+  .btn-add-recicler {
+    background-color: $darkBlue;
+    height: 40px;
+    width: 100px;
+    color: #ffffff;
+    font-size: 12px;
+    //flex-flow: column;
+    //padding: 5px;
+    //
+    ion-icon{
+      font-size: 20px;
+    }
+    //
+    //.button-inner {
+    //  flex-flow: column;
+    //}
+  }
+
 }
