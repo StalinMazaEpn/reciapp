@@ -10,13 +10,13 @@
     <ion-title *ngIf="indexPages == 0" no-padding text-nowrap>¿QUÉ ES RECIVECI?</ion-title>
     <ion-title *ngIf="indexPages == 1" text-uppercase>
       SEPARA <ion-icon ios="ios-hand" md="md-hand"></ion-icon>
-    </ion-title> 
+    </ion-title>
     <ion-title *ngIf="indexPages == 2" text-uppercase >
       ENTREGA <ion-icon ios="ios-pin" md="md-pin" color="red"></ion-icon>
-    </ion-title> 
+    </ion-title>
     <ion-title *ngIf="indexPages == 3 || indexPages == 4" text-uppercase >
       COMPARTE  <ion-icon ios="ios-chatbubbles" md="md-chatbubbles"></ion-icon>
-    </ion-title>  
+    </ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -66,7 +66,7 @@
         <ion-row justify-content-center>
           <ion-col col-12>
             <p text-uppercase>NO IMPORTA DÓNDE VIVAS, SIEMPRE HAY ALGUIEN QUE SEPARA LOS DESECHOS.</p>
-            <p text-lowercase>Aprende cómo ayudar al reciclador(a) de tu barrio, aunque todavía no lo conozcas, aprende a identicarlo!</p>        
+            <p text-lowercase>Aprende cómo ayudar al reciclador(a) de tu barrio, aunque todavía no lo conozcas, aprende a identicarlo!</p>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -121,7 +121,7 @@
           <ion-col col-12 >
             <p style="font-weight: bold;">Sé voluntario o embajador en tu barrio.</p>
           </ion-col>
-        </ion-row> 
+        </ion-row>
         <ion-row justify-content-center>
           <ion-col col-12>
             <p style="font-weight: bold;">Y comparte tus dudas y experiencias con tus amigos</p>
@@ -141,7 +141,7 @@
           <ion-col center text-center>
             <button ion-button icon-left clear large (tap)="goToReciVeciPageInst()">
               <ion-icon clear large ios="logo-instagram" md="logo-instagram" color="light"></ion-icon>
-            </button>    
+            </button>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -155,15 +155,15 @@
         <button ion-button icon-only (tap)="prevlide()" *ngIf="showFirst">
           <ion-icon name="arrow-dropleft" isActive="false"></ion-icon>
         </button>
-      </ion-buttons> 
-      
+      </ion-buttons>
+
       <ion-buttons end>
         <button ion-button icon-only (tap)="nextSlide()" *ngIf="showEnd">
           <ion-icon name="arrow-dropright"></ion-icon>
         </button>
         <button ion-button clear color="royal" *ngIf="showAtEnd" (tap)="startApp()">
-            Sumate
-        </button> 
+            Súmate
+        </button>
       </ion-buttons>
     </ion-toolbar>
   </ion-footer>

@@ -70,6 +70,8 @@ export class DashboardPage {
       }).catch(e=>console.log(e));
 
       this.changeDailyTip();
+    } else {
+      this.navCtrl.setRoot(LoginPage);
     }
   }
 

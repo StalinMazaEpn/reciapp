@@ -30,7 +30,6 @@ export class MyApp {
   ];
 
   optionWithOutSession:any=[
-    {title:'Perfil',component:null},
     {title:'Tour',component:TourPage},
   ];
 
@@ -60,7 +59,13 @@ export class MyApp {
         }else{
           //console.log('WITHOUT SESSION OPTION MENU');
           this.optionsMenu=this.optionWithOutSession;
-          this.rootPage = LoginPage;
+          if(this.isTourDone()){
+            this.rootPage = LoginPage;
+            splashScreen.hide();
+          }else{
+            this.rootPage = TourPage;
+            splashScreen.hide();
+          }
         }
       });
 
