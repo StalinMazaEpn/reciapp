@@ -104,18 +104,18 @@ ion-header {
 
 .tabs-ios {
   a[aria-selected=false]{
-    .tab-button-icon[ng-reflect-name="left-hand"], .tab-button-icon[aria-label="left hand-outline"] {
+    .tab-button-icon[ng-reflect-name="leftHand"], .tab-button-icon[aria-label="leftHand outline"] {
       background-image: url('../assets/imgs/left_hand_on.png');
       background-size: 70px 30px;
       background-position: left;
       opacity: .5;
     }
-    .tab-button-icon[ng-reflect-name="heart-reciveci"], .tab-button-icon[aria-label="heart reciveci-outline"] {
+    .tab-button-icon[ng-reflect-name="heartReciveci"], .tab-button-icon[aria-label="heartReciveci outline"] {
       background-image: url('../assets/imgs/heart_reciveci_on.png');
       background-size: 37px 30px;
       opacity: .5;
     }
-    .tab-button-icon[ng-reflect-name="right-hand"], .tab-button-icon[aria-label="right hand-outline"] {
+    .tab-button-icon[ng-reflect-name="rightHand"], .tab-button-icon[aria-label="rightHand outline"] {
       background-image: url('../assets/imgs/right_hand_on.png');
       background-size: 70px 30px;
       background-position: right;
@@ -127,16 +127,16 @@ ion-header {
     //span {
     //color: #f00; //whatever colour you want to use for the text
     //}
-    .tab-button-icon[ng-reflect-name="left-hand"], .tab-button-icon[aria-label="left hand"] {
+    .tab-button-icon[ng-reflect-name="leftHand"], .tab-button-icon[aria-label="leftHand"] {
       background-image: url('../assets/imgs/left_hand_on.png');
       background-size: 70px 30px;
       background-position: left;
     }
-    .tab-button-icon[ng-reflect-name="heart-reciveci"], .tab-button-icon[aria-label="heart reciveci"] {
+    .tab-button-icon[ng-reflect-name="heartReciveci"], .tab-button-icon[aria-label="heartReciveci"] {
       background-image: url('../assets/imgs/heart_reciveci_on.png');
       background-size: 37px 30px;
     }
-    .tab-button-icon[ng-reflect-name="right-hand"], .tab-button-icon[aria-label="right hand"] {
+    .tab-button-icon[ng-reflect-name="rightHand"], .tab-button-icon[aria-label="rightHand"] {
       background-image: url('../assets/imgs/right_hand_on.png');
       background-size: 70px 30px;
       background-position: right;
@@ -146,18 +146,18 @@ ion-header {
 
 .tabs-md {
   a[aria-selected=false]{
-    .tab-button-icon[ng-reflect-name="left-hand"], .tab-button-icon[aria-label="left-hand"] {
+    .tab-button-icon[ng-reflect-name="leftHand"], .tab-button-icon[aria-label="leftHand"] {
       background-image: url('../assets/imgs/left_hand_on.png');
       background-size: 70px 30px;
       background-position: left;
       opacity: .5;
     }
-    .tab-button-icon[ng-reflect-name="heart-reciveci"], .tab-button-icon[aria-label="heart-reciveci"] {
+    .tab-button-icon[ng-reflect-name="heartReciveci"], .tab-button-icon[aria-label="heartReciveci"] {
       background-image: url('../assets/imgs/heart_reciveci_on.png');
       background-size: 37px 30px;
       opacity: .5;
     }
-    .tab-button-icon[ng-reflect-name="right-hand"], .tab-button-icon[aria-label="right-hand"] {
+    .tab-button-icon[ng-reflect-name="rightHand"], .tab-button-icon[aria-label="rightHand"] {
       background-image: url('../assets/imgs/right_hand_on.png');
       background-size: 70px 30px;
       background-position: right;
@@ -170,16 +170,16 @@ ion-header {
     //span {
     //color: #f00; //whatever colour you want to use for the text
     //}
-    .tab-button-icon[ng-reflect-name="left-hand"], .tab-button-icon[aria-label="left-hand"] {
+    .tab-button-icon[ng-reflect-name="leftHand"], .tab-button-icon[aria-label="leftHand"] {
       background-image: url('../assets/imgs/left_hand_on.png');
       background-size: 70px 30px;
       background-position: left;
     }
-    .tab-button-icon[ng-reflect-name="heart-reciveci"], .tab-button-icon[aria-label="heart-reciveci"] {
+    .tab-button-icon[ng-reflect-name="heartReciveci"], .tab-button-icon[aria-label="heartReciveci"] {
       background-image: url('../assets/imgs/heart_reciveci_on.png');
       background-size: 37px 30px;
     }
-    .tab-button-icon[ng-reflect-name="right-hand"], .tab-button-icon[aria-label="right-hand"] {
+    .tab-button-icon[ng-reflect-name="rightHand"], .tab-button-icon[aria-label="rightHand"] {
       background-image: url('../assets/imgs/right_hand_on.png');
       background-size: 70px 30px;
       background-position: right;
@@ -189,18 +189,18 @@ ion-header {
 
 .tabs-wp {
   a[aria-selected=false]{
-    .tab-button-icon[ng-reflect-name="left-hand"], .tab-button-icon[aria-label="left-hand"] {
+    .tab-button-icon[ng-reflect-name="leftHand"], .tab-button-icon[aria-label="leftHand"] {
       background-image: url('../assets/imgs/left_hand_on.png');
       background-size: 70px 30px;
       background-position: left;
       opacity: .5;
     }
-    .tab-button-icon[ng-reflect-name="heart-reciveci"], .tab-button-icon[aria-label="heart-reciveci"] {
+    .tab-button-icon[ng-reflect-name="heartReciveci"], .tab-button-icon[aria-label="heartReciveci"] {
       background-image: url('../assets/imgs/heart_reciveci_on.png');
       background-size: 37px 30px;
       opacity: .5;
     }
-    .tab-button-icon[ng-reflect-name="right-hand"], .tab-button-icon[aria-label="right-hand"] {
+    .tab-button-icon[ng-reflect-name="rightHand"], .tab-button-icon[aria-label="rightHand"] {
       background-image: url('../assets/imgs/right_hand_on.png');
       background-size: 70px 30px;
       background-position: right;
@@ -213,16 +213,16 @@ ion-header {
     //span {
     //color: #f00; //whatever colour you want to use for the text
     //}
-    .tab-button-icon[ng-reflect-name="left-hand"], .tab-button-icon[aria-label="left-hand"] {
+    .tab-button-icon[ng-reflect-name="leftHand"], .tab-button-icon[aria-label="leftHand"] {
       background-image: url('../assets/imgs/left_hand_on.png');
       background-size: 70px 30px;
       background-position: left;
     }
-    .tab-button-icon[ng-reflect-name="heart-reciveci"], .tab-button-icon[aria-label="heart-reciveci"] {
+    .tab-button-icon[ng-reflect-name="heartReciveci"], .tab-button-icon[aria-label="heartReciveci"] {
       background-image: url('../assets/imgs/heart_reciveci_on.png');
       background-size: 37px 30px;
     }
-    .tab-button-icon[ng-reflect-name="right-hand"], .tab-button-icon[aria-label="right-hand"] {
+    .tab-button-icon[ng-reflect-name="rightHand"], .tab-button-icon[aria-label="rightHand"] {
       background-image: url('../assets/imgs/right_hand_on.png');
       background-size: 70px 30px;
       background-position: right;

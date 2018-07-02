@@ -1,6 +1,6 @@
 {
     "name": "ReciApp",
-    "version": "2.0.8",
+    "version": "0.1.1",
     "author": "Ionic Framework",
     "homepage": "http://ionicframework.com/",
     "private": true,
@@ -41,6 +41,7 @@
         "angular2-moment": "^1.9.0",
         "angularfire2": "5.0.0-rc.6",
         "call-number": "^1.0.1",
+        "cordova-android": "7.0.0",
         "cordova-ios": "4.5.4",
         "cordova-plugin-appavailability": "^0.4.2",
         "cordova-plugin-browsertab": "^0.2.0",

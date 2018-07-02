@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, Slides, Platform } from 'ionic-ang
 import { TabsPage } from './../tabs/tabs';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AppAvailability } from '@ionic-native/app-availability';
+import { AuthenticationService } from '../../services/authenticationService';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the TourPage page.
@@ -30,7 +32,7 @@ export class TourPage {
   colors:any = ["tourOne","tourTwo","tourThree","tourFour"];
   indexPages:number;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public iab: InAppBrowser, private appAvailability: AppAvailability, private platform: Platform) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public iab: InAppBrowser, private appAvailability: AppAvailability, private platform: Platform, public authenticationService:AuthenticationService) {
     this.colornav = "tourOne";
   }
 
@@ -84,7 +86,11 @@ export class TourPage {
 
   startApp(){
     localStorage.setItem('tourDone','true');
-    this.navCtrl.setRoot(TabsPage);
+    if(this.authenticationService.isAuthenticated()) {
+      this.navCtrl.setRoot( TabsPage );
+    } else {
+      this.navCtrl.setRoot( LoginPage );
+    }
     /*
     This method will be used in future test with mobiles
     Don`t Erase please
