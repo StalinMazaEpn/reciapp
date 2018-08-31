@@ -1,0 +1,320 @@
+page-delivery {
+    .rounded {
+        width: 55%;
+        height: 10px;
+        border-radius: 5px;
+        border: 0px 0px 1px 0px solid #39c;
+        //-moz-border-radius: 10px;
+        //-webkit-border-radius: 10px;
+        //border-radius: 5px;
+        margin-bottom: 5px;
+    }
+    .redondeadonorelieve {
+        width: 20%;
+        height: 25px;
+        border: 1px solid #39c;
+        float: left;
+        margin-top: 3%;
+        margin-left: 3%;
+        margin-right: 4%;
+        color: #000;
+    }
+    .b1 {
+        margin-right: 0;
+    }
+    .b2 {
+        margin-left: 0;
+    }
+    #funda1,
+    #funda2 {
+        display: inline-block;
+        margin-left: 30px;
+        margin-top: 10px;
+    }
+    img.izquierda {
+        vertical-align: middle
+    }
+    p {
+        display: inline;
+    }
+    h4 {
+        display: inline-block;
+        margin-left: 15px;
+    }
+    /*new*/
+    img.photoMaterial {
+        height: 30%!important;
+        max-height: 30%;
+        width: 100%;
+        border: 0;
+        top: 0%;
+        left: 0%;
+        border: none;
+        position: absolute;
+    }
+    img.recyclers {
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
+        border: 0;
+    }
+    ion-label.material {
+        padding-top: 13px;
+    }
+    .delivery {
+        margin: 0;
+    }
+    ion-label.title {
+        text-align: left;
+        padding-top: 11%;
+        padding-bottom: 11%;
+        padding-left: 25%;
+    }
+    p.title-small2 {
+        font-size: 14px;
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
+    .title-small1 {
+        font-size: 12px;
+        font-weight: bold;
+        margin-left: 0.9%;
+        color: gray;
+        position: relative;
+    }
+    ion-range {
+        padding: 0 !important;
+    }
+    ion-col {
+        padding: 0 !important;
+    }
+    ion-label.labels {
+        margin: 0 !important;
+        padding: 0! important;
+    }
+    span.label {
+        margin-right: 20% !important;
+    }
+    span.label1 {
+        margin-left: 10% !important;
+    }
+    /*
+	span.label{
+		margin-right: 15% !important;
+	}
+	span.label1{
+		margin-left: 35% !important;
+	}*/
+    .roundBtn {
+        border-radius: 150px, 150px, 150px, 150px;
+        -moz-border-radius: 150px 150px 150px 150px;
+        -webkit-border-radius: 150px 150px 150px 150px;
+    }
+    .validations {
+        font-size: 12px;
+        color: #afba35;
+    }
+    ul {
+        padding-left: 0 !important;
+        display: inline-block;
+        margin: 0;
+        margin-left: 15px;
+    }
+    ul li {
+        display: inline-block;
+    }
+    .scroll-content {
+        padding: 0 !important;
+    }
+    .firstLetter {
+        position: absolute;
+        font-size: 25px;
+        margin-top: 2.5% !important;
+        margin-bottom: 0 !important;
+        margin-left: 3.3% !important;
+        color: white;
+    }
+    .firstLetter1 {
+        left: 20% !important;
+        top: 15% !important;
+        position: absolute;
+        font-size: 25px;
+        color: white;
+    }
+    .btn-mini {
+        max-height: 25px !important;
+        max-width: 25px !important;
+    }
+    .btn-position {
+        top: 60%;
+    }
+    .bg-photo {
+        background: linear-gradient(to right, #afba35, #ede937);
+        min-height: 30%;
+        .delivery-back-button {
+            color: #ffffff;
+        }
+    }
+    .bg-boton {
+        background: linear-gradient(to right, #8dc63f, #39b54a);
+    }
+    .camera-btn {
+        top: 5%;
+        left: 35%;
+        right: 35%;
+        border: none;
+        position: absolute;
+    }
+    .camera-btn1 {
+        top: 23%;
+        right: 3%;
+        border: none;
+        position: absolute;
+        width: 35px;
+        height: 20px;
+    }
+    .message-Photo {
+        position: absolute;
+        top: 20% !important;
+        left: 20% !important;
+        right: 20% !important;
+        z-index: 50;
+        font-size: 1em;
+    }
+    p.recyclersNames {
+        height: auto !important;
+        overfloat: auto;
+        font-size: 10px;
+        margin-top: 5px !important;
+        margin-bottom: 5px !important;
+    }
+    .noData {
+        border: 2px solid;
+        border-radius: 100%;
+    }
+    .camera-img {
+        width: 100px;
+        height: 70px;
+    }
+    .camera-img1 {
+        width: 40px;
+        height: 20px;
+        position: absolute;
+    }
+    div.range-knob {
+        background-color: #ede937;
+    }
+    .recycler-list {
+        width: 100%;
+        height: 58px;
+        white-space: nowrap;
+        margin-left: 0.5%;
+    }
+    ion-label.label {
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+    }
+    .funda-p {
+        margin-left: 30%;
+        margin-top: 0;
+        position: absolute;
+    }
+    .funda-m {
+        margin-left: 60%;
+        margin-top: 0;
+        position: absolute;
+    }
+    .funda-g {
+        margin-left: 90%;
+        margin-top: 0;
+        position: absolute;
+    }
+    ion-icon {
+        font-size: 2.3em;
+    }
+    ion-range[color="yellow"] {
+        div.range-knob {
+            background-color: #ede937 !important;
+        }
+    }
+    ion-range[color="orange"] {
+        div.range-knob {
+            background-color: #ffca34 !important;
+        }
+    }
+    ion-range[color="green"] {
+        div.range-knob {
+            background-color: #8dc63f !important;
+        }
+    }
+    ion-range[color="lightBlue"] {
+        div.range-knob {
+            background-color: #167b9b !important;
+        }
+    }
+    ion-range[color="lightBluePri"] {
+        div.range-knob {
+            background-color: #00a0dc !important;
+        }
+    }
+    ion-range[color="purple"] {
+        div.range-knob {
+            background-color: #c81c71 !important;
+        }
+    }
+    .range-ios .range-knob {
+        left: 14px;
+        top: 14px;
+        width: 14px;
+        height: 14px;
+    }
+    .contenedor {
+        padding-left: 20px;
+        padding-right: 20px;
+        width: 100%;
+    }
+    /*circulos recicladores*/
+    div.avatar {
+        /* cambia estos dos valores para definir el tamaño de tu círculo */
+        margin: 0 auto;
+        display: inline-block;
+        height: 50px;
+        width: 50px;
+        /* los siguientes valores son independientes del tamaño del círculo */
+        background-repeat: no-repeat;
+        background-position: 50%;
+        border-radius: 50%;
+        background-size: 100% auto;
+    }
+    /*iconos*/
+    .circle-material-wrapper {
+        display: inline-block;
+        height: 30px;
+    }
+    .circle-material {
+        border-radius: 100%;
+        height: 20px;
+        width: 20px;
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        &.paper {
+            background: linear-gradient(to right, $yellow2, $yellow1);
+        }
+        &.cardboard {
+            background: linear-gradient(to right, $orange1, $orange2);
+        }
+        &.plastic {
+            background: linear-gradient(to right, $green1, $green2);
+        }
+        &.glass {
+            background: linear-gradient(to right, $olive1, $olive2);
+        }
+        &.metal {
+            background: linear-gradient(to right, $skyBlue2, $skyBlue1);
+        }
+        &.tetrapak {
+            background: linear-gradient(to right, $purple2, #790042);
+        }
+    }
+}

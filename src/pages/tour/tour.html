@@ -1,0 +1,166 @@
+<ion-header>
+
+    <ion-navbar text-center [color]="colornav">
+        <ion-title *ngIf="indexPages == 0" no-padding text-nowrap>¿QUÉ ES RECIVECI?</ion-title>
+        <ion-title *ngIf="indexPages == 1" text-uppercase>
+            SEPARA
+            <ion-icon ios="ios-hand" md="md-hand"></ion-icon>
+        </ion-title>
+        <ion-title *ngIf="indexPages == 2" text-uppercase>
+            ENTREGA
+            <ion-icon ios="ios-pin" md="md-pin" color="red"></ion-icon>
+        </ion-title>
+        <ion-title *ngIf="indexPages == 3 || indexPages == 4" text-uppercase>
+            COMPARTE
+            <ion-icon ios="ios-chatbubbles" md="md-chatbubbles"></ion-icon>
+        </ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-slides pager style="color:white" effect="coverflow" pager="true" paginationType="progress" (ionSlideReachStart)="slideAtBegin()" (ionSlideWillChange)="slideWillChanged()" (ionSlideDidChange)="slideDidChanged()" (ionSlideReachEnd)="slideAtEnd()">
+        <ion-slide style="background-color: #f59f1e">
+            <ion-grid>
+                <ion-row justify-content-center>
+                    <ion-col col-6 align-self-center>
+                        <img src="assets/imgs/logo.png">
+                    </ion-col>
+                    <ion-col col-6 align-self-center>
+                        <h3>RECICLAJE INCLUSIVO</h3>
+                    </ion-col>
+                </ion-row>
+                <ion-row justify-content-center>
+                    <ion-col col-12>
+                        <p text-center>UNA CONEXIÓN HUMANA ENTRE RECICLADORES Y CIUDADANOS.</p>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-slide>
+        <ion-slide class="tourTwo" style="background-color: #64d423">
+            <ion-grid margin-vertical>
+                <ion-row justify-content-center>
+                    <ion-col col-10>
+                        <h3 text-center text-uppercase>¿QUÉ ES RECICLABLE Y QUÉ NO ES?</h3>
+                    </ion-col>
+                </ion-row>
+                <ion-row justify-content-center>
+                    <ion-col col-12>
+                        <p text-lowercase>Conoce cuáles desperdicios son materiales reciclables y cuáles no lo son. Encontrarás ejemplos de cada uno de estos.</p>
+                    </ion-col>
+                </ion-row>
+                <ion-row justify-content-center>
+                    <ion-col col-4 text-center>
+                        <ion-icon id="hand" ios="ios-hand" md="md-hand" style="font-size: 4rem"></ion-icon>
+                    </ion-col>
+                </ion-row>
+                <ion-row justify-content-center>
+                    <ion-col col-8>
+                        <h2 text-center text-uppercase>¡NO LO SABÍAS!</h2>
+                    </ion-col>
+                </ion-row>
+                <ion-row justify-content-center>
+                    <ion-col col-12>
+                        <p text-uppercase>NO IMPORTA DÓNDE VIVAS, SIEMPRE HAY ALGUIEN QUE SEPARA LOS DESECHOS.</p>
+                        <p text-lowercase>Aprende cómo ayudar al reciclador(a) de tu barrio, aunque todavía no lo conozcas, aprende a identicarlo!</p>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-slide>
+        <ion-slide class="tourThree" style="background-color: #8940c5">
+            <ion-grid>
+                <ion-row justify-content-center>
+                    <ion-col col-12>
+                        <h2 text-center text-uppercase>¿QUÉ ES RECICLABLE Y QUÉ NO ES?</h2>
+                    </ion-col>
+                </ion-row>
+                <ion-row justify-content-center>
+                    <ion-col col-6>
+                        <img src="">
+                    </ion-col>
+                </ion-row>
+                <ion-row justify-content-center style="font-weight: lighter;">
+                    <ion-col col-12>
+                        <p text-lowercase> <span style="font-weight: bold;">El material reciclable separado en una sola bolsa</span> lo podrás entregar a tu reciclador de base. En este mapa tambíen puedes aportar con datos del reciclador de tu barrio.</p>
+                    </ion-col>
+                </ion-row>
+                <ion-row justify-content-center>
+                    <ion-col col-8>
+                        <h2 text-center text-uppercase>EN TU BARRIO</h2>
+                    </ion-col>
+                </ion-row>
+                <ion-row justify-content-center style="font-weight: lighter;">
+                    <ion-col col-12>
+                        <p text-lowercase>Si aún no identificas a los recicladores de tu barrio, <span style="font-weight: bold;">saca los materiales reciclables en bolsas separadas</span>, antes de que pase el camión de basura en el horario tradicional.</p>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-slide>
+        <ion-slide style="background-color: #f0575f">
+            <ion-grid>
+                <ion-row justify-content-center>
+                    <ion-col col-10 text-center>
+                        <h2><span style="font-weight: bold;">¡Recibe notificaciones</span> antes de que pase tu camión recolector!</h2>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-6>
+                        <img src="">
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-6>
+                        <img src="">
+                    </ion-col>
+                </ion-row>
+                <ion-row justify-content-center>
+                    <ion-col col-12>
+                        <p style="font-weight: bold;">Sé voluntario o embajador en tu barrio.</p>
+                    </ion-col>
+                </ion-row>
+                <ion-row justify-content-center>
+                    <ion-col col-12>
+                        <p style="font-weight: bold;">Y comparte tus dudas y experiencias con tus amigos</p>
+                    </ion-col>
+                </ion-row>
+                <ion-row text-center>
+                    <ion-col>
+                        <button ion-button icon-left clear large (tap)="goToReciVeciPageFb()">
+              <ion-icon ios="logo-facebook" md="logo-facebook" color="light"></ion-icon>
+            </button>
+                    </ion-col>
+                    <ion-col>
+                        <button ion-button icon-left clear large (tap)="goToReciVeciPageTwit()">
+              <ion-icon ios="logo-twitter" md="logo-twitter" color="light"></ion-icon>
+            </button>
+                    </ion-col>
+                    <ion-col center text-center>
+                        <button ion-button icon-left clear large (tap)="goToReciVeciPageInst()">
+              <ion-icon clear large ios="logo-instagram" md="logo-instagram" color="light"></ion-icon>
+            </button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-slide>
+    </ion-slides>
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar [color]="colornav">
+        <ion-buttons start>
+            <button ion-button icon-only (tap)="prevlide()" *ngIf="showFirst">
+          <ion-icon name="arrow-dropleft" isActive="false"></ion-icon>
+        </button>
+        </ion-buttons>
+
+        <ion-buttons end>
+            <button ion-button icon-only (tap)="nextSlide()" *ngIf="showEnd">
+          <ion-icon name="arrow-dropright"></ion-icon>
+        </button>
+            <button ion-button clear color="royal" *ngIf="showAtEnd" (tap)="startApp()">
+            Súmate
+        </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>

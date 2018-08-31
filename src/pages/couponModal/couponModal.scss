@@ -1,0 +1,37 @@
+page-coupon-modal {
+  .modal-page {
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .modalContent1 {
+    top: 40%;
+    border: none;
+    background: linear-gradient(to bottom, $yellow1, $yellow2);
+    padding: 0 15px;
+  }
+
+  .modalContent {
+    margin-top: 40%;
+    background: transparent;
+    padding: 0 5px;
+  }
+
+  .text-blue {
+    color: $darkBlue;
+  }
+
+  .fab[mini] {
+    background-color: transparent !important;
+    box-shadow: none;
+    margin: 5px 0 0 0;
+    line-height: 1;
+    height: 20px;
+    width: 20px;
+    padding: 0;
+
+    .ion-ios-close {
+      font-size: 3.4rem;
+      font-weight: bold;
+    }
+  }
+}

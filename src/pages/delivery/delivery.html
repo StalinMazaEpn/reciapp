@@ -1,0 +1,317 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Entrega</ion-title>
+        <ion-buttons start>
+            <!--Back button-->
+            <button ion-button icon-only icon-start clear (click)="cancelDelivery()">
+                    <ion-icon name="close"></ion-icon>
+                </button>
+        </ion-buttons>
+        <ion-buttons end>
+            <!--Next button-->
+            <button ion-button icon-only icon-end clear (click)="distribucionMaterial()">
+                        <ion-icon name="arrow-forward"></ion-icon>
+                    </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <!--SECTION PHOTO-->
+    <div class="bg-photo">
+        <!--Photo-->
+        <div *ngIf="tmpPhoto=='assets/imgs/transparent.png'; else photo">
+            <!--Transparent Photo-->
+            <div>
+                <img class="photoMaterial" [hidden]="tmpPhoto == 'assets/imgs/transparent.png'" src="{{tmpPhoto}}">
+            </div>
+            <!--Camera button-->
+            <div class="camera-btn">
+                <button style="background-color: transparent !important; box-shadow: none" (click)="takePhoto()">
+          <img src="assets/imgs/camera.png" class="camera-img">
+        </button>
+            </div>
+            <!--Message suggestion-->
+            <span class="message-Photo">Toma una foto de tu bolsa junto con el reciclador</span>
+        </div>
+        <!--Photo else-->
+        <ng-template #photo>
+            <!--Photo material-->
+            <div>
+                <img class="photoMaterial" [hidden]="tmpPhoto == 'assets/imgs/transparent.png'" src="{{tmpPhoto}}">
+            </div>
+            <!--Camera button-->
+            <div class="camera-btn1">
+                <button style="background-color: transparent !important; box-shadow: none" (click)="takePhoto()">
+          <img src="assets/imgs/camera.png" class="camera-img1">
+        </button>
+            </div>
+        </ng-template>
+    </div>
+
+    <!--FAVORITES RECYCLER SECTION-->
+    <!--AUTH-->
+    <div *ngIf="isAuthenticated; else needLoggin" style="padding-top: 2%;">
+        <!--FAVORITES RECYCLER LIST-->
+        <h4>Reciclador que recogera</h4>
+        <div *ngIf="!hideFavorites; else selectFavorite">
+            <!--Infinity Scroll-->
+            <ion-scroll class="recycler-list" scrollX="true" [hidden]="hideFavorites">
+                <ul>
+                    <!--Agregar-->
+                    <!--li text-center (tap)="addRecycler()">
+                        <ion-avatar >
+                            <img class="recyclers" src="assets/imgs/add-user.png" >
+                        </ion-avatar>
+                        <p text-center class="recyclersNames">Agregar</p>
+                    </li-->
+                    <!--FAVORITES RECYCLERS DATA-->
+                    <li *ngFor="let recycler$ of recyclers | async;" style="margin-right: 5%;">
+                        <span *ngIf="recycler$ | async as recycler;" (tap)="selectRecycler(recycler.id)">
+              <!--SHOW LETTER/PHOTO-->
+							<span *ngIf="recycler.image!=undefined; else firstLetter">
+                <!--PHOTO RECYCLER-->
+								<ion-avatar>
+                	<img class="recyclers" src="{{recycler.image}}" id="{{recycler.id}}">
+                </ion-avatar>
+							</span>
+                        <ng-template #firstLetter>
+                            <!--FIRST LETTER RECYCLER-->
+                            <ion-avatar>
+                                <span text-center>
+										<p class="firstLetter">{{recycler.name.charAt(0).toUpperCase()}}</p>
+										<img class="recyclers imgfirstLetter" style="background-color: #afba35" id="{{recycler.id}}">
+									</span>
+                            </ion-avatar>
+                        </ng-template>
+                        <!--RECYCLER NAME-->
+                        <p block text-wrap class="recyclersNames">{{recycler.name}}</p>
+                        </span>
+                    </li>
+                    <!--RECYCLER AROUND BY-->
+                    <!--ANONYMOUS RECYCLER-->
+                    <li text-center (tap)="selectRecycler('Anónimo')" style="margin-right: 2%; margin-left: -2%;">
+                        <ion-avatar>
+                            <img class="recyclers" src="assets/imgs/menos.png" id="anonymousRecycler" style="background-color: #005c80">
+                        </ion-avatar>
+                        <p text-center class="recyclersNames">Anónimo</p>
+                    </li>
+                </ul>
+            </ion-scroll>
+        </div>
+
+        <!--INICIO REPETIDORES-->
+        <hr>
+        <h4>Bolsas</h4>
+        <hr>
+        <ion-grid>
+            <ion-row>
+                <ion-col>
+                    <p><img class="izquierda" src="assets/imgs/funda_p_r.png" width="40" height="55" /> Texto 1
+                    </p>
+                </ion-col>
+                <ion-col>
+                    <p><img class="izquierda" src="assets/imgs/funda_g_r.png" width="45" height="55" /> Texto 3
+                    </p>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <button class="redondeadonorelieve b1" (click)="disminuirValor(1)">
+                            
+                    </button>
+                    <button class="redondeadonorelieve b2" (click)="aumentarValor(1)">
+                           
+                    </button>
+                </ion-col>
+                <ion-col>
+                    <button class="redondeadonorelieve b1" (click)="disminuirValor(2)">
+                           
+                    </button>
+                    <button class="redondeadonorelieve b2" (click)="aumentarValor(2)">
+                           
+                    </button>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <p id="funda1">{{valorF1}}</p>
+                </ion-col>
+                <ion-col>
+                    <p id="funda2">{{valorF2}}</p>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <br>
+        <!--
+        <h4>Materiales que separaste</h4>
+        <ion-row text-left class="material-row">
+            <ion-col col>
+               
+                <ion-row class="material-row" text-left>
+                    <ion-col col>
+                        <div class="circle-material-wrapper">
+                            <div class="circle-material paper"></div>
+                            <p>Papel</p>
+                            <img src="assets/imgs/papelT1.png" height="20">
+                        </div>
+
+                    </ion-col>
+                    <ion-col col>
+                        <div class="circle-material-wrapper">
+                            <div class="circle-material cardboard"></div>
+                        </div>
+                        <p>Carton</p>
+                        <img src="assets/imgs/cartonT.png" height="27">
+                    </ion-col>
+                </ion-row>
+               
+                <ion-row class="material-row" text-left>
+                    <ion-col col>
+                        <div class="circle-material-wrapper">
+                            <div class="circle-material plastic"></div>
+                        </div>
+                        <p>Plastico</p>
+                        <img src="assets/imgs/plasticoT.png" height="17">
+                    </ion-col>
+                    <ion-col col>
+                        <div class="circle-material-wrapper">
+                            <div class="circle-material glass">
+                            </div>
+                        </div>
+                        <p>Vidrio</p>
+                        <img src="assets/imgs/vidrioT.png" height="20">
+                    </ion-col>
+                </ion-row>
+               
+                <ion-row class="material-row" text-left>
+                    <ion-col col>
+                        <div class="circle-material-wrapper">
+                            <div class="circle-material metal"></div>
+                        </div>
+                        <p>Metal</p>
+                        <img src="assets/imgs/metalT.png" height="20">
+                    </ion-col>
+                    <ion-col col>
+                        <div class="circle-material-wrapper">
+                            <div class="circle-material tetrapak"></div>
+                        </div>
+                        <p>Tetrapak</p>
+                        <img src="assets/imgs/tetrapakT.png" height="20">
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
+    -->
+
+
+        <!--FIN REPETIDORES-->
+
+        <!--SHOW SELECT RECYCLER ELSE-->
+        <ng-template #selectFavorite>
+            <ion-item no-lines style="background: transparent; height: 58px;" (tap)="showFavorites()">
+                <!--Show Anonymous recycler selected-->
+                <span *ngIf="tmp_selRecycler!=null; else selectFavoriteRecycler">
+					<ion-row>
+            <!--ANONIMOUS RECYCLER PHOTO-->
+						<ion-col col-2>
+							<img class="recyclers" style="background: #005c80" src="{{tmpRecyclerImage}}">
+						</ion-col>
+            <!--ANONIMOUS NAME RECYCLER-->
+						<ion-col>
+							<h2 style="margin-top: 4.5% !important; color: white">Anónimo</h2>
+						</ion-col>
+					</ion-row>
+          <!--CLOSE BUTTOM-->
+					<ion-fab middle right class="btn-position">
+				        <button ion-fab mini color="danger" class="btn-mini">
+							<ion-icon ios="ios-close" md="md-close"></ion-icon>
+						</button>
+				    </ion-fab>
+				</span>
+                <!--Show a recycler selected-->
+                <ng-template #selectFavoriteRecycler>
+                    <ion-row style="height: 58px;">
+                        <ion-col col-2>
+                            <!--SHOW PHOTO/LETTER RECYCLER-->
+                            <!--RECYCLER PHOTO-->
+                            <span *ngIf="tmpRecyclerImage != undefined; else firstLetterRecycler">
+								<img class="recyclers" src="{{tmpRecyclerImage}}">
+							</span>
+                            <!--FIRST NAME RECYCLER-->
+                            <ng-template #firstLetterRecycler>
+                                <span text-center>
+									<p class="firstLetter1">{{tmpRecyclerFirstLetterName}}</p>
+									<img class="recyclers" style="background-color: #afba35">
+								</span>
+                            </ng-template>
+                        </ion-col>
+                        <!--NAME RECYCLER-->
+                        <ion-col>
+                            <h2 style="margin-top: 4.5% !important; color: white">{{tmpRecyclerName}} {{tmpRecyclerLastName}}</h2>
+                        </ion-col>
+                    </ion-row>
+                    <!--CLOSE BUTTOM-->
+                    <ion-fab middle right class="btn-position">
+                        <button ion-fab mini color="danger" class="btn-mini">
+              <ion-icon ios="ios-close" md="md-close"></ion-icon>
+            </button>
+                    </ion-fab>
+                </ng-template>
+            </ion-item>
+        </ng-template>
+    </div>
+    <!--Validations auth user-->
+    <ng-template #needLoggin>
+        <p text-center style="color: red;" class="title">Necesitas <b> <!--(tap)="goToLogin()"-->Iniciar Sesión</b> para ver tus recicladores favoritos.</p>
+    </ng-template>
+
+    <!--DELIVERY FORM-->
+
+    <!--Buttom delivery-->
+    <div text-center>
+        <div *ngIf="disabledBtnDelivery; else enabledBtn">
+            <!--button ion-button large outline class="roundBtn" style="background-color:#39b54a;color: white "> Enviar <span
+        style="width: 25px; height: 25px; margin-left: 5% !important;"></span>
+      </button-->
+            <!--VALIDATIONS-->
+            <!--PHOTO Validations-->
+            <div text-center>
+                <span *ngIf="!error" class="validations"> *Toma una foto para validar la información.</span>
+            </div>
+            <!--RECYCLER Validations-->
+            <div text-center>
+                <!--span *ngIf="!errorRecycler && error" class="validations"> *Selecciona a tu <b>Reciclador favorito, Cercano o Anónimo</b> que deseas entregar.</span-->
+                <span *ngIf="!errorRecycler && error" class="validations"> *Selecciona el reciclador al que deseas entregar</span>
+
+            </div>
+            <!--SLEEVE PLASTIC Validations-->
+            <div text-center>
+                <span *ngIf="!errorSize && error && errorRecycler" class="validations"> *Selecciona un tamaño de Funda.</span>
+            </div>
+            <!--MATERIAL RANGE Validations-->
+            <div text-center>
+                <span *ngIf="(totalMaterialRecyclable)==100" class="title-small" style="color: green">La funda ya esta llena</span>
+                <span *ngIf="(_totalMaterialRecyclable)>100" class="title-small validations">(No puedes entregar más de su capacidad.)</span>
+                <span *ngIf="(_totalMaterialRecyclable)>100 && errTotalMaterialRecyclable" class="title-small1 validations">Reduce los porcentajes en el formulario y verifica que no sobrepase el 100% de la funda.</span>
+                <span *ngIf="!errorForm && error && errorRecycler && errorSize" class="validations"> *Indica la cantidad de cada material.</span>
+            </div>
+            <br>
+        </div>
+        <ng-template #enabledBtn>
+            <button *ngIf="!disabledBtn; else spinnerDelivery" [disabled]="disabledBtn" (click)="delivery()" ion-button large outline class="roundBtn bg-boton" style="color: white "> Enviar
+        <span style="width: 25px; height: 25px; margin-left: 5% !important; margin-top: -20px"><ion-icon
+          ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline" color="ligth"></ion-icon></span>
+      </button>
+            <ng-template #spinnerDelivery>
+                <ion-spinner name="circles"></ion-spinner>
+                Guardando...
+            </ng-template>
+        </ng-template>
+        <!--button ion-button large outline class="roundBtn" style="background-color: #39b54a;color: white ">
+      Enviar  <span style="width: 25px; height: 25px; margin-left: 5% !important;"><ion-icon ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline" color="ligth"></ion-icon></span>
+    </button-->
+
+    </div>
+
+    <ion-tabs style="display: none"></ion-tabs>
+</ion-content>

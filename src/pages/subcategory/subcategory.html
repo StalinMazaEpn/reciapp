@@ -1,0 +1,58 @@
+<ion-header text-center>
+
+    <ion-navbar>
+        <ion-title>
+            <h1>{{categoryName}}</h1>
+        </ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content no-padding [ngClass]="categoryClass">
+
+    <ion-slides pager="true" [centeredSlides]="false">
+
+        <ion-slide *ngFor="let subcategory of subcategories; let index=index">
+            <h4>¿Como Entregar?</h4>
+            <hr>
+            <ul>
+                <li>Seco</li>
+                <li>Sin residuos organicos</li>
+                <li>Aùn mejor sin arrugar</li>
+            </ul>
+            <img class="img-header" src="{{subcategory.image}}" alt="{{categoryName}} {{index}}">
+            <h4>Reciclable</h4>
+            <hr>
+            <ion-row class="item" *ngFor="let item of subcategory.detail">
+
+                <ion-col *ngIf="item.recyclable == true">
+
+                    <span [class]="item.recyclable ? 'recyclable' : 'no-recyclable'">
+            <ion-icon [name]="item.recyclable ? 'md-checkbox' : 'md-close'"></ion-icon> {{item.text}}
+          </span>
+                </ion-col>
+            </ion-row>
+
+            <h4>No Reciclable</h4>
+            <hr>
+            <ion-row class="item" *ngFor="let item of subcategory.detail">
+
+                <ion-col *ngIf="item.recyclable != true">
+
+                    <span [class]="item.recyclable ? 'recyclable' : 'no-recyclable'">
+            <ion-icon [name]="item.recyclable ? 'md-checkbox' : 'md-close'"></ion-icon> {{item.text}}
+          </span>
+                </ion-col>
+            </ion-row>
+            <ion-row *ngIf="subcategory.note" class="subcategory-note">
+                <ion-col>
+                    <div><strong>{{subcategory.note.title}}</strong></div>
+                    <div>{{subcategory.note.text}}</div>
+                </ion-col>
+            </ion-row>
+        </ion-slide>
+
+    </ion-slides>
+
+</ion-content>

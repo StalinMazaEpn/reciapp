@@ -1,0 +1,119 @@
+page-subcategory {
+    .toolbar {
+        .toolbar-background {
+            background-color: transparent;
+            border: none;
+        }
+        .title {
+            padding: 0;
+            .toolbar-title {
+                font-size: 1.5rem;
+                span {
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+    .recyclable {
+        .icon {
+            color: $darkBlue;
+            background-color: #ffffff;
+            line-height: 0.5;
+        }
+    }
+    .no-recyclable {
+        .icon::before {
+            color: #ffffff;
+            background-color: red;
+            line-height: 1;
+            width: 10px;
+            font-size: 1.2rem;
+            border-radius: 1px;
+            font-weight: bold;
+            padding-left: 3px;
+        }
+    }
+    li,
+    h4 {
+        text-align: left;
+    }
+    h1 {
+        text-align: right;
+        margin: 4px;
+        font-weight: bold;
+    }
+    .header-md::after,
+    .tabs-md[tabsPlacement="top"]>.tabbar::after,
+    .footer-md::before,
+    .tabs-md[tabsPlacement="bottom"]>.tabbar::before {
+        background-image: none !important;
+    }
+    .content {
+        &.carton {
+            background: linear-gradient(to bottom, $orange1, $orange2);
+            color: $darkBlue;
+        }
+        &.papel {
+            background: linear-gradient(to bottom, $yellow1, $yellow2);
+            color: $darkBlue;
+        }
+        &.plastico {
+            background: linear-gradient(to bottom, $green1, $green2);
+            color: #ffffff;
+        }
+        &.vidrio {
+            background: linear-gradient(to bottom, $olive1, $olive2);
+            color: #ffffff;
+        }
+        &.metal {
+            background: linear-gradient(to bottom, $skyBlue2, $skyBlue1);
+            color: #ffffff;
+        }
+        &.tetrapak {
+            background: linear-gradient(to bottom, $purple2, $purple1);
+            color: #ffffff;
+        }
+        &.otros {
+            background: linear-gradient(to bottom, $darkBlue, $darkBluePri);
+            color: #ffffff;
+        }
+        h2 {
+            text-transform: lowercase;
+            font-weight: bold;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            color: #ffffff;
+            text-align: center;
+        }
+        ion-slides {
+            height: auto;
+        }
+        ion-slide {
+            height: auto;
+            display: block !important;
+            align-items: unset !important;
+            .item {
+                background-color: transparent;
+                border: none;
+                font-size: 1.4rem;
+                text-align: left;
+                padding: 0 15px;
+            }
+        }
+    }
+    .swiper-pagination {
+        position: fixed;
+        //bottom: 65px!important;
+    }
+    .subcategory-note {
+        background-color: $orange2;
+        color: #ffffff;
+        font-size: 1.2rem;
+        text-align: left;
+        padding: 10px;
+        margin: 15px 0;
+    }
+    .img-header {
+        margin-bottom: 20px;
+    }
+}

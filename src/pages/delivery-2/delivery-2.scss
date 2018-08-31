@@ -1,0 +1,87 @@
+page-delivery-2 {
+    /*VARIABLES CSS*/
+     :root {
+        --alto-divs: 130px;
+        --alto-contenedor: 300px;
+    }
+    /*MIXINS*/
+    @mixin crear_linea($top, $numero, $color) {
+        .linea#{$numero} {
+            position: fixed;
+            height: 2.4px;
+            width: 20px;
+            background-color: $color;
+            padding: 1px;
+            top: #{$top}px;
+            left: 0;
+            z-index: 1;
+        }
+    }
+    @mixin estiloDiv($numero, $color, $top) {
+        $numDiv: $numero -1;
+        .r#{$numero} {
+            top: #{$top}px;
+            background-color: $color;
+        }
+    }
+    //VARIABLES
+    //$topDiv: 40,80,100,160,240,280,300,360,440,480,500,560,200,400;
+    //$topDiv: 90,270,490;
+    //$numDiv: 1;
+    // el numero de vis a crear
+    $numeroDivs: 2;
+    $listaColores: red,
+    yellow,
+    rgb(173, 23, 173),
+    rgb(24, 224, 24),
+    blue,
+    orange;
+    $listaTop: 400,
+    530,
+    270,
+    375,
+    480,
+    585;
+    @for $i from 1 through $numeroDivs {
+        $color: nth($listaColores, $i);
+        $top: nth($listaTop, $i);
+        @include estiloDiv($i, $color, $top);
+    }
+    //@include estiloDiv(1 , red, 0);
+    //@include estiloDiv(2 , yellow,180);
+    //@include estiloDiv(3 , purple, 360);
+    //@include estiloDiv(4 , black, 540);
+    //LINEAS EN LOS DIVS
+    /*@each $top in $topDiv { 
+  @if $numDiv == 13 
+  {
+   // @include crear_linea($top, a, white);
+  }  @else if $numDiv == 14 
+  {
+    // @include crear_linea($top, b, white);
+  } @else 
+  {
+    @include crear_linea($top, $numDiv  , black);
+  }
+
+  $numDiv: $numDiv + 1;
+}*/
+    //otras reglas css
+    .rectangle {
+        position: fixed;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        color: #121621;
+        margin: 0;
+        left: 0;
+        height: var(--alto-divs);
+    }
+    //var(--main-bg-color);
+    //var(--color-dark);
+    .wrapper {
+        height: var(--alto-contenedor);
+        width: 100%;
+    }
+}

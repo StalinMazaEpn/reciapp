@@ -1,0 +1,27 @@
+<ion-content padding class="bg-login">
+    <ion-scroll scrollY="false">
+    </ion-scroll>
+    <div text-center class="logo-position">
+        <img src="assets/imgs/logo-header.png" height="35" />
+    </div>
+
+    <div class="textbox">
+        <!--ion-label stacked>Correo</ion-label-->
+        <ion-input text-center type="email" [(ngModel)]="user.mail" placeholder="Usuario"></ion-input>
+    </div>
+
+    <div class="textbox">
+        <!--ion-label stacked>Contraseña</ion-label-->
+        <ion-input text-center type="password" [(ngModel)]="user.password" placeholder="Contraseña"></ion-input>
+    </div>
+
+    <div text-center padding style="z-index: 50">
+        <button class="bg-boton" ion-button round (click)="validate()" style="z-index: 100">Ingresar</button>
+    </div>
+    <div text-center style="z-index: 100; position: absolute; left: 20% !important; right: 20% !important;">
+        <p>Aún no tienes cuenta, <br><a style="color: white; text-decoration: underline;" (click)="register()">Regístrate</a></p>
+    </div>
+
+    <span class="rotar"></span>
+
+</ion-content>

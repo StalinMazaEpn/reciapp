@@ -1,0 +1,274 @@
+<ion-header>
+  <ion-toolbar>
+
+    <div *ngIf="isLog; else elseHeader">
+      <ion-grid class="grid-header">
+        <ion-row>
+          <ion-title text-center showWhen="ios">
+            <img src="assets/imgs/logo-header.png" height="30" class="logo-header"/>
+          </ion-title>
+          <ion-col col-2>
+            <button ion-button icon-only menuToggle>
+              <ion-icon name="menu"></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col col-8 class="logo-header-wrapper">
+            <ion-title text-center showWhen="android,windows">
+              <img src="assets/imgs/logo-header.png" height="30" class="logo-header"/>
+            </ion-title>
+          </ion-col>
+          <ion-col col text-center (click)="openTips()">
+            <img src="assets/imgs/libro.png" width="40" height="40" style="position: absolute; left: 10px !important; top: 0px !important">
+            <!--ion-buttons item-end>
+              <button ion-button icon-only >
+                <ion-icon ios="ios-bulb" md="md-bulb"></ion-icon>
+              </button>
+            </ion-buttons-->
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </div>
+    <ng-template #elseHeader>
+      <ion-title showWhen="ios" text-center>Bienvenido!</ion-title>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+        <ion-title text-center showWhen="android,windows">Bienvenido!</ion-title>
+      </button>
+    </ng-template>
+
+  </ion-toolbar>
+</ion-header>
+<br/>
+<br/>
+
+
+<ion-content class="textContent">
+
+  <div *ngIf="isLog; else elseLogin" >
+
+    <div *ngIf="user !== undefined; else loading">
+      <ion-list style="margin: 0%;" >
+        <ion-item (tap)="exchange()" style="background: linear-gradient(to bottom, #c81c71, #790042); padding-left: 0%; height: 62px;">
+          <ion-grid>
+            <ion-row>
+                <!--ion-title text-center showWhen="ios">
+                    <img src="assets/imgs/heart_reciveci_on.png" class="logo-header"/>
+                  </ion-title-->
+              <ion-col col-3 text-right showWhen="android,windows,ios" align-self-center>
+                <img src="assets/imgs/heart_reciveci_on.png" height="30" class="logo-header"/>
+              </ion-col>
+              <ion-col col-4 text-left class="dashboard-points" align-self-center>
+                {{ (user)?.points.total }}
+              </ion-col>
+              <ion-col col-5 text-right class="dashboard-name" align-self-center>
+                {{(user)?.name}}
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+        </ion-item>
+      </ion-list>
+
+      <ion-item *ngIf="(user)?.lastDelivery==0" style="background-color: #005c7e;" (click)="deliveryPage()">
+        <ion-grid>
+          <ion-row (tap)="goDelivery()" class="first-delivery">
+            <ion-col text-center>
+              ¡Haz tu primera entrega!
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+      <ion-item *ngIf="(user)?.lastDelivery;" style="background-color: #005c7e;">
+        <ion-grid>
+          <ion-row class="last-delivery">
+            <ion-col col-7 text-center>
+              Última entrega:
+            </ion-col>
+            <ion-col col-5 text-left>
+                hace {{(user)?.lastDelivery | amLocale:'es' | amTimeAgo:true}}
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+      <!--ion-item *ngIf="(user)?.totalDeliveries ==0" text-center style=" background-color:transparent">
+              <ion-item text-center text-wrap style="background-color:transparent">Aún no haz realizado entregas, toca <i> aquí </i>para hacer tu primera entrega</ion-item>
+              <ion-row text-center>
+                <ion-col col-12>
+                  <div text-center padding style="z-index: 50">
+                      <button class="botonE" ion-button round (click)="deliveryPage()" style="z-index: 100" >Aquí</button>
+                    </div>
+                </ion-col>
+              </ion-row>
+      </ion-item>
+
+
+      <ion-item *ngIf="(user)?.lastDelivery; " style="background-color: #004361; padding-left: 11%;  margin-top: 20px;">
+          <h1>Mis entregas</h1>
+          <p>
+            <ion-icon ios="ios-star" md="md-star" style="color: yellow"></ion-icon>    Has registrado {{(user)?.totalDeliveries}} entrega{{(user)?.totalDeliveries > 1 ? 's' : ''}}
+          </p>
+        </ion-item-->
+
+      <ion-row text-center class="delivery-info">
+        <ion-col col>
+          <!--1-->
+          <ion-row class="my-deliveries">
+            <ion-col col>
+              <p style="font-size: 18px; padding: 0px; margin:0px; text-align: left;">Mis entregas</p>
+            </ion-col>
+            <ion-col col text-right>
+              <p style="font-weight: bold; font-size: 22px; padding: 0px; margin:0px;">{{(user)?.totalDeliveries}}</p>
+            </ion-col>
+          </ion-row>
+          <!--2-->
+          <ion-row class="material-row" text-left>
+            <ion-col col>
+              <div class="circle-material-wrapper"><div class="circle-material paper"></div></div>
+                <div class="material-img-wrapper"><img src="assets/imgs/papelT1.png" height="25"></div>
+                <div class="material-percentage" *ngIf="porcentMaterialPapel != null">
+                  <div>{{porcentMaterialPapel}}%</div>
+                </div>
+            </ion-col>
+            <ion-col col>
+              <div class="circle-material-wrapper"><div class="circle-material cardboard"></div></div>
+              <div class="material-img-wrapper"><img src="assets/imgs/cartonT.png" height="27"></div>
+                <div class="material-percentage" *ngIf="porcentMaterialCarton != null">
+                  <div>{{porcentMaterialCarton}}%</div>
+                </div>
+            </ion-col>
+          </ion-row>
+          <!--3-->
+          <ion-row class="material-row" text-left>
+            <ion-col col>
+              <div class="circle-material-wrapper"><div class="circle-material plastic"></div></div>
+              <div class="material-img-wrapper"><img src="assets/imgs/plasticoT.png" height="17"></div>
+                <div class="material-percentage" *ngIf="porcentMaterialPlastico != null">
+                  <div>{{porcentMaterialPlastico}}%</div>
+                </div>
+            </ion-col>
+            <ion-col col>
+              <div class="circle-material-wrapper"><div class="circle-material glass"></div></div>
+              <div class="material-img-wrapper"><img src="assets/imgs/vidrioT.png" height="20"></div>
+                <div class="material-percentage" *ngIf="porcentMaterialVidrio != null">
+                  <div>{{porcentMaterialVidrio}}%</div>
+                </div>
+            </ion-col>
+          </ion-row>
+          <!--4-->
+          <ion-row class="material-row" text-left>
+            <ion-col col>
+                <div class="circle-material-wrapper"><div class="circle-material metal"></div></div>
+              <div class="material-img-wrapper"><img src="assets/imgs/metalT.png" height="20"></div>
+                <div class="material-percentage" *ngIf="porcentMaterialChatarra != null">
+                  <div>{{porcentMaterialChatarra}}%</div>
+                </div>
+            </ion-col>
+            <ion-col col>
+              <div class="circle-material-wrapper"><div class="circle-material tetrapak"></div></div>
+              <div class="material-img-wrapper"><img src="assets/imgs/tetrapakT.png" height="20"></div>
+                <div class="material-percentage" *ngIf="porcentMaterialTetrapack != null">
+                  <div>{{porcentMaterialTetrapack}}%</div>
+                </div>
+
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+      <!--ion-slides spaceBetween="10" autoplay="2000" loop="true" speed="3000">
+        <ion-slide style="background-color:#005c7e;">
+          <ion-grid>
+            <ion-row>
+              <ion-col col-7 left text-left item-start style="padding-top: 5%;">
+                <img class="imagen" src="assets/imgs/desechosT.png">
+              </ion-col>
+              <ion-col col-5 center text-center>
+                  <h2 text-right>Tip del día</h2>
+                  <p class="textTips" text-right>
+                    Limpia tus residuos antes de guardar. Evita malos olores y tienen mejor precio comercial para el reciclador de base.</p>
+                </ion-col>
+            </ion-row>
+          </ion-grid>
+          <img src="assets/imgs/tips1.png"/>
+        </ion-slide>
+
+        <ion-slide style="background-color: #1b6c8d; ">
+          <ion-grid>
+            <ion-row>
+              <ion-col col-6 center text-center>
+                <h2 text-left>Tip del día</h2>
+                  <p class="textTips" text-left>
+                    El objetivo es reducir la cantidad de basura que generemos, después separar lo que aún desechamos</p>
+              </ion-col>
+              <ion-col col-6 center text-center>
+                <img class="imagen" src="assets/imgs/reduceT.png">
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <img src="assets/imgs/tips2.png" >
+        </ion-slide>
+
+        <ion-slide style="background-color:#1b6c8d"  >
+          <ion-grid>
+            <ion-row>
+              <ion-col col-6 center text-center>
+                <img class="imagen" src="assets/imgs/familiaT.png" >
+              </ion-col>
+              <ion-col col-6 center text-center style="padding-top: 5%; padding-right: 5%">
+                  <p class="textTips" text-right>
+                    El ingreso familiar de estas dos recicladoreas, el mes
+                    pasado aumentó en 15%</p>
+                    <p class="textBold" text-right>Gracias!</p>
+                </ion-col>
+            </ion-row>
+          </ion-grid>
+          <img src="assets/imgs/tips3.png" />
+        </ion-slide>
+
+      </ion-slides-->
+      <ion-row style="height: 152px !important;">
+        <ion-col col style="padding: 0px !important; max-height: 152px !important">
+          <img src="{{imgDailyTip}}" width="100%" height="100%">
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+
+  <ng-template #loading>
+    <ion-spinner name="circles"></ion-spinner>
+    Cargando...
+  </ng-template>
+
+  <ng-template #elseLogin>
+    <ion-row text-center>
+      <ion-col col-12>
+        <button ion-button round (click)="login()">Iniciar Sesión</button>
+      </ion-col>
+    </ion-row>
+    <br>
+
+    <ion-list>
+      <ion-list-header color="light"> Personaliza tu experiencia.</ion-list-header>
+      <ion-row text-center>
+        <!--ion-col col-12>
+          <span ion-button clear>Regístrate</span>
+        </ion-col-->
+        <ion-col>
+          <button ion-button icon-left clear large (click)="register_mail()">
+            <ion-icon ios="ios-mail" md="md-mail"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-left clear large (click)="register_fb()">
+            <ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+  </ng-template>
+
+
+</ion-content>

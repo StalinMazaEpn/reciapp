@@ -1,0 +1,115 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>Delivery 2</ion-title>
+
+        <ion-buttons end>
+            <!--Next button-->
+            <button ion-button icon-only icon-end clear>
+                           Enviar
+                        </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <h4>Materiales que separaste</h4>
+    <ion-row text-left class="material-row">
+        <ion-col col>
+
+            <ion-row class="material-row" text-left>
+                <ion-col col>
+                    <div class="circle-material-wrapper">
+                        <div class="circle-material paper"></div>
+                        <p>Papel</p>
+                        <img src="assets/imgs/papelT1.png" height="20">
+                    </div>
+
+                </ion-col>
+                <ion-col col>
+                    <div class="circle-material-wrapper">
+                        <div class="circle-material cardboard"></div>
+                    </div>
+                    <p>Carton</p>
+                    <img src="assets/imgs/cartonT.png" height="27">
+                </ion-col>
+            </ion-row>
+
+            <ion-row class="material-row" text-left>
+                <ion-col col>
+                    <div class="circle-material-wrapper">
+                        <div class="circle-material plastic"></div>
+                    </div>
+                    <p>Plastico</p>
+                    <img src="assets/imgs/plasticoT.png" height="17">
+                </ion-col>
+                <ion-col col>
+                    <div class="circle-material-wrapper">
+                        <div class="circle-material glass">
+                        </div>
+                    </div>
+                    <p>Vidrio</p>
+                    <img src="assets/imgs/vidrioT.png" height="20">
+                </ion-col>
+            </ion-row>
+
+            <ion-row class="material-row" text-left>
+                <ion-col col>
+                    <div class="circle-material-wrapper">
+                        <div class="circle-material metal"></div>
+                    </div>
+                    <p>Metal</p>
+                    <img src="assets/imgs/metalT.png" height="20">
+                </ion-col>
+                <ion-col col>
+                    <div class="circle-material-wrapper">
+                        <div class="circle-material tetrapak"></div>
+                    </div>
+                    <p>Tetrapak</p>
+                    <img src="assets/imgs/tetrapakT.png" height="20">
+                </ion-col>
+            </ion-row>
+        </ion-col>
+    </ion-row>
+    <p>DIV PINTAR</p>
+    <!--INICIO DEL DIV CONTENEDOR EN TEORIA-->
+    <div #r1 id="r1" class="rectangle r1" [ngStyle]="styles[0]" mwlResizable [resizeEdges]="{bottom: true, right: false, top: false, left: false}" [enableGhostResize]="true" [resizeSnapGrid]="{bottom: 10}" (resizeEnd)="onResizeEnd($event, 0)" [resizeCursorPrecision]="20">
+        <p id="info-percent"></p>
+        <p id="message-tamanio"></p>
+    </div>
+    <!-- DIVISION DEL DIV-->
+    <div #r2 id="r2" class="rectangle r2" [ngStyle]="styles[1]" mwlResizable [resizeEdges]="{bottom: false, right: false, top: true, left: false}" [enableGhostResize]="true" [resizeSnapGrid]="{top: 10, bottom: 10}" (resizeEnd)="onResizeEnd($event, 1)" [resizeCursorPrecision]="20">
+        <p id="info-percent"></p>
+        <p id="message-tamanio"></p>
+    </div>
+    <!-- DIVISION DEL DIV-->
+    <!--
+    <div class="linea9"></div>
+    <div class="linea10"></div>
+    <div class="linea11"></div>
+    <div class="linea12"></div>
+    -->
+    <!-- DIVISION DEL DIV-->
+    <!-- <div #r3 id="r3" class="rectangle r3" [ngStyle]="styles[2]" mwlResizable [resizeEdges]="{bottom: true, right: false, top: true, left: false}" [enableGhostResize]="true" [resizeSnapGrid]="{top: 10}" (resizeEnd)="onResizeEnd($event, 2)" [resizeCursorPrecision]="20">
+        <p id="info-percent"></p>
+        <p id="message-tamanio"></p>
+    </div> -->
+    <!-- DIVISION DEL DIV-->
+    <!-- <div #r4 id="r4" class="rectangle r4" [ngStyle]="styles[3]" mwlResizable [resizeEdges]="{bottom: true, right: false, top: true, left: false}" [enableGhostResize]="true" [resizeSnapGrid]="{bottom: 10}" (resizeEnd)="onResizeEnd($event, 3)" [resizeCursorPrecision]="20">
+        <p id="info-percent"></p>
+        <p id="message-tamanio"></p>
+    </div> -->
+    <!-- DIVISION DEL DIV-->
+    <!-- <div #r5 id="r5" class="rectangle r5" [ngStyle]="styles[4]" mwlResizable [resizeEdges]="{bottom: true, right: false, top: true, left: false}" [enableGhostResize]="true" [resizeSnapGrid]="{bottom: 10}" (resizeEnd)="onResizeEnd($event, 4)" [resizeCursorPrecision]="20">
+        <p id="info-percent"></p>
+        <p id="message-tamanio"></p>
+    </div> -->
+    <!-- DIVISION DEL DIV-->
+    <!-- <div #r6 id="r6" class="rectangle r6" [ngStyle]="styles[5]" mwlResizable [resizeEdges]="{bottom: false, right: false, top: true, left: false}" [enableGhostResize]="true" [resizeSnapGrid]="{bottom: 10}" (resizeEnd)="onResizeEnd($event, 5)" [resizeCursorPrecision]="20">
+        <p id="info-percent"></p>
+        <p id="message-tamanio"></p>
+    </div> -->
+    <!-- FIN DEL DIV CONTENEDOR EN TEORIA-->
+
+</ion-content>

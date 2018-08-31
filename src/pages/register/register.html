@@ -1,0 +1,35 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Registro</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+  <ion-content padding class="bg-page">
+
+    <div text-center class="logo-position">
+      <img src="assets/imgs/logo-header.png" height="35" />
+    </div>
+
+    <div class="textbox" style="margin-top: 15%;">
+      <ion-input class="black-letter" text-center type="text" [(ngModel)]="user.name" placeholder="Nombre"></ion-input>
+    </div>
+
+    <div class="textbox" style="margin-top: 10%;">
+      <ion-input class="black-letter" text-center type="text" [(ngModel)]="user.lastname" placeholder="Apellidos"></ion-input>
+    </div>
+
+    <div class="textbox" style="margin-top: 10%;">
+      <ion-input class="black-letter" text-center type="text" [(ngModel)]="userData.email" placeholder="Correo"></ion-input>
+    </div>
+
+    <div class="textbox" style="margin-top: 10%;">
+      <ion-input class="black-letter" text-center type="password" [(ngModel)]="userData.pass" placeholder="Contraseña"></ion-input>
+    </div>
+
+    <div text-center>
+      <button class="bg-boton" ion-button round (click)="register()">Registrarse</button>
+    </div>
+  </ion-content>
+    <div class="triangle"></div>

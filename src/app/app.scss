@@ -1,0 +1,233 @@
+// http://ionicframework.com/docs/theming/
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+@font-face {
+  font-family: "WorkSans";
+  src: url('../assets/fonts/WorkSans-Regular.ttf')
+}
+
+*{
+  font-family: "WorkSans", serif;
+}
+
+.content {
+  background-color: $darkBlue;
+  color: $fontColor;
+
+  ion-input,
+  ion-textarea {
+    color: #000000;
+  }
+}
+
+.toolbar {
+  .toolbar-background {
+    background-color: $skyBlue1;
+  }
+
+  .toolbar-title {
+    color: $fontColor;
+    padding: 6px 0;
+  }
+
+  .bar-button {
+    color: $fontColor;
+  }
+}
+
+.button-md {
+  text-transform: none;
+}
+
+
+/* HEADER */
+ion-header {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+.grid-header {
+  padding: 0;
+
+  .logo-header-wrapper {
+    padding: 0;
+  }
+
+  img.logo-header {
+    height: 25px;
+  }
+}
+
+
+/* TABS */
+.tabs {
+  .tabbar {
+    background: linear-gradient(to right, $skyBlue2, $skyBlue1);
+
+    .tab-button {
+      padding: 0;
+
+      .tab-button-icon {
+        color: $fontColor;
+      }
+    }
+  }
+}
+
+.tabbar, .tabs-ios, .tabs-md , .tabs-wp{
+  .tab-button-icon {
+    background-repeat:no-repeat;
+    background-position:center;
+    height:48px;
+    width:100%;
+    margin: 0;
+    background-size:contain;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    &:before {
+      display:none;
+    }
+  }
+}
+
+.tabs-ios {
+  a[aria-selected=false]{
+    .tab-button-icon[ng-reflect-name="leftHand"], .tab-button-icon[aria-label="leftHand outline"] {
+      background-image: url('../assets/imgs/left_hand_on.png');
+      background-size: 70px 30px;
+      background-position: left;
+      opacity: .5;
+    }
+    .tab-button-icon[ng-reflect-name="heartReciveci"], .tab-button-icon[aria-label="heartReciveci outline"] {
+      background-image: url('../assets/imgs/heart_reciveci_on.png');
+      background-size: 37px 30px;
+      opacity: .5;
+    }
+    .tab-button-icon[ng-reflect-name="rightHand"], .tab-button-icon[aria-label="rightHand outline"] {
+      background-image: url('../assets/imgs/right_hand_on.png');
+      background-size: 70px 30px;
+      background-position: right;
+      opacity: .5;
+    }
+  }
+  a[aria-selected=true] {
+    //führ eventuellen text
+    //span {
+    //color: #f00; //whatever colour you want to use for the text
+    //}
+    .tab-button-icon[ng-reflect-name="leftHand"], .tab-button-icon[aria-label="leftHand"] {
+      background-image: url('../assets/imgs/left_hand_on.png');
+      background-size: 70px 30px;
+      background-position: left;
+    }
+    .tab-button-icon[ng-reflect-name="heartReciveci"], .tab-button-icon[aria-label="heartReciveci"] {
+      background-image: url('../assets/imgs/heart_reciveci_on.png');
+      background-size: 37px 30px;
+    }
+    .tab-button-icon[ng-reflect-name="rightHand"], .tab-button-icon[aria-label="rightHand"] {
+      background-image: url('../assets/imgs/right_hand_on.png');
+      background-size: 70px 30px;
+      background-position: right;
+    }
+  }
+}
+
+.tabs-md {
+  a[aria-selected=false]{
+    .tab-button-icon[ng-reflect-name="leftHand"], .tab-button-icon[aria-label="leftHand"] {
+      background-image: url('../assets/imgs/left_hand_on.png');
+      background-size: 70px 30px;
+      background-position: left;
+      opacity: .5;
+    }
+    .tab-button-icon[ng-reflect-name="heartReciveci"], .tab-button-icon[aria-label="heartReciveci"] {
+      background-image: url('../assets/imgs/heart_reciveci_on.png');
+      background-size: 37px 30px;
+      opacity: .5;
+    }
+    .tab-button-icon[ng-reflect-name="rightHand"], .tab-button-icon[aria-label="rightHand"] {
+      background-image: url('../assets/imgs/right_hand_on.png');
+      background-size: 70px 30px;
+      background-position: right;
+      opacity: .5;
+    }
+  }
+
+  a[aria-selected=true] {
+    //führ eventuellen text
+    //span {
+    //color: #f00; //whatever colour you want to use for the text
+    //}
+    .tab-button-icon[ng-reflect-name="leftHand"], .tab-button-icon[aria-label="leftHand"] {
+      background-image: url('../assets/imgs/left_hand_on.png');
+      background-size: 70px 30px;
+      background-position: left;
+    }
+    .tab-button-icon[ng-reflect-name="heartReciveci"], .tab-button-icon[aria-label="heartReciveci"] {
+      background-image: url('../assets/imgs/heart_reciveci_on.png');
+      background-size: 37px 30px;
+    }
+    .tab-button-icon[ng-reflect-name="rightHand"], .tab-button-icon[aria-label="rightHand"] {
+      background-image: url('../assets/imgs/right_hand_on.png');
+      background-size: 70px 30px;
+      background-position: right;
+    }
+  }
+}
+
+.tabs-wp {
+  a[aria-selected=false]{
+    .tab-button-icon[ng-reflect-name="leftHand"], .tab-button-icon[aria-label="leftHand"] {
+      background-image: url('../assets/imgs/left_hand_on.png');
+      background-size: 70px 30px;
+      background-position: left;
+      opacity: .5;
+    }
+    .tab-button-icon[ng-reflect-name="heartReciveci"], .tab-button-icon[aria-label="heartReciveci"] {
+      background-image: url('../assets/imgs/heart_reciveci_on.png');
+      background-size: 37px 30px;
+      opacity: .5;
+    }
+    .tab-button-icon[ng-reflect-name="rightHand"], .tab-button-icon[aria-label="rightHand"] {
+      background-image: url('../assets/imgs/right_hand_on.png');
+      background-size: 70px 30px;
+      background-position: right;
+      opacity: .5;
+    }
+  }
+
+  a[aria-selected=true] {
+    //führ eventuellen text
+    //span {
+    //color: #f00; //whatever colour you want to use for the text
+    //}
+    .tab-button-icon[ng-reflect-name="leftHand"], .tab-button-icon[aria-label="leftHand"] {
+      background-image: url('../assets/imgs/left_hand_on.png');
+      background-size: 70px 30px;
+      background-position: left;
+    }
+    .tab-button-icon[ng-reflect-name="heartReciveci"], .tab-button-icon[aria-label="heartReciveci"] {
+      background-image: url('../assets/imgs/heart_reciveci_on.png');
+      background-size: 37px 30px;
+    }
+    .tab-button-icon[ng-reflect-name="rightHand"], .tab-button-icon[aria-label="rightHand"] {
+      background-image: url('../assets/imgs/right_hand_on.png');
+      background-size: 70px 30px;
+      background-position: right;
+    }
+  }
+
+
+}
